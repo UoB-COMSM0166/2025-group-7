@@ -1,6 +1,12 @@
+/*
+The Grid class is responsible for creating and managing a grid-based structure.
+It includes methods for initializing the grid, generating a map using a depth-first search algorithm,
+creating a hexagonal grid, drawing the grid and walls, updating wall states, and retrieving the closest cell.
+This class is designed to support visualization and interaction with a grid-based map.
+*/
 let walls;
 class Grid {
-	current;
+    current;
     constructor(gridHeight) {
         this.w = 120;
         this.cols = floor(gridHeight/this.w);
@@ -26,6 +32,7 @@ class Grid {
         this.visitTracker.overlaps(allSprites);
     }
 
+    // Initializes the grid by creating cells and setting up the initial state
     initGrid() {
         for(let y = 0; y < this.rows; y++){
             let row = [];
@@ -49,6 +56,8 @@ class Grid {
             }
         }
     }
+
+    // Generates the map using a depth-first search algorithm
     generateMap(){
         this.current.visited++;
         
@@ -65,6 +74,8 @@ class Grid {
             this.current = this.cellstack.pop();
         }
     }
+
+    // Initializes the map generation process and handles the visualization
     initMap(){
         if(this.cellstack != 0 || !this.mapStartedGenerating){
             frameRate(7);
@@ -87,6 +98,7 @@ class Grid {
         
     }
 
+    // Generates a hexagonal grid of coordinates based on the given radius and hex size
     generateHexagonGrid(radius, hexSize) {
         const coords = [];
         const sqrt3 = Math.sqrt(3);
@@ -104,8 +116,8 @@ class Grid {
         return coords;
     }
 
+    // Draws the grid and walls with shadow effects
     draw() {
-
         drawingContext.shadowBlur = 15;
         drawingContext.shadowColor = color(GameState.themeColor[GameState.themeColorIndex]);
         
@@ -114,12 +126,13 @@ class Grid {
         drawingContext.shadowColor = 'transparent';
     }
 
+    // Updates the state of the walls
     update() {
         walls.update();
     }
     
+    // Returns the cell closest to the given coordinates
     getCell(x, y){
-        //return the cell closest to the given coordinates
         let closestCell = null;
         for(let i = 0; i < this.grid.length; i++){
             for(let j = 0; j < this.grid[i].length; j++){

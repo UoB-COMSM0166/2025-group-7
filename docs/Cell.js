@@ -1,37 +1,43 @@
+/**
+ * The Cell class represents a single cell in a hexagonal grid.
+ * It manages the cell's properties, walls, neighbors, and pathfinding logic.
+ * This class supports visualization and interaction with individual cells in the grid.
+ */
 class Cell {
 
-    constructor(i, j,grid, cols, rows, cellWidth){
+    constructor(i, j, grid, cols, rows, cellWidth) {
         this.w = cellWidth;
-        this.wallLength = this.w/2+2.3;
+        this.wallLength = this.w / 2 + 2.3;
         this.wallWidth = 3;
-        this.radius = sqrt(3)/2 * this.wallLength - this.wallWidth/2;
+        this.radius = sqrt(3) / 2 * this.wallLength - this.wallWidth / 2;
         this.grid = grid;
         this.cols = cols;
         this.rows = rows;
         this.i = i;
         this.j = j;
         this.wallOffsetX = 10;
-        this.centerX = round(this.i * (3/2 * this.wallLength - this.wallWidth) + this.wallLength + this.wallOffsetX);
+        this.centerX = round(this.i * (3 / 2 * this.wallLength - this.wallWidth) + this.wallLength + this.wallOffsetX);
         this.centerY = round(this.j * (sqrt(3) * this.wallLength - this.wallWidth) + sqrt(3) / 2 * this.wallLength + (this.i % 2 === 0 ? 0 : sqrt(3) / 2 * this.wallLength - 2));
         // Hexagon with 6 sides in wallState
         this.wallNames = ["top", "topRight", "bottomRight", "bottom", "bottomLeft", "topLeft"];
-        this.wallState = {"top": true, "topRight": true, "bottomRight": true, "bottom": true, "bottomLeft": true, "topLeft": true};
+        this.wallState = { "top": true, "topRight": true, "bottomRight": true, "bottom": true, "bottomLeft": true, "topLeft": true };
         this.visited = 0;
     }
+
+    // Displays the cell and its walls
     show() {
         // Calculate center position
-
 
         // List all cell walls with their angles and outer conditions
         const cellWalls = [
             { name: "top", angle: 0, outer: this.j === 0 },
-            { name: "topRight", angle: 60, outer: this.i === this.rows-1 || this.j === (this.i % 2 ? this.cols-1 : 0) },
-            { name: "bottomRight", angle: 120, outer: this.i === this.rows-1 || this.j === (this.i % 2 ? this.cols-1 : 0) },
-            { name: "bottom", angle: 180, outer: this.j === this.cols-1 },
-            { name: "bottomLeft", angle: 240, outer: this.i === 0 || this.j === (this.i % 2 ? this.cols-1 : 0) },
-            { name: "topLeft", angle: 300, outer: this.i === 0 || this.j === (this.i % 2 ? this.cols-1 : 0) }
+            { name: "topRight", angle: 60, outer: this.i === this.rows - 1 || this.j === (this.i % 2 ? this.cols - 1 : 0) },
+            { name: "bottomRight", angle: 120, outer: this.i === this.rows - 1 || this.j === (this.i % 2 ? this.cols - 1 : 0) },
+            { name: "bottom", angle: 180, outer: this.j === this.cols - 1 },
+            { name: "bottomLeft", angle: 240, outer: this.i === 0 || this.j === (this.i % 2 ? this.cols - 1 : 0) },
+            { name: "topLeft", angle: 300, outer: this.i === 0 || this.j === (this.i % 2 ? this.cols - 1 : 0) }
         ];
-    
+
         // Handle each wall
         cellWalls.forEach(wall => {
             // Remove wall if it exists but shouldn't
@@ -39,15 +45,15 @@ class Cell {
                 this[wall.name].remove();
                 return;
             }
-    
+
             // Create wall if needed
             if (this.wallState[wall.name]) {
                 const x = this.centerX + this.radius * sin(wall.angle);
                 const y = this.centerY - this.radius * cos(wall.angle);
-                
+
                 this[wall.name] = new walls.Sprite(x, y, this.wallLength, this.wallWidth);
                 this[wall.name].rotation = wall.angle;
-                
+
                 if (wall.outer) {
                     this[wall.name].outerWall = true;
                 }
@@ -55,9 +61,10 @@ class Cell {
         });
     }
 
+    // Checks and returns a random unvisited neighbor
     checkNeighbours() {
         this.neighbours = [];
-        
+
         // Hexagonal grid neighbors (6 directions)
         const directions = [
             { dx: 0, dy: -1, name: "top" },        // above
@@ -67,11 +74,11 @@ class Cell {
             { dx: -1, dy: this.i % 2 ? 1 : 0, name: "bottomLeft" }, // bottom-left
             { dx: -1, dy: this.i % 2 ? 0 : -1, name: "topLeft" }    // top-left
         ];
-        
+
         for (let dir of directions) {
             const ni = this.i + dir.dx;
             const nj = this.j + dir.dy;
-            
+
             if (ni >= 0 && ni < this.rows && nj >= 0 && nj < this.cols) {
                 const neighbor = this.grid[ni][nj];
                 if (neighbor.visited < (random() < 0.09 ? 4 : 2)) {
@@ -86,128 +93,38 @@ class Cell {
         return undefined;
     }
 
+    // Removes the wall between this cell and a neighboring cell
     removeWall(neighbour) {
-        // Calculate relative position
         const dx = neighbour.i - this.i;
         const dy = neighbour.j - this.j;
-        
-        // Hexagonal grid wall removal
-        if (dx === 0 && dy === -1) { // above (top)
-            this.wallState.top = false;
-            neighbour.wallState.bottom = false;
-            // remove wall if exists
-            if (this.top) {
-                this.top.remove();
-            }
-            if (neighbour.bottom) {
-                neighbour.bottom.remove();
-            }
-        } else if (dx === 0 && dy === 1) { // below (bottom)
-            this.wallState.bottom = false;
-            neighbour.wallState.top = false;
-            // remove wall if exists
-            if (this.bottom) {
-                this.bottom.remove();
-            }
-            if (neighbour.top) {
-                neighbour.top.remove();
-            }
-        } else if (dx === 1) {
-            if (this.i % 2) {
-                if (dy === 0) { // top-right
-                    this.wallState.topRight = false;
-                    neighbour.wallState.bottomLeft = false;
-                    // remove wall if exists
-                    if (this.topRight) {
-                        this.topRight.remove();
-                    }
-                    if (neighbour.bottomLeft) {
-                        neighbour.bottomLeft.remove();
-                    }
-                } else if (dy === 1) { // bottom-right
-                    this.wallState.bottomRight = false;
-                    neighbour.wallState.topLeft = false;
-                    // remove wall if exists
-                    if (this.bottomRight) {
-                        this.bottomRight.remove();
-                    }
-                    if (neighbour.topLeft) {
-                        neighbour.topLeft.remove();
-                    }
+
+        const wallMappings = [
+            { dx: 0, dy: -1, thisWall: "top", neighbourWall: "bottom" },
+            { dx: 0, dy: 1, thisWall: "bottom", neighbourWall: "top" },
+            { dx: 1, dy: this.i % 2 ? 0 : -1, thisWall: "topRight", neighbourWall: "bottomLeft" },
+            { dx: 1, dy: this.i % 2 ? 1 : 0, thisWall: "bottomRight", neighbourWall: "topLeft" },
+            { dx: -1, dy: this.i % 2 ? 1 : 0, thisWall: "bottomLeft", neighbourWall: "topRight" },
+            { dx: -1, dy: this.i % 2 ? 0 : -1, thisWall: "topLeft", neighbourWall: "bottomRight" }
+        ];
+
+        for (const mapping of wallMappings) {
+            if (dx === mapping.dx && dy === mapping.dy) {
+                this.wallState[mapping.thisWall] = false;
+                neighbour.wallState[mapping.neighbourWall] = false;
+
+                if (this[mapping.thisWall]) {
+                    this[mapping.thisWall].remove();
                 }
-            } else {
-                if (dy === -1) { // top-right
-                    this.wallState.topRight = false;
-                    neighbour.wallState.bottomLeft = false;
-                    // remove wall if exists
-                    if (this.topRight) {
-                        this.topRight.remove();
-                    }
-                    if (neighbour.bottomLeft) {
-                        neighbour.bottomLeft.remove();
-                    }
-                } else if (dy === 0) { // bottom-right
-                    this.wallState.bottomRight = false;
-                    neighbour.wallState.topLeft = false;
-                    // remove wall if exists
-                    if (this.bottomRight) {
-                        this.bottomRight.remove();
-                    }
-                    if (neighbour.topLeft) {
-                        neighbour.topLeft.remove();
-                    }
+                if (neighbour[mapping.neighbourWall]) {
+                    neighbour[mapping.neighbourWall].remove();
                 }
-            }
-        } else if (dx === -1) {
-            if (this.i % 2) {
-                if (dy === 0) { // top-left
-                    this.wallState.topLeft = false;
-                    neighbour.wallState.bottomRight = false;
-                    // remove wall if exists
-                    if (this.topLeft) {
-                        this.topLeft.remove();
-                    }
-                    if (neighbour.bottomRight) {
-                        neighbour.bottomRight.remove();
-                    }
-                } else if (dy === 1) { // bottom-left
-                    this.wallState.bottomLeft = false;
-                    neighbour.wallState.topRight = false;
-                    // remove wall if exists
-                    if (this.bottomLeft) {
-                        this.bottomLeft.remove();
-                    }
-                    if (neighbour.topRight) {
-                        neighbour.topRight.remove();
-                    }
-                }
-            } else {
-                if (dy === -1) { // top-left
-                    this.wallState.topLeft = false;
-                    neighbour.wallState.bottomRight = false;
-                    // remove wall if exists
-                    if (this.topLeft) {
-                        this.topLeft.remove();
-                    }
-                    if (neighbour.bottomRight) {
-                        neighbour.bottomRight.remove();
-                    }
-                } else if (dy === 0) { // bottom-left
-                    this.wallState.bottomLeft = false;
-                    neighbour.wallState.topRight = false;
-                    // remove wall if exists
-                    if (this.bottomLeft) {
-                        this.bottomLeft.remove();
-                    }
-                    if (neighbour.topRight) {
-                        neighbour.topRight.remove();
-                    }
-                }
+                break;
             }
         }
     }
+
+    // Removes overlapping walls with neighboring cells
     removeOverlappingWalls() {
-        // Remove overlapping walls with neighboring cells
         const directions = [
             { dx: 0, dy: -1, name: "top", oposite: "bottom" },
             { dx: 1, dy: this.i % 2 ? 0 : -1, name: "topRight", oposite: "bottomLeft" },
@@ -219,15 +136,17 @@ class Cell {
         for (let dir of directions) {
             const ni = this.i + dir.dx;
             const nj = this.j + dir.dy;
-            
+
             if (ni >= 0 && ni < this.rows && nj >= 0 && nj < this.cols) {
                 const neighbour = this.grid[ni][nj];
                 if (this.wallState[dir.name]) {
-                    neighbour.wallState[dir.oposite] = false;    
+                    neighbour.wallState[dir.oposite] = false;
                 }
             }
         }
     }
+
+    // Returns neighboring cells with no walls between them
     neighboringCellsWithNoWalls() {
         const directions = [
             { dx: 0, dy: -1, name: "top", oposite: "bottom" },
@@ -251,6 +170,7 @@ class Cell {
         return neighbors;
     }
 
+    // Finds the closest path to the target cell
     findClosestPath(targetCell) {
         let current = this;
         let targetX = targetCell.centerX;
@@ -281,7 +201,7 @@ class Cell {
             current = closestNeighbor;
             paths++;
         }
-        if(current === targetCell) {
+        if (current === targetCell) {
             path.push(targetCell);
             return path;
         } else {
