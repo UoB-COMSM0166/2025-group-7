@@ -238,6 +238,7 @@ class GameSetup{
         if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.start)) {
             this.selector = this.ON_START;
             await delay(100);
+            audioBackground.loop();
             this.startGame();
             
             return;
