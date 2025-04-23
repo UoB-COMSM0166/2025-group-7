@@ -642,4 +642,19 @@ class GameState{
         this.tankList[1].tankSprite.wheels.y = this.TANK2Y;
         this.tankList[1].tankSprite.wheels.rotation = this.TANK2ROT;
     }
+    pathFinder(tank, opponentTank) {
+        // find next cell to target
+        let targetCell = this.gameMap.getCell(opponentTank.tankSprite.x, opponentTank.tankSprite.y);
+        let currentCell = this.gameMap.getCell(tank.tankSprite.x, tank.tankSprite.y);
+        let path = currentCell.findClosestPath(targetCell);
+        if (path.length > 0) {
+            // move tank to next cell
+            let nextCell = path[1];
+            let nextX = nextCell.col * 90.5 + 72;
+            let nextY = nextCell.row * 105 + 54 + (nextCell.col % 2 === 0 ? 0 : 52.5);
+            return { x: nextX, y: nextY };
+        } else {
+            return { x: tank.tankSprite.x, y: tank.tankSprite.y };
+        }
+    }
 }

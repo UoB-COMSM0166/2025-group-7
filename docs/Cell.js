@@ -17,7 +17,6 @@ class Cell {
         this.wallNames = ["top", "topRight", "bottomRight", "bottom", "bottomLeft", "topLeft"];
         this.wallState = {"top": true, "topRight": true, "bottomRight": true, "bottom": true, "bottomLeft": true, "topLeft": true};
         this.visited = 0;
-        
     }
     show() {
         // Calculate center position
@@ -227,6 +226,66 @@ class Cell {
                     neighbour.wallState[dir.oposite] = false;    
                 }
             }
+        }
+    }
+    neighboringCellsWithNoWalls() {
+        const directions = [
+            { dx: 0, dy: -1, name: "top", oposite: "bottom" },
+            { dx: 1, dy: this.i % 2 ? 0 : -1, name: "topRight", oposite: "bottomLeft" },
+            { dx: 1, dy: this.i % 2 ? 1 : 0, name: "bottomRight", oposite: "topLeft" },
+            { dx: 0, dy: 1, name: "bottom", oposite: "top" },
+            { dx: -1, dy: this.i % 2 ? 1 : 0, name: "bottomLeft", oposite: "topRight" },
+            { dx: -1, dy: this.i % 2 ? 0 : -1, name: "topLeft", oposite: "bottomRight" }
+        ];
+        const neighbors = [];
+        for (let dir of directions) {
+            const ni = this.i + dir.dx;
+            const nj = this.j + dir.dy;
+            if (ni >= 0 && ni < this.rows && nj >= 0 && nj < this.cols) {
+                const neighbour = this.grid[ni][nj];
+                if (!this.wallState[dir.name] && !neighbour.wallState[dir.oposite]) {
+                    neighbors.push(neighbour);
+                }
+            }
+        }
+        return neighbors;
+    }
+
+    findClosestPath(targetCell) {
+        let current = this;
+        let targetX = targetCell.centerX;
+        let targetY = targetCell.centerY;
+        let maxIterations = 100;
+        let paths = 0;
+        let visited = new Set();
+        const path = [];
+        while (current !== targetCell && current !== null && paths < maxIterations) {
+            visited.add(current);
+            path.push(current);
+            const neighbors = current.neighboringCellsWithNoWalls();
+            if (neighbors.length === 0) {
+                return [];
+            }
+            let closestNeighbor = null;
+            let minDistance = Infinity;
+            for (let neighbor of neighbors) {
+                const distance = dist(neighbor.centerX, neighbor.centerY, targetX, targetY);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    if (visited.has(neighbor)) {
+                        continue;
+                    }
+                    closestNeighbor = neighbor;
+                }
+            }
+            current = closestNeighbor;
+            paths++;
+        }
+        if(current === targetCell) {
+            path.push(targetCell);
+            return path;
+        } else {
+            return [];
         }
     }
 }

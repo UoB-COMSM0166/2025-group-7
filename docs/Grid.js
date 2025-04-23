@@ -117,5 +117,19 @@ class Grid {
     update() {
         walls.update();
     }
+    
+    getCell(x, y){
+        //return the cell closest to the given coordinates
+        let closestCell = null;
+        for(let i = 0; i < this.grid.length; i++){
+            for(let j = 0; j < this.grid[i].length; j++){
+                let distance = dist(x, y, this.grid[i][j].centerX, this.grid[i][j].centerY);
+                if(closestCell === null || distance < closestCell.distance){
+                    closestCell = { cell: this.grid[i][j], distance: distance };
+                }
+            }
+        }
+        return closestCell.cell;
+    }
 }
 
