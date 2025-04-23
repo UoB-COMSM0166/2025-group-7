@@ -461,7 +461,8 @@ class GameState{
     drawHUD(){
 
         strokeWeight(5);
-        textFont('Courier New');
+        textFont(BatmanForeverAlt);
+        textAlign(CENTER);
 
         let offsetY = GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2);
         let offsetX = GameState.CANVAS_WIDTH / 2;
@@ -506,7 +507,7 @@ class GameState{
         //print score
         strokeWeight(0);
         fill(this.tankList[1].tankSprite.color);
-        text(this.player2.getScore(), (offsetX - 400) + separator, offsetY - 11);
+        text(this.player2.getScore(), (offsetX - 400) + separator, offsetY - 12);
         strokeWeight(5);
         fill('black');
 
@@ -523,11 +524,12 @@ class GameState{
         //print score
         strokeWeight(0);
         fill(this.tankList[0].tankSprite.color);
-        text(this.player1.getScore(), (offsetX + 400) - separator, offsetY - 11);
+        text(this.player1.getScore(), (offsetX + 400) - separator, offsetY - 12);
         strokeWeight(5);
         fill('black');
 
         offsetY =  GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2) - 5;
+        textSize(20);
 
         //P1 life bar
         
@@ -539,7 +541,7 @@ class GameState{
         vertex((offsetX - 82.5) + separator, offsetY + -21.65);
         vertex((offsetX - 70) + separator,   offsetY + 0);
         endShape(CLOSE);
-        
+
         //bar fill
         let fillLevel = (this.tankList[1].getLife() / this.tankList[1].initialLife) * 200; 
 
@@ -550,6 +552,14 @@ class GameState{
         vertex((offsetX - 282.5) + separator + fillLevel, offsetY + -21.65);
         vertex((offsetX - 270) + separator + fillLevel, offsetY + 0);
         endShape(CLOSE);
+        fill('black');
+
+        //describe health and ammo
+        strokeWeight(0);
+        fill(this.tankList[1].tankSprite.color);
+        text("Health", (offsetX - 230) + separator, offsetY - 48);
+        text("Ammo", (offsetX - 235) + separator, offsetY + 35);
+        strokeWeight(5);
         fill('black');
 
         //P2 life bar
@@ -572,6 +582,14 @@ class GameState{
         vertex((offsetX + 282.5) - separator - fillLevel, offsetY + -21.65);
         vertex((offsetX + 270) - separator - fillLevel,   offsetY + 0);
         endShape(CLOSE);
+        fill('black');
+
+        //describe health and ammo
+        strokeWeight(0);
+        fill(this.tankList[0].tankSprite.color);
+        text("Health", (offsetX + 230) - separator, offsetY - 48);
+        text("Ammo", (offsetX + 235) - separator, offsetY + 35);
+        strokeWeight(5);
         fill('black');
 
         offsetY =  GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2) + 5;

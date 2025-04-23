@@ -45,6 +45,7 @@ function preload() {
     imgLaserPickup  = loadImage('images/laser-pickup.webp');
     imgSawIcon      = loadImage('images/saw-icon.webp');
     imgSawPickup    = loadImage('images/saw-pickup.webp');
+    imgShieldPickup = loadImage('images/shield-pickup.webp');
     imgSpeedIcon    = loadImage('images/speed-icon.webp');
     imgSpeedPickup  = loadImage('images/speed-pickup.webp');
     imgTankGreen    = loadImage('images/tank-image-green.webp');
@@ -144,7 +145,6 @@ function keyPressed() {
 function mousePressed() {
     if (setupStage) {
         startingScreen.mousePressed();
-        audioBackground.loop();
     } else if (endOfGame && keyCode === ENTER) {
         allSprites.remove();
         endOfGame = false;
