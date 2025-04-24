@@ -1,12 +1,12 @@
 class GameFinish{
 
-    gameWinnerX = 265;
+    gameWinnerX = 230;
     gameWinnerY = 350;
     drawX = 375;
     drawY = 350;
-    gameCompleteX = 200;
+    gameCompleteX = 120;
     gameCompleteY = 200;
-    newGameX = 320;
+    newGameX = 305;
     newGameY = 500;
     newGameRectX = 490;
     newGameRectY = 515;
@@ -24,13 +24,14 @@ class GameFinish{
         
         strokeWeight(10);
         fill('white');
-        textFont(VT323Font);
-        textSize(110);
+        textFont(BatmanForeverAlt);
+        textSize(70);
         text("GAME COMPLETE", this.gameCompleteX, this.gameCompleteY);
 
         // display the winner
         strokeWeight(0);
-        textSize(80);
+        textFont(BatmanForever);
+        textSize(50);
         if(GameState.currentWinner != "Draw") text(GameState.currentWinner + " wins!", this.gameWinnerX, this.gameWinnerY);
         else{
             text(GameState.currentWinner + "!", this.drawX, this.drawY);
@@ -39,8 +40,9 @@ class GameFinish{
         strokeWeight(2);
         rect(this.newGameRectX, this.newGameRectY, this.newGameRectWidth, this.newGameRectHeight);
         fill('black');
+        textFont(BatmanForeverAlt);
         strokeWeight(0);
-        textSize(35);
+        textSize(20);
         text("Press Enter for New Game", this.newGameX, this.newGameY);
 
         // add selector if more options added to screen 
