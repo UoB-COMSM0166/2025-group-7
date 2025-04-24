@@ -50,7 +50,7 @@ function preload() {
     imgSpeedPickup  = loadImage('images/speed-pickup.webp');
     imgTankGreen    = loadImage('images/tank-image-green.webp');
     imgTankRed      = loadImage('images/tank-image-red.webp');
-    introImage      = loadImage('intro&endimages/introscreen-alt.png');
+    introImage      = loadImage('intro&endimages/introscreen-v2.png');
     endImage        = loadImage('intro&endimages/endscreenbg.png');
     controllersImg  = loadImage('Controllers.png');
 
