@@ -281,6 +281,14 @@ class GameState{
         return this.gameOverCnt;
     }
 
+    getGameComplete(){
+        if(this.player1.getScore() === 3 || this.player2.getScore() === 3){
+            return true;
+        }
+
+        return false;
+    }
+
     setCurrentWinner(){
         if(this.player1.getScore() > this.player2.getScore()) GameState.currentWinner = "Player 1";
         else if(this.player1.getScore() < this.player2.getScore()){

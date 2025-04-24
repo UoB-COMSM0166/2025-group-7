@@ -1,6 +1,6 @@
 class GameFinish{
 
-    gameWinnerX = 230;
+    gameWinnerX = 245;
     gameWinnerY = 350;
     drawX = 375;
     drawY = 350;

@@ -83,7 +83,7 @@ function draw() {
     if(setupStage){
         startingScreen.draw();
     }
-    else if(tankGame.getGameOverCnt() >= maxGames){
+    else if(tankGame.getGameComplete()){
         endOfGame = true;
         gameEndScreen = new GameFinish(endImage, VT323Font);
         if(endOfGame){    
