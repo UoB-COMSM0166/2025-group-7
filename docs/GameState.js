@@ -22,8 +22,8 @@ class GameState{
     static LOWER_PANEL_HT = 200;
     static CANVAS_HEIGHT = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT;
     gameMap;
-    RAND1X = floor(random(5, 9)); 
-    RAND1Y = floor(random(0, 3)); 
+    RAND1X = (GameState.twoPlayerMode)? floor(random(5, 9)): 5; 
+    RAND1Y = (GameState.twoPlayerMode)? floor(random(0, 3)): 2; 
     RAND2X = floor(random(0, 4));
     RAND2Y = floor(random(0, 3));
     TANK1X = this.RAND1X*90.5 + 72;
@@ -111,7 +111,7 @@ class GameState{
             const { x, y } = cellToXY(cell.col, cell.row);
             const rot = atan2(this.tankList[0].tankSprite.y - y, this.tankList[0].tankSprite.x - x);
             const aiTank = new Tank(x, y, rot, GameState.player2Difficulty, idx + 2, this);
-            aiTank.spdFactor = 0.5;
+            aiTank.spdFactor = 2;
             aiTank.counted = false;
             this.tankList.push(aiTank);
 
@@ -331,6 +331,22 @@ class GameState{
                 this.tankList[i].numberOfRoundsRefresh();
                 this.tankList[i].lifeRefresh();
                 this.tankList[i].tankWeapon = new Weapon(Weapon.BULLET_TYPE);
+            }
+
+            if (!GameState.twoPlayerMode) {
+                // Clear existing AI controllers
+                this.extraAIControllers = [];
+                
+                // Recreate AI controllers for each AI tank
+                for (let i = 1; i < this.tankList.length; i++) {
+                    const aiCtrl = new AIController(this.tankList[i], this, this.tankList[0], GameState.player2Difficulty);
+                    this.extraAIControllers.push(aiCtrl);
+                    
+                    // Update player2 with the first AI controller
+                    if (i === 1) {
+                        this.player2.keyListener = aiCtrl;
+                    }
+                }
             }
             
             //increment every time a game is won 
@@ -635,39 +651,77 @@ class GameState{
     }
 
     regenerateTankPosition(tank){
-        this.RAND1X = floor(random(5, 9)); 
-        this.RAND1Y = floor(random(0, 3)); 
-        this.RAND2X = floor(random(0, 4));
-        this.RAND2Y = floor(random(0, 3));
-        this.TANK1X = this.RAND1X*90.5 + 72;
-        this.TANK1Y = this.RAND1Y*105 + 54 + (this.RAND1X%2 == 0? 0 : 52.5);
-        this.TANK2X = this.RAND2X*90.5 + 72;
-        this.TANK2Y = this.RAND2Y*105 + 54 + (this.RAND2X%2 == 0? 0 : 52.5);
-        this.ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
-        this.ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
-        this.TANK1ROT = this.ANGLE1;
-        this.TANK2ROT = this.ANGLE2;
-        this.tankList[0].tankSprite.x = this.TANK1X;
-        this.tankList[0].tankSprite.y = this.TANK1Y;
-        this.tankList[0].tankSprite.rotation = this.TANK1ROT;
-        this.tankList[1].tankSprite.x = this.TANK2X;
-        this.tankList[1].tankSprite.y = this.TANK2Y;
-        this.tankList[1].tankSprite.rotation = this.TANK2ROT;
-        this.tankList[0].tankSprite.wheels.x = this.TANK1X;
-        this.tankList[0].tankSprite.wheels.y = this.TANK1Y;
-        this.tankList[0].tankSprite.wheels.rotation = this.TANK1ROT;
-        this.tankList[1].tankSprite.wheels.x = this.TANK2X;
-        this.tankList[1].tankSprite.wheels.y = this.TANK2Y;
-        this.tankList[1].tankSprite.wheels.rotation = this.TANK2ROT;
+        if (GameState.twoPlayerMode) {
+            // Original two-player positioning logic
+            this.RAND1X = floor(random(5, 9)); 
+            this.RAND1Y = floor(random(0, 3)); 
+            this.RAND2X = floor(random(0, 4));
+            this.RAND2Y = floor(random(0, 3));
+            this.TANK1X = this.RAND1X*90.5 + 72;
+            this.TANK1Y = this.RAND1Y*105 + 54 + (this.RAND1X%2 == 0? 0 : 52.5);
+            this.TANK2X = this.RAND2X*90.5 + 72;
+            this.TANK2Y = this.RAND2Y*105 + 54 + (this.RAND2X%2 == 0? 0 : 52.5);
+            this.ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
+            this.ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
+            this.TANK1ROT = this.ANGLE1;
+            this.TANK2ROT = this.ANGLE2;
+            
+            // Update tank positions
+            this.tankList[0].tankSprite.x = this.TANK1X;
+            this.tankList[0].tankSprite.y = this.TANK1Y;
+            this.tankList[0].tankSprite.rotation = this.TANK1ROT;
+            this.tankList[1].tankSprite.x = this.TANK2X;
+            this.tankList[1].tankSprite.y = this.TANK2Y;
+            this.tankList[1].tankSprite.rotation = this.TANK2ROT;
+            
+            // Update wheel positions
+            this.tankList[0].tankSprite.wheels.x = this.TANK1X;
+            this.tankList[0].tankSprite.wheels.y = this.TANK1Y;
+            this.tankList[0].tankSprite.wheels.rotation = this.TANK1ROT;
+            this.tankList[1].tankSprite.wheels.x = this.TANK2X;
+            this.tankList[1].tankSprite.wheels.y = this.TANK2Y;
+            this.tankList[1].tankSprite.wheels.rotation = this.TANK2ROT;
+        } else {
+            // Single-player mode
+            // Position player tank randomly
+            this.RAND1X = 4;
+            this.RAND1Y = 2;
+            this.TANK1X = this.RAND1X*90.5 + 72;
+            this.TANK1Y = this.RAND1Y*105 + 54 + (this.RAND1X%2 == 0? 0 : 52.5);
+            
+            // Update player tank position
+            this.tankList[0].tankSprite.x = this.TANK1X;
+            this.tankList[0].tankSprite.y = this.TANK1Y;
+            this.tankList[0].tankSprite.wheels.x = this.TANK1X;
+            this.tankList[0].tankSprite.wheels.y = this.TANK1Y;
+            
+            // Position AI tanks in corners
+            for (let i = 1; i < this.tankList.length; i++) {
+                const cornerIndex = (i - 1) % CORNER_CELLS.length;
+                const cell = CORNER_CELLS[cornerIndex];
+                const { x, y } = cellToXY(cell.col, cell.row);
+                
+                // Calculate rotation to face player
+                const rot = atan2(this.tankList[0].tankSprite.y - y, this.tankList[0].tankSprite.x - x);
+                
+                // Update AI tank position
+                this.tankList[i].tankSprite.x = x;
+                this.tankList[i].tankSprite.y = y;
+                this.tankList[i].tankSprite.rotation = rot;
+                this.tankList[i].tankSprite.wheels.x = x;
+                this.tankList[i].tankSprite.wheels.y = y;
+                this.tankList[i].tankSprite.wheels.rotation = rot;
+            }
+        }
     }
     pathFinder(tank, opponentTank) {
         // find next cell to target
         let targetCell = this.gameMap.getCell(opponentTank.tankSprite.x, opponentTank.tankSprite.y);
         let currentCell = this.gameMap.getCell(tank.tankSprite.x, tank.tankSprite.y);
         let path = currentCell.findClosestPath(targetCell);
-        if (path.length > 0) {
+        if (path.length > 1) {
             // move tank to next cell
-            let nextCell = path[0];
+            let nextCell = path[1];
             let nextX = nextCell.centerX;
             let nextY = nextCell.centerY;
             return { x: nextX, y: nextY };
