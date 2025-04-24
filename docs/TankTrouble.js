@@ -10,7 +10,7 @@ let controllersImg;
 let SPACE_CODE = 32;
 let Q_CODE = 81;
 
-let maxGames = 0;
+let maxGames = 5;
 let destroyAnimGreen = [];
 let destroyAnimRed = [];
 
