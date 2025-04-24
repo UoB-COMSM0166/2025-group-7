@@ -667,9 +667,9 @@ class GameState{
         let path = currentCell.findClosestPath(targetCell);
         if (path.length > 0) {
             // move tank to next cell
-            let nextCell = path[1];
-            let nextX = nextCell.col * 90.5 + 72;
-            let nextY = nextCell.row * 105 + 54 + (nextCell.col % 2 === 0 ? 0 : 52.5);
+            let nextCell = path[0];
+            let nextX = nextCell.centerX;
+            let nextY = nextCell.centerY;
             return { x: nextX, y: nextY };
         } else {
             return { x: tank.tankSprite.x, y: tank.tankSprite.y };
