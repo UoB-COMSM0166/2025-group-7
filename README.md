@@ -113,7 +113,35 @@ Users appreciated the minimalist aesthetic of our game and expressed that it was
 
 - 15% ~750 words
 
-- Teamwork. How did you work together, what tools did you use. Did you have team roles? Reflection on how you worked together. 
+- Teamwork. How did you work together, what tools did you use. Did you have team roles? Reflection on how you worked together.
+
+(current word count: 554)
+
+- Our process
+
+Work was primarily driven by decision making at a weekly touchpoint, conducted in-person between scheduled on-campus lectures.
+
+These sessions functioned as Agile demos, retrospectives, and sprint planning sessions – at which the team as a whole interacted with the game together, explained their recent work (often with code walkthroughs), and discussed on-going issues with development and potential issues on the horizon.
+
+Tasks were added to the group Kanban board at these sessions, utilising the in-built project management functionality on Github. The most important tickets for the next week were assigned, and additional tickets in surplus of the most essential work remained in the Kanban backlog for individual team members to pick up as and when capacity permitted – or else left to be assigned, by agreed order of priority, at the start of a future sprint.
+
+In early sessions, a formal planning poker approach was taken to prioritising work – but as the project progressed, it was agreed that consensus was easily found within the group on priorities, and that a more informal process could be used to free up extra time for interactive demo and retrospective as a team.
+
+In some instances, pair programming sessions were agreed at these meetings to facilitate collaboration across the team – assisting members who had encountered issues in development, or allowing individuals to better understand existing areas of the code.
+This formal process was supplemented by ongoing discussion on a group Whatsapp chat so that individuals could update the group on recently committed work, highlight any problems that had arisen in the course of completing tickets, and seek feedback on ideas and decision-making that hadn’t been scoped or settled during the last weekly touchpoint.
+
+The team did not implement daily stand-ups since the work was balanced with other commitments on the MSc course, and we chose not to enforce the expectation of daily work on the project that a daily stand-up might imply – instead monitoring progress at our weekly sessions, where issues with overall progress could be addressed if necessary. 
+
+Work accelerated during the April vacation period, with all members of the team making themselves broadly available throughout. This led to more regular meetings – including daily sessions during one week of the holiday.
+
+- Rationale
+
+The team followed Agile processes, as an Agile software development lifecycle was considered the correct choice for the project.
+
+Waterfall was rejected because of the opaque requirements of the project, which would be refined along the process rather than set in stone at the outset. Because of the scope of the project a V-shaped SDLC was considered inappropriate, since a sharp delineation between programming and testing was seen to be counterproductive. And a Spiral methodology was also rejected due to the timescale involved in the project – with Agile-style continuous software integration considered more appropriate than repeated discrete iteration.
+
+The choice for Agile was also supported by the circumstances of the project, which allowed us to avoid many of the traditional dangers associated with the approach: it is a greenfield rather than brownfield project, the team is necessarily co-located due to the university context, and term-time availability of the entire team was very predictable. There was also no firm contractual relationship required by the project, with the requirements set by the unit remaining fairly loose – supporting an Agile approach to development and an ongoing discovery process.
+
 
 ### Conclusion
 
