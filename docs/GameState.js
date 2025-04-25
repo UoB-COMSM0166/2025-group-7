@@ -1,8 +1,8 @@
 const CORNER_CELLS = [
-    { col: 0, row: 0 }//,  // 左上
-    //{ col: 9, row: 0 },  // 右上
-    //{ col: 0, row: 3 },  // 左下
-    //{ col: 9, row: 3 }   // 右下
+    { col: 0, row: 0 },  // 左上
+    { col: 9, row: 0 },  // 右上
+    { col: 0, row: 3 },  // 左下
+    { col: 9, row: 3 }   // 右下
 ];
 function cellToXY(col, row) {
     const x = col * 90.5 + 72;
@@ -86,10 +86,8 @@ class GameState{
         this.extraAIControllers = [];
         if(GameState.twoPlayerMode){
             keyListener2 = new KeyListener(this.tankList[1], false);
-            
-             this.player2 = new Player(GameState.player2Difficulty, GameState.twoPlayerMode, keyListener2);
         } else {
-            this.spawnAITanks();
+            keyListener2 = this.spawnAITanks();
         }
         
         //create two Player objects
@@ -106,6 +104,7 @@ class GameState{
             this.tankList.splice(i, 1);
         }
         this.extraAIControllers = [];
+        let aiCtrlListner;
 
         CORNER_CELLS.forEach((cell, idx) => {
             const { x, y } = cellToXY(cell.col, cell.row);
@@ -119,12 +118,12 @@ class GameState{
             this.extraAIControllers.push(aiCtrl);
 
             if (idx === 0) {
-                this.player2 = new Player(GameState.player2Difficulty, false, aiCtrl);
+                aiCtrlListner = aiCtrl;
             }
         });
 
         //establishes initial time for first Pickup to spawn
-
+        return aiCtrlListner;
 
     }
     
@@ -241,30 +240,71 @@ class GameState{
         }    
 
         //restart game if tank life is less than or equal to 0
-        for(let i = 0; i < this.tankList.length; i++){
-            if(this.tankList[i].getLife() <= 0){
-                //to ensure the score is not updated during the restart "wait time"
-                if(!this.isGameOver){
-                    //update the relevant score
-                    i == 0 ? this.player2.incScore() : this.player1.incScore();
-                    i == 0 ? audioP2Wins.play() : audioP1Wins.play();
+        if (!this.isGameOver) {
 
-                    this.isGameOver = true;
-
-                    //get rid of all current pickups
-                    while (this.pickupList.length > 0){
-                        this.pickupList[0].sprite.remove();
-                        this.pickupList.splice(0);
+            if (GameState.twoPlayerMode) {
+                // 原双人：谁先死谁输
+                for (let i = 0; i < this.tankList.length; i++) {
+                    if (this.tankList[i].getLife() <= 0) {
+                        (i === 0 ? this.player2 : this.player1).incScore();
+			i == 0 ? audioP2Wins.play() : audioP1Wins.play();
+                        this.endRound(this.tankList[i]);
+                        break;
                     }
-    
-                    this.nextPickupSpawn = millis() + this.pickupSpawnInterval();
-                    this.restartGame(this.tankList[i]);
+                }
+            } else { // ----- 单人模式 -----
+                // 1. 玩家击毁 AI → 立即加分一次
+                for (let i = 1; i < this.tankList.length; i++) {
+                    const t = this.tankList[i];
+                    if (t.getLife() <= 0 && !t.counted) {
+                        t.counted = true;
+                        const aiIndex = this.tankList.indexOf(t);
+                        if(aiIndex === 1 && this.tankList.length === 2){
+                            continue;
+                        }
+                        t.destroy();
+
+                        
+                        // 如果 destroy() 里已 remove() sprite，这里再 remove 也无妨
+                        t.tankSprite.remove?.();     // 可安全调用，可省略
+                        
+                        if (aiIndex > -1) {
+                            this.tankList.splice(aiIndex, 1);
+                            this.extraAIControllers.splice(aiIndex - 1, 1); // -1 因为列表第 0 位是玩家
+                        }
+                    }
+                }
+
+                const playerDead = (this.tankList[0].getLife() <= 0);
+                const aiAlive = this.tankList.slice(1).filter(t => t.getLife() > 0).length;
+
+                if (playerDead) {                       // 玩家败
+                    this.player2.incScore();
+                    this.endRound(this.tankList[0]);
+                } else if (aiAlive === 0) {  
+                    this.player1.incScore();           // 四角 AI 全灭 → 玩家胜
+                    this.endRound(this.tankList[0]);
                 }
             }
         }
 
         this.setCurrentWinner();
     }
+
+    endRound(deadTankSprite) {
+        this.isGameOver = true;
+
+        // 清理所有拾取
+        while (this.pickupList.length) {
+            this.pickupList[0].sprite.remove();
+            this.pickupList.splice(0, 1);
+        }
+        this.nextPickupSpawn = millis() + this.pickupSpawnInterval();
+
+        // 2 秒后重启，并在其中重新生成 AI
+        this.restartGame(deadTankSprite);
+    }
+
     
     addProjectile(newProjectile, tank){
         newProjectile.tank = tank;
@@ -341,21 +381,7 @@ class GameState{
                 this.tankList[i].tankWeapon = new Weapon(Weapon.BULLET_TYPE);
             }
 
-            if (!GameState.twoPlayerMode) {
-                // Clear existing AI controllers
-                this.extraAIControllers = [];
-                
-                // Recreate AI controllers for each AI tank
-                for (let i = 1; i < this.tankList.length; i++) {
-                    const aiCtrl = new AIController(this.tankList[i], this, this.tankList[0], GameState.player2Difficulty);
-                    this.extraAIControllers.push(aiCtrl);
-                    
-                    // Update player2 with the first AI controller
-                    if (i === 1) {
-                        this.player2.keyListener = aiCtrl;
-                    }
-                }
-            }
+            if (!GameState.twoPlayerMode) this.spawnAITanks();
             
             //increment every time a game is won 
             this.gameOverCnt++;
