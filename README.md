@@ -49,10 +49,10 @@ One common point in support of both options was the scope they offered for innov
   
 Both ideas were prototyped during the January 28 workshop, with Tank Trouble prototyped on paper and Tower Defence prototyped via Powerpoint. The team agreed to focus on the Tank Trouble prototype at the outset, indicating an existing common preference for that idea.
 
-![](development-docs/paper-prototypes/TTpaperprototype.gif)
+![Tank Trouble paper prototype](development-docs/paper-prototypes/TTpaperprototype.gif)
 
 
-![](development-docs/paper-prototypes/tower_defense_prototype.gif)
+![Tower Defence paper prototype](development-docs/paper-prototypes/tower_defense_prototype.gif)
 
 After prototyping, the decision was taken to focus on the Tank Trouble idea because of the team’s greater familiarity with the core game mechanics – and because we had already identified some interesting twists on the existing game design that would help differentiate our game from its inspiration.
 
@@ -134,7 +134,9 @@ A user experienced initial difficulty in moving the tanks because they rotate le
 This evaluation also affirmed that we need to include some form of tutorial that explains the controls of the game, especially as it is developed and more elements are introduced.
 Users appreciated the minimalist aesthetic of our game and expressed that it was enjoyable to play. 
 
-- One quantitative evaluation (of your choice) 
+- One quantitative evaluation (of your choice)
+
+![NASA TLX findings](testing/NASA TLX image.png)
 
 - Description of how code was tested. 
 
