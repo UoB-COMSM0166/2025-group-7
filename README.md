@@ -136,7 +136,7 @@ Users appreciated the minimalist aesthetic of our game and expressed that it was
 
 - One quantitative evaluation (of your choice)
 
-### NASA TLX aggregate scores:
+**NASA TLX aggregate scores:**
 
 | Participant | Easy mode  | Hard mode  |
 |-------------|------------|------------|
@@ -152,7 +152,7 @@ Users appreciated the minimalist aesthetic of our game and expressed that it was
 | 10          | 62.50      | 54.17      |
 | 11          | 45.00      | 45.00      |
 
-### Wilcoxon Signed-Rank Test Results:
+**Wilcoxon Signed-Rank Test Results:**
 
 | Metric             | Value   |
 |--------------------|---------|
