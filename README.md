@@ -136,7 +136,32 @@ Users appreciated the minimalist aesthetic of our game and expressed that it was
 
 - One quantitative evaluation (of your choice)
 
-![NASA TLX findings](./testing/NASA-TLX-image.png)
+## NASA TLX aggregate scores:
+
+| Participant | Easy mode  | Hard mode  |
+|-------------|------------|------------|
+| 1           | 49.17      | 66.67      |
+| 2           | 52.50      | 65.83      |
+| 3           | 17.50      | 22.50      |
+| 4           | 31.67      | 62.50      |
+| 5           | 35.00      | 45.83      |
+| 6           | 16.67      | 45.00      |
+| 7           | 42.50      | 42.50      |
+| 8           | 21.67      | 41.67      |
+| 9           | 39.17      | 36.67      |
+| 10          | 62.50      | 54.17      |
+| 11          | 45.00      | 45.00      |
+
+### Wilcoxon Signed-Rank Test Results
+
+| Metric             | Value   |
+|--------------------|---------|
+| W Value            | 4.00    |
+| N                  | 11      |
+| Confidence Level   | 0.05    |
+| Critical W Value   | 5.00    |
+| Result             | **Significant**|
+
 
 - Description of how code was tested. 
 
