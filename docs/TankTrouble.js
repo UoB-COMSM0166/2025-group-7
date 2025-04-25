@@ -50,7 +50,7 @@ function preload() {
     imgSpeedPickup  = loadImage('images/speed-pickup.webp');
     imgTankGreen    = loadImage('images/tank-image-green.webp');
     imgTankRed      = loadImage('images/tank-image-red.webp');
-    introImage      = loadImage('intro&endimages/introscreen-alt.png');
+    introImage      = loadImage('intro&endimages/introscreen-v2.png');
     endImage        = loadImage('intro&endimages/endscreenbg.png');
     controllersImg  = loadImage('Controllers.png');
 
@@ -83,7 +83,7 @@ function draw() {
     if(setupStage){
         startingScreen.draw();
     }
-    else if(tankGame.getGameOverCnt() >= maxGames){
+    else if(tankGame.getGameComplete()){
         endOfGame = true;
         gameEndScreen = new GameFinish(endImage, VT323Font);
         if(endOfGame){    
