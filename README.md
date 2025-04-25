@@ -74,27 +74,27 @@ We took time to consider epics, user stories and acceptance criteria to ensure w
 
 Epics:
 
-(1) Game that is comfortable to play for the visually impaired
-(2) Coherent overall design theme to the game 
-(3) Intuitive game with guidance for controls
-(4) Game with no bugs or errors and maintainable code
-(5) Taking input from gamers e.g. gamer name and keeping track of state data related to the players e.g. tank health, bullets left
-(6) Management of size and complexity of game to enable running on third party platforms
+(1) Game that is comfortable to play for the visually impaired  
+(2) Coherent overall design theme to the game  
+(3) Intuitive game with guidance for controls  
+(4) Game with no bugs or errors and maintainable code  
+(5) Taking input from gamers e.g. gamer name and keeping track of state data related to the players e.g. tank health, bullets left  
+(6) Management of size and complexity of game to enable running on third party platforms  
 
 We considered the perspectives of a range of stakeholders. 
 
 User Stories and Acceptance Criteria:
 
--->As a child/inexperienced gamer, I want the game to be playable for me by not being too challenging, so that I enjoy my experience and continue to play in future
+-->As a child/inexperienced gamer, I want the game to be playable for me by not being too challenging, so that I enjoy my experience and continue to play in future  
 -->Given this is one of my first gaming experiences, when I start playing the game, I want to be able to get through the easiest rounds
 
--->As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand
+-->As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand  
 -->Given external users play the game for the first time, when they start playing the game it behaves in a reasonable way, then the game progresses in a way that is intuitive to them
 
--->As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience
+-->As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience  
 -->Given I uploaded the game on my server, when users try to access them game, I want them to enjoy it even with slow internet
 
-–->As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others
+–->As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others  
 -->Given I have never played the game before, when I start playing the game for the first time, I want it to be different enough from the original version that I have reason to continue to play
 
 Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. Concerns were raised regarding sedentary lifestyles and gaming addictions causing lesser connections with nature. The glorification of conflict and warfare may normalise such concepts within impressionable minds such as children. The game itself consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the WEEE waste produced by the PC gaming industry. On the other hand the game has lower energy consumption compared to typical PC games (owing to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient. Finally the game does not include in-game purchases or upgrades which can be considered exploitative (and which many online games possess).
