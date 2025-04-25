@@ -136,7 +136,7 @@ Users appreciated the minimalist aesthetic of our game and expressed that it was
 
 - One quantitative evaluation (of your choice)
 
-![NASA TLX findings](testing/NASA TLX image.png)
+![NASA TLX findings](./testing/NASA-TLX-image.png)
 
 - Description of how code was tested. 
 
