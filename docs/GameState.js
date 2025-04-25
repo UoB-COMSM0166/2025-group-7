@@ -23,7 +23,7 @@ class GameState{
     static CANVAS_HEIGHT = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT;
     gameMap;
     RAND1X = (GameState.twoPlayerMode)? floor(random(5, 9)): 5; 
-    RAND1Y = (GameState.twoPlayerMode)? floor(random(0, 3)): 2; 
+    RAND1Y = (GameState.twoPlayerMode)? floor(random(0, 3)): 1; 
     RAND2X = floor(random(0, 4));
     RAND2Y = floor(random(0, 3));
     TANK1X = this.RAND1X*90.5 + 72;

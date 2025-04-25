@@ -170,42 +170,87 @@ class Cell {
         return neighbors;
     }
 
-    // Finds the closest path to the target cell
     findClosestPath(targetCell) {
-        let current = this;
-        let targetX = targetCell.centerX;
-        let targetY = targetCell.centerY;
-        let maxIterations = 100;
-        let paths = 0;
-        let visited = new Set();
-        const path = [];
-        while (current !== targetCell && current !== null && paths < maxIterations) {
-            visited.add(current);
-            path.push(current);
-            const neighbors = current.neighboringCellsWithNoWalls();
-            if (neighbors.length === 0) {
-                return [];
+        // Reset A* properties for all cells in the grid
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[i].length; j++) {
+                this.grid[i][j].f = 0;
+                this.grid[i][j].g = 0;
+                this.grid[i][j].h = 0;
+                this.grid[i][j].previous = null;
             }
-            let closestNeighbor = null;
-            let minDistance = Infinity;
-            for (let neighbor of neighbors) {
-                const distance = dist(neighbor.centerX, neighbor.centerY, targetX, targetY);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    if (visited.has(neighbor)) {
-                        continue;
-                    }
-                    closestNeighbor = neighbor;
+        }
+
+        const start = this;
+        const end = targetCell;
+
+        const openSet = [start];
+        const closedSet = [];
+
+        while (openSet.length > 0) {
+            // Find the cell in openSet with the lowest f value
+            let current = openSet[0];
+            for (let i = 1; i < openSet.length; i++) {
+                if (openSet[i].f < current.f) {
+                    current = openSet[i];
                 }
             }
-            current = closestNeighbor;
-            paths++;
+
+            // If we've reached the goal, reconstruct the path and return it
+            if (current === end) {
+                return this.reconstructPath(current);
+            }
+
+            // Move current from openSet to closedSet
+            openSet.splice(openSet.indexOf(current), 1);
+            closedSet.push(current);
+
+            // Check all neighbors of current
+            const neighbors = current.neighboringCellsWithNoWalls();
+
+            for (let neighbor of neighbors) {
+                // Ignore the neighbor which is already evaluated
+                if (closedSet.includes(neighbor)) {
+                    continue;
+                }
+
+                // The distance from start to neighbor
+                const tentativeG = current.g + 1; // Assuming each step costs 1
+
+                // If new path to neighbor is better OR neighbor is not in openSet
+                if (!openSet.includes(neighbor) || tentativeG < neighbor.g) {
+                    // This path is the best until now. Record it!
+                    neighbor.g = tentativeG;
+                    neighbor.h = this.heuristic(neighbor, end);
+                    neighbor.f = neighbor.g + neighbor.h;
+                    neighbor.previous = current;
+
+                    // Add neighbor to openSet if not already there
+                    if (!openSet.includes(neighbor)) {
+                        openSet.push(neighbor);
+                    }
+                }
+            }
         }
-        if (current === targetCell) {
-            path.push(targetCell);
-            return path;
-        } else {
-            return [];
+
+        // If no path found, return an empty array
+        return [];
+    }
+
+    // Heuristic function (estimated cost from cell 'a' to cell 'b')
+    heuristic(a, b) {
+        // Use the distance between the centers of the cells as the heuristic
+        return dist(a.centerX, a.centerY, b.centerX, b.centerY);
+    }
+
+    // Reconstructs the path from the end cell back to the start cell
+    reconstructPath(current) {
+        const path = [];
+        let temp = current;
+        while (temp !== null) {
+            path.push(temp);
+            temp = temp.previous;
         }
+        return path.reverse(); // Reverse the path to get it from start to end
     }
 }
