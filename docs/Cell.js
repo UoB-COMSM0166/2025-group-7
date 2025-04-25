@@ -53,6 +53,8 @@ class Cell {
 
                 this[wall.name] = new walls.Sprite(x, y, this.wallLength, this.wallWidth);
                 this[wall.name].rotation = wall.angle;
+                this[wall.name].cell = this;
+                this[wall.name].wallName = wall.name;
 
                 if (wall.outer) {
                     this[wall.name].outerWall = true;

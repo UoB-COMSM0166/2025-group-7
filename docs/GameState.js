@@ -1,8 +1,8 @@
 const CORNER_CELLS = [
-    { col: 0, row: 0 },  // 左上
-    { col: 9, row: 0 },  // 右上
-    { col: 0, row: 3 },  // 左下
-    { col: 9, row: 3 }   // 右下
+    { col: 0, row: 0 }//,  // 左上
+    //{ col: 9, row: 0 },  // 右上
+    //{ col: 0, row: 3 },  // 左下
+    //{ col: 9, row: 3 }   // 右下
 ];
 function cellToXY(col, row) {
     const x = col * 90.5 + 72;
@@ -460,6 +460,11 @@ class GameState{
                 if (wall.collides(projectile.sprite)){
                     audioProjectileBounce.play();
                     if (!wall.outerWall) {
+                        let cell = wall.cell;
+                        let wallName = wall.wallName;
+                        if (cell) {
+                            cell.wallState[wallName] = false; 
+                        }
                         wall.remove();
                     }
                 }
