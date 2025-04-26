@@ -136,6 +136,10 @@ Users appreciated the minimalist aesthetic of our game and expressed that it was
 
 - One quantitative evaluation (of your choice)
 
+On the 4th of March we asked 11 participants to complete the NASA TLX for an easy and hard version of our game. In the hard version the player’s tank was slower, they had less ammunition and their health was lower.
+Through the NASA TLX, we found that some users actually found it easier to navigate the tank in the hard mode. We realised that beginners will have a much different experience to us, as developers who play the game regularly. This evaluation exposed the obstacle of striking a balance between a challenging, enjoyable game for experienced gamers, and a playable one for inexperienced gamers. 
+However, this was not the case for most participants as our results show that there was a statistically significant increased workload when playing the hard mode. Two participants experienced a higher workload, while two participants experienced no observable difference. Therefore, our difficulty modes were generally suitable but they needed fine tuning to ensure this is the case for a wider range of users.
+
 **NASA TLX aggregate scores:**
 
 | Participant | Easy mode  | Hard mode  |
