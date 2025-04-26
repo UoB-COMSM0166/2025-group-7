@@ -6,17 +6,14 @@ class Missile extends Projectile {
   /* Constants -------------------------------------------------------------- */
   static SIZE             = 12;   // sprite diameter (px)
   static SPEED            = 3;    // px per frame @30 FPS
-  static DAMAGE           = 3;    // explosion damage
   static EXPLOSION_RADIUS = 40;   // explosion radius (px)
-  static FLIGHT_TIME      = 10;   // max lifetime (s)
-  static LAUNCH_GRACE     = 10;   // grace frames after launch to avoid self‑hit
 
   constructor (x, y, angleDeg, ownerTank, gs) {
-    super(x, y, angleDeg, Missile.FLIGHT_TIME);
+    super(x, y, angleDeg, Weapon.MISSILE_TIME);
 
-    this.owner = ownerTank;
-    this.gs    = gs;
-    this.grace = Missile.LAUNCH_GRACE;           // launch grace counter
+    this.owner  = ownerTank;
+    this.gs     = gs;
+    this.damage = 3;
 
     /* Capture target coordinates ----------------------------------------- */
     this.enemy = this._nearestEnemy();
@@ -29,12 +26,12 @@ class Missile extends Projectile {
     this.sprite.direction  = degrees(Math.atan2(this.targetY - y,
                                                 this.targetX - x));
     this.sprite.speed      = Missile.SPEED;
-    this.sprite.collider   = 'none';     // circle collider disabled
+    //this.sprite.collider   = 'none';     // circle collider disabled
     this.sprite.overlaps(walls);         // ignore maze walls
     this.sprite.autoDraw   = true;       // let p5play render automatically
     this.sprite.autoUpdate = false;      // movement handled in update()
     this.sprite.visible    = true;       // visible immediately
-    this.leftTurret        = true;       // skip GameState turret‑exit check
+    this.leftTurret = true;
   }
 
   /* Main loop ------------------------------------------------------------- */
@@ -44,30 +41,16 @@ class Missile extends Projectile {
     this.sprite.direction  = degrees(Math.atan2(this.targetY - this.sprite.y,
     this.targetX - this.sprite.x));
 
+    //update the sprite
     this.sprite.update();
-
-    if (this.grace-- > 0) return;        // launch grace period
-
-    // 1) explode at target location
-    if (dist(this.sprite.x, this.sprite.y,
-             this.targetX, this.targetY) <= Missile.SPEED) {
-      this._explode();
-      return;
-    }
-
-    // 2) explode on enemy collision
-    for (const t of this.gs.tankList) {
-      if (t === this.owner || t.getLife() <= 0) continue;
-      if (dist(this.sprite.x, this.sprite.y,
-               t.tankSprite.x, t.tankSprite.y) <= Missile.SIZE) {
-        this._explode();
-        return;
-      }
-    }
   }
 
   draw   () { this.sprite.draw();   }
-  remove () { this.sprite.remove(); }
+
+  remove () {
+    this._explode();
+    this.sprite.remove(); 
+  }
 
   /* Helpers --------------------------------------------------------------- */
   _nearestEnemy () {
@@ -81,18 +64,8 @@ class Missile extends Projectile {
   }
 
   _explode () {
-    // Apply damage
-    for (const t of this.gs.tankList) {
-      if (t === this.owner) continue;                     // never hurt owner
-      if (dist(t.tankSprite.x, t.tankSprite.y,
-               this.sprite.x,  this.sprite.y) <= Missile.EXPLOSION_RADIUS) {
-        t.receiveDamage(Missile.DAMAGE);
-      }
-    }
     audioBombExplode.play();
     this._particles();
-    this.remove();
-    this.despawnTime = 0;         // let GameState clear reference immediately
   }
 
   _particles () {

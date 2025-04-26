@@ -21,7 +21,7 @@ class Weapon {
     static LASER_TIME = 8;
     static BOMB_TIME = 5;
     static SPLINTER_TIME = 2;
-    static MISSILE_TIME  = 10;
+    static MISSILE_TIME  = 30;
 
     /**
      * Creates a Weapon instance based on the provided type.
