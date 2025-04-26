@@ -9,9 +9,9 @@
    id="svg1"
    inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
    sodipodi:docname="pickup-icons.svg"
-   inkscape:export-filename="shield-pickup.webp"
-   inkscape:export-xdpi="238.12488"
-   inkscape:export-ydpi="238.12488"
+   inkscape:export-filename="missile-icon.webp"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -28,15 +28,15 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="1164.9584"
-     inkscape:cy="366.98842"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="1375.1459"
+     inkscape:cy="375.12015"
      inkscape:window-width="1920"
      inkscape:window-height="1018"
      inkscape:window-x="-6"
      inkscape:window-y="-6"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg1">
+     inkscape:current-layer="layer1">
     <inkscape:grid
        id="grid1"
        units="mm"
@@ -60,10 +60,10 @@
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
        id="filter4"
-       x="-0.014666666"
-       y="-0.12064514"
-       width="1.0293333"
-       height="1.2412903">
+       x="-0.011"
+       y="-0.12064512"
+       width="1.022"
+       height="1.2412902">
       <feGaussianBlur
          inkscape:collect="always"
          stdDeviation="1.35"
@@ -71,9 +71,9 @@
     </filter>
   </defs>
   <rect
-     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.51738;stroke-dasharray:none"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.62348;stroke-dasharray:none"
      id="rect1"
-     width="380"
+     width="435"
      height="90"
      x="5"
      y="45"
@@ -102,6 +102,40 @@
        xlink:href="#g3"
        id="use3"
        style="filter:url(#filter4)" />
+  </g>
+  <g
+     id="g26"
+     inkscape:label="Missile"
+     transform="translate(7.4999986)">
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-opacity:1"
+       d="m 362.00001,79.999998 c 0,0 3.53228,-7 5.53103,-7 1.86189,0 5.46897,7 5.46897,7 z"
+       id="path19"
+       sodipodi:nodetypes="cscc" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-opacity:1"
+       d="m 362,80.999996 h 11 v 11.000001 h -11 z"
+       id="path20" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-opacity:1"
+       d="m 362,92.999995 -0.99999,1.000001 h 12.99998 L 373,92.999995 Z"
+       id="path21" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-opacity:1"
+       d="m 367.5,94.994268 c -1.60189,-0.0061 -3.94437,1.526766 -3.94557,4.005729 -0.001,2.473503 3.44558,6.000003 3.92864,6.000003 0.51694,0 3.95422,-3.51815 3.95683,-6.000003 0.003,-2.478962 -2.43989,-4 -3.9399,-4.005729 z"
+       id="path22"
+       sodipodi:nodetypes="sssss" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;stroke-opacity:1"
+       d="m 361.00001,91.999997 -3.5,0 v -4.999999 l 3.5,-2.000002 z"
+       id="path23"
+       sodipodi:nodetypes="ccccc" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#path23"
+       id="use26"
+       transform="matrix(-1,0,0,1,735,0)" />
   </g>
   <g
      inkscape:label="Icons"
@@ -394,6 +428,20 @@
            d="m 299.97137,103 c 0,0 7.33333,-3.666662 8.99999,-7.000002 C 310.63803,92.666665 311.62501,80 311.62501,80 c 0,0 -4.98698,1.499999 -6.65365,1 -1.66666,-0.5 -5.00001,-3.892969 -5.00001,-3.892969 z"
            id="path18-0"
            sodipodi:nodetypes="cscscc" />
+      </g>
+      <g
+         id="g6"
+         inkscape:label="Missile">
+        <path
+           style="display:inline;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-opacity:1"
+           d="m 325.00001,79.999999 5,-5.000001 h 20 l 5,5.000001 v 19.999996 l -5,5.000015 h -20 l -5,-5.000015 z"
+           id="path1-7-1-6-2" />
+        <use
+           x="0"
+           y="0"
+           xlink:href="#g26"
+           id="use27"
+           transform="rotate(-40.568927,359.79302,135.7733)" />
       </g>
     </g>
   </g>
