@@ -354,11 +354,13 @@ class GameState{
                 GameState.projectileList[0].remove();
                 GameState.projectileList.splice(0);
             }
-            //remove all saw sprites
+            //remove all saw sprites and shields
             for(let i = 0; i < this.tankList.length; i++){
                 if(this.tankList[i].tankWeapon.weaponType == Weapon.SAW_TYPE){
                     this.tankList[i].saw.remove();
                 }
+                if(this.tankList[i].hasShield)
+                    this.tankList[i].deactivateShield(false);
             }
 
             //only refresh map once

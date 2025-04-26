@@ -62,7 +62,8 @@ class Pickup {
         this.y = cellY;
 
         // selects pick-up by using millis as a pseudo-random number
-        let randomiser = Math.floor(Math.random() * 7);
+        //let randomiser = Math.floor(Math.random() * 7);
+        let randomiser = 4;
         
         if(randomiser == 0){
             this.setHealth();

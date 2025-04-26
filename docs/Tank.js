@@ -214,7 +214,7 @@ receiveDamage(amount) {
         }
     }
     
-    deactivateShield() {
+    deactivateShield(showAnimation = true) {
         this.hasShield = false;
     
         if (this.shieldSprite) {
@@ -222,8 +222,10 @@ receiveDamage(amount) {
             this.shieldSprite = null;
         }
     
-        this.showShieldBreakEffect(); 
+        if(showAnimation)
+            this.showShieldBreakEffect(); 
     }
+    
     showShieldBreakEffect() {
         for (let i = 0; i < 20; i++) {
             const particle = new Sprite();
