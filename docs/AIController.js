@@ -15,6 +15,7 @@ class AIController {
       this.turnStep    = level === GameState.HARD ? 3   : 1.5;     // Difficulty affects turning speed
       this.safeDistSq  = 150 * 150;
       this.currentPath = null;
+      this.oldPath = null;
       this.pathReached = true;
     }
   

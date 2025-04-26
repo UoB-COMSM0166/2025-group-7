@@ -262,7 +262,7 @@ class GameState{
                         if(aiIndex === 1 && this.tankList.length === 2){
                             continue;
                         }
-                        t.destroy();
+                        //t.destroy();
 
                         
                         // 如果 destroy() 里已 remove() sprite，这里再 remove 也无妨
