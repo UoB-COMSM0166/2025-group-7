@@ -172,7 +172,7 @@ class Pickup {
             this.setBomb();
         } else {
             this.type = "MISSILE";
-            this.sprite.image = imgAmmoPickup; // to be replaced with bespoke image
+            this.sprite.image = imgMissilePickup;
         }
     }
 

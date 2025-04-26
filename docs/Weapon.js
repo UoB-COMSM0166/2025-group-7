@@ -54,8 +54,8 @@ class Weapon {
                 break;
                 case Weapon.MISSILE_TYPE:
                 this.capacity  = Weapon.MISSILE_CAPACITY;
-                this.fireSound = audioBulletShot;   // 先共用子弹声音
-                this.icon      = imgAmmoIcon;       // 如有图标可替换
+                this.fireSound = audioBulletShot;
+                this.icon      = imgMissileIcon;
                 break;
             default:
                 throw new Error("Invalid weapon type");

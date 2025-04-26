@@ -48,6 +48,8 @@ function preload() {
     imgShieldPickup = loadImage('images/shield-pickup.webp');
     imgSpeedIcon    = loadImage('images/speed-icon.webp');
     imgSpeedPickup  = loadImage('images/speed-pickup.webp');
+    imgMissileIcon  = loadImage('images/missile-icon.webp');
+    imgMissilePickup= loadImage('images/missile-pickup.webp');
     imgTankGreen    = loadImage('images/tank-image-green.webp');
     imgTankRed      = loadImage('images/tank-image-red.webp');
     introImage      = loadImage('intro&endimages/introscreen-v2.png');
