@@ -97,9 +97,6 @@ User Stories and Acceptance Criteria:
 –->As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others  
 -->Given I have never played the game before, when I start playing the game for the first time, I want it to be different enough from the original version that I have reason to continue to play
 
-Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. Concerns were raised regarding sedentary lifestyles and gaming addictions causing lesser connections with nature. The glorification of conflict and warfare may normalise such concepts within impressionable minds such as children. The game itself consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the WEEE waste produced by the PC gaming industry. On the other hand the game has lower energy consumption compared to typical PC games (owing to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient. Finally the game does not include in-game purchases or upgrades which can be considered exploitative (and which many online games possess).
-
-![SusAD](./diagrams/SusAD.jpg)
 
 ### Design
 
@@ -201,6 +198,16 @@ The team followed Agile processes, as an Agile software development lifecycle wa
 Waterfall was rejected because of the opaque requirements of the project, which would be refined along the process rather than set in stone at the outset. Because of the scope of the project a V-shaped SDLC was considered inappropriate, since a sharp delineation between programming and testing was seen to be counterproductive. And a Spiral methodology was also rejected due to the timescale involved in the project – with Agile-style continuous software integration considered more appropriate than repeated discrete iteration.
 
 The choice for Agile was also supported by the circumstances of the project, which allowed us to avoid many of the traditional dangers associated with the approach: it is a greenfield rather than brownfield project, the team is necessarily co-located due to the university context, and term-time availability of the entire team was very predictable. There was also no firm contractual relationship required by the project, with the requirements set by the unit remaining fairly loose – supporting an Agile approach to development and an ongoing discovery process.
+
+
+### Sustainability, ethics and accessability 
+
+- 10%, 750 words
+- Evidence of the impact of your game across the environment and two of the other areas (Social, Economic, Technical and Individual)
+
+Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. Concerns were raised regarding sedentary lifestyles and gaming addictions causing lesser connections with nature. The glorification of conflict and warfare may normalise such concepts within impressionable minds such as children. The game itself consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the WEEE waste produced by the PC gaming industry. On the other hand the game has lower energy consumption compared to typical PC games (owing to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient. Finally the game does not include in-game purchases or upgrades which can be considered exploitative (and which many online games possess).
+
+![SusAD](./diagrams/SusAD.jpg)
 
 
 ### Conclusion
