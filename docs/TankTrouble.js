@@ -14,6 +14,8 @@ let maxGames = 5;
 let destroyAnimGreen = [];
 let destroyAnimRed = [];
 
+let isTouchScreen = hasTouchscreen();
+
 function preload() {
 
     //audio file preloads
@@ -127,7 +129,7 @@ function keyPressed() {
     }
     else{
         //detect if tank 1 (human player) has fired
-        if (keyCode === SPACE_CODE && !tankGame.getIsGameOver() && !GameState.showMapGeneration) {
+        if ((keyCode === SPACE_CODE) && !tankGame.getIsGameOver() && !GameState.showMapGeneration) {
                 if(tankGame.tankList[0].canFire()){
                     tankGame.addProjectile(tankGame.tankList[0].fire(), tankGame.tankList[0]);
                 }
@@ -152,5 +154,29 @@ function mousePressed() {
         endOfGame = false;
         setup();
         gameEndScreen = null;
+    } else if (!tankGame.getIsGameOver()) {
+        if ((shootButton.isPressed) && !tankGame.getIsGameOver() && !GameState.showMapGeneration) {
+            if(tankGame.tankList[0].canFire()){
+                tankGame.addProjectile(tankGame.tankList[0].fire(), tankGame.tankList[0]);
+            }
+        }
+
+        //if the game in two player mode, detect if tank 2 fired
+        if(GameState.twoPlayerMode){
+            if (shootButton2.isPressed && !tankGame.getIsGameOver() && !GameState.showMapGeneration) {
+                if(tankGame.tankList[1].canFire()){    
+                    tankGame.addProjectile(tankGame.tankList[1].fire(), tankGame.tankList[1]);
+                }
+            }
+        }
     }
 }
+
+function hasTouchscreen() {
+    return 'TouchEvent' in window ||
+        (window.DocumentTouch && document instanceof window.DocumentTouch) ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0;
+}
+  
+

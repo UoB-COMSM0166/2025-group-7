@@ -1,14 +1,14 @@
 class GameFinish{
 
-    gameWinnerX = 245;
+    gameWinnerX = 445;
     gameWinnerY = 350;
-    drawX = 375;
+    drawX = 575;
     drawY = 350;
-    gameCompleteX = 120;
+    gameCompleteX = 320;
     gameCompleteY = 200;
-    newGameX = 305;
+    newGameX = 505;
     newGameY = 500;
-    newGameRectX = 490;
+    newGameRectX = 690;
     newGameRectY = 515;
     newGameRectWidth = 450;
     newGameRectHeight = 60;

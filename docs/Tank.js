@@ -300,6 +300,11 @@ receiveDamage(amount) {
     }
     
     update(){
+
+        if(isTouchScreen){
+            this.joyStickInput();
+        }
+
         //call the update method of the underlying sprite
         this.tankSprite.wheels.update();
         this.tankSprite.update();
@@ -345,7 +350,7 @@ receiveDamage(amount) {
             this.tankSprite.ani.pause();
             this.inMotion = true;
         }
-        else {
+        else if(!isTouchScreen){
             this.tankSprite.speed = 0;
             this.tankSprite.ani.pause();
             this.inMotion = false;
@@ -386,5 +391,53 @@ receiveDamage(amount) {
 
         return [row, column];
 
+    }
+
+    joyStickInput() {
+        if(GameState.twoPlayerMode) {
+            this.moveX = (this.index === 1)? joyStick.val.x: -joyStick2.val.x;
+            this.moveY = (this.index === 1)? joyStick.val.y: -joyStick2.val.y;
+            this.rotationSpeed = 2*this.spdFactor; // Adjust this value to control rotation speed
+            this.moveSpeed = 1*this.spdFactor; //adjust this value to control movement speed
+
+            if (abs(this.moveY) > 0.1) {
+                this.tankSprite.rotation += this.moveY * this.rotationSpeed;
+                this.inMotion = true;
+            }
+            
+            if (abs(this.moveX) > 0.1) {
+                this.tankSprite.direction = this.tankSprite.rotation;
+                this.tankSprite.speed = -this.moveX * this.moveSpeed; // Invert moveY to align joystick up with forward movement
+            
+                this.tankSprite.inMotion = true;
+                this.inMotion = true;
+            } else{
+                this.tankSprite.speed = 0;
+                this.tankSprite.ani.pause();
+                this.inMotion = false;
+            }
+        }
+        else if(this.index === 1){
+            this.moveX = joyStick.val.x;
+            this.moveY = joyStick.val.y;
+            this.rotationSpeed = 2*this.spdFactor; // Adjust this value to control rotation speed
+            this.moveSpeed = 1*this.spdFactor; //adjust this value to control movement speed
+            if (abs(this.moveX) > 0.1) {
+                this.tankSprite.rotation += this.moveX * this.rotationSpeed;
+                this.inMotion = true;
+            }
+
+            if (abs(this.moveY) > 0.1) {
+                this.tankSprite.direction = this.tankSprite.rotation;
+                this.tankSprite.speed = this.moveY * this.moveSpeed; // Invert moveY to align joystick up with forward movement
+
+                this.tankSprite.inMotion = true;
+                this.inMotion = true;
+            } else{
+                this.tankSprite.speed = 0;
+                this.tankSprite.ani.pause();
+                this.inMotion = false;
+            }
+        }
     }
 }

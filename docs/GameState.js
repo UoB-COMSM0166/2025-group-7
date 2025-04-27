@@ -4,8 +4,15 @@ const CORNER_CELLS = [
     { col: 0, row: 3 },  // 左下
     { col: 9, row: 3 }   // 右下
 ];
+
+let gui
+let joyStick;
+let joyStick2;
+let shootButton;
+let shootButton2;
+
 function cellToXY(col, row) {
-    const x = col * 90.5 + 72;
+    const x = col * 90.5 + 272;
     const y = row * 105 + 54 + (col % 2 === 0 ? 0 : 52.5);
     return { x, y };
 }
@@ -17,8 +24,9 @@ class GameState{
     isGameOver;
     gameOverCnt;
     nextPickupSpawn;
-    static CANVAS_WIDTH = 960;
+    static CANVAS_WIDTH = 1360;
     static GRID_HEIGHT = 480;
+    static GRID_WIDTH = 960;
     static LOWER_PANEL_HT = 200;
     static CANVAS_HEIGHT = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT;
     gameMap;
@@ -26,9 +34,9 @@ class GameState{
     RAND1Y = (GameState.twoPlayerMode)? floor(random(0, 3)): 1; 
     RAND2X = floor(random(0, 4));
     RAND2Y = floor(random(0, 3));
-    TANK1X = this.RAND1X*90.5 + 72;
+    TANK1X = this.RAND1X*90.5 + 272;
     TANK1Y = this.RAND1Y*105 + 54 + (this.RAND1X%2 == 0? 0 : 52.5);
-    TANK2X = this.RAND2X*90.5 + 72;
+    TANK2X = this.RAND2X*90.5 + 272;
     TANK2Y = this.RAND2Y*105 + 54 + (this.RAND2X%2 == 0? 0 : 52.5);
     ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
     ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
@@ -48,6 +56,7 @@ class GameState{
     static doneMapGeneration = false;
     static themeColor = /*red, blue, green, white*/ [[255, 0, 0], [0, 0, 255], [0, 255, 0], [255, 255, 255]];
     static themeColorIndex = 0;
+
     
     constructor(){ 
         this.isGameOver = false;
@@ -58,7 +67,7 @@ class GameState{
         this.pickupList = [];
         
         //generate map
-        this.gameMap = new Grid(GameState.GRID_HEIGHT);
+        this.gameMap = new Grid(GameState.GRID_HEIGHT, GameState.GRID_WIDTH);
         this.gameMap.initGrid();
         if(!GameState.showMapGeneration){
             do{
@@ -97,6 +106,69 @@ class GameState{
         //establishes initial time for first Pickup to spawn
         
         this.nextPickupSpawn = millis() + this.pickupSpawnInterval();
+
+        if(isTouchScreen && !GameState.twoPlayerMode){
+                //Create Gui insstance
+            gui = createGui();
+            joyStick = createJoystick("Player1_JoyStick", 10, 250, 180, 180);
+
+            //Create a joystick
+            joyStick.setStyle({
+                rounding: 100,
+                fillBgActive: color(20, 20, 20, 20),
+                strokeBg:  color(255, 255, 255),
+                strokeBgActive: color(255, 255, 255, 20),
+                handleRadius: 30
+            });
+
+            //Create shoot button
+            shootButton = createButton("Player1_Shoot", 1185, 265, 150, 150);
+
+            shootButton.setStyle({
+                rounding: 100,
+                fillBgActive: color(200, 200, 200, 50),
+                fillLabelActive: color(200, 200, 200, 0),
+                strokeBg:  color(255, 255, 255),
+                strokeBgActive: color(255, 255, 255, 20)
+            });
+        } else if(isTouchScreen && GameState.twoPlayerMode){
+            //Create Gui insstance
+            gui = createGui();
+            joyStick = createJoystick("Player1_JoyStick", 1170, 425, 180, 180);
+            joyStick.setStyle({
+                rounding: 100,
+                fillBgActive: color(20, 20, 20, 20),
+                strokeBg:  color(255, 255, 255),
+                strokeBgActive: color(255, 255, 255, 20),
+                handleRadius: 30
+            });
+
+            shootButton = createButton("Player1_Shoot", 1185, 100, 150, 150);
+            shootButton.setStyle({
+                rounding: 100,
+                fillBgActive: color(200, 200, 200, 50),
+                fillLabelActive: color(200, 200, 200, 0),
+                strokeBg:  color(255, 255, 255),
+                strokeBgActive: color(255, 255, 255, 20)
+            });
+
+            joyStick2 = createJoystick("Player2_JoyStick", 10, 100, 180, 180);
+            joyStick2.setStyle({
+                rounding: 100,
+                fillBgActive: color(20, 20, 20, 20),
+                strokeBg:  color(255, 255, 255),
+                strokeBgActive: color(255, 255, 255, 20),
+                handleRadius: 30
+            });
+            shootButton2 = createButton("Player2_Shoot", 25, 425, 150, 150);
+            shootButton2.setStyle({
+                rounding: 100,
+                fillBgActive: color(200, 200, 200, 50),
+                fillLabelActive: color(200, 200, 200, 0),
+                strokeBg:  color(255, 255, 255),
+                strokeBgActive: color(255, 255, 255, 20)
+            });
+        }
     }
     spawnAITanks() {
         for (let i = this.tankList.length - 1; i >= 1; i--) {
@@ -129,9 +201,11 @@ class GameState{
     
     draw(){
         background(0);
-        
-        fill('black'); // Different color for the window
-        rect(480, 240, 960, 480); // Position & size
+
+        if(isTouchScreen){
+            //Draw joystick
+            drawGui();
+        }
         
         //draw the map
         if(GameState.showMapGeneration){
@@ -211,7 +285,7 @@ class GameState{
         //update pickups
         if(millis() > this.nextPickupSpawn){
             if (this.pickupList.length < 5){
-                let newPickup = new Pickup(this.CANVAS_WIDTH, this.GRID_HEIGHT, this.pickupList, this.tankList);
+                let newPickup = new Pickup(this.GRID_WIDTH, this.GRID_HEIGHT, this.pickupList, this.tankList);
                 this.pickupList.push(newPickup);
             }
             this.nextPickupSpawn = millis() + this.pickupSpawnInterval();
@@ -367,7 +441,7 @@ class GameState{
             if(this.isGameOver){
                 walls.remove();
                 GameState.themeColorIndex = (GameState.themeColorIndex + 1) % GameState.themeColor.length;
-                this.gameMap = new Grid(GameState.GRID_HEIGHT);
+                this.gameMap = new Grid(GameState.GRID_HEIGHT, GameState.GRID_WIDTH);
                 this.gameMap.initGrid();
                 do{
                     this.gameMap.generateMap();
@@ -689,6 +763,8 @@ class GameState{
             image(controllersImg, imgX, imgY, imgWidth, imgHeight);
             
         }
+
+        
     }
 
     regenerateTankPosition(tank){
@@ -698,9 +774,9 @@ class GameState{
             this.RAND1Y = floor(random(0, 3)); 
             this.RAND2X = floor(random(0, 4));
             this.RAND2Y = floor(random(0, 3));
-            this.TANK1X = this.RAND1X*90.5 + 72;
+            this.TANK1X = this.RAND1X*90.5 + 272;
             this.TANK1Y = this.RAND1Y*105 + 54 + (this.RAND1X%2 == 0? 0 : 52.5);
-            this.TANK2X = this.RAND2X*90.5 + 72;
+            this.TANK2X = this.RAND2X*90.5 + 272;
             this.TANK2Y = this.RAND2Y*105 + 54 + (this.RAND2X%2 == 0? 0 : 52.5);
             this.ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
             this.ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
@@ -727,7 +803,7 @@ class GameState{
             // Position player tank randomly
             this.RAND1X = 4;
             this.RAND1Y = 2;
-            this.TANK1X = this.RAND1X*90.5 + 72;
+            this.TANK1X = this.RAND1X*90.5 + 272;
             this.TANK1Y = this.RAND1Y*105 + 54 + (this.RAND1X%2 == 0? 0 : 52.5);
             
             // Update player tank position
@@ -770,4 +846,9 @@ class GameState{
             return { x: tank.tankSprite.x, y: tank.tankSprite.y };
         }
     }
+}
+
+function touchMoved() {
+    // do some stuff
+    return false;
 }

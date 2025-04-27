@@ -15,7 +15,7 @@ class Cell {
         this.rows = rows;
         this.i = i;
         this.j = j;
-        this.wallOffsetX = 10;
+        this.wallOffsetX = 210;
         this.centerX = round(this.i * (3 / 2 * this.wallLength - this.wallWidth) + this.wallLength + this.wallOffsetX);
         this.centerY = round(this.j * (sqrt(3) * this.wallLength - this.wallWidth) + sqrt(3) / 2 * this.wallLength + (this.i % 2 === 0 ? 0 : sqrt(3) / 2 * this.wallLength - 2));
         // Hexagon with 6 sides in wallState
