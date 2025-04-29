@@ -56,7 +56,8 @@ function preload() {
     imgTankRed      = loadImage('images/tank-image-red.webp');
     introImage      = loadImage('intro&endimages/introscreen-v2.png');
     endImage        = loadImage('intro&endimages/endscreenbg.png');
-    controllersImg  = loadImage('Controllers.png');
+    controllersTwoPlayersImg  = loadImage('images/ControllersTwoPlayer.png');
+    controllersOnePlayerImg  = loadImage('images/ControllerSinglePlayer.png');
 
     //destroy animation image preloads
     for(let i = 1; i <= 10; i++){
