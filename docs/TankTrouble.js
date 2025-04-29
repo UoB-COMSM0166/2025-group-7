@@ -120,7 +120,11 @@ function keyPressed() {
     }
     else if(endOfGame){
         if(keyCode === ENTER){
-            allSprites.remove();
+            for(let i = 0; i < allSprites.length; i++){
+                i.remove();
+                i = null;
+            }
+            //allSprites.remove();
             audioBackground.stop();
             endOfGame = false;
             this.setup();
