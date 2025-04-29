@@ -754,14 +754,20 @@ class GameState{
         fill('black');
         
         // Display controller instructions at the bottom
-        if (controllersImg) {
+        if (controllersTwoPlayersImg && GameState.twoPlayerMode) {
             const imgWidth = 200; // Adjust as needed
             const imgHeight = 200; // Adjust as needed
             const imgX = offsetX - imgWidth / 2;
             const imgY = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT - imgHeight - 10;
             
-            image(controllersImg, imgX, imgY, imgWidth, imgHeight);
+            image(controllersTwoPlayersImg, imgX, imgY, imgWidth, imgHeight);
             
+        } else if (controllersOnePlayerImg && !GameState.twoPlayerMode) {
+            const imgWidth = 100; // Adjust as needed
+            const imgHeight = 200; // Adjust as needed
+            const imgX = offsetX - imgWidth / 2;
+            const imgY = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT - imgHeight - 10;
+            image(controllersOnePlayerImg, imgX, imgY, imgWidth, imgHeight);
         }
 
         
