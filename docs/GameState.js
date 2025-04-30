@@ -415,8 +415,6 @@ class GameState{
                             }
                         }
 
-                        console.log(GameState.projectileList[i]);
-
                         //next remove the projectile
                         GameState.projectileList[j].remove();
                         GameState.projectileList.splice(j, 1);
