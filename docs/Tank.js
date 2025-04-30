@@ -5,13 +5,13 @@ class Tank{
     tankWeapon; //which particular type of weapon the tank has
     tankSprite; //sprite created with P5 Play
     saw;
-    static TANK_HEIGHT = 20;
-    static TANK_WIDTH = 20;
-    static GUN_HEIGHT = 20;
-    static GUN_WIDTH = 10;
-    static WHEEL_HEIGHT = 12;
-    static WHEEL_WIDTH = 20;
-    static PROJECTILE_SPAWN_DIST = -5;
+    static TANK_HEIGHT = 15;
+    static TANK_WIDTH = 15;
+    static GUN_HEIGHT = 15;
+    static GUN_WIDTH = 8;
+    static WHEEL_HEIGHT = 9;
+    static WHEEL_WIDTH = 15;
+    static PROJECTILE_SPAWN_DIST = -4;
     static UP_DIRECTION = 0;
     static DOWN_DIRECTION = 1;
     static LEFT_DIRECTION = 2;
@@ -77,8 +77,8 @@ class Tank{
         }else{
             this.tankSprite.addAni('move', 'images/green-tank-moving/green-moving1.webp', 2);
         }
-        this.tankSprite.anis.scale = 0.1;
-        this.tankSprite.anis.offset.x = 60;
+        this.tankSprite.anis.scale = 0.08;
+        this.tankSprite.anis.offset.x = 45;
 
         //to keep track of how many bullets are fired
         //enables resetting bullet count once special weapons used
@@ -140,7 +140,7 @@ class Tank{
         let projY = this.tankSprite.y + projDist*sin(this.tankSprite.rotation);
 
         //visual indication of firing through "scale" animation
-        this.tankSprite.anis.scale = 0.11;
+        this.tankSprite.anis.scale = 0.09;
         this.scaleAniFrameCount = 1;
 
         if(this.tankWeapon.weaponType == Weapon.BULLET_TYPE){
@@ -180,7 +180,7 @@ class Tank{
 
     lifeDecrease(damage){
         //visual indication of firing through "scale" animation
-        this.tankSprite.anis.scale = 0.11;
+        this.tankSprite.anis.scale = 0.09;
         this.scaleAniFrameCount = 1;
 
         if(this.tankLife - damage > 0){
@@ -326,7 +326,7 @@ receiveDamage(amount) {
 
     updateScaleAnimation() {
         if(this.scaleAniFrameCount == 1) {
-            this.tankSprite.anis.scale = 0.1;
+            this.tankSprite.anis.scale = 0.08;
         }
         if(this.scaleAniFrameCount > 0) {
             this.scaleAniFrameCount--;
