@@ -238,7 +238,7 @@ function resetGame() {
         tank.tankWeapon = new Weapon(Weapon.BULLET_TYPE);
         tank.positionRefresh(); // Reset tank positions
         tank.tankSprite.speed = 0; // Stop any movement
-        tank.tankSprite.rotation = tank.INITIALROTATION; // Reset rotation
+        tankGame.regenerateTankPosition(tank);
 
         //remove saws if present
         if (tank.tankWeapon.weaponType == Weapon.SAW_TYPE) {
