@@ -12,6 +12,8 @@ class GameFinish{
     newGameRectY = 515;
     newGameRectWidth = 300;
     newGameRectHeight = 60;
+    scoreX = 600;
+    scoreY = 410;
     
     constructor(endImage, VT323Font){
         createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
@@ -33,13 +35,32 @@ class GameFinish{
         text("GAME COMPLETE", this.gameCompleteX, this.gameCompleteY);
 
         // display the winner
-        strokeWeight(0);
-        textFont(BatmanForever);
-        textSize(50);
-        if(GameState.currentWinner != "Draw") text(GameState.currentWinner + " wins!", this.gameWinnerX, this.gameWinnerY);
-        else{
-            text(GameState.currentWinner + "!", this.drawX, this.drawY);
+        if(GameState.twoPlayerMode){
+            fill('white');
+            strokeWeight(0);
+            textFont(BatmanForever);
+            textSize(50);
+            if(GameState.currentWinner != "Draw") text(GameState.currentWinner + " wins!", this.gameWinnerX, this.gameWinnerY);
+            else{
+                text(GameState.currentWinner + "!", this.drawX, this.drawY);
+            }
         }
+        else{
+            textFont(BatmanForever);
+            textSize(50);
+            if(GameState.currentWinner === "Player 2"){
+                fill('white');
+                text("You Lose!", this.gameWinnerX + 77, this.gameWinnerY);
+            }
+            else{
+                fill('white');
+                text("You Win!", this.gameWinnerX + 100, this.gameWinnerY);
+            }
+        }
+
+        fill('white');
+        textSize(60);
+        text(GameState.currentWinnerScore + " : " + GameState.currentLoserScore, this.scoreX, this.scoreY);
 
         strokeWeight(2);
         rect(this.newGameRectX, this.newGameRectY, this.newGameRectWidth, this.newGameRectHeight);

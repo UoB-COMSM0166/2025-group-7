@@ -33,7 +33,16 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 ### Introduction
 
 - 5% ~250 words 
-- Describe your game, what is based on, what makes it novel? 
+- Describe your game, what is based on, what makes it novel?
+
+Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank – using forward movement, backward movement, and left/right pivoting instead of lateral movement – around a dynamically generated hex map with the aim of destroying opposing tanks. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots.
+
+It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat, but differs in a key mechanical aspect: whereas Tank Trouble is largely predicated on geometric reasoning about predictable projectile bounce off of fixed surfaces, Hex Wars creates a more chaotic style of combat by situating the game in a hexagonal grid (about which it is harder to intuitively reason) with destructible walls.
+
+Environmental destructibility means that the arena of combat becomes more and more sparse as gameplay unfolds, pushing players into more proactive and less defensive strategies. It also creates interesting decisions about preserving ammunition and switching to new weapons – with opportunities to reshape the map now balanced against existing concerns about directly damaging the opposing tank.
+
+In addition to the mechanical novelty, we’ve also styled the game in a more consistent futuristic theme with clear applications to graphical assets, sound, and UI design – creating a more coherent aesthetic experience than that offered by Tank Trouble, which simply situates cartoon tanks in an otherwise un-themed game world.
+
 
 ### Requirements 
 
