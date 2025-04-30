@@ -96,6 +96,7 @@ class Missile extends Projectile {
   _particles () {
     for (let i = 0; i < 25; i++) {
       const p = new Sprite();
+      p.collider = 'none';
       p.x = this.sprite.x;
       p.y = this.sprite.y;
       p.diameter   = 4;

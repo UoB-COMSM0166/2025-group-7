@@ -204,14 +204,15 @@ receiveDamage(amount) {
     
         if (!this.shieldSprite) {
             this.shieldSprite = new Sprite();
-            this.shieldSprite.diameter = Math.max(Tank.TANK_WIDTH, Tank.TANK_HEIGHT) * 2.5; 
-            this.shieldSprite.shape = 'circle'; 
             this.shieldSprite.x = this.tankSprite.x;
             this.shieldSprite.y = this.tankSprite.y;
+            this.shieldSprite.draw = function() {
+                fill(color(0, 200, 255, 50));
+                stroke(color(0, 200, 255));
+                strokeWeight(2);
+                ellipse(5, 0, 50, 40);
+            };
             this.shieldSprite.collider = 'none';
-            this.shieldSprite.stroke = color(0, 200, 255);
-            this.shieldSprite.strokeWeight = 3;
-            this.shieldSprite.color = color(0, 200, 255, 50);
             this.shieldSprite.autoUpdate = false;
             this.shieldSprite.autoDraw = false;
         }
@@ -232,6 +233,7 @@ receiveDamage(amount) {
     showShieldBreakEffect() {
         for (let i = 0; i < 20; i++) {
             const particle = new Sprite();
+            particle.collider = 'none';
             particle.x = this.tankSprite.x;
             particle.y = this.tankSprite.y;
             particle.width = 4;
@@ -337,6 +339,7 @@ receiveDamage(amount) {
         if (this.hasShield && this.shieldSprite) {
             this.shieldSprite.x = this.tankSprite.x;
             this.shieldSprite.y = this.tankSprite.y;
+            this.shieldSprite.rotation = this.tankSprite.rotation;
         }
     }
 

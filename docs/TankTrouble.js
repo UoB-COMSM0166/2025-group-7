@@ -194,7 +194,7 @@ function mousePressed() {
 }
 
 function mouseClicked() {
-    if(!tankGame.getIsGameOver()) {
+    if(tankGame && !tankGame.getIsGameOver()) {
         //Menu button
         if (gameMenu.menuButton.isReleased) {
             tankGame.tankMoving = false;
