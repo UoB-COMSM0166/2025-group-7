@@ -4,7 +4,7 @@ class GameSetup{
     HEAD_TEXT = 75;
     REG_TEXT = 25;
     VERT_SP = 110;
-    BELOW_TITLE = 170;
+    BELOW_TITLE = 230;
     HORZ1 = -100;
     HORZ2 = 50;
     HORZ3 = 300;
@@ -12,10 +12,9 @@ class GameSetup{
 
     //keeps track of which game setting user is on
     ON_MODE = 0;
-    ON_P1DIFF = 1;
-    ON_P2DIFF = 2;
-    ON_MAPGEN = 3;
-    ON_START = 4;
+    ON_DIFF = 1;
+    ON_MAPGEN = 2;
+    ON_START = 3;
 
     constructor(introImage, VT323Font){
         //start off on the one-vs-two player mode setting
@@ -31,21 +30,17 @@ class GameSetup{
                 onePlayer: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE, width: 200, height: this.REG_TEXT + 25 },
                 twoPlayer: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE, width: 200, height: this.REG_TEXT + 25 }
             },
-            p1Diff: {
+            diff: {
                 easy: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + this.VERT_SP, width: 100, height: this.REG_TEXT + 25 },
                 hard: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + this.VERT_SP, width: 100, height: this.REG_TEXT + 25 }
             },
-            p2Diff: {
-                easy: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + 2*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 },
-                hard: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + 2*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 }
-            },
             mapGen: {
-                on: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + 3*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 },
-                off: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + 3*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 }
+                on: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 },
+                off: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 }
             },
             start: { 
                 x: GameState.CANVAS_WIDTH/2 + this.HORZ4, 
-                y: this.BELOW_TITLE + 4*this.VERT_SP, 
+                y: this.BELOW_TITLE + this.ON_START*this.VERT_SP, 
                 width: 500, 
                 height: 100 
             }
@@ -82,11 +77,10 @@ class GameSetup{
 
         //put in difficulty selection
         textFont(BatmanForeverAlt);
-        text('PLAYER 1 DIFFICULTY:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE + this.VERT_SP);
-        text('PLAYER 2 DIFFICULTY:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE + 2*this.VERT_SP);
+        text('DIFFICULTY:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE + this.VERT_SP);
 
         //put in Map Generation selection
-        text('MAP GENERATION:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE + 3*this.VERT_SP);
+        text('MAP GENERATION:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
 
         //put in player mode boxes
         textAlign(CENTER, TOP);
@@ -96,17 +90,15 @@ class GameSetup{
 
         //put in difficulty boxes
         text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP);
-        text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + 2*this.VERT_SP);
         text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP);
-        text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + 2*this.VERT_SP);
 
         //put in map generation on/off
-        text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + 3*this.VERT_SP);
-        text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + 3*this.VERT_SP);
+        text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
+        text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
 
         //put in "start game"
         textSize(1.5*this.REG_TEXT);
-        text('START GAME', GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + 3.8*this.VERT_SP);
+        text('START GAME', GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.ON_START*this.VERT_SP);
         textSize(this.REG_TEXT);
 
         //highlight player mode selection
@@ -123,7 +115,7 @@ class GameSetup{
 
         //highlight difficulty selection for player 1
         fill('#CCCCCC'); // changed
-        if(GameState.player1Difficulty === GameState.EASY){
+        if(GameState.difficulty === GameState.EASY){
             rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
             fill('black');
             text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP);
@@ -133,28 +125,18 @@ class GameSetup{
             text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP);
         }
 
-        //highlight difficulty selection for player 2
-        fill('#CCCCCC'); // changed
-        if(GameState.player2Difficulty === GameState.EASY){
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + 2*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
-            fill('black');
-            text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + 2*this.VERT_SP);
-        }else{
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + 2*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
-            fill('black');
-            text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + 2*this.VERT_SP);
-        }
+        
         //highlight map generation selection
         fill('#CCCCCC'); // changed
         if(GameState.showMapGeneration){
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + 3*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
+            rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
             fill('black');
-            text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + 3*this.VERT_SP);
+            text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
         }
         else{
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + 3*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
+            rect(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
             fill('black');
-            text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + 3*this.VERT_SP);
+            text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
         }
 
         //leave this back to default since it's used in drawing the tank sprites
@@ -171,10 +153,8 @@ class GameSetup{
             //change appropriate settings
             if(this.selector === this.ON_MODE){
                 GameState.twoPlayerMode = !GameState.twoPlayerMode;
-            }else if(this.selector === this.ON_P1DIFF){
-                GameState.player1Difficulty = 1 - GameState.player1Difficulty;
-            }else if(this.selector === this.ON_P2DIFF){
-                GameState.player2Difficulty = 1 - GameState.player2Difficulty;
+            }else if(this.selector === this.ON_DIFF){
+                GameState.difficulty = 1 - GameState.difficulty;
             }else if(this.selector === this.ON_MAPGEN){
                 GameState.showMapGeneration = !GameState.showMapGeneration;
             }
@@ -198,29 +178,18 @@ class GameSetup{
             return;
         }
         
-        // Check player 1 difficulty
-        if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.p1Diff.easy)) {
-            GameState.player1Difficulty = GameState.EASY;
-            this.selector = this.ON_P1DIFF;
+        // Check for difficulty
+        if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.diff.easy)) {
+            GameState.difficulty = GameState.EASY;
+            this.selector = this.ON_DIFF;
             return;
         }
-        if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.p1Diff.hard)) {
-            GameState.player1Difficulty = GameState.HARD;
-            this.selector = this.ON_P1DIFF;
+        if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.diff.hard)) {
+            GameState.difficulty = GameState.HARD;
+            this.selector = this.ON_DIFF;
             return;
         }
         
-        // Check player 2 difficulty
-        if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.p2Diff.easy)) {
-            GameState.player2Difficulty = GameState.EASY;
-            this.selector = this.ON_P2DIFF;
-            return;
-        }
-        if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.p2Diff.hard)) {
-            GameState.player2Difficulty = GameState.HARD;
-            this.selector = this.ON_P2DIFF;
-            return;
-        }
         
         // Check map generation
         if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.mapGen.on)) {
@@ -254,6 +223,7 @@ class GameSetup{
 
     startGame() {
         tankGame = new GameState();
+        gameMenu = new GameMenu();
         setupStage = false;
         startingScreen = null;
     }
