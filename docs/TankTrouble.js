@@ -7,6 +7,7 @@ let setupStage;
 let endOfGame;
 let controllersImg;
 let gameEndScreen;
+let confirmQuit = false;
 
 //key codes for firing of tanks
 let SPACE_CODE = 32;
@@ -188,22 +189,38 @@ function mousePressed() {
                 }
             }
         }
+        
+    }
+}
 
+function mouseClicked() {
+    if(!tankGame.getIsGameOver()) {
         //Menu button
-        if (gameMenu.menuButton.isPressed) {
+        if (gameMenu.menuButton.isReleased) {
             tankGame.tankMoving = false;
             audioTankMovement.stop();
             GameState.menuMode = true;
         }
-        if (gameMenu.resumeButton.isPressed) {
+        if (gameMenu.resumeButton.isReleased) {
             GameState.menuMode = false;
             allSprites.sleeping = false;
         }
-        if (gameMenu.restartButton.isPressed) {
+        if (gameMenu.restartButton.isReleased) {
             gameMenu.restartGame();
         }
-        if (gameMenu.quitButton.isPressed) {
+        if (gameMenu.quitButton.isReleased && !confirmQuit) {
+            gameMenu.quitButton.label = "Are you sure?";
+            gameMenu.quitButton.setStyle({
+                fillBgHover: color(255, 0, 0, 50),
+                fillLabelHover: color(255, 0, 0),
+                fillBgActive: color(255, 0, 0, 50),
+                fillLabelActive: color(255, 0, 0),
+            });
+            confirmQuit = true;
+        }
+        else if (gameMenu.quitButton.isReleased && confirmQuit) {
             gameMenu.quitToMenu();
+            confirmQuit = false;
         }
     }
 }
