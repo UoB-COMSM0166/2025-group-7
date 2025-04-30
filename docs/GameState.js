@@ -51,8 +51,8 @@ class GameState {
     static difficulty = GameState.EASY;
     static twoPlayerMode = true;
     static currentWinner;
-    static currentWinnerPlayer;
-    static currentLoserPlayer;
+    static currentWinnerScore;
+    static currentLoserScore;
 
     static showMapGeneration = false;
     static doneMapGeneration = false;
@@ -448,13 +448,13 @@ class GameState {
     setCurrentWinner(){
         if(this.player1.getScore() > this.player2.getScore()){
             GameState.currentWinner = "Player 1";
-            GameState.currentWinnerPlayer = this.player1;
-            GameState.currentLoserPlayer = this.player2;
+            GameState.currentWinnerScore = this.player1.getScore().toString();
+            GameState.currentLoserScore = this.player2.getScore().toString();
         }
         else if(this.player1.getScore() < this.player2.getScore()){
             GameState.currentWinner = "Player 2";
-            GameState.currentWinnerPlayer = this.player2;
-            GameState.currentLoserPlayer = this.player1;
+            GameState.currentWinnerScore = this.player2.getScore().toString();
+            GameState.currentLoserScore = this.player1.getScore().toString();
         }
         else {
             GameState.currentWinner = "Draw";

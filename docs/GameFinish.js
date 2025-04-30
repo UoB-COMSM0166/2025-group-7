@@ -12,8 +12,8 @@ class GameFinish{
     newGameRectY = 515;
     newGameRectWidth = 300;
     newGameRectHeight = 60;
-    scoreX = 320;
-    scoreY = 400;
+    scoreX = 600;
+    scoreY = 410;
     
     constructor(endImage, VT323Font){
         createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
@@ -43,7 +43,8 @@ class GameFinish{
             text(GameState.currentWinner + "!", this.drawX, this.drawY);
         }
 
-        text(GameState.player1.getScore() + ":" + GameState.player2.getScore());
+        textSize(60);
+        text(GameState.currentWinnerScore + " : " + GameState.currentLoserScore, this.scoreX, this.scoreY);
 
         strokeWeight(2);
         rect(this.newGameRectX, this.newGameRectY, this.newGameRectWidth, this.newGameRectHeight);
