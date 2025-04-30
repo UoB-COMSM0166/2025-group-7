@@ -12,6 +12,8 @@ class GameFinish{
     newGameRectY = 515;
     newGameRectWidth = 300;
     newGameRectHeight = 60;
+    scoreX = 320;
+    scoreY = 400;
     
     constructor(endImage, VT323Font){
         createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
@@ -40,6 +42,8 @@ class GameFinish{
         else{
             text(GameState.currentWinner + "!", this.drawX, this.drawY);
         }
+
+        text(GameState.player1.getScore() + ":" + GameState.player2.getScore());
 
         strokeWeight(2);
         rect(this.newGameRectX, this.newGameRectY, this.newGameRectWidth, this.newGameRectHeight);
