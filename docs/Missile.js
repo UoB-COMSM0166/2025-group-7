@@ -8,8 +8,9 @@ class Missile extends Projectile {
   static SPEED            = 3;    // px per frame @30 FPS
   static DAMAGE           = 3;    // explosion damage
   static EXPLOSION_RADIUS = 40;   // explosion radius (px)
-  static FLIGHT_TIME      = 10;   // max lifetime (s)
+  static FLIGHT_TIME      = 12;   // max lifetime (s)
   static LAUNCH_GRACE     = 10;   // grace frames after launch to avoid self‑hit
+  static TRACKING_DELAY   = 5;   // frames before starting to track (1s @30FPS)
 
   constructor (x, y, angleDeg, ownerTank, gs) {
     super(x, y, angleDeg, Missile.FLIGHT_TIME);
@@ -17,20 +18,21 @@ class Missile extends Projectile {
     this.owner = ownerTank;
     this.gs    = gs;
     this.grace = Missile.LAUNCH_GRACE;           // launch grace counter
+    this.trackingDelay = Missile.TRACKING_DELAY; // tracking delay counter
 
     /* Capture target coordinates ----------------------------------------- */
-    const enemy = this._nearestEnemy();
-    this.targetX = enemy ? enemy.tankSprite.x
+    this.enemy = this._nearestEnemy();
+    this.targetX = this.enemy ? this.enemy.tankSprite.x
                          : x + 2000 * Math.cos(angleDeg * Math.PI/180);
-    this.targetY = enemy ? enemy.tankSprite.y
+    this.targetY = this.enemy ? this.enemy.tankSprite.y
                          : y + 2000 * Math.sin(angleDeg * Math.PI/180);
 
     /* Sprite setup -------------------------------------------------------- */
     // Passing only size => circular collider; circles may use collider = 'none'
     this.sprite            = new Sprite(x, y, Missile.SIZE);
     this.sprite.color      = color(255, 150, 0);
-    this.sprite.direction  = degrees(Math.atan2(this.targetY - y,
-                                                this.targetX - x));
+    this.sprite.direction  = angleDeg;  // Start with tank's angle
+    this.sprite.rotation   = angleDeg;
     this.sprite.speed      = Missile.SPEED;
     this.sprite.collider   = 'none';     // circle collider disabled
     this.sprite.overlaps(walls);         // ignore maze walls
@@ -46,21 +48,27 @@ class Missile extends Projectile {
 
     if (this.grace-- > 0) return;        // launch grace period
 
-    // 1) explode at target location
-    if (dist(this.sprite.x, this.sprite.y,
-             this.targetX, this.targetY) <= Missile.SPEED) {
-      this._explode();
-      return;
+    // Update target position if enemy exists and is alive, and tracking delay has passed
+    if (this.enemy && this.enemy.getLife() > 0 && this.trackingDelay-- <= 0) {
+      this.targetX = this.enemy.tankSprite.x;
+      this.targetY = this.enemy.tankSprite.y;
+      this.sprite.rotateTowards(this.enemy.tankSprite, 0.1, 0);
+      this.sprite.direction = this.sprite.rotation;
     }
 
-    // 2) explode on enemy collision
-    for (const t of this.gs.tankList) {
-      if (t === this.owner || t.getLife() <= 0) continue;
+    // 1) explode on enemy collision
+    if (this.enemy && this.enemy.getLife() > 0) {
       if (dist(this.sprite.x, this.sprite.y,
-               t.tankSprite.x, t.tankSprite.y) <= Missile.SIZE) {
+               this.enemy.tankSprite.x, this.enemy.tankSprite.y) <= Missile.SIZE) {
         this._explode();
         return;
       }
+    }
+
+    // 2) explode after flight time
+    if (this.despawnTime <= 0) {
+      this._explode();
+      return;
     }
   }
 
