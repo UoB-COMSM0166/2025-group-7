@@ -124,10 +124,8 @@ function keyPressed() {
     }
     else if (endOfGame) {
         if (keyCode === ENTER) {
-            for (let i = 0; i < allSprites.length; i++) {
-                allSprites[i].remove();
-            }
-            //allSprites.remove();
+            resetGame();
+            allSprites.removeAll();
             audioBackground.stop();
             endOfGame = false;
             this.setup();
@@ -157,10 +155,8 @@ function mousePressed() {
     if (setupStage) {
         startingScreen.mousePressed();
     } else if (endOfGame && gameEndScreen.isButtonPressed()) {
-        for (let i = 0; i < allSprites.length; i++) {
-            allSprites[i].remove();
-        }
-        //allSprites.remove();
+        resetGame();
+        allSprites.removeAll();
         endOfGame = false;
         setup();
         gameEndScreen = null;
