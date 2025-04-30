@@ -1,21 +1,25 @@
 class GameFinish{
 
-    gameWinnerX = 245;
+    gameWinnerX = 445;
     gameWinnerY = 350;
-    drawX = 375;
+    drawX = 575;
     drawY = 350;
-    gameCompleteX = 120;
+    gameCompleteX = 320;
     gameCompleteY = 200;
-    newGameX = 305;
-    newGameY = 500;
-    newGameRectX = 490;
+    newGameX = 564;
+    newGameY = 494;
+    newGameRectX = 690;
     newGameRectY = 515;
-    newGameRectWidth = 450;
+    newGameRectWidth = 300;
     newGameRectHeight = 60;
     
     constructor(endImage, VT323Font){
         createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
         displayMode('centered');
+
+        this.button = {x: this.newGameRectX, y: this.newGameRectY,
+            width: this.newGameRectWidth, height: this.newGameRectHeight
+        };
     }
 
     draw(){
@@ -42,14 +46,24 @@ class GameFinish{
         fill('black');
         textFont(BatmanForeverAlt);
         strokeWeight(0);
-        textSize(20);
-        text("Press Enter for New Game", this.newGameX, this.newGameY);
+        textSize(40);
+        text("New Game", this.newGameX, this.newGameY);
 
         // add selector if more options added to screen 
 
         strokeWeight(1);
 
     }
+
+    isButtonPressed(){
+        return mouseX > this.button.x - this.button.width/2 && 
+               mouseX < this.button.x + this.button.width/2 && 
+               mouseY > this.button.y - this.button.height/2 && 
+               mouseY < this.button.y + this.button.height/2 &&
+               mouseIsPressed;
+    }
+
+
 
 
 }

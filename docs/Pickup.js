@@ -48,7 +48,7 @@ class Pickup {
         }
 
         this.sprite = new Sprite();
-        this.sprite.x = cellX * 90.5 + 72;
+        this.sprite.x = cellX * 90.5 + 272;
         this.sprite.y = cellY * 105 + 54 + (cellX % 2 == 0 ? 0 : 52.5);
         this.sprite.width = 30;
         this.sprite.height = 30;

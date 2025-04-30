@@ -7,10 +7,10 @@ This class is designed to support visualization and interaction with a grid-base
 let walls;
 class Grid {
     current;
-    constructor(gridHeight) {
+    constructor(gridHeight, gridWidth) {
         this.w = 120;
         this.cols = floor(gridHeight/this.w);
-        this.rows = floor(width/this.w+2);
+        this.rows = floor(gridWidth/this.w+2);
         this.cellstack = [];
         this.grid = [];
         walls = new Group();

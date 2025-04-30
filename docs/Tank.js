@@ -95,34 +95,37 @@ class Tank{
         this.gameState = gameState;
     }
     
-    draw(){
-        //call the draw method of the underlying sprite
-        /*
-        drawingContext.shadowBlur = 15;
-        drawingContext.shadowColor = this.tankSprite.wheels.color;
-        this.tankSprite.wheels.draw();
-        drawingContext.shadowBlur = 0;
-        drawingContext.shadowColor = 'transparent';
-        drawingContext.shadowBlur = 10;
-        drawingContext.shadowColor = this.tankSprite.color;
-        */
-        if(!this.isDestroyed) this.tankSprite.draw();
+    draw() {
+        this.drawTankSprite();
+        this.drawShield();
+        this.drawSaw();
+        this.drawDestroyAnimation();
+    }
+
+    drawTankSprite() {
+        if(!this.isDestroyed) {
+            this.tankSprite.draw();
+        }
+    }
+
+    drawShield() {
         if (this.hasShield && this.shieldSprite) {
-            this.shieldSprite.draw();}
-        /*
-        drawingContext.shadowBlur = 0;
-        drawingContext.shadowColor = 'transparent';
-        */
-        if(this.tankWeapon.weaponType == Weapon.SAW_TYPE){
+            this.shieldSprite.draw();
+        }
+    }
+
+    drawSaw() {
+        if(this.tankWeapon.weaponType == Weapon.SAW_TYPE) {
             this.saw.draw();
         }
+    }
 
-        if(this.isDestroyed){
+    drawDestroyAnimation() {
+        if(this.isDestroyed) {
             destroyAnim.play();
             destroyAnim.looping = false;
             animation(destroyAnim, this.tankSprite.x, this.tankSprite.y);
         }
-
     }
 
     canFire(){
@@ -292,6 +295,7 @@ receiveDamage(amount) {
         destroyAnim.frameDelay = 1;
         destroyAnim.rotation = this.tankSprite.rotation;
         this.isDestroyed = true;
+        this.inMotion = false;
         audioTankDestroy.play();
         setTimeout (() => {
             this.isDestroyed = false;
@@ -299,57 +303,97 @@ receiveDamage(amount) {
 
     }
     
-    update(){
-        //call the update method of the underlying sprite
+    update() {
+        this.handleTouchInput();
+        this.updateSprites();
+        this.updateScaleAnimation();
+        this.updateShield();
+    }
+
+    handleTouchInput() {
+        if(isTouchScreen) {
+            this.joyStickInput();
+        }
+    }
+
+    updateSprites() {
         this.tankSprite.wheels.update();
         this.tankSprite.update();
-        if(this.tankWeapon.weaponType == Weapon.SAW_TYPE){
+        if(this.tankWeapon.weaponType == Weapon.SAW_TYPE) {
             this.saw.update();
         }
+    }
 
-        //scale animation updates
-        if(this.scaleAniFrameCount == 1)
+    updateScaleAnimation() {
+        if(this.scaleAniFrameCount == 1) {
             this.tankSprite.anis.scale = 0.1;
-        if(this.scaleAniFrameCount > 0)
+        }
+        if(this.scaleAniFrameCount > 0) {
             this.scaleAniFrameCount--;
-        //console.log(this.scaleAniFrameCount);
+        }
+    }
+
+    updateShield() {
         if (this.hasShield && this.shieldSprite) {
             this.shieldSprite.x = this.tankSprite.x;
             this.shieldSprite.y = this.tankSprite.y;
-    
         }
     }
-    
+
     //updates the rotation and speed attributes of the tank sprite
     //directionOfMove corresponds to either UP, DOWN, LEFT or RIGHT
-    move(directionOfMove){
-        if(directionOfMove == Tank.RIGHT_DIRECTION){
-            if (this.tankSprite.speed === 0) this.tankSprite.rotation += 1*this.spdFactor;
-            else this.tankSprite.rotation += 2*this.spdFactor;
-            this.inMotion = true;
+    move(directionOfMove) {
+        switch(directionOfMove) {
+            case Tank.RIGHT_DIRECTION:
+                this.handleRightMovement();
+                break;
+            case Tank.LEFT_DIRECTION:
+                this.handleLeftMovement();
+                break;
+            case Tank.UP_DIRECTION:
+                this.handleUpMovement();
+                break;
+            case Tank.DOWN_DIRECTION:
+                this.handleDownMovement();
+                break;
+            case Tank.NO_DIRECTION:
+                if(!isTouchScreen) {
+                    this.stopMovement();
+                }
+                break;
         }
-        else if(directionOfMove == Tank.LEFT_DIRECTION){
-            if (this.tankSprite.speed === 0) this.tankSprite.rotation -= 1*this.spdFactor;
-            else this.tankSprite.rotation -= 2*this.spdFactor;
-            this.inMotion = true;
-        }
-        else if(directionOfMove == Tank.UP_DIRECTION){
-            this.tankSprite.direction = this.tankSprite.rotation;
-            this.tankSprite.speed = 1*this.spdFactor;
-            this.tankSprite.ani.play();
-            this.inMotion = true;
-        }
-        else if(directionOfMove == Tank.DOWN_DIRECTION){
-            this.tankSprite.direction = this.tankSprite.rotation;
-            this.tankSprite.speed = -0.5*this.spdFactor;
-            this.tankSprite.ani.pause();
-            this.inMotion = true;
-        }
-        else {
-            this.tankSprite.speed = 0;
-            this.tankSprite.ani.pause();
-            this.inMotion = false;
-        }
+    }
+
+    handleRightMovement() {
+        const rotationSpeed = this.tankSprite.speed === 0 ? 1 : 2;
+        this.tankSprite.rotation += rotationSpeed * this.spdFactor;
+        this.inMotion = true;
+    }
+
+    handleLeftMovement() {
+        const rotationSpeed = this.tankSprite.speed === 0 ? 1 : 2;
+        this.tankSprite.rotation -= rotationSpeed * this.spdFactor;
+        this.inMotion = true;
+    }
+
+    handleUpMovement() {
+        this.tankSprite.direction = this.tankSprite.rotation;
+        this.tankSprite.speed = 1 * this.spdFactor;
+        this.tankSprite.ani.play();
+        this.inMotion = true;
+    }
+
+    handleDownMovement() {
+        this.tankSprite.direction = this.tankSprite.rotation;
+        this.tankSprite.speed = -0.5 * this.spdFactor;
+        this.tankSprite.ani.pause();
+        this.inMotion = true;
+    }
+
+    stopMovement() {
+        this.tankSprite.speed = 0;
+        this.tankSprite.ani.pause();
+        this.inMotion = false;
     }
 
     //returns APPROXIMATE co-ordinates of the tank, in terms of grid cells,
@@ -386,5 +430,51 @@ receiveDamage(amount) {
 
         return [row, column];
 
+    }
+
+    joyStickInput() {
+        if(GameState.twoPlayerMode) {
+            this.handleTwoPlayerJoystick();
+        } else if(this.index === 1) {
+            this.handleSinglePlayerJoystick();
+        }
+    }
+
+    handleTwoPlayerJoystick() {
+        this.moveX = (this.index === 1) ? joyStick.val.x : -joyStick2.val.x;
+        this.moveY = (this.index === 1) ? joyStick.val.y : -joyStick2.val.y;
+        this.updateMovementFromJoystick();
+    }
+
+    handleSinglePlayerJoystick() {
+        this.moveX = joyStick.val.x;
+        this.moveY = joyStick.val.y;
+        this.updateMovementFromJoystick();
+    }
+
+    updateMovementFromJoystick() {
+        this.rotationSpeed = 2 * this.spdFactor;
+        this.moveSpeed = 1 * this.spdFactor;
+
+        if (abs(this.moveY) > 0.1) {
+            this.handleVerticalMovement();
+        }
+        
+        if (abs(this.moveX) > 0.1) {
+            this.handleHorizontalMovement();
+        } else {
+            this.stopMovement();
+        }
+    }
+
+    handleVerticalMovement() {
+        this.tankSprite.rotation += this.moveY * this.rotationSpeed;
+        this.inMotion = true;
+    }
+
+    handleHorizontalMovement() {
+        this.tankSprite.direction = this.tankSprite.rotation;
+        this.tankSprite.speed = -this.moveX * this.moveSpeed;
+        this.inMotion = true;
     }
 }

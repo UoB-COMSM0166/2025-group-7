@@ -15,7 +15,7 @@ class Cell {
         this.rows = rows;
         this.i = i;
         this.j = j;
-        this.wallOffsetX = 10;
+        this.wallOffsetX = 210;
         this.centerX = round(this.i * (3 / 2 * this.wallLength - this.wallWidth) + this.wallLength + this.wallOffsetX);
         this.centerY = round(this.j * (sqrt(3) * this.wallLength - this.wallWidth) + sqrt(3) / 2 * this.wallLength + (this.i % 2 === 0 ? 0 : sqrt(3) / 2 * this.wallLength - 2));
         // Hexagon with 6 sides in wallState
@@ -31,11 +31,11 @@ class Cell {
         // List all cell walls with their angles and outer conditions
         const cellWalls = [
             { name: "top", angle: 0, outer: this.j === 0 },
-            { name: "topRight", angle: 60, outer: this.i === this.rows - 1 || this.j === (this.i % 2 ? this.cols - 1 : 0) },
-            { name: "bottomRight", angle: 120, outer: this.i === this.rows - 1 || this.j === (this.i % 2 ? this.cols - 1 : 0) },
+            { name: "topRight", angle: 60, outer: this.i === this.rows - 1 || (this.j === 0 && this.i % 2 === 0)},
+            { name: "bottomRight", angle: 120, outer: this.i === this.rows - 1 || this.j === this.cols - 1 && this.i % 2 !== 0 },
             { name: "bottom", angle: 180, outer: this.j === this.cols - 1 },
-            { name: "bottomLeft", angle: 240, outer: this.i === 0 || this.j === (this.i % 2 ? this.cols - 1 : 0) },
-            { name: "topLeft", angle: 300, outer: this.i === 0 || this.j === (this.i % 2 ? this.cols - 1 : 0) }
+            { name: "bottomLeft", angle: 240, outer: this.i === 0 || this.j === this.cols - 1 && this.i % 2 !== 0 },
+            { name: "topLeft", angle: 300, outer: this.i === 0 || (this.j === 0 && this.i % 2 === 0) }
         ];
 
         // Handle each wall
