@@ -6,6 +6,11 @@ class GameMenu {
         this.menuY = (GameState.CANVAS_HEIGHT - this.menuHeight) / 2 + this.menuHeight/2;
         
         // Create menu buttons
+        this.menuButton = createButton("Menu", 1250, 10, 100, 30);
+        this.menuButton.setStyle({
+            fillBgActive: color(200, 200, 200, 50),
+            fillLabelActive: color(200, 200, 200),
+        });
         this.resumeButton = createButton('Resume', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 100, 200, 50);
 
         this.restartButton = createButton('Restart',this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 180, 200, 50);

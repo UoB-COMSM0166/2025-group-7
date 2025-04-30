@@ -148,6 +148,17 @@ function keyPressed() {
                 }
             }
         }
+
+        if (keyCode === ESCAPE) {
+            GameState.menuMode = true;
+            audioTankMovement.stop();
+            tankGame.tankMoving = false;
+        }
+    } else if (GameState.menuMode) {
+        if (keyCode === ESCAPE) {
+            GameState.menuMode = false;
+            allSprites.sleeping = false;
+        }
     }
 }
 
@@ -179,7 +190,7 @@ function mousePressed() {
         }
 
         //Menu button
-        if (menuButton.isPressed) {
+        if (gameMenu.menuButton.isPressed) {
             tankGame.tankMoving = false;
             audioTankMovement.stop();
             GameState.menuMode = true;

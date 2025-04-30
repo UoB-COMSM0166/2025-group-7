@@ -10,7 +10,6 @@ let joyStick;
 let joyStick2;
 let shootButton;
 let shootButton2;
-let menuButton;
 
 function cellToXY(col, row) {
     const x = col * 90.5 + 272;
@@ -181,12 +180,6 @@ class GameState {
                 shootButton2.setStyle(buttonStyle);
             }
         }
-
-        menuButton = createButton("Menu", 1250, 10, 100, 30);
-        menuButton.setStyle({
-            fillBgActive: color(200, 200, 200, 50),
-            fillLabelActive: color(200, 200, 200),
-        });
     }
 
     draw() {
