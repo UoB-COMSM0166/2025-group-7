@@ -117,10 +117,11 @@ function draw() {
 
 function windowResized() {
     if(startingScreen){
-        startingScreen.tank1ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3 - windowHeight/20);
-        startingScreen.tank1ColorPicker.size(windowWidth/25, windowHeight/14);
-        startingScreen.tank2ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3+startingScreen.tank1ColorPicker.height - windowHeight/20);
-        startingScreen.tank2ColorPicker.size(windowWidth/25, windowHeight/14);
+        displayMode('maxed');
+        startingScreen.tank1ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/6, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5);
+        startingScreen.tank1ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
+        startingScreen.tank2ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/6, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5 + startingScreen.tank1ColorPicker.size().height);
+        startingScreen.tank2ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
     }
 }
 

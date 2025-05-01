@@ -21,16 +21,8 @@ class GameSetup{
         this.selector = this.ON_MODE;
 
         //create canvas
-        let canvas = createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
-        //displayMode('centered');
-        canvas.style('display', 'flex');
-        canvas.style('justify-content', 'center');
-        canvas.style('align-items', 'center');
-        canvas.style('width', '100%');
-        canvas.style('height', '100%');
-        canvas.style('position', 'absolute');
-        canvas.style('max-width', '5000px');
-        canvas.style('max-height', '2500px');
+        this.canvas = createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
+        displayMode('maxed');
         // Define button areas for mouse interaction
         this.buttons = {
             mode: {
@@ -54,11 +46,11 @@ class GameSetup{
         };
 
         this.tank1ColorPicker = createColorPicker(tank1Color);
-        this.tank1ColorPicker.size(windowWidth/25, windowHeight/14);
-        this.tank1ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3 - windowHeight/20);
+        this.tank1ColorPicker.size(this.canvas.size().width/25, this.canvas.size().height/14);
+        this.tank1ColorPicker.position(this.canvas.position().x + this.canvas.size().width - this.canvas.size().width/6, this.canvas.position().y + this.canvas.size().height/3.5);
         this.tank2ColorPicker = createColorPicker(tank2Color);
-        this.tank2ColorPicker.size(windowWidth/25, windowHeight/14);
-        this.tank2ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3+this.tank1ColorPicker.height - windowHeight/20);
+        this.tank2ColorPicker.size(this.canvas.size().width/25, this.canvas.size().height/14);
+        this.tank2ColorPicker.position(this.canvas.position().x + this.canvas.size().width - this.canvas.size().width/6, this.canvas.position().y + this.canvas.size().height/3.5 + this.tank1ColorPicker.size().height);
     }
 
     draw(){
