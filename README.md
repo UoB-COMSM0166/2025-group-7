@@ -114,11 +114,19 @@ User Stories and Acceptance Criteria:
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams.
 
+(current word count: 525)
+
 The figures below show our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. Methods are often called by other classes hence are mostly public. A key abstraction is that classes often possess `draw()`, `update()` and `remove()` methods. Therefore a bullet or tank is drawn simply by running its `draw()` method. Through providing this standard interface a higher level class does not need to know the details regarding how to draw the lower level object. Shown in yellow are the weapons we initially proposed. All weapon classes inherit from the abstract class Projectile providing concrete implementations of the `draw()`, `update()` and `remove()` methods. Shown in pink are the Tank and Weapon classes. A composition relationship is shown between them since a Tank **has** a Weapon. Further, the Weapon cannot exist without the Tank. The Weapon class also contains static variables such as `bulletCapacity` and `bulletDuration` describing how many bullets the tank can fire and how long bullets last for once fired. In orange is the GameState class which has all game related objects such as the tanks, grid and projectiles. As an example of polymorphism the `projectileList` attribute contains all projectiles currently in play – these can be bombs, bullets, splinters etc. GameState calls their `draw()` and `update()` methods irrespective of what the underlying object type actually is – which also demonstrates clear delegation.
 
 ![UML Diagram](./diagrams/uml-diagram.png)
 
 ![UML Diagram Projectiles](./diagrams/weapons-uml.PNG)
+
+
+The sequence diagram below illustrates our map generation process. `GameState` initially creates a `Grid` object using the `Grid(GRID_HEIGHT)` constructor. `GameState` then calls the `initGrid` method of `Grid` which creates a hexagonal `Cell` object for every location on the grid. Each `Cell` object stores information such as its location and which walls exist (initially all six walls of each hexagonal cell exist). `GameState` then calls the `initMap` method of `Grid` which generates the map by deleting walls from cells. This algorithm involves assuming a starting location at the top-left of the grid called `current`. There is also a stack of cells called `cellstack` which represents the path the algorithm has followed on the grid. The algorithm starts by calling the `getNeighbours` method of the `current` cell which randomly returns a neighbouring cell from `current` called `next`. If `next` is a valid cell we first push `current` to `cellstack` then we proceed to remove the wall between `current` and `next` by calling `current.removeWall(next)` and increment by setting `current = next`. Otherwise `next` is invalid meaning the path has reached a dead-end and we take a step back in our path by setting `current = cellstack.pop()`. We keep repeating this process until all grid cells have been visited, ensuring no location is inaccessible from another. Finally we call `removeOverlappingWalls` for each `Cell` (which removes any common walls between cells) and `show` (which generates the wall sprite objects). We then return to GameState finishing map generation. This algorithm can generate infinitely many different maps making the game feel different every time.
+
+![UML Sequence Diagram Map Generation](./diagrams/sequence-diagram.png)
+
 
 ### Implementation
 
@@ -126,9 +134,7 @@ The figures below show our UML diagram developed through group discussion in the
 
 - Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game. 
 
-The sequence diagram below illustrates our map generation process. `GameState` initially creates a `Grid` object using the `Grid(GRID_HEIGHT)` constructor. `GameState` then calls the `initGrid` method of `Grid` which creates a hexagonal `Cell` object for every location on the grid. Each `Cell` object stores information such as its location and which walls exist (initially all six walls of each hexagonal cell exist). `GameState` then calls the `initMap` method of `Grid` which generates the map by deleting walls from cells. This algorithm involves assuming a starting location at the top-left of the grid called `current`. There is also a stack of cells called `cellstack` which represents the path the algorithm has followed on the grid. The algorithm starts by calling the `getNeighbours` method of the `current` cell which randomly returns a neighbouring cell from `current` called `next`. If `next` is a valid cell we first push `current` to `cellstack` then we proceed to remove the wall between `current` and `next` by calling `current.removeWall(next)` and increment by setting `current = next`. Otherwise `next` is invalid meaning the path has reached a dead-end and we take a step back in our path by setting `current = cellstack.pop()`. We keep repeating this process until all grid cells have been visited, ensuring no location is inaccessible from another. Finally we call `removeOverlappingWalls` for each `Cell` (which removes any common walls between cells) and `show` (which generates the wall sprite objects). We then return to GameState finishing map generation. This algorithm can generate infinitely many different maps making the game feel different every time.
 
-![UML Sequence Diagram Map Generation](./diagrams/sequence-diagram.png)
 
 ### Evaluation
 
@@ -222,6 +228,8 @@ The choice for Agile was also supported by the circumstances of the project, whi
 
 - 10%, 750 words
 - Evidence of the impact of your game across the environment and two of the other areas (Social, Economic, Technical and Individual)
+
+(current word count: 475)
 
 It is vital to consider sustainability throughout the software development process. The information and Communication Technologies (ICT) sector is responsible for approximately 2% of global carbon emissions (Danushi, Forti, & Soldani, 2024).
 
