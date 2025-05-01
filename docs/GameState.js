@@ -640,7 +640,8 @@ class GameState {
         let separator = -35;
 
         //P1 weapon hex
-        stroke(this.tankList[1].tankSprite.color);
+        //stroke(this.tankList[1].tankSprite.color);
+        stroke(tank2Color);
         beginShape();
         vertex((offsetX - 280) + separator, offsetY + 0);
         vertex((offsetX - 305) + separator, offsetY + 43.3);
@@ -652,7 +653,8 @@ class GameState {
         image(this.tankList[1].tankWeapon.icon, offsetX - 392, offsetY - 28.3, 55, 55);
 
         //P2 weapon hex
-        stroke(this.tankList[0].tankSprite.color);
+        //stroke(this.tankList[0].tankSprite.color);
+        stroke(tank1Color);
         beginShape();
         vertex((offsetX + 280) - separator, offsetY + 0);
         vertex((offsetX + 305) - separator, offsetY + 43.3);
@@ -666,7 +668,8 @@ class GameState {
         offsetY -= 30;
 
         //P1 score hex
-        stroke(this.tankList[1].tankSprite.color);
+        //stroke(this.tankList[1].tankSprite.color);
+        stroke(tank2Color);
         beginShape();
         vertex((offsetX - 375) + separator, offsetY + 0);
         vertex((offsetX - 387.5) + separator, offsetY + 21.65);
@@ -677,13 +680,15 @@ class GameState {
         endShape(CLOSE);
         //print score
         strokeWeight(0);
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         text(this.player2.getScore(), (offsetX - 400) + separator, offsetY - 12);
         strokeWeight(5);
         fill('black');
 
         //P2 score hex
-        stroke(this.tankList[0].tankSprite.color);
+        //stroke(this.tankList[0].tankSprite.color);
+        stroke(tank1Color);
         beginShape();
         vertex((offsetX + 375) - separator, offsetY + 0);
         vertex((offsetX + 387.5) - separator, offsetY + 21.65);
@@ -694,7 +699,8 @@ class GameState {
         endShape(CLOSE);
         //print score
         strokeWeight(0);
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         text(this.player1.getScore(), (offsetX + 400) - separator, offsetY - 12);
         strokeWeight(5);
         fill('black');
@@ -705,7 +711,8 @@ class GameState {
         //P1 life bar
 
         //bar outline
-        stroke(this.tankList[1].tankSprite.color);
+        //stroke(this.tankList[1].tankSprite.color);
+        stroke(tank2Color);
         beginShape();
         vertex((offsetX - 270) + separator, offsetY + 0);
         vertex((offsetX - 282.5) + separator, offsetY + -21.65);
@@ -716,7 +723,8 @@ class GameState {
         //bar fill
         let fillLevel = (this.tankList[1].getLife() / this.tankList[1].initialLife) * 200;
 
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         beginShape();
         vertex((offsetX - 270) + separator, offsetY + 0);
         vertex((offsetX - 282.5) + separator, offsetY + -21.65);
@@ -727,7 +735,8 @@ class GameState {
 
         //describe health and ammo
         strokeWeight(0);
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         text("Health", (offsetX - 230) + separator, offsetY - 48);
         text("Ammo", (offsetX - 235) + separator, offsetY + 35);
         strokeWeight(5);
@@ -735,7 +744,8 @@ class GameState {
 
         //P2 life bar
         //bar outline
-        stroke(this.tankList[0].tankSprite.color);
+        //stroke(this.tankList[0].tankSprite.color);
+        stroke(tank1Color);
         beginShape();
         vertex((offsetX + 270) - separator, offsetY + 0);
         vertex((offsetX + 282.5) - separator, offsetY + -21.65);
@@ -746,7 +756,8 @@ class GameState {
         //bar fill
         fillLevel = (this.tankList[0].getLife() / this.tankList[0].initialLife) * 200;
 
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         beginShape();
         vertex((offsetX + 270) - separator, offsetY + 0);
         vertex((offsetX + 282.5) - separator, offsetY + -21.65);
@@ -757,7 +768,8 @@ class GameState {
 
         //describe health and ammo
         strokeWeight(0);
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         text("Health", (offsetX + 230) - separator, offsetY - 48);
         text("Ammo", (offsetX + 235) - separator, offsetY + 35);
         strokeWeight(5);
@@ -767,7 +779,8 @@ class GameState {
         strokeWeight(0);
 
         //P1 ammo
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         for (let i = 0; i < this.tankList[1].getAmmo(); i++) {
             beginShape();
             let xoffset = (20 * i);
@@ -779,7 +792,8 @@ class GameState {
         }
 
         //P2 ammo
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         for (let i = 0; i < this.tankList[0].getAmmo(); i++) {
             beginShape();
             let xoffset = (20 * i);

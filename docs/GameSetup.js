@@ -21,9 +21,16 @@ class GameSetup{
         this.selector = this.ON_MODE;
 
         //create canvas
-        createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
-        displayMode('centered');
-
+        let canvas = createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
+        //displayMode('centered');
+        canvas.style('display', 'flex');
+        canvas.style('justify-content', 'center');
+        canvas.style('align-items', 'center');
+        canvas.style('width', '100%');
+        canvas.style('height', '100%');
+        canvas.style('position', 'absolute');
+        canvas.style('max-width', '5000px');
+        canvas.style('max-height', '2500px');
         // Define button areas for mouse interaction
         this.buttons = {
             mode: {
@@ -45,10 +52,20 @@ class GameSetup{
                 height: 100 
             }
         };
+
+        this.tank1ColorPicker = createColorPicker(tank1Color);
+        this.tank1ColorPicker.size(windowWidth/25, windowHeight/14);
+        this.tank1ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3 - windowHeight/20);
+        this.tank2ColorPicker = createColorPicker(tank2Color);
+        this.tank2ColorPicker.size(windowWidth/25, windowHeight/14);
+        this.tank2ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3+this.tank1ColorPicker.height - windowHeight/20);
     }
 
     draw(){
         background(introImage);
+
+        tank1Color = this.tank1ColorPicker.color();
+        tank2Color = this.tank2ColorPicker.color();
 
         //display the game title
         strokeWeight(0);
@@ -107,10 +124,14 @@ class GameSetup{
             rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.REG_TEXT/2, 200, this.REG_TEXT + 25);
             fill('black');
             text('ONE PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE);
+            this.tank1ColorPicker.show();
+            this.tank2ColorPicker.hide();
         }else{
             rect(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.REG_TEXT/2, 200, this.REG_TEXT + 25);
             fill('black');
             text('TWO PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE);
+            this.tank1ColorPicker.show();
+            this.tank2ColorPicker.show();
         }
 
         //highlight difficulty selection for player 1
@@ -224,6 +245,8 @@ class GameSetup{
     startGame() {
         tankGame = new GameState();
         gameMenu = new GameMenu();
+        this.tank1ColorPicker.remove();
+        this.tank2ColorPicker.remove();
         setupStage = false;
         startingScreen = null;
     }

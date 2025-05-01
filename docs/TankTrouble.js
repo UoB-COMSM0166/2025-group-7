@@ -18,6 +18,8 @@ let destroyAnimGreen = [];
 let destroyAnimRed = [];
 let tankMovementAnimTank1 = [];
 let tankMovementAnimTank2 = [];
+let tank1Color = '#FF0000'; //red
+let tank2Color = '#00FF00'; //green
 
 let isTouchScreen = hasTouchscreen();
 
@@ -113,6 +115,15 @@ function draw() {
 
 }
 
+function windowResized() {
+    if(startingScreen){
+        startingScreen.tank1ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3 - windowHeight/20);
+        startingScreen.tank1ColorPicker.size(windowWidth/25, windowHeight/14);
+        startingScreen.tank2ColorPicker.position(windowWidth - windowWidth/6, windowHeight/3+startingScreen.tank1ColorPicker.height - windowHeight/20);
+        startingScreen.tank2ColorPicker.size(windowWidth/25, windowHeight/14);
+    }
+}
+
 function keyPressed() {
 
     //setup-stage control handling
@@ -121,6 +132,8 @@ function keyPressed() {
         if (keyCode === ENTER) {
             tankGame = new GameState();
             gameMenu = new GameMenu();
+            startingScreen.tank1ColorPicker.remove();
+            startingScreen.tank2ColorPicker.remove();
             audioBackground.loop();
             setupStage = false;
             //startingScreen can be garbage collected

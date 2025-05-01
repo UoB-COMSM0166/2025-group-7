@@ -73,26 +73,10 @@ class Tank {
         this.tankSprite.wheels[1].opacity = 0;
         //console.log(index);
         if (index === 1) {
-            for (let i = 0; i < tankMovementAnimTank1.length; i++) {
-                tankMovementAnimTank1[i].loadPixels();
-                for (let j = 0; j < tankMovementAnimTank1[i].pixels.length; j += 4) {
-                    tankMovementAnimTank1[i].pixels[j] = 255;
-                    tankMovementAnimTank1[i].pixels[j + 1] = 0;
-                    tankMovementAnimTank1[i].pixels[j + 2] = 0;
-                }
-                tankMovementAnimTank1[i].updatePixels();
-            }
+            this.setTankAnimationColor(tankMovementAnimTank1, tank1Color);
             this.tankSprite.addAni('move', ...tankMovementAnimTank1);
         } else {
-            for (let i = 0; i < tankMovementAnimTank2.length; i++) {
-                tankMovementAnimTank2[i].loadPixels();
-                for (let j = 0; j < tankMovementAnimTank2[i].pixels.length; j += 4) {
-                    tankMovementAnimTank2[i].pixels[j] = 0;
-                    tankMovementAnimTank2[i].pixels[j + 1] = 255;
-                    tankMovementAnimTank2[i].pixels[j + 2] = 0;
-                }
-                tankMovementAnimTank2[i].updatePixels();
-            }
+            this.setTankAnimationColor(tankMovementAnimTank2, tank2Color);
             this.tankSprite.addAni('move', ...tankMovementAnimTank2);
         }
         this.tankSprite.anis.scale = 0.08;
@@ -112,6 +96,20 @@ class Tank {
         //fixing bug of missile missing gameState reference
         this.gameState = gameState;
     }
+
+    setTankAnimationColor(animation, color) {
+        for (let i = 0; i < animation.length; i++) {
+            animation[i].loadPixels();
+            for (let j = 0; j < animation[i].pixels.length; j += 4) {
+                animation[i].pixels[j] = color.levels[0];
+                animation[i].pixels[j + 1] = color.levels[1];
+                animation[i].pixels[j + 2] = color.levels[2];
+            }
+            animation[i].updatePixels();
+        }
+    }
+    
+
 
     draw() {
         this.drawTankSprite();
