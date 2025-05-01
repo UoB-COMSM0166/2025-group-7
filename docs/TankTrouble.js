@@ -16,6 +16,8 @@ let Q_CODE = 81;
 let maxGames = 5;
 let destroyAnimGreen = [];
 let destroyAnimRed = [];
+let tankMovementAnimTank1 = [];
+let tankMovementAnimTank2 = [];
 
 let isTouchScreen = hasTouchscreen();
 
@@ -72,6 +74,12 @@ function preload() {
         destroyAnimRed.push(animImage);
     }
 
+    //tank movement animation preloads
+    for (let i = 1; i <= 2; i++) {
+        tankMovementAnimTank1.push(loadImage(`images/tank-moving-ani/tank-moving${i}.webp`));
+        tankMovementAnimTank2.push(loadImage(`images/green-tank-moving/green-moving${i}.webp`));
+    }
+
     //font preload
     VT323Font = loadFont('fonts/VT323-Regular.ttf');
     QargeoFont = loadFont('fonts/Qargeo-Regular.otf');
@@ -102,6 +110,7 @@ function draw() {
         tankGame.draw();
         tankGame.update();
     }
+
 }
 
 function keyPressed() {
