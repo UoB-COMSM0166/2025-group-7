@@ -121,7 +121,14 @@ class GameState {
         this.extraAIControllers = [];
         let aiCtrlListner;
 
-        CORNER_CELLS.forEach((cell, idx) => {
+        // Calculate number of AI tanks based on round number (gameOverCnt)
+        // Start with 1 tank, increase by 1 every round up to 4
+        const numAITanks = min(4, max(1, this.gameOverCnt + 1));
+        console.log(numAITanks);
+
+        // Only spawn the calculated number of AI tanks
+        for (let idx = 0; idx < numAITanks; idx++) {
+            const cell = CORNER_CELLS[idx];
             const { x, y } = cellToXY(cell.col, cell.row);
             const rot = atan2(this.tankList[0].tankSprite.y - y, this.tankList[0].tankSprite.x - x);
             const aiTank = new Tank(x, y, rot, GameState.EASY, idx + 2, this);
@@ -135,11 +142,9 @@ class GameState {
             if (idx === 0) {
                 aiCtrlListner = aiCtrl;
             }
-        });
+        }
 
-        //establishes initial time for first Pickup to spawn
         return aiCtrlListner;
-
     }
 
     createGUIElements() {
@@ -393,6 +398,7 @@ class GameState {
             audioTankMovement.stop();
             this.endRound(this.tankList[0]);
         } else if (aiAlive === 0) {
+            // Player won - increment score
             this.player1.incScore();
             audioP1Wins.play(); 
             audioTankMovement.stop();
@@ -431,10 +437,17 @@ class GameState {
     }
 
     getGameComplete() {
-        if (this.player1.getScore() === 3 || this.player2.getScore() === 3) {
-            return true;
+        if (GameState.twoPlayerMode) {
+            // Two player mode remains unchanged
+            if (this.player1.getScore() === 3 || this.player2.getScore() === 3) {
+                return true;
+            }
+        } else {
+            // Single player mode - need 4 consecutive wins
+            if (this.player1.getScore() === 4 || this.player2.getScore() === 1) {
+                return true;
+            }
         }
-
         return false;
     }
 
@@ -498,10 +511,11 @@ class GameState {
                 this.tankList[i].tankWeapon = new Weapon(Weapon.BULLET_TYPE);
             }
 
-            if (!GameState.twoPlayerMode) this.spawnAITanks();
-
             //increment every time a game is won 
             this.gameOverCnt++;
+            
+            if (!GameState.twoPlayerMode) this.spawnAITanks();
+
             if (this.gameOverCnt >= maxGames) {
                 //currently assumes one player always wins - ie odd number of rounds with always a clear winner
                 if (GameState.currentWinner == "Player 1") {
