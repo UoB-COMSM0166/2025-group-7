@@ -444,12 +444,13 @@ class GameState {
     getGameComplete() {
         if (GameState.twoPlayerMode) {
             // Two player mode remains unchanged
-            if (this.player1.getScore() === 3 || this.player2.getScore() === 3) {
+            // check if level is over before ending game
+            if ((this.player1.getScore() === 3 || this.player2.getScore() === 3) && this.levelOver) {
                 return true;
             }
         } else {
             // Single player mode - need 4 consecutive wins
-            if (this.player1.getScore() === 4 || this.player2.getScore() === 1) {
+            if (this.player1.getScore() === 4 || this.player2.getScore() === 1 && this.levelOver) {
                 return true;
             }
         }
@@ -495,6 +496,7 @@ class GameState {
                 if (this.tankList[i].hasShield)
                     this.tankList[i].deactivateShield(false);
             }
+            this.levelOver = true;
 
             //only refresh map once
             if (this.isGameOver) {
@@ -529,6 +531,7 @@ class GameState {
             }
             this.isGameOver = false;
         }, 2000);
+        this.levelOver = false;
     }
 
     checkProjectileTankOverlaps() {
