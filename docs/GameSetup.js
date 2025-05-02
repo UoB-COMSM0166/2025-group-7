@@ -44,7 +44,7 @@ class GameSetup{
                 height: 100 
             }
         };
-
+        
         this.tank1ColorPicker = createColorPicker(tank1Color);
         this.tank1ColorPicker.size(this.canvas.size().width/25, this.canvas.size().height/14);
         this.tank1ColorPicker.position(this.canvas.position().x + this.canvas.size().width - this.canvas.size().width/6, this.canvas.position().y + this.canvas.size().height/3.5);

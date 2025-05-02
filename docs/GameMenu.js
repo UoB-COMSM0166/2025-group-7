@@ -11,11 +11,22 @@ class GameMenu {
             fillBgActive: color(200, 200, 200, 50),
             fillLabelActive: color(200, 200, 200),
         });
-        this.resumeButton = createButton('Resume', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 100, 200, 50);
+        this.resumeButton = createButton('Resume', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 100, 240, 50);
+        this.resumeButton.setStyle({
+            font: 'BatmanForeverAlt',
+            textSize: 30
+        });
+        this.restartButton = createButton('Restart',this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 180, 240, 50);
+        this.restartButton.setStyle({
+            font: 'BatmanForeverAlt',
+            textSize: 30
+        });
+        this.quitButton = createButton('Quit to Main Menu', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 260, 240, 50);
+        this.quitButton.setStyle({
+            font: 'BatmanForeverAlt',
+            textSize: 30
+        });
 
-        this.restartButton = createButton('Restart',this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 180, 200, 50);
-
-        this.quitButton = createButton('Quit to Main Menu', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 260, 200, 50);
 
         // Hide buttons initially
         this.hideMenu();

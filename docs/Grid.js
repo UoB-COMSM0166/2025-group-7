@@ -14,8 +14,8 @@ class Grid {
         this.cellstack = [];
         this.grid = [];
         walls = new Group();
-        walls.color = color(GameState.themeColor[GameState.themeColorIndex]);
-        walls.stroke = color(GameState.themeColor[GameState.themeColorIndex]);
+        walls.color = 'white';
+        walls.stroke = 'white';
         walls.strokeWeight = '0';
         walls.overlaps(walls);
         walls.collider = ('static');
@@ -118,7 +118,7 @@ class Grid {
 
     // Draws the grid and walls with shadow effects
     draw() {
-        drawingContext.shadowBlur = 15;
+        drawingContext.shadowBlur = 30;
         drawingContext.shadowColor = color(GameState.themeColor[GameState.themeColorIndex]);
         
         walls.draw();

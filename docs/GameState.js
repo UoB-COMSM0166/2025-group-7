@@ -199,7 +199,12 @@ class GameState {
     }
 
     drawBackground() {
-        background(0);
+        background(10, 10, 15);
+        noStroke();
+        for (let r = 600; r > 0; r -= 10) {
+            fill(40, 40, 40, map(r, 600, 0, 0, 20));  // medium grey, slightly more visible
+            ellipse(width / 2, height / 2, r * 2);
+        }
     }
 
     drawMap() {
@@ -400,7 +405,7 @@ class GameState {
         } else if (aiAlive === 0) {
             // Player won - increment score
             this.player1.incScore();
-            audioP1Wins.play(); 
+            audioP1Wins.play();
             audioTankMovement.stop();
             this.endRound(this.tankList[0]);
         }
@@ -408,7 +413,7 @@ class GameState {
 
     endRound(deadTankSprite) {
         this.isGameOver = true;
-        
+
         // 清理所有拾取
         while (this.pickupList.length) {
             this.pickupList[0].sprite.remove();
@@ -451,13 +456,13 @@ class GameState {
         return false;
     }
 
-    setCurrentWinner(){
-        if(this.player1.getScore() > this.player2.getScore()){
+    setCurrentWinner() {
+        if (this.player1.getScore() > this.player2.getScore()) {
             GameState.currentWinner = "Player 1";
             GameState.currentWinnerScore = this.player1.getScore().toString();
             GameState.currentLoserScore = this.player2.getScore().toString();
         }
-        else if(this.player1.getScore() < this.player2.getScore()){
+        else if (this.player1.getScore() < this.player2.getScore()) {
             GameState.currentWinner = "Player 2";
             GameState.currentWinnerScore = this.player2.getScore().toString();
             GameState.currentLoserScore = this.player1.getScore().toString();
@@ -513,7 +518,7 @@ class GameState {
 
             //increment every time a game is won 
             this.gameOverCnt++;
-            
+
             if (!GameState.twoPlayerMode) this.spawnAITanks();
 
             if (this.gameOverCnt >= maxGames) {
@@ -651,7 +656,19 @@ class GameState {
 
         let offsetY = GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2);
         let offsetX = GameState.CANVAS_WIDTH / 2;
-        let separator = -35;
+        let separator = -60;
+
+        // Draw glowing boxes around each tank HUD
+        stroke(tank2Color);
+        strokeWeight(1);
+        drawingContext.shadowBlur = 15;
+        drawingContext.shadowColor = color(tank2Color);
+        rect(offsetX - 190 + separator, offsetY + 10, 490, 150, 20);
+        drawingContext.shadowBlur = 15; 
+        drawingContext.shadowColor = color(tank1Color);
+        stroke(tank1Color);
+        rect(offsetX + 190 - separator, offsetY + 10, 490, 150, 20);
+        drawingContext.shadowBlur = 0;
 
         //P1 weapon hex
         //stroke(this.tankList[1].tankSprite.color);
@@ -664,7 +681,7 @@ class GameState {
         vertex((offsetX - 355) + separator, offsetY + -43.3);
         vertex((offsetX - 305) + separator, offsetY + -43.3);
         endShape(CLOSE);
-        image(this.tankList[1].tankWeapon.icon, offsetX - 392, offsetY - 28.3, 55, 55);
+        image(this.tankList[1].tankWeapon.icon, offsetX - 357 + separator, offsetY - 28.3, 55, 55);
 
         //P2 weapon hex
         //stroke(this.tankList[0].tankSprite.color);
@@ -677,7 +694,7 @@ class GameState {
         vertex((offsetX + 355) - separator, offsetY + -43.3);
         vertex((offsetX + 305) - separator, offsetY + -43.3);
         endShape(CLOSE);
-        image(this.tankList[0].tankWeapon.icon, offsetX + 337, offsetY - 28.3, 55, 55);
+        image(this.tankList[0].tankWeapon.icon, offsetX + 303 - separator, offsetY - 28.3, 55, 55);
 
         offsetY -= 30;
 
@@ -697,8 +714,8 @@ class GameState {
         //fill(this.tankList[1].tankSprite.color);
         fill(tank2Color);
         text(this.player2.getScore(), (offsetX - 400) + separator, offsetY - 12);
-        strokeWeight(5);
-        fill('black');
+        strokeWeight(1);
+        noFill();
 
         //P2 score hex
         //stroke(this.tankList[0].tankSprite.color);
@@ -717,7 +734,7 @@ class GameState {
         fill(tank1Color);
         text(this.player1.getScore(), (offsetX + 400) - separator, offsetY - 12);
         strokeWeight(5);
-        fill('black');
+        noFill();
 
         offsetY = GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2) - 5;
         textSize(20);
@@ -745,7 +762,7 @@ class GameState {
         vertex((offsetX - 282.5) + separator + fillLevel, offsetY + -21.65);
         vertex((offsetX - 270) + separator + fillLevel, offsetY + 0);
         endShape(CLOSE);
-        fill('black');
+        noFill();
 
         //describe health and ammo
         strokeWeight(0);
@@ -754,7 +771,7 @@ class GameState {
         text("Health", (offsetX - 230) + separator, offsetY - 48);
         text("Ammo", (offsetX - 235) + separator, offsetY + 35);
         strokeWeight(5);
-        fill('black');
+        noFill();
 
         //P2 life bar
         //bar outline
@@ -778,7 +795,7 @@ class GameState {
         vertex((offsetX + 282.5) - separator - fillLevel, offsetY + -21.65);
         vertex((offsetX + 270) - separator - fillLevel, offsetY + 0);
         endShape(CLOSE);
-        fill('black');
+        noFill();
 
         //describe health and ammo
         strokeWeight(0);
@@ -787,7 +804,7 @@ class GameState {
         text("Health", (offsetX + 230) - separator, offsetY - 48);
         text("Ammo", (offsetX + 235) - separator, offsetY + 35);
         strokeWeight(5);
-        fill('black');
+        noFill();
 
         offsetY = GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2) + 5;
         strokeWeight(0);
@@ -818,9 +835,78 @@ class GameState {
             endShape(CLOSE);
         }
 
+        //draw instructions nest to health and ammo
+        //player name on top of the instructions
+        //player 1 instructions are arrow keys
+        //Shoot is spacebar
+        //player 2 instructions are WASD
+        //Shoot is Q
+        //player 1 name is "Player 1"
+        //player 1 code:
+        fill(tank2Color);
+        textSize(15);
+        text("Player 2", offsetX - 10 + separator, offsetY - 60);
+        noFill();
+        strokeWeight(1);
+        stroke(tank2Color);
+        // make small boxes around each letter, one on top, under the text and three next to each other under the first box
+        rect(offsetX - 10 + separator, offsetY - 20, 25, 25, 5);
+        rect(offsetX - 40 + separator, offsetY + 10, 25, 25, 5);
+        rect(offsetX - 10 + separator, offsetY + 10, 25, 25, 5);
+        rect(offsetX + 20 + separator, offsetY + 10, 25, 25, 5);
+        fill(tank2Color);
+        text("W", offsetX - 10 + separator, offsetY - 27);
+        text("A", offsetX - 40 + separator, offsetY + 2);
+        text("S", offsetX - 10 + separator, offsetY + 2);
+        text("D", offsetX + 20 + separator, offsetY + 2);
+        noFill();
+        rect(offsetX - 10 + separator, offsetY + 43, 25, 25, 5);
+        fill(tank2Color);
+        text("Q", offsetX - 10 + separator, offsetY + 36);
+        text("Shoot", offsetX - 10 + separator, offsetY + 60);
+
+        //player 2 instructions are arrow keys
+        fill(tank1Color);
+        textSize(15);
+        strokeWeight(1);
+        stroke(tank1Color);
+        text("Player 1", offsetX + 10 - separator, offsetY - 60);
+        noFill();
+        // make small boxes around each letter, one on top, under the text and three next to each other under the first box
+        rect(offsetX + 10 - separator, offsetY - 20, 25, 25, 5);
+        rect(offsetX + 40 - separator, offsetY + 10, 25, 25, 5);
+        rect(offsetX + 10 - separator, offsetY + 10, 25, 25, 5);
+        rect(offsetX - 20 - separator, offsetY + 10, 25, 25, 5);
+        fill(tank1Color);
+        textFont('Arial');
+        text("⬆", offsetX + 10 - separator, offsetY - 27);
+        text("➡", offsetX + 40 - separator, offsetY + 2);
+        text("⬇", offsetX + 10 - separator, offsetY + 2);
+        text("⬅", offsetX - 20 - separator, offsetY + 2);
+        textFont(BatmanForeverAlt);
+        noFill();
+        rect(offsetX + 10 - separator, offsetY + 43, 110, 25, 5);
+        fill(tank1Color);
+        text("Spacebar", offsetX + 10 - separator, offsetY + 36);
+        text("Shoot", offsetX + 10 - separator, offsetY + 60);
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
         //reset global drawing parameters
         fill('black');
-
+/*
         // Display controller instructions at the bottom
         if (controllersTwoPlayersImg && GameState.twoPlayerMode) {
             const imgWidth = 200; // Adjust as needed
@@ -837,7 +923,7 @@ class GameState {
             const imgY = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT - imgHeight - 10;
             image(controllersOnePlayerImg, imgX, imgY, imgWidth, imgHeight);
         }
-
+*/
 
     }
 
@@ -846,7 +932,7 @@ class GameState {
             // Generate random positions for two players
             this.RAND1X = floor(random(5, 9));
             this.RAND1Y = floor(random(0, 3));
-            this.RAND2X = floor(random(0, 4)); 
+            this.RAND2X = floor(random(0, 4));
             this.RAND2Y = floor(random(0, 3));
 
             // Calculate tank positions
@@ -873,11 +959,11 @@ class GameState {
             for (let i = 1; i < this.tankList.length; i++) {
                 const cornerIndex = (i - 1) % CORNER_CELLS.length;
                 const cell = CORNER_CELLS[cornerIndex];
-                const {x, y} = cellToXY(cell.col, cell.row);
-                
-                const rot = atan2(this.tankList[0].tankSprite.y - y, 
-                                this.tankList[0].tankSprite.x - x);
-                
+                const { x, y } = cellToXY(cell.col, cell.row);
+
+                const rot = atan2(this.tankList[0].tankSprite.y - y,
+                    this.tankList[0].tankSprite.x - x);
+
                 this.updateTankPosition(this.tankList[i], x, y, rot);
             }
         }
