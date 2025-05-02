@@ -664,7 +664,7 @@ class GameState {
         drawingContext.shadowBlur = 15;
         drawingContext.shadowColor = color(tank2Color);
         rect(offsetX - 190 + separator, offsetY + 10, 490, 150, 20);
-        drawingContext.shadowBlur = 15; 
+        drawingContext.shadowBlur = 15;
         drawingContext.shadowColor = color(tank1Color);
         stroke(tank1Color);
         rect(offsetX + 190 - separator, offsetY + 10, 490, 150, 20);
@@ -834,38 +834,31 @@ class GameState {
             vertex((offsetX + 255) - separator - xoffset, offsetY + 0);
             endShape(CLOSE);
         }
-
-        //draw instructions nest to health and ammo
-        //player name on top of the instructions
+        if (GameState.twoPlayerMode) {
+            //Draw instructions for player 2
+            fill(tank2Color);
+            textSize(15);
+            text("Player 2", offsetX - 10 + separator, offsetY - 60);
+            noFill();
+            strokeWeight(1);
+            stroke(tank2Color);
+            // make small boxes around each letter, one on top, under the text and three next to each other under the first box
+            rect(offsetX - 10 + separator, offsetY - 20, 25, 25, 5);
+            rect(offsetX - 40 + separator, offsetY + 10, 25, 25, 5);
+            rect(offsetX - 10 + separator, offsetY + 10, 25, 25, 5);
+            rect(offsetX + 20 + separator, offsetY + 10, 25, 25, 5);
+            fill(tank2Color);
+            text("W", offsetX - 10 + separator, offsetY - 27);
+            text("A", offsetX - 40 + separator, offsetY + 2);
+            text("S", offsetX - 10 + separator, offsetY + 2);
+            text("D", offsetX + 20 + separator, offsetY + 2);
+            noFill();
+            rect(offsetX - 10 + separator, offsetY + 43, 25, 25, 5);
+            fill(tank2Color);
+            text("Q", offsetX - 10 + separator, offsetY + 36);
+            text("Shoot", offsetX - 10 + separator, offsetY + 60);
+        }
         //player 1 instructions are arrow keys
-        //Shoot is spacebar
-        //player 2 instructions are WASD
-        //Shoot is Q
-        //player 1 name is "Player 1"
-        //player 1 code:
-        fill(tank2Color);
-        textSize(15);
-        text("Player 2", offsetX - 10 + separator, offsetY - 60);
-        noFill();
-        strokeWeight(1);
-        stroke(tank2Color);
-        // make small boxes around each letter, one on top, under the text and three next to each other under the first box
-        rect(offsetX - 10 + separator, offsetY - 20, 25, 25, 5);
-        rect(offsetX - 40 + separator, offsetY + 10, 25, 25, 5);
-        rect(offsetX - 10 + separator, offsetY + 10, 25, 25, 5);
-        rect(offsetX + 20 + separator, offsetY + 10, 25, 25, 5);
-        fill(tank2Color);
-        text("W", offsetX - 10 + separator, offsetY - 27);
-        text("A", offsetX - 40 + separator, offsetY + 2);
-        text("S", offsetX - 10 + separator, offsetY + 2);
-        text("D", offsetX + 20 + separator, offsetY + 2);
-        noFill();
-        rect(offsetX - 10 + separator, offsetY + 43, 25, 25, 5);
-        fill(tank2Color);
-        text("Q", offsetX - 10 + separator, offsetY + 36);
-        text("Shoot", offsetX - 10 + separator, offsetY + 60);
-
-        //player 2 instructions are arrow keys
         fill(tank1Color);
         textSize(15);
         strokeWeight(1);
@@ -889,41 +882,10 @@ class GameState {
         fill(tank1Color);
         text("Spacebar", offsetX + 10 - separator, offsetY + 36);
         text("Shoot", offsetX + 10 - separator, offsetY + 60);
-        
-        
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
         //reset global drawing parameters
         fill('black');
-/*
-        // Display controller instructions at the bottom
-        if (controllersTwoPlayersImg && GameState.twoPlayerMode) {
-            const imgWidth = 200; // Adjust as needed
-            const imgHeight = 200; // Adjust as needed
-            const imgX = offsetX - imgWidth / 2;
-            const imgY = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT - imgHeight - 10;
 
-            image(controllersTwoPlayersImg, imgX, imgY, imgWidth, imgHeight);
-
-        } else if (controllersOnePlayerImg && !GameState.twoPlayerMode) {
-            const imgWidth = 100; // Adjust as needed
-            const imgHeight = 200; // Adjust as needed
-            const imgX = offsetX - imgWidth / 2;
-            const imgY = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT - imgHeight - 10;
-            image(controllersOnePlayerImg, imgX, imgY, imgWidth, imgHeight);
-        }
-*/
 
     }
 

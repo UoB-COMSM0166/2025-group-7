@@ -18,8 +18,8 @@ let destroyAnimGreen = [];
 let destroyAnimRed = [];
 let tankMovementAnimTank1 = [];
 let tankMovementAnimTank2 = [];
-let tank1Color = '#FF0000'; //red
-let tank2Color = '#00FF00'; //green
+let tank1Color = '#00FFFF'; 
+let tank2Color = '#E9AB17'; 
 
 let isTouchScreen = hasTouchscreen();
 
