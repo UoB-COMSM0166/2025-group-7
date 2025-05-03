@@ -29,7 +29,7 @@ class Missile extends Projectile {
 
     /* Sprite setup -------------------------------------------------------- */
     // Passing only size => circular collider; circles may use collider = 'none'
-    this.sprite            = new Sprite(x, y, Missile.SIZE);
+    this.sprite            = new Sprite(x, y, Missile.SIZE*4, Missile.SIZE);
     this.sprite.color      = color(255, 150, 0);
     this.sprite.direction  = angleDeg;  // Start with tank's angle
     this.sprite.rotation   = angleDeg;
@@ -40,6 +40,8 @@ class Missile extends Projectile {
     this.sprite.autoUpdate = false;      // movement handled in update()
     this.sprite.visible    = true;       // visible immediately
     this.leftTurret        = true;       // skip GameState turret‑exit check
+    this.sprite.addAni('move', ...missileAnim);
+    this.sprite.anis.scale = 0.2;
   }
 
   /* Main loop ------------------------------------------------------------- */

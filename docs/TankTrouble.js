@@ -18,6 +18,7 @@ let destroyAnimGreen = [];
 let destroyAnimRed = [];
 let tankMovementAnimTank1 = [];
 let tankMovementAnimTank2 = [];
+let missileAnim = [];
 let tank1Color = '#00FFFF'; 
 let tank2Color = '#E9AB17'; 
 
@@ -80,6 +81,12 @@ function preload() {
     for (let i = 1; i <= 2; i++) {
         tankMovementAnimTank1.push(loadImage(`images/tank-moving-ani/tank-moving${i}.webp`));
         tankMovementAnimTank2.push(loadImage(`images/green-tank-moving/green-moving${i}.webp`));
+    }
+
+    //missile animation preloads
+    missileExplode = loadImage(`images/missileMovement/MissileExplotion.webp`);
+    for (let i = 1; i <= 8; i++) {
+        missileAnim.push(loadImage(`images/missileMovement/Missile${i}.webp`));
     }
 
     //font preload
