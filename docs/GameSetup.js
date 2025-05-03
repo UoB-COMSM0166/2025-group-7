@@ -152,40 +152,51 @@ class GameSetup{
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.twoPlayerMode ? '#CCCCCC' : '#333333', '#FFFFFF');
         stroke(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
         fill(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        stroke(0); strokeWeight(2);
         text('ONE PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE);
         stroke(GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
         fill(GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        stroke(0); strokeWeight(2);
         text('TWO PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE);
+        strokeWeight(2);
 
         //put in difficulty boxes with glowing effect
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.difficulty === GameState.EASY ? '#CCCCCC' : '#333333', '#FFFFFF');
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.difficulty === GameState.HARD ? '#CCCCCC' : '#333333', '#FFFFFF');
         stroke(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(41,193,244));
         fill(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(41,193,244));
+        stroke(0); strokeWeight(2);
         text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP);
         stroke(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(41,193,244));
         fill(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(41,193,244));
+        stroke(0); strokeWeight(2);
         text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP);
+        strokeWeight(2);
 
         //put in map generation on/off with glowing effect
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.showMapGeneration ? '#CCCCCC' : '#333333', '#FFFFFF');
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, !GameState.showMapGeneration ? '#CCCCCC' : '#333333', '#FFFFFF');
         stroke(GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
         fill(GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
+        stroke(0); strokeWeight(2);
         text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
         stroke(!GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
         fill(!GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
+        stroke(0); strokeWeight(2);
         text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
+        strokeWeight(2);
 
         //put in "start game" with glowing effect
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.ON_START*this.VERT_SP + 10, 500, 80, '#CCCCCC', '#FFFFFF');
         textSize(1.5*this.REG_TEXT);
         stroke(color(219, 51, 105));
         fill(color(219, 51, 105));
+        stroke(0); strokeWeight(2);
         textAlign(CENTER, CENTER);
         text('START GAME', GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.ON_START*this.VERT_SP + 10);
         textAlign(CENTER, TOP);
         textSize(this.REG_TEXT);
+        strokeWeight(0);
 
         // Reset shadow and stroke
         drawingContext.shadowBlur = 0;
