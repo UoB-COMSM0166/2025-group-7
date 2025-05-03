@@ -54,7 +54,8 @@ class GameFinish{
             }
             else{
                 fill('white');
-                text("You Win!", this.gameWinnerX + 100, this.gameWinnerY);
+                text("You Win!", this.gameWinnerX + 100
+                    , this.gameWinnerY);
             }
         }
 
