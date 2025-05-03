@@ -34,14 +34,14 @@ class GameState {
     RAND1Y = (GameState.twoPlayerMode) ? floor(random(0, 3)) : 1;
     RAND2X = floor(random(0, 4));
     RAND2Y = floor(random(0, 3));
-    TANK1X = this.RAND1X * 90.5 + 272;
-    TANK1Y = this.RAND1Y * 105 + 54 + (this.RAND1X % 2 == 0 ? 0 : 52.5);
-    TANK2X = this.RAND2X * 90.5 + 272;
-    TANK2Y = this.RAND2Y * 105 + 54 + (this.RAND2X % 2 == 0 ? 0 : 52.5);
-    ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
-    ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
-    TANK1ROT = this.ANGLE1;
-    TANK2ROT = this.ANGLE2;
+    //TANK1X = this.RAND1X * 90.5 + 272;
+    //TANK1Y = this.RAND1Y * 105 + 54 + (this.RAND1X % 2 == 0 ? 0 : 52.5);
+    //TANK2X = this.RAND2X * 90.5 + 272;
+    //TANK2Y = this.RAND2Y * 105 + 54 + (this.RAND2X % 2 == 0 ? 0 : 52.5);
+    //ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
+    //ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
+    //TANK1ROT = this.ANGLE1;
+    //TANK2ROT = this.ANGLE2;
     static HARD = 0;
     static EASY = 1;
 
@@ -77,11 +77,13 @@ class GameState {
             GameState.doneMapGeneration = true;
         }
 
-
         //create two tanks
         this.tankList = [];
+        this.initializeTankPositions();
+        
         let tank1 = new Tank(this.TANK1X, this.TANK1Y, this.TANK1ROT, GameState.difficulty, 1, this);
         this.tankList.push(tank1);
+        
         let tank2 = new Tank(this.TANK2X, this.TANK2Y, this.TANK2ROT, GameState.difficulty, 2, this);
         this.tankList.push(tank2);
 
@@ -897,6 +899,20 @@ class GameState {
 
     }
 
+    initializeTankPositions() {
+        this.TANK1X = this.gameMap.grid[this.RAND1X][this.RAND1Y].centerX;  
+        this.TANK1Y = this.gameMap.grid[this.RAND1X][this.RAND1Y].centerY;
+        
+        this.TANK2X = this.gameMap.grid[this.RAND2X][this.RAND2Y].centerX;
+        this.TANK2Y = this.gameMap.grid[this.RAND2X][this.RAND2Y].centerY;
+        
+        this.ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
+        this.ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
+        
+        this.TANK1ROT = this.ANGLE1;
+        this.TANK2ROT = this.ANGLE2;
+    }
+
     regenerateTankPosition(tank) {
         if (GameState.twoPlayerMode) {
             // Generate random positions for two players
@@ -905,15 +921,7 @@ class GameState {
             this.RAND2X = floor(random(0, 4));
             this.RAND2Y = floor(random(0, 3));
 
-            // Calculate tank positions
-            this.TANK1X = this.RAND1X * 90.5 + 272;
-            this.TANK1Y = this.RAND1Y * 105 + 54 + (this.RAND1X % 2 == 0 ? 0 : 52.5);
-            this.TANK2X = this.RAND2X * 90.5 + 272;
-            this.TANK2Y = this.RAND2Y * 105 + 54 + (this.RAND2X % 2 == 0 ? 0 : 52.5);
-
-            // Calculate angles between tanks
-            this.TANK1ROT = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
-            this.TANK2ROT = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
+            this.initializeTankPositions();
 
             // Update tank and wheel positions for both tanks
             this.updateTankPosition(this.tankList[0], this.TANK1X, this.TANK1Y, this.TANK1ROT);
