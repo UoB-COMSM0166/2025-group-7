@@ -467,33 +467,25 @@ class Tank {
 
     handleSinglePlayerJoystick() {
         this.moveX = joyStick.val.x;
-        this.moveY = joyStick.val.y;
+        this.moveY = joyStick.val.y; 
         this.updateMovementFromJoystick();
     }
 
     updateMovementFromJoystick() {
-        this.rotationSpeed = 2 * this.spdFactor;
-        this.moveSpeed = 1 * this.spdFactor;
-
-        if (abs(this.moveY) > 0.1) {
-            this.handleVerticalMovement();
-        }
-
-        if (abs(this.moveX) > 0.1) {
-            this.handleHorizontalMovement();
+        if (abs(this.moveX) > 0.1 || abs(this.moveY) > 0.1) {
+            // Calculate angle from joystick x,y coordinates
+            let angle = atan2(this.index === 1 ? -this.moveY : this.moveY, this.index === 1 ? this.moveX : -this.moveX);
+            
+            this.tankSprite.rotation = angle;
+            // Set tank rotation to match joystick angle
+            //this.tankSprite.rotation = angle;
+            
+            // Move tank forward at constant speed when joystick is pushed
+            this.tankSprite.direction = this.tankSprite.rotation;
+            this.tankSprite.speed = this.spdFactor;
+            this.inMotion = true;
         } else {
             this.stopMovement();
         }
-    }
-
-    handleVerticalMovement() {
-        this.tankSprite.rotation += this.moveY * this.rotationSpeed;
-        this.inMotion = true;
-    }
-
-    handleHorizontalMovement() {
-        this.tankSprite.direction = this.tankSprite.rotation;
-        this.tankSprite.speed = -this.moveX * this.moveSpeed;
-        this.inMotion = true;
     }
 }

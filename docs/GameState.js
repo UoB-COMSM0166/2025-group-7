@@ -965,7 +965,35 @@ class GameState {
 }
 
 function touchMoved() {
-    // do some stuff
+    if (gameMenu.menuButton.isPressed) {
+        GameState.menuMode = !GameState.menuMode;
+        tankGame.tankMoving ? audioTankMovement.stop() : audioTankMovement.play();
+        allSprites.sleeping = !allSprites.sleeping;
+        tankGame.tankMoving = !tankGame.tankMoving;
+    }
+    if (gameMenu.resumeButton.isPressed) {
+        GameState.menuMode = false;
+        allSprites.sleeping = false;
+        tankGame.tankMoving = true;
+        audioTankMovement.play();
+    }
+    if (gameMenu.restartButton.isPressed) {
+        gameMenu.restartGame();
+    }
+    if (gameMenu.quitButton.isPressed && !confirmQuit) {
+        gameMenu.quitButton.label = "Are you sure?";
+        gameMenu.quitButton.setStyle({
+            fillBgHover: color(255, 0, 0, 50),
+            fillBgActive: color(255, 0, 0, 50),
+            fillLabelHover: color(255, 255, 255),
+            fillLabelActive: color(255, 255, 255),
+        });
+        confirmQuit = true;
+    }
+    if (gameMenu.quitButton.isPressed && confirmQuit) {
+        gameMenu.quitToMenu();
+        confirmQuit = false;
+    }
     return false;
 }
 
