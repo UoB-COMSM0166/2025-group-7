@@ -61,7 +61,7 @@ function preload() {
     imgMissilePickup = loadImage('images/missile-pickup.webp');
     imgTankGreen = loadImage('images/tank-image-green.webp');
     imgTankRed = loadImage('images/tank-image-red.webp');
-    introImage = loadImage('intro&endimages/introscreen-v2.png');
+    introImage = loadImage('intro&endimages/introBackground5.png');
     endImage = loadImage('intro&endimages/endscreenbg.png');
     controllersTwoPlayersImg = loadImage('images/ControllersTwoPlayer.png');
     controllersOnePlayerImg = loadImage('images/ControllerSinglePlayer.png');
@@ -118,9 +118,9 @@ function draw() {
 function windowResized() {
     if(startingScreen){
         displayMode('maxed');
-        startingScreen.tank1ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/6, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5);
+        startingScreen.tank1ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5);
         startingScreen.tank1ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
-        startingScreen.tank2ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/6, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5 + startingScreen.tank1ColorPicker.size().height);
+        startingScreen.tank2ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5 + startingScreen.tank1ColorPicker.size().height);
         startingScreen.tank2ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
     }
 }

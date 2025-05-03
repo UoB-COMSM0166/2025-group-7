@@ -244,7 +244,10 @@ class GameState {
         if (gameMenu) {
             gameMenu.draw();
         }
+        drawingContext.shadowBlur = 10;
+        drawingContext.shadowColor = color(255, 255, 255);
         drawGui();
+        drawingContext.shadowBlur = 0;
     }
 
     update() {
@@ -837,50 +840,52 @@ class GameState {
         if (GameState.twoPlayerMode) {
             //Draw instructions for player 2
             fill(tank2Color);
-            textSize(15);
-            text("Player 2", offsetX - 10 + separator, offsetY - 60);
-            noFill();
+            textSize(18);
             strokeWeight(1);
             stroke(tank2Color);
+            text("Player 2", offsetX - 10 + separator, offsetY - 60);
+            fill(tank2Color);
             // make small boxes around each letter, one on top, under the text and three next to each other under the first box
             rect(offsetX - 10 + separator, offsetY - 20, 25, 25, 5);
             rect(offsetX - 40 + separator, offsetY + 10, 25, 25, 5);
             rect(offsetX - 10 + separator, offsetY + 10, 25, 25, 5);
             rect(offsetX + 20 + separator, offsetY + 10, 25, 25, 5);
-            fill(tank2Color);
+            fill('black');
             text("W", offsetX - 10 + separator, offsetY - 27);
             text("A", offsetX - 40 + separator, offsetY + 2);
             text("S", offsetX - 10 + separator, offsetY + 2);
             text("D", offsetX + 20 + separator, offsetY + 2);
-            noFill();
-            rect(offsetX - 10 + separator, offsetY + 43, 25, 25, 5);
             fill(tank2Color);
+            rect(offsetX - 10 + separator, offsetY + 43, 25, 25, 5);
+            fill('black');
             text("Q", offsetX - 10 + separator, offsetY + 36);
+            fill(tank2Color);
             text("Shoot", offsetX - 10 + separator, offsetY + 60);
         }
         //player 1 instructions are arrow keys
         fill(tank1Color);
-        textSize(15);
+        textSize(18);
         strokeWeight(1);
         stroke(tank1Color);
         text("Player 1", offsetX + 10 - separator, offsetY - 60);
-        noFill();
+        fill(tank1Color);
         // make small boxes around each letter, one on top, under the text and three next to each other under the first box
         rect(offsetX + 10 - separator, offsetY - 20, 25, 25, 5);
         rect(offsetX + 40 - separator, offsetY + 10, 25, 25, 5);
         rect(offsetX + 10 - separator, offsetY + 10, 25, 25, 5);
         rect(offsetX - 20 - separator, offsetY + 10, 25, 25, 5);
-        fill(tank1Color);
+        fill('black');
         textFont('Arial');
         text("⬆", offsetX + 10 - separator, offsetY - 27);
         text("➡", offsetX + 40 - separator, offsetY + 2);
         text("⬇", offsetX + 10 - separator, offsetY + 2);
         text("⬅", offsetX - 20 - separator, offsetY + 2);
         textFont(BatmanForeverAlt);
-        noFill();
-        rect(offsetX + 10 - separator, offsetY + 43, 110, 25, 5);
         fill(tank1Color);
-        text("Spacebar", offsetX + 10 - separator, offsetY + 36);
+        rect(offsetX + 10 - separator, offsetY + 43, 110, 25, 5);
+        fill('black');
+        text("Space", offsetX + 10 - separator, offsetY + 36);
+        fill(tank1Color);
         text("Shoot", offsetX + 10 - separator, offsetY + 60);
 
         //reset global drawing parameters

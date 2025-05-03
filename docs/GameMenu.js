@@ -8,8 +8,17 @@ class GameMenu {
         // Create menu buttons
         this.menuButton = createButton("Menu", 1250, 10, 100, 30);
         this.menuButton.setStyle({
-            fillBgActive: color(200, 200, 200, 50),
-            fillLabelActive: color(200, 200, 200),
+            fillBg: color(20, 20, 20),
+            fillBgHover: color(40, 40, 40),
+            fillBgActive: color(60, 60, 60),
+            fillLabel: color(200, 200, 200),
+            fillLabelHover: color(255, 255, 255),
+            fillLabelActive: color(255, 255, 255),
+            strokeBg: color(200, 200, 200),
+            strokeBgHover: color(255, 255, 255),
+            strokeBgActive: color(255, 255, 255),
+            strokeWeight: 2,
+            rounding: 10,
         });
         this.resumeButton = createButton('Resume', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 100, 240, 50);
         this.resumeButton.setStyle({
@@ -46,7 +55,7 @@ class GameMenu {
             textAlign(CENTER);
             textSize(36);
             fill(255);
-            text('GAME MENU', this.menuX, this.menuY - 150);
+            text('GAME MENU', this.menuX + 25, this.menuY - 150);
             
             // Show buttons after drawing the background
             this.showMenu();

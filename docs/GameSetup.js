@@ -2,12 +2,12 @@ class GameSetup{
 
     //various params for layout of screen
     HEAD_TEXT = 75;
-    REG_TEXT = 25;
-    VERT_SP = 110;
+    REG_TEXT = 20;
+    VERT_SP = 120;
     BELOW_TITLE = 230;
     HORZ1 = -100;
-    HORZ2 = 50;
-    HORZ3 = 300;
+    HORZ2 = -120;
+    HORZ3 = 120;
     HORZ4 = (this.HORZ2 + this.HORZ3)/2;
 
     //keeps track of which game setting user is on
@@ -15,6 +15,10 @@ class GameSetup{
     ON_DIFF = 1;
     ON_MAPGEN = 2;
     ON_START = 3;
+
+    // Add these properties to the class
+    lastMouseX = null;
+    lastMouseY = null;
 
     constructor(introImage, VT323Font){
         //start off on the one-vs-two player mode setting
@@ -30,12 +34,12 @@ class GameSetup{
                 twoPlayer: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE, width: 200, height: this.REG_TEXT + 25 }
             },
             diff: {
-                easy: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + this.VERT_SP, width: 100, height: this.REG_TEXT + 25 },
-                hard: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + this.VERT_SP, width: 100, height: this.REG_TEXT + 25 }
+                easy: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + this.VERT_SP, width: 220, height: this.REG_TEXT + 25 },
+                hard: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + this.VERT_SP, width: 220, height: this.REG_TEXT + 25 }
             },
             mapGen: {
-                on: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 },
-                off: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP, width: 100, height: this.REG_TEXT + 25 }
+                on: { x: GameState.CANVAS_WIDTH/2 + this.HORZ2, y: this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP, width: 220, height: this.REG_TEXT + 25 },
+                off: { x: GameState.CANVAS_WIDTH/2 + this.HORZ3, y: this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP, width: 220, height: this.REG_TEXT + 25 }
             },
             start: { 
                 x: GameState.CANVAS_WIDTH/2 + this.HORZ4, 
@@ -47,112 +51,202 @@ class GameSetup{
         
         this.tank1ColorPicker = createColorPicker(tank1Color);
         this.tank1ColorPicker.size(this.canvas.size().width/25, this.canvas.size().height/14);
-        this.tank1ColorPicker.position(this.canvas.position().x + this.canvas.size().width - this.canvas.size().width/6, this.canvas.position().y + this.canvas.size().height/3.5);
+        this.tank1ColorPicker.position(this.canvas.position().x + this.canvas.size().width - this.canvas.size().width/3.5, this.canvas.position().y + this.canvas.size().height/3.5);
         this.tank2ColorPicker = createColorPicker(tank2Color);
         this.tank2ColorPicker.size(this.canvas.size().width/25, this.canvas.size().height/14);
-        this.tank2ColorPicker.position(this.canvas.position().x + this.canvas.size().width - this.canvas.size().width/6, this.canvas.position().y + this.canvas.size().height/3.5 + this.tank1ColorPicker.size().height);
+        this.tank2ColorPicker.position(this.canvas.position().x + this.canvas.size().width - this.canvas.size().width/3.5, this.canvas.position().y + this.canvas.size().height/3.5 + this.tank1ColorPicker.size().height);
     }
 
     draw(){
         background(introImage);
 
         tank1Color = this.tank1ColorPicker.color();
+        if(!GameState.twoPlayerMode){
+            this.tank2ColorPicker.value('#E9AB17');
+        }
         tank2Color = this.tank2ColorPicker.color();
+
+        //add rect behind all text and their respective boxes. make it white with full opacity
+        strokeWeight(0);
+        drawingContext.shadowBlur = 30;
+        drawingContext.shadowColor = color(10,10,10);
+        fill(color(0,0,0,120));
+        const boxX = GameState.CANVAS_WIDTH/2;
+        const boxY = this.BELOW_TITLE + 165;
+        const boxWidth = 550;
+        const boxHeight = 500;
+        rect(boxX, boxY, boxWidth, boxHeight, 10);
+        rect(GameState.CANVAS_WIDTH/2, this.BELOW_TITLE + this.selector*this.VERT_SP + this.REG_TEXT/2, 500, 80, 10);
+        drawingContext.shadowBlur = 0;
+
+        // Track mouse movement
+        let mouseMoved = false;
+        if (this.lastMouseX !== null && this.lastMouseY !== null) {
+            mouseMoved = (mouseX !== this.lastMouseX || mouseY !== this.lastMouseY);
+        }
+        this.lastMouseX = mouseX;
+        this.lastMouseY = mouseY;
+
+        // Check mouse hover for selector position only if inside the box and mouse moved
+        const mouseXVal = mouseX;
+        const mouseYVal = mouseY;
+        const isMouseInBox = mouseXVal > boxX - boxWidth/2 && 
+                           mouseXVal < boxX + boxWidth/2 && 
+                           mouseYVal > boxY - boxHeight/2 && 
+                           mouseYVal < boxY + boxHeight/2;
+
+        if (isMouseInBox && mouseMoved) {
+            const buttonYPositions = [
+                this.BELOW_TITLE,
+                this.BELOW_TITLE + this.VERT_SP,
+                this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP,
+                this.BELOW_TITLE + this.ON_START*this.VERT_SP
+            ];
+
+            // Find the closest button to mouse Y position
+            let closestIndex = 0;
+            let minDistance = Infinity;
+            for (let i = 0; i < buttonYPositions.length; i++) {
+                const distance = Math.abs(mouseYVal - buttonYPositions[i]);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = i;
+                }
+            }
+
+            // Update selector if mouse is within reasonable distance
+            if (minDistance < 50) {
+                this.selector = closestIndex;
+            }
+        }
 
         //display the game title
         strokeWeight(0);
         textFont(BatmanForeverAlt);
         rectMode(CENTER);
-        textSize(this.HEAD_TEXT);
-        fill('#FFFFFF'); // changed
-        text('HEX WARS', GameState.CANVAS_WIDTH/2 + this.HORZ4, 30);
 
-        textFont(QargeoFont);
-
-        //put in user selection box
-        rectMode(CENTER);
-        fill('#CCCCCC'); // changed
-        rect(GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.selector*this.VERT_SP + this.REG_TEXT/2, 500, 100);
-        fill(55, 55, 55);
-        rect(GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.selector*this.VERT_SP + this.REG_TEXT/2, 490, 90);
-        rect(GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.selector*this.VERT_SP + this.REG_TEXT/2, 500, 50);
-        rect(GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.selector*this.VERT_SP + this.REG_TEXT/2, 400, 100);
-
-        //put in mode selection
-        fill('#CCCCCC'); // changed
-        textSize(this.REG_TEXT);
-        textAlign(RIGHT, TOP);
-        //text('NUMBER OF PLAYERS:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE);
+        //put in game mode text
+        drawingContext.shadowBlur = 5;
+        drawingContext.shadowColor = color(41,193,244);
+        fill(color(41,193,244));
+        text('GAME MODE', GameState.CANVAS_WIDTH/2, this.BELOW_TITLE - 60);
 
         //put in difficulty selection
         textFont(BatmanForeverAlt);
-        text('DIFFICULTY:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE + this.VERT_SP);
+        text('DIFFICULTY', GameState.CANVAS_WIDTH/2, this.BELOW_TITLE - 60 + this.VERT_SP);
 
         //put in Map Generation selection
-        text('MAP GENERATION:', GameState.CANVAS_WIDTH/2 + this.HORZ1, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
+        text('MAP GENERATION', GameState.CANVAS_WIDTH/2, this.BELOW_TITLE - 60 + this.ON_MAPGEN*this.VERT_SP);
 
-        //put in player mode boxes
-        textAlign(CENTER, TOP);
-        //rect(this.CANVAS_WIDTH/2 - 50, 225, 200, this.REG_TEXT);
+        //put in user selection box with glowing effect
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2, this.BELOW_TITLE + this.selector*this.VERT_SP + this.REG_TEXT/2, 500, 80, '#CCCCCC', '#FFFFFF');
+
+        //put in mode selection
+        strokeWeight(2);
+        stroke(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        fill(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+
+        //put in player mode boxes with glowing effect
+        textAlign(CENTER);
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.REG_TEXT/2, 220, this.REG_TEXT + 25, !GameState.twoPlayerMode ? '#CCCCCC' : '#333333', '#FFFFFF');
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.twoPlayerMode ? '#CCCCCC' : '#333333', '#FFFFFF');
+        stroke(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        fill(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
         text('ONE PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE);
+        stroke(GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        fill(GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
         text('TWO PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE);
 
-        //put in difficulty boxes
+        //put in difficulty boxes with glowing effect
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.difficulty === GameState.EASY ? '#CCCCCC' : '#333333', '#FFFFFF');
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.difficulty === GameState.HARD ? '#CCCCCC' : '#333333', '#FFFFFF');
+        stroke(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(41,193,244));
+        fill(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(41,193,244));
         text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP);
+        stroke(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(41,193,244));
+        fill(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(41,193,244));
         text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP);
 
-        //put in map generation on/off
+        //put in map generation on/off with glowing effect
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.showMapGeneration ? '#CCCCCC' : '#333333', '#FFFFFF');
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, !GameState.showMapGeneration ? '#CCCCCC' : '#333333', '#FFFFFF');
+        stroke(GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
+        fill(GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
         text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
+        stroke(!GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
+        fill(!GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
         text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
 
-        //put in "start game"
+        //put in "start game" with glowing effect
+        this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.ON_START*this.VERT_SP + 10, 500, 80, '#CCCCCC', '#FFFFFF');
         textSize(1.5*this.REG_TEXT);
-        text('START GAME', GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.ON_START*this.VERT_SP);
+        stroke(color(219, 51, 105));
+        fill(color(219, 51, 105));
+        textAlign(CENTER, CENTER);
+        text('START GAME', GameState.CANVAS_WIDTH/2 + this.HORZ4, this.BELOW_TITLE + this.ON_START*this.VERT_SP + 10);
+        textAlign(CENTER, TOP);
         textSize(this.REG_TEXT);
 
-        //highlight player mode selection
-        fill('#CCCCCC'); // changed
+        // Reset shadow and stroke
+        drawingContext.shadowBlur = 0;
+        drawingContext.shadowColor = 'transparent';
+        strokeWeight(0);
+
+        //show/hide color pickers
         if(!GameState.twoPlayerMode){
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.REG_TEXT/2, 200, this.REG_TEXT + 25);
-            fill('black');
-            text('ONE PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE);
             this.tank1ColorPicker.show();
             this.tank2ColorPicker.hide();
         }else{
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.REG_TEXT/2, 200, this.REG_TEXT + 25);
-            fill('black');
-            text('TWO PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE);
             this.tank1ColorPicker.show();
             this.tank2ColorPicker.show();
         }
 
-        //highlight difficulty selection for player 1
-        fill('#CCCCCC'); // changed
-        if(GameState.difficulty === GameState.EASY){
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
-            fill('black');
-            text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP);
-        }else{
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
-            fill('black');
-            text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP);
-        }
-
-        
-        //highlight map generation selection
-        fill('#CCCCCC'); // changed
-        if(GameState.showMapGeneration){
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
-            fill('black');
-            text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
-        }
-        else{
-            rect(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 100, this.REG_TEXT + 25);
-            fill('black');
-            text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
-        }
-
         //leave this back to default since it's used in drawing the tank sprites
+        strokeWeight(1);
+    }
+
+    drawGlowingButton(x, y, width, height, fillColor, glowColor) {
+        // Determine if button is active based on fillColor
+        const isActive = fillColor === '#CCCCCC';
+        
+        // Check if mouse is hovering over this button
+        const isHovering = mouseX > x - width/2 && 
+                          mouseX < x + width/2 && 
+                          mouseY > y - height/2 && 
+                          mouseY < y + height/2;
+        
+        // Draw glow effect using shadow
+        if (isActive) {
+            drawingContext.shadowBlur = 20;
+            drawingContext.shadowColor = color(219, 51, 105);
+        } else if (isHovering) {
+            drawingContext.shadowBlur = 15;
+            drawingContext.shadowColor = color(41,193,244);
+        } else {
+            drawingContext.shadowBlur = 0;
+            drawingContext.shadowColor = 'transparent';
+        }
+        
+        // Draw main button with rounded corners
+        noStroke();
+        fill(color(0, 50)); // Translucent black
+        rect(x, y, width, height, 10); // Rounded corners with 10px radius
+        
+        // Draw outline
+        noFill();
+        if (isActive) {
+            stroke(color(219, 51, 105));
+        } else if (isHovering) {
+            stroke(color(41,193,244));
+        } else {
+            stroke(color(41,193,244));
+        }
+        strokeWeight(2);
+        rect(x, y, width, height, 10);
+        
+        // Reset shadow and stroke
+        drawingContext.shadowBlur = 0;
+        drawingContext.shadowColor = 'transparent';
         strokeWeight(1);
     }
 
