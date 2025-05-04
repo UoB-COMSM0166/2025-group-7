@@ -7,6 +7,7 @@ let setupStage;
 let endOfGame;
 let controllersImg;
 let gameEndScreen;
+let confirmQuit = false;
 
 //key codes for firing of tanks
 let SPACE_CODE = 32;
@@ -15,6 +16,11 @@ let Q_CODE = 81;
 let maxGames = 5;
 let destroyAnimGreen = [];
 let destroyAnimRed = [];
+let tankMovementAnimTank1 = [];
+let tankMovementAnimTank2 = [];
+let missileAnim = [];
+let tank1Color = '#00FFFF'; 
+let tank2Color = '#E9AB17'; 
 
 let isTouchScreen = hasTouchscreen();
 
@@ -56,7 +62,7 @@ function preload() {
     imgMissilePickup = loadImage('images/missile-pickup.webp');
     imgTankGreen = loadImage('images/tank-image-green.webp');
     imgTankRed = loadImage('images/tank-image-red.webp');
-    introImage = loadImage('intro&endimages/introscreen-v2.png');
+    introImage = loadImage('intro&endimages/introBackground5.png');
     endImage = loadImage('intro&endimages/endscreenbg.png');
     controllersTwoPlayersImg = loadImage('images/ControllersTwoPlayer.png');
     controllersOnePlayerImg = loadImage('images/ControllerSinglePlayer.png');
@@ -69,6 +75,18 @@ function preload() {
     for (let i = 1; i <= 10; i++) {
         animImage = loadImage(`destroyanim-red/${i}.png`);
         destroyAnimRed.push(animImage);
+    }
+
+    //tank movement animation preloads
+    for (let i = 1; i <= 2; i++) {
+        tankMovementAnimTank1.push(loadImage(`images/tank-moving-ani/tank-moving${i}.webp`));
+        tankMovementAnimTank2.push(loadImage(`images/green-tank-moving/green-moving${i}.webp`));
+    }
+
+    //missile animation preloads
+    missileExplode = loadImage(`images/missileMovement/MissileExplotion.webp`);
+    for (let i = 1; i <= 8; i++) {
+        missileAnim.push(loadImage(`images/missileMovement/Missile${i}.webp`));
     }
 
     //font preload
@@ -101,6 +119,17 @@ function draw() {
         tankGame.draw();
         tankGame.update();
     }
+
+}
+
+function windowResized() {
+    if(startingScreen){
+        displayMode('maxed');
+        startingScreen.tank1ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5);
+        startingScreen.tank1ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
+        startingScreen.tank2ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5 + startingScreen.tank1ColorPicker.size().height);
+        startingScreen.tank2ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
+    }
 }
 
 function keyPressed() {
@@ -111,6 +140,8 @@ function keyPressed() {
         if (keyCode === ENTER) {
             tankGame = new GameState();
             gameMenu = new GameMenu();
+            startingScreen.tank1ColorPicker.remove();
+            startingScreen.tank2ColorPicker.remove();
             audioBackground.loop();
             setupStage = false;
             //startingScreen can be garbage collected
@@ -148,6 +179,17 @@ function keyPressed() {
                 }
             }
         }
+
+        if (keyCode === ESCAPE) {
+            GameState.menuMode = true;
+            audioTankMovement.stop();
+            tankGame.tankMoving = false;
+        }
+    } else if (GameState.menuMode) {
+        if (keyCode === ESCAPE) {
+            GameState.menuMode = false;
+            allSprites.sleeping = false;
+        }
     }
 }
 
@@ -177,22 +219,38 @@ function mousePressed() {
                 }
             }
         }
+        
+    }
+}
 
+function mouseClicked() {
+    if(tankGame && !tankGame.getIsGameOver()) {
         //Menu button
-        if (menuButton.isPressed) {
+        if (gameMenu.menuButton.isReleased) {
             tankGame.tankMoving = false;
             audioTankMovement.stop();
             GameState.menuMode = true;
         }
-        if (gameMenu.resumeButton.isPressed) {
+        if (gameMenu.resumeButton.isReleased) {
             GameState.menuMode = false;
             allSprites.sleeping = false;
         }
-        if (gameMenu.restartButton.isPressed) {
+        if (gameMenu.restartButton.isReleased) {
             gameMenu.restartGame();
         }
-        if (gameMenu.quitButton.isPressed) {
+        if (gameMenu.quitButton.isReleased && !confirmQuit) {
+            gameMenu.quitButton.label = "Are you sure?";
+            gameMenu.quitButton.setStyle({
+                fillBgHover: color(255, 0, 0, 50),
+                fillLabelHover: color(255, 0, 0),
+                fillBgActive: color(255, 0, 0, 50),
+                fillLabelActive: color(255, 0, 0),
+            });
+            confirmQuit = true;
+        }
+        else if (gameMenu.quitButton.isReleased && confirmQuit) {
             gameMenu.quitToMenu();
+            confirmQuit = false;
         }
     }
 }

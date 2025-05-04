@@ -10,7 +10,6 @@ let joyStick;
 let joyStick2;
 let shootButton;
 let shootButton2;
-let menuButton;
 
 function cellToXY(col, row) {
     const x = col * 90.5 + 272;
@@ -122,7 +121,14 @@ class GameState {
         this.extraAIControllers = [];
         let aiCtrlListner;
 
-        CORNER_CELLS.forEach((cell, idx) => {
+        // Calculate number of AI tanks based on round number (gameOverCnt)
+        // Start with 1 tank, increase by 1 every round up to 4
+        const numAITanks = min(4, max(1, this.gameOverCnt + 1));
+        console.log(numAITanks);
+
+        // Only spawn the calculated number of AI tanks
+        for (let idx = 0; idx < numAITanks; idx++) {
+            const cell = CORNER_CELLS[idx];
             const { x, y } = cellToXY(cell.col, cell.row);
             const rot = atan2(this.tankList[0].tankSprite.y - y, this.tankList[0].tankSprite.x - x);
             const aiTank = new Tank(x, y, rot, GameState.EASY, idx + 2, this);
@@ -136,11 +142,9 @@ class GameState {
             if (idx === 0) {
                 aiCtrlListner = aiCtrl;
             }
-        });
+        }
 
-        //establishes initial time for first Pickup to spawn
         return aiCtrlListner;
-
     }
 
     createGUIElements() {
@@ -181,12 +185,6 @@ class GameState {
                 shootButton2.setStyle(buttonStyle);
             }
         }
-
-        menuButton = createButton("Menu", 1250, 10, 100, 30);
-        menuButton.setStyle({
-            fillBgActive: color(200, 200, 200, 50),
-            fillLabelActive: color(200, 200, 200),
-        });
     }
 
     draw() {
@@ -201,7 +199,12 @@ class GameState {
     }
 
     drawBackground() {
-        background(0);
+        background(10, 10, 15);
+        noStroke();
+        for (let r = 600; r > 0; r -= 10) {
+            fill(40, 40, 40, map(r, 600, 0, 0, 20));  // medium grey, slightly more visible
+            ellipse(width / 2, height / 2, r * 2);
+        }
     }
 
     drawMap() {
@@ -241,7 +244,10 @@ class GameState {
         if (gameMenu) {
             gameMenu.draw();
         }
+        drawingContext.shadowBlur = 10;
+        drawingContext.shadowColor = color(255, 255, 255);
         drawGui();
+        drawingContext.shadowBlur = 0;
     }
 
     update() {
@@ -400,8 +406,9 @@ class GameState {
             audioTankMovement.stop();
             this.endRound(this.tankList[0]);
         } else if (aiAlive === 0) {
+            // Player won - increment score
             this.player1.incScore();
-            audioP1Wins.play(); 
+            audioP1Wins.play();
             audioTankMovement.stop();
             this.endRound(this.tankList[0]);
         }
@@ -409,7 +416,7 @@ class GameState {
 
     endRound(deadTankSprite) {
         this.isGameOver = true;
-        
+
         // 清理所有拾取
         while (this.pickupList.length) {
             this.pickupList[0].sprite.remove();
@@ -438,20 +445,28 @@ class GameState {
     }
 
     getGameComplete() {
-        if (this.player1.getScore() === 3 || this.player2.getScore() === 3) {
-            return true;
+        if (GameState.twoPlayerMode) {
+            // Two player mode remains unchanged
+            // check if level is over before ending game
+            if ((this.player1.getScore() === 3 || this.player2.getScore() === 3) && this.levelOver) {
+                return true;
+            }
+        } else {
+            // Single player mode - need 4 consecutive wins
+            if (this.player1.getScore() === 4 || this.player2.getScore() === 1 && this.levelOver) {
+                return true;
+            }
         }
-
         return false;
     }
 
-    setCurrentWinner(){
-        if(this.player1.getScore() > this.player2.getScore()){
+    setCurrentWinner() {
+        if (this.player1.getScore() > this.player2.getScore()) {
             GameState.currentWinner = "Player 1";
             GameState.currentWinnerScore = this.player1.getScore().toString();
             GameState.currentLoserScore = this.player2.getScore().toString();
         }
-        else if(this.player1.getScore() < this.player2.getScore()){
+        else if (this.player1.getScore() < this.player2.getScore()) {
             GameState.currentWinner = "Player 2";
             GameState.currentWinnerScore = this.player2.getScore().toString();
             GameState.currentLoserScore = this.player1.getScore().toString();
@@ -484,6 +499,7 @@ class GameState {
                 if (this.tankList[i].hasShield)
                     this.tankList[i].deactivateShield(false);
             }
+            this.levelOver = true;
 
             //only refresh map once
             if (this.isGameOver) {
@@ -505,10 +521,11 @@ class GameState {
                 this.tankList[i].tankWeapon = new Weapon(Weapon.BULLET_TYPE);
             }
 
-            if (!GameState.twoPlayerMode) this.spawnAITanks();
-
             //increment every time a game is won 
             this.gameOverCnt++;
+
+            if (!GameState.twoPlayerMode) this.spawnAITanks();
+
             if (this.gameOverCnt >= maxGames) {
                 //currently assumes one player always wins - ie odd number of rounds with always a clear winner
                 if (GameState.currentWinner == "Player 1") {
@@ -517,6 +534,7 @@ class GameState {
             }
             this.isGameOver = false;
         }, 2000);
+        this.levelOver = false;
     }
 
     checkProjectileTankOverlaps() {
@@ -644,10 +662,23 @@ class GameState {
 
         let offsetY = GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2);
         let offsetX = GameState.CANVAS_WIDTH / 2;
-        let separator = -35;
+        let separator = -60;
+
+        // Draw glowing boxes around each tank HUD
+        stroke(tank2Color);
+        strokeWeight(1);
+        drawingContext.shadowBlur = 15;
+        drawingContext.shadowColor = color(tank2Color);
+        rect(offsetX - 190 + separator, offsetY + 10, 490, 150, 20);
+        drawingContext.shadowBlur = 15;
+        drawingContext.shadowColor = color(tank1Color);
+        stroke(tank1Color);
+        rect(offsetX + 190 - separator, offsetY + 10, 490, 150, 20);
+        drawingContext.shadowBlur = 0;
 
         //P1 weapon hex
-        stroke(this.tankList[1].tankSprite.color);
+        //stroke(this.tankList[1].tankSprite.color);
+        stroke(tank2Color);
         beginShape();
         vertex((offsetX - 280) + separator, offsetY + 0);
         vertex((offsetX - 305) + separator, offsetY + 43.3);
@@ -656,10 +687,11 @@ class GameState {
         vertex((offsetX - 355) + separator, offsetY + -43.3);
         vertex((offsetX - 305) + separator, offsetY + -43.3);
         endShape(CLOSE);
-        image(this.tankList[1].tankWeapon.icon, offsetX - 392, offsetY - 28.3, 55, 55);
+        image(this.tankList[1].tankWeapon.icon, offsetX - 357 + separator, offsetY - 28.3, 55, 55);
 
         //P2 weapon hex
-        stroke(this.tankList[0].tankSprite.color);
+        //stroke(this.tankList[0].tankSprite.color);
+        stroke(tank1Color);
         beginShape();
         vertex((offsetX + 280) - separator, offsetY + 0);
         vertex((offsetX + 305) - separator, offsetY + 43.3);
@@ -668,12 +700,13 @@ class GameState {
         vertex((offsetX + 355) - separator, offsetY + -43.3);
         vertex((offsetX + 305) - separator, offsetY + -43.3);
         endShape(CLOSE);
-        image(this.tankList[0].tankWeapon.icon, offsetX + 337, offsetY - 28.3, 55, 55);
+        image(this.tankList[0].tankWeapon.icon, offsetX + 303 - separator, offsetY - 28.3, 55, 55);
 
         offsetY -= 30;
 
         //P1 score hex
-        stroke(this.tankList[1].tankSprite.color);
+        //stroke(this.tankList[1].tankSprite.color);
+        stroke(tank2Color);
         beginShape();
         vertex((offsetX - 375) + separator, offsetY + 0);
         vertex((offsetX - 387.5) + separator, offsetY + 21.65);
@@ -684,13 +717,15 @@ class GameState {
         endShape(CLOSE);
         //print score
         strokeWeight(0);
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         text(this.player2.getScore(), (offsetX - 400) + separator, offsetY - 12);
-        strokeWeight(5);
-        fill('black');
+        strokeWeight(1);
+        noFill();
 
         //P2 score hex
-        stroke(this.tankList[0].tankSprite.color);
+        //stroke(this.tankList[0].tankSprite.color);
+        stroke(tank1Color);
         beginShape();
         vertex((offsetX + 375) - separator, offsetY + 0);
         vertex((offsetX + 387.5) - separator, offsetY + 21.65);
@@ -701,10 +736,11 @@ class GameState {
         endShape(CLOSE);
         //print score
         strokeWeight(0);
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         text(this.player1.getScore(), (offsetX + 400) - separator, offsetY - 12);
         strokeWeight(5);
-        fill('black');
+        noFill();
 
         offsetY = GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2) - 5;
         textSize(20);
@@ -712,7 +748,8 @@ class GameState {
         //P1 life bar
 
         //bar outline
-        stroke(this.tankList[1].tankSprite.color);
+        //stroke(this.tankList[1].tankSprite.color);
+        stroke(tank2Color);
         beginShape();
         vertex((offsetX - 270) + separator, offsetY + 0);
         vertex((offsetX - 282.5) + separator, offsetY + -21.65);
@@ -723,26 +760,29 @@ class GameState {
         //bar fill
         let fillLevel = (this.tankList[1].getLife() / this.tankList[1].initialLife) * 200;
 
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         beginShape();
         vertex((offsetX - 270) + separator, offsetY + 0);
         vertex((offsetX - 282.5) + separator, offsetY + -21.65);
         vertex((offsetX - 282.5) + separator + fillLevel, offsetY + -21.65);
         vertex((offsetX - 270) + separator + fillLevel, offsetY + 0);
         endShape(CLOSE);
-        fill('black');
+        noFill();
 
         //describe health and ammo
         strokeWeight(0);
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         text("Health", (offsetX - 230) + separator, offsetY - 48);
         text("Ammo", (offsetX - 235) + separator, offsetY + 35);
         strokeWeight(5);
-        fill('black');
+        noFill();
 
         //P2 life bar
         //bar outline
-        stroke(this.tankList[0].tankSprite.color);
+        //stroke(this.tankList[0].tankSprite.color);
+        stroke(tank1Color);
         beginShape();
         vertex((offsetX + 270) - separator, offsetY + 0);
         vertex((offsetX + 282.5) - separator, offsetY + -21.65);
@@ -753,28 +793,31 @@ class GameState {
         //bar fill
         fillLevel = (this.tankList[0].getLife() / this.tankList[0].initialLife) * 200;
 
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         beginShape();
         vertex((offsetX + 270) - separator, offsetY + 0);
         vertex((offsetX + 282.5) - separator, offsetY + -21.65);
         vertex((offsetX + 282.5) - separator - fillLevel, offsetY + -21.65);
         vertex((offsetX + 270) - separator - fillLevel, offsetY + 0);
         endShape(CLOSE);
-        fill('black');
+        noFill();
 
         //describe health and ammo
         strokeWeight(0);
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         text("Health", (offsetX + 230) - separator, offsetY - 48);
         text("Ammo", (offsetX + 235) - separator, offsetY + 35);
         strokeWeight(5);
-        fill('black');
+        noFill();
 
         offsetY = GameState.GRID_HEIGHT + (GameState.LOWER_PANEL_HT / 2) + 5;
         strokeWeight(0);
 
         //P1 ammo
-        fill(this.tankList[1].tankSprite.color);
+        //fill(this.tankList[1].tankSprite.color);
+        fill(tank2Color);
         for (let i = 0; i < this.tankList[1].getAmmo(); i++) {
             beginShape();
             let xoffset = (20 * i);
@@ -786,7 +829,8 @@ class GameState {
         }
 
         //P2 ammo
-        fill(this.tankList[0].tankSprite.color);
+        //fill(this.tankList[0].tankSprite.color);
+        fill(tank1Color);
         for (let i = 0; i < this.tankList[0].getAmmo(); i++) {
             beginShape();
             let xoffset = (20 * i);
@@ -796,26 +840,59 @@ class GameState {
             vertex((offsetX + 255) - separator - xoffset, offsetY + 0);
             endShape(CLOSE);
         }
+        if (GameState.twoPlayerMode) {
+            //Draw instructions for player 2
+            fill(tank2Color);
+            textSize(18);
+            strokeWeight(1);
+            stroke(tank2Color);
+            text("Player 2", offsetX - 10 + separator, offsetY - 60);
+            fill(tank2Color);
+            // make small boxes around each letter, one on top, under the text and three next to each other under the first box
+            rect(offsetX - 10 + separator, offsetY - 20, 25, 25, 5);
+            rect(offsetX - 40 + separator, offsetY + 10, 25, 25, 5);
+            rect(offsetX - 10 + separator, offsetY + 10, 25, 25, 5);
+            rect(offsetX + 20 + separator, offsetY + 10, 25, 25, 5);
+            fill('black');
+            text("W", offsetX - 10 + separator, offsetY - 27);
+            text("A", offsetX - 40 + separator, offsetY + 2);
+            text("S", offsetX - 10 + separator, offsetY + 2);
+            text("D", offsetX + 20 + separator, offsetY + 2);
+            fill(tank2Color);
+            rect(offsetX - 10 + separator, offsetY + 43, 25, 25, 5);
+            fill('black');
+            text("Q", offsetX - 10 + separator, offsetY + 36);
+            fill(tank2Color);
+            text("Shoot", offsetX - 10 + separator, offsetY + 60);
+        }
+        //player 1 instructions are arrow keys
+        fill(tank1Color);
+        textSize(18);
+        strokeWeight(1);
+        stroke(tank1Color);
+        text("Player 1", offsetX + 10 - separator, offsetY - 60);
+        fill(tank1Color);
+        // make small boxes around each letter, one on top, under the text and three next to each other under the first box
+        rect(offsetX + 10 - separator, offsetY - 20, 25, 25, 5);
+        rect(offsetX + 40 - separator, offsetY + 10, 25, 25, 5);
+        rect(offsetX + 10 - separator, offsetY + 10, 25, 25, 5);
+        rect(offsetX - 20 - separator, offsetY + 10, 25, 25, 5);
+        fill('black');
+        textFont('Arial');
+        text("⬆", offsetX + 10 - separator, offsetY - 27);
+        text("➡", offsetX + 40 - separator, offsetY + 2);
+        text("⬇", offsetX + 10 - separator, offsetY + 2);
+        text("⬅", offsetX - 20 - separator, offsetY + 2);
+        textFont(BatmanForeverAlt);
+        fill(tank1Color);
+        rect(offsetX + 10 - separator, offsetY + 43, 110, 25, 5);
+        fill('black');
+        text("Space", offsetX + 10 - separator, offsetY + 36);
+        fill(tank1Color);
+        text("Shoot", offsetX + 10 - separator, offsetY + 60);
 
         //reset global drawing parameters
         fill('black');
-
-        // Display controller instructions at the bottom
-        if (controllersTwoPlayersImg && GameState.twoPlayerMode) {
-            const imgWidth = 200; // Adjust as needed
-            const imgHeight = 200; // Adjust as needed
-            const imgX = offsetX - imgWidth / 2;
-            const imgY = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT - imgHeight - 10;
-
-            image(controllersTwoPlayersImg, imgX, imgY, imgWidth, imgHeight);
-
-        } else if (controllersOnePlayerImg && !GameState.twoPlayerMode) {
-            const imgWidth = 100; // Adjust as needed
-            const imgHeight = 200; // Adjust as needed
-            const imgX = offsetX - imgWidth / 2;
-            const imgY = GameState.GRID_HEIGHT + GameState.LOWER_PANEL_HT - imgHeight - 10;
-            image(controllersOnePlayerImg, imgX, imgY, imgWidth, imgHeight);
-        }
 
 
     }
@@ -825,7 +902,7 @@ class GameState {
             // Generate random positions for two players
             this.RAND1X = floor(random(5, 9));
             this.RAND1Y = floor(random(0, 3));
-            this.RAND2X = floor(random(0, 4)); 
+            this.RAND2X = floor(random(0, 4));
             this.RAND2Y = floor(random(0, 3));
 
             // Calculate tank positions
@@ -852,11 +929,11 @@ class GameState {
             for (let i = 1; i < this.tankList.length; i++) {
                 const cornerIndex = (i - 1) % CORNER_CELLS.length;
                 const cell = CORNER_CELLS[cornerIndex];
-                const {x, y} = cellToXY(cell.col, cell.row);
-                
-                const rot = atan2(this.tankList[0].tankSprite.y - y, 
-                                this.tankList[0].tankSprite.x - x);
-                
+                const { x, y } = cellToXY(cell.col, cell.row);
+
+                const rot = atan2(this.tankList[0].tankSprite.y - y,
+                    this.tankList[0].tankSprite.x - x);
+
                 this.updateTankPosition(this.tankList[i], x, y, rot);
             }
         }
@@ -888,7 +965,35 @@ class GameState {
 }
 
 function touchMoved() {
-    // do some stuff
+    if (gameMenu.menuButton.isPressed) {
+        GameState.menuMode = !GameState.menuMode;
+        tankGame.tankMoving ? audioTankMovement.stop() : audioTankMovement.play();
+        allSprites.sleeping = !allSprites.sleeping;
+        tankGame.tankMoving = !tankGame.tankMoving;
+    }
+    if (gameMenu.resumeButton.isPressed) {
+        GameState.menuMode = false;
+        allSprites.sleeping = false;
+        tankGame.tankMoving = true;
+        audioTankMovement.play();
+    }
+    if (gameMenu.restartButton.isPressed) {
+        gameMenu.restartGame();
+    }
+    if (gameMenu.quitButton.isPressed && !confirmQuit) {
+        gameMenu.quitButton.label = "Are you sure?";
+        gameMenu.quitButton.setStyle({
+            fillBgHover: color(255, 0, 0, 50),
+            fillBgActive: color(255, 0, 0, 50),
+            fillLabelHover: color(255, 255, 255),
+            fillLabelActive: color(255, 255, 255),
+        });
+        confirmQuit = true;
+    }
+    if (gameMenu.quitButton.isPressed && confirmQuit) {
+        gameMenu.quitToMenu();
+        confirmQuit = false;
+    }
     return false;
 }
 

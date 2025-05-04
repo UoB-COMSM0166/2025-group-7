@@ -8,7 +8,7 @@ class Cell {
     constructor(i, j, grid, cols, rows, cellWidth) {
         this.w = cellWidth;
         this.wallLength = this.w / 2 + 2.3;
-        this.wallWidth = 3;
+        this.wallWidth = 5;
         this.radius = sqrt(3) / 2 * this.wallLength - this.wallWidth / 2;
         this.grid = grid;
         this.cols = cols;

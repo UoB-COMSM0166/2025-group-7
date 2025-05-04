@@ -48,13 +48,14 @@ class GameFinish{
         else{
             textFont(BatmanForever);
             textSize(50);
-            if(GameState.currentWinner === "Player 2"){
+            if(GameState.currentWinner === "Player 2" || GameState.currentWinnerScore !== "4"){
                 fill('white');
                 text("You Lose!", this.gameWinnerX + 77, this.gameWinnerY);
             }
             else{
                 fill('white');
-                text("You Win!", this.gameWinnerX + 100, this.gameWinnerY);
+                text("You Win!", this.gameWinnerX + 100
+                    , this.gameWinnerY);
             }
         }
 
