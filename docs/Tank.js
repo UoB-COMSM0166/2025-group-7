@@ -74,9 +74,11 @@ class Tank {
         //console.log(index);
         if (index === 1) {
             this.setTankAnimationColor(tankMovementAnimTank1, tank1Color);
+            this.setTankAnimationColor(destroyAnimRed, tank1Color);
             this.tankSprite.addAni('move', ...tankMovementAnimTank1);
         } else {
             this.setTankAnimationColor(tankMovementAnimTank2, tank2Color);
+            this.setTankAnimationColor(destroyAnimGreen, tank2Color);
             this.tankSprite.addAni('move', ...tankMovementAnimTank2);
         }
         this.tankSprite.anis.scale = 0.08;
@@ -480,7 +482,7 @@ class Tank {
             let joystickMagnitude = sqrt(this.moveX * this.moveX + this.moveY * this.moveY);
             // Clamp magnitude between 0 and 1
             joystickMagnitude = constrain(joystickMagnitude, 0, 1);
-            
+
             this.tankSprite.rotation = angle * joystickMagnitude;
             
             
