@@ -128,6 +128,7 @@ class GameMenu {
         this.restartButton.visible = true;
         this.quitButton.visible = true;
         this.instrButton.visible = true;
+        this.menuButton.visible = false;
     }
 
     hideMenu() {
@@ -135,6 +136,7 @@ class GameMenu {
         this.restartButton.visible = false;
         this.quitButton.visible = false;
         this.instrButton.visible = false;
+        this.menuButton.visible = true;
     }
 
 
