@@ -84,32 +84,6 @@ class AIController {
         this.isMoving = false; // Tank is intentionally stationary
       }
       
-      /*
-      // === 1. Turn toward player ===
-      const ang = atan2(
-        this.targetTank.tankSprite.y - this.tank.tankSprite.y,
-        this.targetTank.tankSprite.x - this.tank.tankSprite.x
-      );
-      const diff = (((ang - this.tank.tankSprite.rotation + 540) % 360) - 180);
-  
-      if (abs(diff) > this.turnStep) {
-        this.tank.move(diff > 0 ? Tank.RIGHT_DIRECTION : Tank.LEFT_DIRECTION);
-        return;                        // First aim the gun barrel
-      }
-  
-      // === 2. Maneuver ===
-      const dx = this.targetTank.tankSprite.x - this.tank.tankSprite.x;
-      const dy = this.targetTank.tankSprite.y - this.tank.tankSprite.y;
-      const distSq = dx * dx + dy * dy;
-  
-      if (distSq > this.safeDistSq) {
-        this.tank.move(Tank.UP_DIRECTION);       // Chase after target
-      } else if (distSq < this.safeDistSq / 4) {
-        this.tank.move(Tank.DOWN_DIRECTION);     // Back up if too close
-      } else {
-        this.tank.move(Tank.NO_DIRECTION);
-      }
-      */
       // === 3. Fire ===
       if (this.tank.canFire() && millis() - this.lastFireMS > this.fireCD && 
       this.tank.tankSprite.distanceTo(this.targetTank.tankSprite) <= 100) {
