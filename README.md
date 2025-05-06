@@ -229,7 +229,7 @@ The choice for Agile was also supported by the circumstances of the project, whi
 - 10%, 750 words
 - Evidence of the impact of your game across the environment and two of the other areas (Social, Economic, Technical and Individual)
 
-(current word count: 475)
+(current word count: 645)
 
 It is vital to consider sustainability throughout the software development process. The information and Communication Technologies (ICT) sector is responsible for approximately 2% of global carbon emissions (Danushi, Forti, & Soldani, 2024).
 
@@ -240,8 +240,10 @@ Our sustainability awareness diagram is shown below. The diagram was created fol
 
 Our game impacts individual sustainability by encouraging strategic thinking and improved coordination skills. Research shows that a sufficient level of simultaneous information and action coordination in a video game can lead to improved cognitive flexibility (Glass, Maddox, & Love, 2013). Our game requires the player to learn how to navigate the tank, pick up collectables and avoid and attack their opponent, among other tasks. As well as this, the added twist of breakable walls provides another complex element to the game. Therefore, our game rewards more strategic players as they can choose which features of our game to use to their advantage. 
 
+Furthermore, in the initial stages of implementation, our game had a red and green theme. The colours of our two tanks in both modes were a bright red and green. At this time, we felt that these colours were easy to locate, and fit our minimalist theme. However, during a guest talk by Doug Clark on designing for accessibility we found that these colours were the most problematic for colour blind people. This would make the tanks difficult to distinguish, and greatly impact the usability and enjoyability of playing the game for such users. Due to this, we chose to not only change the colours of the tanks, but allow the user to be able to choose and customise colours. This makes our game more individually sustainable as it allows our game to be accessible to a more diverse demographic of users. It also enhances the playability of our game to non-color blind players as they are able to choose the colours that bring the most comfort to their playing experience.
+
 In our discussion, concerns were raised regarding sedentary lifestyles and gaming addictions causing lesser connections with nature. The glorification of conflict and warfare may normalise such concepts within impressionable minds such as children. The general aggression model suggests that exposure to violent video games can cause people to behave impulsively and aggressively (Adachi & Willoughby, 2011). However, we have purposefully designed our game to be of a futuristic and virtual style. The game is not intended to simulate reality, rather the warfare theme serves as a foundation to introduce many different components (e.g. weapons). 
-In future, we aim to develop a cooperative multiplayer mode in order to encourage social sustainability. Research suggests that the cooperative game mode could weaken the effect of violent video games (Zheng et al., 2021). Our game may positively impact social sustainability in its current form as competitive game modes have been found to stimulate more shared laughter (Zhan et al., 2022). 
+In future, we can develop a cooperative multiplayer mode in order to encourage social sustainability. Research suggests that the cooperative game mode could weaken the effect of violent video games (Zheng et al., 2021). Our game may positively impact social sustainability in its current form as competitive game modes have been found to stimulate more shared laughter (Zhan et al., 2022). 
 
 
 ### Conclusion
