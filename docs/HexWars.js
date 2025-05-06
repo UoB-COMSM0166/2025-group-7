@@ -221,7 +221,7 @@ function mousePressed() {
         }
         
     }
-    if(isTouchScreen){
+    if(isTouchScreen && gameMenu){
         if (gameMenu.menuButton.isPressed) {
             GameState.menuMode = !GameState.menuMode;
             tankGame.tankMoving ? audioTankMovement.stop() : audioTankMovement.play();
