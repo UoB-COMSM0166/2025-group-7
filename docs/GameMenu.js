@@ -14,15 +14,15 @@ class GameMenu {
         // Create menu buttons
         this.menuButton = createButton("Menu", 1250, 10, 100, 30);
         this.menuButton.setStyle({
-            fillBg: color(20, 20, 20),
-            fillBgHover: color(40, 40, 40),
-            fillBgActive: color(60, 60, 60),
-            fillLabel: color(200, 200, 200),
-            fillLabelHover: color(255, 255, 255),
-            fillLabelActive: color(255, 255, 255),
-            strokeBg: color(200, 200, 200),
-            strokeBgHover: color(255, 255, 255),
-            strokeBgActive: color(255, 255, 255),
+            fillBg: color(0, 0, 0, 0),
+            fillBgHover: color(0, 0, 0, 0),
+            fillBgActive: color(0, 0, 0, 0),
+            fillLabel: color(136, 128, 128),
+            fillLabelHover: color(219, 51, 105),
+            fillLabelActive: color(219, 51, 105),
+            strokeBg: color(136, 128, 128),
+            strokeBgHover: color(219, 51, 105),
+            strokeBgActive: color(219, 51, 105),
             strokeWeight: 2,
             rounding: 10,
             font: 'batForAlt',
@@ -30,24 +30,67 @@ class GameMenu {
         this.resumeButton = createButton('Resume', this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 100, 400, 50);
         this.resumeButton.setStyle({
             font: 'batForAlt',
-            textSize: 30
+            textSize: 30,
+            fillBg: color(0, 0, 0, 0),
+            fillBgHover: color(0, 0, 0, 0),
+            fillBgActive: color(0, 0, 0, 0),
+            fillLabel: color(136, 128, 128),
+            fillLabelHover: color(219, 51, 105),
+            fillLabelActive: color(219, 51, 105),
+            strokeBg: color(136, 128, 128),
+            strokeBgHover: color(219, 51, 105),
+            strokeBgActive: color(219, 51, 105),
+            strokeWeight: 2,
+            rounding: 10
         });
         this.restartButton = createButton('Restart',this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 180, 400, 50);
         this.restartButton.setStyle({
             font: 'batForAlt',
-            textSize: 30
+            textSize: 30,
+            fillBg: color(0, 0, 0, 0),
+            fillBgHover: color(0, 0, 0, 0),
+            fillBgActive: color(0, 0, 0, 0),
+            fillLabel: color(136, 128, 128),
+            fillLabelHover: color(219, 51, 105),
+            fillLabelActive: color(219, 51, 105),
+            strokeBg: color(136, 128, 128),
+            strokeBgHover: color(219, 51, 105),
+            strokeBgActive: color(219, 51, 105),
+            strokeWeight: 2,
+            rounding: 10
         });
         this.quitButton = createButton('Quit to Main Menu', this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 260, 400, 50);
         this.quitButton.setStyle({
             font: 'batForAlt',
-            textSize: 30
+            textSize: 30,
+            fillBg: color(0, 0, 0, 0),
+            fillBgHover: color(0, 0, 0, 0),
+            fillBgActive: color(0, 0, 0, 0),
+            fillLabel: color(136, 128, 128),
+            fillLabelHover: color(219, 51, 105),
+            fillLabelActive: color(219, 51, 105),
+            strokeBg: color(136, 128, 128),
+            strokeBgHover: color(219, 51, 105),
+            strokeBgActive: color(219, 51, 105),
+            strokeWeight: 2,
+            rounding: 10
         });
         this.instrButton = createButton('Instructions', this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 340, 400, 50);
         this.instrButton.setStyle({
             font: 'batForAlt',
-            textSize: 30
+            textSize: 30,
+            fillBg: color(0, 0, 0, 0),
+            fillBgHover: color(0, 0, 0, 0),
+            fillBgActive: color(0, 0, 0, 0),
+            fillLabel: color(136, 128, 128),
+            fillLabelHover: color(219, 51, 105),
+            fillLabelActive: color(219, 51, 105),
+            strokeBg: color(136, 128, 128),
+            strokeBgHover: color(219, 51, 105),
+            strokeBgActive: color(219, 51, 105),
+            strokeWeight: 2,
+            rounding: 10
         });
-
 
         // Hide buttons initially
         this.hideMenu();
@@ -59,14 +102,18 @@ class GameMenu {
             fill(0, 0, 0, 180);
             rect(this.menuX, this.menuY, GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
             
-            // Draw menu background
-            fill(50);
+            // Draw menu background with glow effect
+            drawingContext.shadowBlur = 20;
+            drawingContext.shadowColor = color(219, 51, 105);
+            stroke(0,0,0);
+            fill(0);
             rect(this.menuX, this.menuY, this.menuWidth, this.menuHeight, 20);
+            drawingContext.shadowBlur = 0;
             
             // Draw menu title
             textAlign(CENTER);
             textSize(36);
-            fill(255);
+            fill(219, 51, 105);
             text('GAME MENU', this.menuX, this.menuY - 200);
             
             // Show buttons after drawing the background

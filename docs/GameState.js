@@ -246,10 +246,7 @@ class GameState {
         if (gameMenu) {
             gameMenu.draw();
         }
-        drawingContext.shadowBlur = 10;
-        drawingContext.shadowColor = color(255, 255, 255);
         drawGui();
-        drawingContext.shadowBlur = 0;
     }
 
     update() {
