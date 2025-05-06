@@ -470,19 +470,23 @@ class Tank {
         this.moveY = joyStick.val.y; 
         this.updateMovementFromJoystick();
     }
-
     updateMovementFromJoystick() {
         if (abs(this.moveX) > 0.1 || abs(this.moveY) > 0.1) {
             // Calculate angle from joystick x,y coordinates
             let angle = atan2(this.index === 1 ? -this.moveY : this.moveY, this.index === 1 ? this.moveX : -this.moveX);
             
-            this.tankSprite.rotation = angle;
-            // Set tank rotation to match joystick angle
-            //this.tankSprite.rotation = angle;
             
-            // Move tank forward at constant speed when joystick is pushed
+            // Calculate speed based on joystick distance from center
+            let joystickMagnitude = sqrt(this.moveX * this.moveX + this.moveY * this.moveY);
+            // Clamp magnitude between 0 and 1
+            joystickMagnitude = constrain(joystickMagnitude, 0, 1);
+            
+            this.tankSprite.rotation = angle * joystickMagnitude;
+            
+            
+            // Scale speed by joystick magnitude
             this.tankSprite.direction = this.tankSprite.rotation;
-            this.tankSprite.speed = this.spdFactor;
+            this.tankSprite.speed = this.spdFactor * joystickMagnitude;
             this.inMotion = true;
         } else {
             this.stopMovement();
