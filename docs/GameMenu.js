@@ -216,4 +216,47 @@ class GameMenu {
         GameState.menuMode = false;
     }
 }
+/*Game Modes:
+
+Single-Player Mode: Battle against AI, up to 4 levels, with increasing number of AI in each level.
+
+Two-Player Mode: Players battle against each other, the first to get 3 points wins.
+
+Game Rules:
+
+Maps are randomly generated and different for each game.
+
+Score points by defeating the opponent's tank.
+
+Two Difficulties:
+
+Simple Mode: The tank has 3 health and moves fast.
+
+Hard Mode: The tank has only 1 health, moves slowly, and is more challenging.
+
+Battle Mechanics:
+
+Firing bullets and hitting the tank can cause 1 point of damage.
+
+Walls can bounce bullets, be careful not to be hit by yourself!
+
+Walls can be destroyed to change the terrain.
+
+Item System (Random Drop):
+
+Health: Restore 1 point of health, up to the upper limit.
+
+Ammo: Restore all bullets.
+
+Saw: Melee weapon, destroys the enemy on contact, and bullets cannot be fired.
+
+Laser: Fires a laser that penetrates up to two walls and can destroy tanks (only one shot).
+
+Shield: Gain an invincible shield that can block any damage.
+
+Missile: Automatically tracks missiles, destroys on hit, disappears when time runs out (only one shot).
+
+Bomb: Throws a bomb that releases a large number of small bullets after the explosion (each deals 0.5 damage).
+
+*/
 
