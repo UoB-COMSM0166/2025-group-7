@@ -19,7 +19,7 @@ Include a demo video of your game here (you don't have to wait until the end, yo
 
 ## Your Group
 
-![Grp-7](https://github.com/user-attachments/assets/501cd6fb-302c-42bb-9cf5-6fb428ba4358)
+![Grp-7](group-photo.jpg)
 
 | Group Member | Name            | Email                          | Role  |
 |--------------|-----------------|--------------------------------|-------|
