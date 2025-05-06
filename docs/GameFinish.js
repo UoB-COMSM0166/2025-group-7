@@ -6,8 +6,8 @@ class GameFinish{
     drawY = 350;
     gameCompleteX = 320;
     gameCompleteY = 200;
-    newGameX = 564;
-    newGameY = 494;
+    newGameX = 690;
+    newGameY = 515;
     newGameRectX = 690;
     newGameRectY = 515;
     newGameRectWidth = 300;
@@ -54,8 +54,7 @@ class GameFinish{
             }
             else{
                 fill('white');
-                text("You Win!", this.gameWinnerX + 100
-                    , this.gameWinnerY);
+                text("You Win!", this.gameWinnerX + 100, this.gameWinnerY);
             }
         }
 
@@ -63,18 +62,75 @@ class GameFinish{
         textSize(60);
         text(GameState.currentWinnerScore + " : " + GameState.currentLoserScore, this.scoreX, this.scoreY);
 
-        strokeWeight(2);
-        rect(this.newGameRectX, this.newGameRectY, this.newGameRectWidth, this.newGameRectHeight);
-        fill('black');
+        // Check if mouse is hovering over the button
+        const isHovering = mouseX > this.newGameRectX - this.newGameRectWidth/2 && 
+                          mouseX < this.newGameRectX + this.newGameRectWidth/2 && 
+                          mouseY > this.newGameRectY - this.newGameRectHeight/2 && 
+                          mouseY < this.newGameRectY + this.newGameRectHeight/2;
+
+        // Draw glowing button for New Game
+        this.drawGlowingButton(this.newGameRectX, this.newGameRectY, this.newGameRectWidth, this.newGameRectHeight, '#CCCCCC', '#FFFFFF');
+        
+        // Draw New Game text with glow effect when hovering
+        textAlign(CENTER, CENTER);
         textFont(BatmanForeverAlt);
-        strokeWeight(0);
         textSize(40);
+        strokeWeight(0);
+        
+        if (isHovering) {
+            drawingContext.shadowBlur = 20;
+            drawingContext.shadowColor = color(219, 51, 105);
+            fill(color(219, 51, 105));
+        } else {
+            drawingContext.shadowBlur = 0;
+            drawingContext.shadowColor = 'transparent';
+            fill(color(136, 128, 128));
+        }
+        
         text("New Game", this.newGameX, this.newGameY);
+        textAlign(LEFT, TOP);
 
-        // add selector if more options added to screen 
-
+        // Reset shadow and stroke
+        drawingContext.shadowBlur = 0;
+        drawingContext.shadowColor = 'transparent';
         strokeWeight(1);
+    }
 
+    drawGlowingButton(x, y, width, height, fillColor, glowColor) {
+        // Check if mouse is hovering over this button
+        const isHovering = mouseX > x - width/2 && 
+                          mouseX < x + width/2 && 
+                          mouseY > y - height/2 && 
+                          mouseY < y + height/2;
+        
+        // Draw glow effect using shadow
+        if (isHovering) {
+            drawingContext.shadowBlur = 20;
+            drawingContext.shadowColor = color(219, 51, 105);
+        } else {
+            drawingContext.shadowBlur = 0;
+            drawingContext.shadowColor = 'transparent';
+        }
+        
+        // Draw main button with rounded corners
+        noStroke();
+        fill(color(0, 50)); // Translucent black
+        rect(x, y, width, height, 10); // Rounded corners with 10px radius
+        
+        // Draw outline
+        noFill();
+        if (isHovering) {
+            stroke(color(219, 51, 105));
+        } else {
+            stroke(color(136, 128, 128));
+        }
+        strokeWeight(2);
+        rect(x, y, width, height, 10);
+        
+        // Reset shadow and stroke
+        drawingContext.shadowBlur = 0;
+        drawingContext.shadowColor = 'transparent';
+        strokeWeight(1);
     }
 
     isButtonPressed(){
@@ -84,8 +140,4 @@ class GameFinish{
                mouseY < this.button.y + this.button.height/2 &&
                mouseIsPressed;
     }
-
-
-
-
 }
