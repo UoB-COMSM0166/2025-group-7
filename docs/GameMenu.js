@@ -92,12 +92,36 @@ class GameMenu {
             rounding: 10
         });
 
+        //from the instructions screen - enables you to go back
+        this.backButton = createButton('Back', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 400, 200, 50);
+        this.backButton.setStyle({
+            font: 'batForAlt',
+            textSize: 30,
+            fillBg: color(0, 0, 0, 0),
+            fillBgHover: color(0, 0, 0, 0),
+            fillBgActive: color(0, 0, 0, 0),
+            fillLabel: color(136, 128, 128),
+            fillLabelHover: color(219, 51, 105),
+            fillLabelActive: color(219, 51, 105),
+            strokeBg: color(136, 128, 128),
+            strokeBgHover: color(219, 51, 105),
+            strokeBgActive: color(219, 51, 105),
+            strokeWeight: 2,
+            rounding: 10
+        });
+        
+        //hide back button for now
+        this.backButton.visible = false;
+
+        //Boolean whether to show instructions or pause menu
+        this.onInstructions = false;
+
         // Hide buttons initially
         this.hideMenu();
     }
 
     draw() {
-        if (GameState.menuMode) {
+        if (GameState.menuMode && !this.onInstructions) {
             // Draw semi-transparent background
             fill(0, 0, 0, 180);
             rect(this.menuX, this.menuY, GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
@@ -118,9 +142,45 @@ class GameMenu {
             
             // Show buttons after drawing the background
             this.showMenu();
+        } else if(GameState.menuMode && this.onInstructions){
+            this.drawInstructions();
         } else {
             this.hideMenu();
         }
+    }
+
+    drawInstructions(){
+        if (GameState.menuMode && this.onInstructions) {
+            // Draw semi-transparent background
+            fill(0, 0, 0, 180);
+            rect(this.menuX, this.menuY, GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
+            
+            // Draw instructions background with glow effect
+            drawingContext.shadowBlur = 20;
+            drawingContext.shadowColor = color(219, 51, 105);
+            stroke(0,0,0);
+            fill(0);
+            rect(this.menuX, this.menuY, this.menuWidth, this.menuHeight, 20);
+            drawingContext.shadowBlur = 0;
+            
+            // Draw instructions title
+            textAlign(CENTER);
+            textSize(36);
+            fill(219, 51, 105);
+            text('INSTRUCTIONS', this.menuX, this.menuY - 200);            
+        }
+    }
+
+    switchToInstructions(){
+        this.hideMenu();
+        this.onInstructions = true;
+        this.backButton.visible = true;
+    }
+
+    switchToMenu(){
+        this.showMenu();
+        this.onInstructions = false;
+        this.backButton.visible = false;
     }
 
     showMenu() {
@@ -138,7 +198,6 @@ class GameMenu {
         this.instrButton.visible = false;
         this.menuButton.visible = true;
     }
-
 
     restartGame() {
         // Reset game state

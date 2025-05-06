@@ -252,6 +252,12 @@ function mouseClicked() {
             gameMenu.quitToMenu();
             confirmQuit = false;
         }
+        if (gameMenu.instrButton.isReleased) {
+            gameMenu.switchToInstructions();
+        }
+        if (gameMenu.backButton.isReleased) {
+            gameMenu.switchToMenu();
+        }
     }
 }
 
