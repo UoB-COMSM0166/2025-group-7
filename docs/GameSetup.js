@@ -127,8 +127,8 @@ class GameSetup{
 
         //put in game mode text
         drawingContext.shadowBlur = 5;
-        drawingContext.shadowColor = color(41,193,244);
-        fill(color(41,193,244));
+        drawingContext.shadowColor = color(136,128,128);
+        fill(color(136,128,128));
         text('GAME MODE', GameState.CANVAS_WIDTH/2, this.BELOW_TITLE - 60);
 
         //put in difficulty selection
@@ -143,19 +143,19 @@ class GameSetup{
 
         //put in mode selection
         strokeWeight(2);
-        stroke(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
-        fill(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        stroke(!GameState.twoPlayerMode ? color(219, 51, 105) : color(136,128,128));
+        fill(!GameState.twoPlayerMode ? color(219, 51, 105) : color(136,128,128));
 
         //put in player mode boxes with glowing effect
         textAlign(CENTER);
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.REG_TEXT/2, 220, this.REG_TEXT + 25, !GameState.twoPlayerMode ? '#CCCCCC' : '#333333', '#FFFFFF');
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.twoPlayerMode ? '#CCCCCC' : '#333333', '#FFFFFF');
-        stroke(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
-        fill(!GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        stroke(!GameState.twoPlayerMode ? color(219, 51, 105) : color(136,128,128));
+        fill(!GameState.twoPlayerMode ? color(219, 51, 105) : color(136,128,128));
         stroke(0); strokeWeight(2);
         text('ONE PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE);
-        stroke(GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
-        fill(GameState.twoPlayerMode ? color(219, 51, 105) : color(41,193,244));
+        stroke(GameState.twoPlayerMode ? color(219, 51, 105) : color(136,128,128));
+        fill(GameState.twoPlayerMode ? color(219, 51, 105) : color(136,128,128));
         stroke(0); strokeWeight(2);
         text('TWO PLAYER', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE);
         strokeWeight(2);
@@ -163,12 +163,12 @@ class GameSetup{
         //put in difficulty boxes with glowing effect
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.difficulty === GameState.EASY ? '#CCCCCC' : '#333333', '#FFFFFF');
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.difficulty === GameState.HARD ? '#CCCCCC' : '#333333', '#FFFFFF');
-        stroke(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(41,193,244));
-        fill(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(41,193,244));
+        stroke(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(136,128,128));
+        fill(GameState.difficulty === GameState.EASY ? color(219, 51, 105) : color(136,128,128));
         stroke(0); strokeWeight(2);
         text('EASY', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.VERT_SP);
-        stroke(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(41,193,244));
-        fill(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(41,193,244));
+        stroke(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(136,128,128));
+        fill(GameState.difficulty === GameState.HARD ? color(219, 51, 105) : color(136,128,128));
         stroke(0); strokeWeight(2);
         text('HARD', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.VERT_SP);
         strokeWeight(2);
@@ -176,12 +176,12 @@ class GameSetup{
         //put in map generation on/off with glowing effect
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, GameState.showMapGeneration ? '#CCCCCC' : '#333333', '#FFFFFF');
         this.drawGlowingButton(GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP + this.REG_TEXT/2, 220, this.REG_TEXT + 25, !GameState.showMapGeneration ? '#CCCCCC' : '#333333', '#FFFFFF');
-        stroke(GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
-        fill(GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
+        stroke(GameState.showMapGeneration ? color(219, 51, 105) : color(136,128,128));
+        fill(GameState.showMapGeneration ? color(219, 51, 105) : color(136,128,128));
         stroke(0); strokeWeight(2);
         text('ON', GameState.CANVAS_WIDTH/2 + this.HORZ2, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
-        stroke(!GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
-        fill(!GameState.showMapGeneration ? color(219, 51, 105) : color(41,193,244));
+        stroke(!GameState.showMapGeneration ? color(219, 51, 105) : color(136,128,128));
+        fill(!GameState.showMapGeneration ? color(219, 51, 105) : color(136,128,128));
         stroke(0); strokeWeight(2);
         text('OFF', GameState.CANVAS_WIDTH/2 + this.HORZ3, this.BELOW_TITLE + this.ON_MAPGEN*this.VERT_SP);
         strokeWeight(2);
@@ -232,7 +232,7 @@ class GameSetup{
             drawingContext.shadowColor = color(219, 51, 105);
         } else if (isHovering) {
             drawingContext.shadowBlur = 15;
-            drawingContext.shadowColor = color(41,193,244);
+            drawingContext.shadowColor = color(136,128,128);
         } else {
             drawingContext.shadowBlur = 0;
             drawingContext.shadowColor = 'transparent';
@@ -248,9 +248,9 @@ class GameSetup{
         if (isActive) {
             stroke(color(219, 51, 105));
         } else if (isHovering) {
-            stroke(color(41,193,244));
+            stroke(color(136,128,128));
         } else {
-            stroke(color(41,193,244));
+            stroke(color(136,128,128));
         }
         strokeWeight(2);
         rect(x, y, width, height, 10);
