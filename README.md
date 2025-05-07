@@ -245,13 +245,16 @@ The choice for Agile was also supported by the circumstances of the project, whi
 - 10%, 750 words
 - Evidence of the impact of your game across the environment and two of the other areas (Social, Economic, Technical and Individual)
 
-(current word count: 645)
+(current word count: 747)
 
 It is vital to consider sustainability throughout the software development process. The information and Communication Technologies (ICT) sector is responsible for approximately 2% of global carbon emissions (Danushi, Forti, & Soldani, 2024).
 
 Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. The game consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the WEEE waste produced by the PC gaming industry. On the other hand the game has lower energy consumption compared to typical PC games (owing to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient. Finally the game does not include in-game purchases or upgrades which can be considered exploitative (and which many online games possess).
 
 ![SusAD](./diagrams/SusAD.jpg)
+
+
+Green software patterns were a central part of our discussion of the sustainability of the game. We made an effort to serve images in modern formats such as webp. P5play complies with minifying web assets to reduce page size and network bandwidth. As a team, we decided to implement stateless design, reducing the on-disk data required to run the game. We aim to implement this after carefully considering the impact on the environmental footprint of the game and any privacy implications. In future, we can optimise average CPU utilisation and use a compiled language to further adhere to green software patterns.
 
 
 Our game impacts individual sustainability by encouraging strategic thinking and improved coordination skills. Research shows that a sufficient level of simultaneous information and action coordination in a video game can lead to improved cognitive flexibility (Glass, Maddox, & Love, 2013). Our game requires the player to learn how to navigate the tank, pick up collectables and avoid and attack their opponent, among other tasks. As well as this, the added twist of breakable walls provides another complex element to the game. Therefore, our game rewards more strategic players as they can choose which features of our game to use to their advantage. 
