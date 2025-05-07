@@ -167,7 +167,10 @@ class GameMenu {
             textAlign(CENTER);
             textSize(36);
             fill(219, 51, 105);
-            text('INSTRUCTIONS', this.menuX, this.menuY - 200);            
+            text('INSTRUCTIONS', this.menuX, this.menuY - 200);   
+
+            // Add the instructions image
+            image(instructionsImg, 0.5*this.menuX + 50, 0.5*this.menuY + 25, 575, 300);         
         }
     }
 

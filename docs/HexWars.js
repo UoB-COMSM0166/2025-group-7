@@ -66,6 +66,7 @@ function preload() {
     endImage = loadImage('intro&endimages/endscreenbg.png');
     controllersTwoPlayersImg = loadImage('images/ControllersTwoPlayer.png');
     controllersOnePlayerImg = loadImage('images/ControllerSinglePlayer.png');
+    instructionsImg = loadImage('images/instructions/instructions.webp');
 
     //destroy animation image preloads
     for (let i = 1; i <= 10; i++) {
