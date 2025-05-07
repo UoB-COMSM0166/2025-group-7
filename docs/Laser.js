@@ -24,6 +24,7 @@ class Laser extends Projectile {
     }
 
     performRaycast() {
+        // Cast ray from start position in given angle
         let rayX = this.startX;
         let rayY = this.startY;
         let dirX = Math.cos(this.angle);
@@ -36,19 +37,19 @@ class Laser extends Projectile {
         this.hitTarget = null;
         const wallsArray = Array.isArray(walls) ? walls : [];
         let tankList = [];
-    
-        this.wallsDestroyed = 0; 
-    
+
+        this.wallsDestroyed = 0;
+
         try {
             if (typeof tankGame !== 'undefined' && tankGame && tankGame.tankList) {
                 tankList = tankGame.tankList;
             }
-        } catch (e) {}
-    
+        } catch (e) { }
+
         while (distanceTraveled < this.maxDistance && !hitSomething) {
             const currentX = rayX + dirX * distanceTraveled;
             const currentY = rayY + dirY * distanceTraveled;
-    
+
             for (let wall of wallsArray) {
                 if (wall && this.pointInWall(currentX, currentY, wall)) {
                     if (wall.outerWall) {
@@ -59,7 +60,7 @@ class Laser extends Projectile {
                     }
                     if (this.wallsDestroyed < 2) {
                         try {
-                            wall.remove(); 
+                            wall.remove();
                             this.wallsDestroyed++;
                         } catch (e) {
                             console.warn("cannot break:", e);
@@ -72,9 +73,9 @@ class Laser extends Projectile {
                     break;
                 }
             }
-    
+
             if (hitSomething) break;
-    
+
             for (let tank of tankList) {
                 if (tank && tank.tankSprite && !this.tank) {
                     if (this.pointInTank(currentX, currentY, tank)) {
@@ -86,13 +87,13 @@ class Laser extends Projectile {
                     }
                 }
             }
-    
+
             distanceTraveled += step;
         }
     }
-    
 
     pointInWall(x, y, wall) {
+        // Check if point is inside wall bounds
         const dx = x - wall.x;
         const dy = y - wall.y;
         const angle = -wall.rotation * Math.PI / 180;
@@ -109,6 +110,7 @@ class Laser extends Projectile {
     }
 
     pointInTank(x, y, tank) {
+        // Check if point is inside tank bounds
         const tankSprite = tank.tankSprite;
         const tankX = tankSprite.x;
         const tankY = tankSprite.y;
@@ -130,6 +132,7 @@ class Laser extends Projectile {
     }
 
     isFiringTank(tank, startX, startY) {
+        // Check if tank is close enough to firing point
         const dx = tank.tankSprite.x - startX;
         const dy = tank.tankSprite.y - startY;
         const distSquared = dx * dx + dy * dy;
@@ -138,17 +141,19 @@ class Laser extends Projectile {
     }
 
     applyDamage() {
+        // Apply damage to hit target if not already done
         if (this.hitTarget && !this.damageApplied) {
             try {
                 if (typeof this.hitTarget.receiveDamage === 'function') {
                     this.hitTarget.receiveDamage(this.damage);
                     this.damageApplied = true;
                 }
-            } catch (e) {}
+            } catch (e) { }
         }
     }
 
     draw() {
+        // Draw laser beam with fade effect
         const timePassed = millis() - (this.despawnTime - 1000);
         const opacity = Math.max(0, this.beamOpacity - timePassed * this.fadeRate / 1000);
 
@@ -180,9 +185,10 @@ class Laser extends Projectile {
         pop();
     }
 
-    update() {}
+    update() { }
 
     remove() {
+        // Clean up sprite when removing laser
         if (this.sprite) {
             this.sprite.remove();
         }

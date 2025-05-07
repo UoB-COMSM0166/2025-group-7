@@ -25,17 +25,10 @@ class Tank {
         this.tankWeapon = new Weapon(Weapon.BULLET_TYPE);
         this.index = index;
         this.destroyed = false;
-        //create a sprite in P5 Play for the tank
-        //this.tankSprite = new Sprite();
-        //this.tankSprite.x = locX;
         this.INITIALX = locX;
-        //this.tankSprite.y = locY;
         this.INITIALY = locY;
-        //this.tankSprite.width = Tank.TANK_HEIGHT;
-        //this.tankSprite.height = Tank.TANK_WIDTH;
         this.tankSprite = new Sprite(locX, locY, Tank.TANK_WIDTH, "hexagon");
         this.tankSprite.addCollider((Tank.GUN_HEIGHT + Tank.TANK_HEIGHT) / 2, 0, Tank.GUN_HEIGHT, Tank.GUN_WIDTH);
-        // add wheels as colliders
         this.tankSprite.wheels = new Group();
         this.tankSprite.wheels.color = 'gray';
         this.tankSprite.wheels.autoDraw = false;
@@ -44,14 +37,10 @@ class Tank {
         new this.tankSprite.wheels.Sprite(this.tankSprite.x, this.tankSprite.y - (Tank.WHEEL_HEIGHT + Tank.TANK_HEIGHT) / 2, Tank.WHEEL_WIDTH, Tank.WHEEL_HEIGHT);
         new GlueJoint(this.tankSprite, this.tankSprite.wheels[0]);
         new GlueJoint(this.tankSprite, this.tankSprite.wheels[1]);
-        //this.tankSprite.addCollider(0, Tank.TANK_HEIGHT/2, Tank.WHEEL_WIDTH, Tank.WHEEL_HEIGHT);
-        //this.tankSprite.addCollider(0, -Tank.TANK_HEIGHT/2, Tank.WHEEL_WIDTH, Tank.WHEEL_HEIGHT);
         this.tankSprite.autoUpdate = false;
         this.tankSprite.autoDraw = false;
         this.tankSprite.rotationLock = true;
         this.tankSprite.speed = 0;
-        //this.hasShield = false;         
-        //this.shieldSprite = null;
         this.tankSprite.rotation = initialDirection;
         this.INITIALROTATION = initialDirection;
         if (this.index === 1) {
@@ -71,7 +60,6 @@ class Tank {
 
         this.tankSprite.wheels[0].opacity = 0;
         this.tankSprite.wheels[1].opacity = 0;
-        //console.log(index);
         if (index === 1) {
             this.setTankAnimationColor(tankMovementAnimTank1, tank1Color);
             this.setTankAnimationColor(destroyAnimRed, tank1Color);
@@ -84,18 +72,9 @@ class Tank {
         this.tankSprite.anis.scale = 0.08;
         this.tankSprite.anis.offset.x = 45;
 
-        //to keep track of how many bullets are fired
-        //enables resetting bullet count once special weapons used
         this.bulletRoundCount = 0;
-
-        //scale animation effect when bullet fired or
-        //projectile damage taken
-        //counts the frames to apply effect for
         this.scaleAniFrameCount = 0;
-
         this.inMotion = false;
-
-        //fixing bug of missile missing gameState reference
         this.gameState = gameState;
     }
 
@@ -110,7 +89,7 @@ class Tank {
             animation[i].updatePixels();
         }
     }
-    
+
 
 
     draw() {
@@ -421,9 +400,6 @@ class Tank {
     //to exclude it from new Pickup placement - currently hardcodes values
     //for grid and cell size
     getCurrentCell() {
-
-        //naive approximation of cell position based on breaking map
-        //into a 90.5 * 105 rectangular grid
         let column = floor(this.tankSprite.x / 90.5);
         let row;
         let columnIsOdd = (column % 2 == 1);
@@ -432,10 +408,6 @@ class Tank {
             row = floor((this.tankSprite.y - 52.5) / 105);
         } else row = floor(this.tankSprite.y / 105);
 
-        //additional logic can be implemented to disambiguate edge cases if needed
-        //but not currently necessary since Pickups don't spawn on edges anyway...
-
-        //bounds enforcement for broken edge cases
         if (column < 0) {
             columnn = 0;
         }
@@ -450,7 +422,6 @@ class Tank {
         }
 
         return [row, column];
-
     }
 
     joyStickInput() {
@@ -469,23 +440,23 @@ class Tank {
 
     handleSinglePlayerJoystick() {
         this.moveX = joyStick.val.x;
-        this.moveY = joyStick.val.y; 
+        this.moveY = joyStick.val.y;
         this.updateMovementFromJoystick();
     }
     updateMovementFromJoystick() {
         if (abs(this.moveX) > 0.1 || abs(this.moveY) > 0.1) {
             // Calculate angle from joystick x,y coordinates
             let angle = atan2(this.index === 1 ? -this.moveY : this.moveY, this.index === 1 ? this.moveX : -this.moveX);
-            
-            
+
+
             // Calculate speed based on joystick distance from center
             let joystickMagnitude = sqrt(this.moveX * this.moveX + this.moveY * this.moveY);
             // Clamp magnitude between 0 and 1
             joystickMagnitude = constrain(joystickMagnitude, 0, 1);
 
             this.tankSprite.rotation = angle * joystickMagnitude;
-            
-            
+
+
             // Scale speed by joystick magnitude
             this.tankSprite.direction = this.tankSprite.rotation;
             this.tankSprite.speed = this.spdFactor * joystickMagnitude;

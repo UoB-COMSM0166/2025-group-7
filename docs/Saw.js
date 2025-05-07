@@ -5,7 +5,7 @@ let sawHeight = 50;
 
 class Saw {
 
-    constructor(tankSprite , tankIndex){
+    constructor(tankSprite, tankIndex) {
         this.damage = Infinity;
         this.tankIndex = tankIndex;
         this.tankSprite = tankSprite;
@@ -13,7 +13,7 @@ class Saw {
         this.collisionOffset = 37;
 
         //create saw sprite and load in image
-        this.sawSprite = new Sprite(); 
+        this.sawSprite = new Sprite();
         this.sawSprite.img = "./spikedram.png";
         this.sawSprite.img.scale = 0.1;
         this.sawSprite.overlaps(allSprites);
@@ -38,38 +38,38 @@ class Saw {
 
     }
 
-    setSpriteLocation(sprite, offset){
+    setSpriteLocation(sprite, offset) {
         //calculate appropriate initial location based on location/rotation of tank
-        if(this.tankSprite.rotation === 90 || this.tankSprite.rotation === -90){
+        if (this.tankSprite.rotation === 90 || this.tankSprite.rotation === -90) {
             sprite.position.x = this.tankSprite.position.x - offset * cos(this.tankSprite.rotation);
             sprite.position.y = this.tankSprite.position.y + offset * sin(this.tankSprite.rotation);
 
         }
 
-        if(this.tankSprite.rotation === 180 || this.tankSprite.rotation === -180){
+        if (this.tankSprite.rotation === 180 || this.tankSprite.rotation === -180) {
             sprite.position.x = this.tankSprite.position.x + offset * cos(this.tankSprite.rotation);
             sprite.position.y = this.tankSprite.position.y - offset * sin(this.tankSprite.rotation);
         }
 
-        else{
+        else {
             sprite.position.x = this.tankSprite.position.x + offset * cos(this.tankSprite.rotation);
             sprite.position.y = this.tankSprite.position.y + offset * sin(this.tankSprite.rotation);
         }
     }
 
 
-    draw(){
+    draw() {
         drawingContext.shadowBlur = 15;
         drawingContext.shadowColor = 'white';
-        
+
         this.sawSprite.draw();
         drawingContext.shadowBlur = 0;
         drawingContext.shadowColor = 'transparent';
-        
-    }
-    
 
-    update(){
+    }
+
+
+    update() {
         //keep gluejoint sturdy
         this.sawSprite.velocity.x = this.tankSprite.velocity.x;
         this.sawSprite.velocity.y = this.tankSprite.velocity.y;
@@ -81,7 +81,7 @@ class Saw {
 
     }
 
-    remove(){
+    remove() {
         this.glueJoint.remove();
         this.sawSprite.remove();
         this.glueJoint1.remove();

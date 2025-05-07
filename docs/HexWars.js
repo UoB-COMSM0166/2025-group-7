@@ -1,4 +1,4 @@
-//global declaration of GameState object
+// Global game state variables
 let tankGame;
 let gameMenu;
 let startingScreen;
@@ -9,24 +9,27 @@ let controllersImg;
 let gameEndScreen;
 let confirmQuit = false;
 
-//key codes for firing of tanks
+// Key codes for tank firing controls
 let SPACE_CODE = 32;
 let Q_CODE = 81;
 
+// Game configuration
 let maxGames = 5;
+// Animation arrays for different game effects
 let destroyAnimGreen = [];
 let destroyAnimRed = [];
 let tankMovementAnimTank1 = [];
 let tankMovementAnimTank2 = [];
 let missileAnim = [];
-let tank1Color = '#00FFFF'; 
-let tank2Color = '#E9AB17'; 
+// Default tank colors
+let tank1Color = '#00FFFF';
+let tank2Color = '#E9AB17';
 
+// Check if device has touchscreen
 let isTouchScreen = hasTouchscreen();
 
 function preload() {
-
-    //audio file preloads
+    // Load all audio files
     audioBackground = loadSound('audio/background.wav');
     audioBombExplode = loadSound('audio/bombExplode.mp3');
     audioBombShot = loadSound('audio/bombShot.mp3');
@@ -44,7 +47,7 @@ function preload() {
     audioTankDestroy = loadSound('audio/tankDestroy.mp3');
     audioTankMovement = loadSound('audio/tankMovement.wav');
 
-    //image file preloads
+    // Load all image assets
     imgAmmoIcon = loadImage('images/ammo-icon.webp');
     imgAmmoPickup = loadImage('images/ammo-pickup.webp');
     imgBombIcon = loadImage('images/bomb-icon.webp');
@@ -68,7 +71,7 @@ function preload() {
     controllersOnePlayerImg = loadImage('images/ControllerSinglePlayer.png');
     instructionsImg = loadImage('images/instructions/instructions.webp');
 
-    //destroy animation image preloads
+    // Load tank destruction animations
     for (let i = 1; i <= 10; i++) {
         animImage = loadImage(`destroyanim-green/${i}.png`);
         destroyAnimGreen.push(animImage);
@@ -78,19 +81,19 @@ function preload() {
         destroyAnimRed.push(animImage);
     }
 
-    //tank movement animation preloads
+    // Load tank movement animations
     for (let i = 1; i <= 2; i++) {
         tankMovementAnimTank1.push(loadImage(`images/tank-moving-ani/tank-moving${i}.webp`));
         tankMovementAnimTank2.push(loadImage(`images/green-tank-moving/green-moving${i}.webp`));
     }
 
-    //missile animation preloads
+    // Load missile animations
     missileExplode = loadImage(`images/missileMovement/MissileExplotion.webp`);
     for (let i = 1; i <= 8; i++) {
         missileAnim.push(loadImage(`images/missileMovement/Missile${i}.webp`));
     }
 
-    //font preload
+    // Load game fonts
     VT323Font = loadFont('fonts/VT323-Regular.ttf');
     QargeoFont = loadFont('fonts/Qargeo-Regular.otf');
     BatmanForever = loadFont('fonts/batmfo__.ttf');
@@ -98,19 +101,19 @@ function preload() {
 }
 
 function setup() {
-    //standardise frame rate to ensure animations and speed consistent
-    //accross different machines
+    // Set consistent frame rate for animations
     frameRate(30);
     setupStage = true;
     startingScreen = new GameSetup(introImage, VT323Font);
 }
 
 function draw() {
+    // Main game loop - handles different game states
     if (setupStage) {
         startingScreen.draw();
     }
     else if (tankGame.getGameComplete()) {
-        endOfGame = true; 
+        endOfGame = true;
         gameEndScreen = new GameFinish(endImage, VT323Font);
         if (endOfGame) {
             gameEndScreen.draw();
@@ -120,21 +123,21 @@ function draw() {
         tankGame.draw();
         tankGame.update();
     }
-
 }
 
 function windowResized() {
-    if(startingScreen){
+    // Handle window resizing and UI element repositioning
+    if (startingScreen) {
         displayMode('maxed');
-        startingScreen.tank1ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5);
-        startingScreen.tank1ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
-        startingScreen.tank2ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width/3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height/3.5 + startingScreen.tank1ColorPicker.size().height);
-        startingScreen.tank2ColorPicker.size(startingScreen.canvas.size().width/25, startingScreen.canvas.size().height/14);
+        startingScreen.tank1ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width / 3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height / 3.5);
+        startingScreen.tank1ColorPicker.size(startingScreen.canvas.size().width / 25, startingScreen.canvas.size().height / 14);
+        startingScreen.tank2ColorPicker.position(startingScreen.canvas.position().x + startingScreen.canvas.size().width - startingScreen.canvas.size().width / 3.5, startingScreen.canvas.position().y + startingScreen.canvas.size().height / 3.5 + startingScreen.tank1ColorPicker.size().height);
+        startingScreen.tank2ColorPicker.size(startingScreen.canvas.size().width / 25, startingScreen.canvas.size().height / 14);
     }
 }
 
 function keyPressed() {
-
+    // Handle keyboard input for different game states
     //setup-stage control handling
     if (setupStage) {
         //check whether user is ready to begin game
@@ -195,6 +198,7 @@ function keyPressed() {
 }
 
 function mousePressed() {
+    // Handle mouse input and touch controls
     if (setupStage) {
         startingScreen.mousePressed();
     } else if (endOfGame && gameEndScreen.isButtonPressed()) {
@@ -220,9 +224,9 @@ function mousePressed() {
                 }
             }
         }
-        
+
     }
-    if(isTouchScreen && gameMenu){
+    if (isTouchScreen && gameMenu) {
         if (gameMenu.menuButton.isPressed) {
             GameState.menuMode = !GameState.menuMode;
             tankGame.tankMoving ? audioTankMovement.stop() : audioTankMovement.play();
@@ -263,7 +267,8 @@ function mousePressed() {
 }
 
 function mouseClicked() {
-    if(tankGame && !tankGame.getIsGameOver()) {
+    // Handle mouse click events for menu interactions
+    if (tankGame && !tankGame.getIsGameOver()) {
         //Menu button
         if (gameMenu.menuButton.isReleased) {
             tankGame.tankMoving = false;
@@ -301,15 +306,16 @@ function mouseClicked() {
 }
 
 function hasTouchscreen() {
+    // Detect if device has touchscreen capabilities
     return 'TouchEvent' in window ||
         (window.DocumentTouch && document instanceof window.DocumentTouch) ||
         navigator.maxTouchPoints > 0 ||
         navigator.msMaxTouchPoints > 0;
 }
 
-
 function resetGame() {
-    // Stop all sounds
+    // Reset all game state and audio
+    // Stop all active sounds
     audioBackground.stop();
     audioBombExplode.stop();
     audioBombShot.stop();
@@ -327,10 +333,10 @@ function resetGame() {
     audioTankDestroy.stop();
     audioTankMovement.stop();
 
-    // Reset game state
+    // Reset game objects and state
     GameState.projectileList = [];
 
-    // Reset tanks
+    // Reset tank properties and positions
     for (let i = 0; i < tankGame.tankList.length; i++) {
         const tank = tankGame.tankList[i];
         tank.lifeRefresh();
@@ -352,7 +358,7 @@ function resetGame() {
 
     }
 
-    // Reset the map
+    // Reset game map and AI
     walls.removeAll();
     GameState.themeColorIndex = 0;
     tankGame.gameMap = new Grid(GameState.GRID_HEIGHT, GameState.GRID_WIDTH);
@@ -365,7 +371,7 @@ function resetGame() {
         tankGame.spawnAITanks();
     }
 
-    // Reset scores and game over state
+    // Reset scores and game state
     tankGame.player1.score = 0;
     tankGame.player2.score = 0;
     tankGame.isGameOver = false;

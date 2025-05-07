@@ -5,49 +5,49 @@ let W_CODE = 87;
 let tanks;
 
 class KeyListener {
-   
+
     //"arrKeyControls" should be false if the KeyListener uses WASD controls
-    constructor (tank, arrKeyControls) {
+    constructor(tank, arrKeyControls) {
         this.tank = tank;
         this.arrKeyControls = arrKeyControls;
     }
 
-    listenForKeys () { 
+    listenForKeys() {
 
-        if(this.arrKeyControls){
-            if(keyIsDown(RIGHT_ARROW)){
+        if (this.arrKeyControls) {
+            if (keyIsDown(RIGHT_ARROW)) {
                 this.tank.move(Tank.RIGHT_DIRECTION);
             }
 
-            if(keyIsDown(LEFT_ARROW)){
+            if (keyIsDown(LEFT_ARROW)) {
                 this.tank.move(Tank.LEFT_DIRECTION);
             }
 
-            if(keyIsDown(DOWN_ARROW)){
+            if (keyIsDown(DOWN_ARROW)) {
                 this.tank.move(Tank.DOWN_DIRECTION);
             }
 
-            else if(keyIsDown(UP_ARROW)){
+            else if (keyIsDown(UP_ARROW)) {
                 this.tank.move(Tank.UP_DIRECTION);
             }
 
             else {
-              this.tank.move(Tank.NO_DIRECTION);
+                this.tank.move(Tank.NO_DIRECTION);
             }
-        } else{
-            if(keyIsDown(D_CODE)){ 
+        } else {
+            if (keyIsDown(D_CODE)) {
                 this.tank.move(Tank.RIGHT_DIRECTION);
             }
 
-            if(keyIsDown(A_CODE)){  
+            if (keyIsDown(A_CODE)) {
                 this.tank.move(Tank.LEFT_DIRECTION);
             }
 
-            if(keyIsDown(S_CODE)){  
+            if (keyIsDown(S_CODE)) {
                 this.tank.move(Tank.DOWN_DIRECTION);
             }
 
-            else if(keyIsDown(W_CODE)){  
+            else if (keyIsDown(W_CODE)) {
                 this.tank.move(Tank.UP_DIRECTION);
             }
 
@@ -57,5 +57,5 @@ class KeyListener {
         }
     }
 
-    touchListener() {}
+    touchListener() { }
 }

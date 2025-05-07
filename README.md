@@ -136,8 +136,13 @@ The sequence diagram below illustrates our map generation process. `GameState` i
 
 - 15% ~750 words
 
-- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game. 
+- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game.
 
+(current word count: 225)
+
+As we were nearing the implementation stage of the process we were unsure of how to translate our design into a working game. We decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our unique implementations, identifying commonalities and differences and using this to further inform our design. 
+
+There are multiple aspects of our game that we prioritised more as our implementation progressed. For example, our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at this stage. This was not ideal as we had identified it as a challenge from the beginning of the process and it is a complex part of the game. However, implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour later on. We also began to consider the game menu and instructions later on in our implementation. This was effective for our process as when we felt the game was at a playable state we could focus on features that would make the game more intuitive and usable.
 
 
 ### Evaluation
@@ -245,13 +250,16 @@ The choice for Agile was also supported by the circumstances of the project, whi
 - 10%, 750 words
 - Evidence of the impact of your game across the environment and two of the other areas (Social, Economic, Technical and Individual)
 
-(current word count: 645)
+(current word count: 747)
 
 It is vital to consider sustainability throughout the software development process. The information and Communication Technologies (ICT) sector is responsible for approximately 2% of global carbon emissions (Danushi, Forti, & Soldani, 2024).
 
 Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. The game consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the WEEE waste produced by the PC gaming industry. On the other hand the game has lower energy consumption compared to typical PC games (owing to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient. Finally the game does not include in-game purchases or upgrades which can be considered exploitative (and which many online games possess).
 
 ![SusAD](./diagrams/SusAD.jpg)
+
+
+Green software patterns were a central part of our discussion of the sustainability of the game. We made an effort to serve images in modern formats such as webp. P5play complies with minifying web assets to reduce page size and network bandwidth. As a team, we decided to implement stateless design, reducing the on-disk data required to run the game. We aim to implement this after carefully considering the impact on the environmental footprint of the game and any privacy implications. In future, we can optimise average CPU utilisation and use a compiled language to further adhere to green software patterns.
 
 
 Our game impacts individual sustainability by encouraging strategic thinking and improved coordination skills. Research shows that a sufficient level of simultaneous information and action coordination in a video game can lead to improved cognitive flexibility (Glass, Maddox, & Love, 2013). Our game requires the player to learn how to navigate the tank, pick up collectables and avoid and attack their opponent, among other tasks. As well as this, the added twist of breakable walls provides another complex element to the game. Therefore, our game rewards more strategic players as they can choose which features of our game to use to their advantage. 
@@ -270,7 +278,22 @@ In future, we can develop a cooperative multiplayer mode in order to encourage s
 
 ### Contribution Statement
 
-- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent. 
+- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent.
+
+
+### Bibliography
+
+Adachi, P. J. C., & Willoughby, T. (2011). The effect of video game competition and violence on aggressive behavior: Which characteristic has the greatest influence? Psychology of Violence, 1(4), 259–274. https://doi.org/10.1037/a0024908
+
+Danushi, O., Forti, S., & Soldani, J. (2025). Environmentally Sustainable Software Design and Development: A Systematic Literature Review. https://doi.org/10.48550/arXiv.2407.19901
+
+Glass, B. D., Maddox, W. T., & Love, B., C. (2013). Real-Time Strategy Game Training: Emergence of a Cognitive Flexibility Trait. PLOS One. https://doi.org/10.1371/journal.pone.0070350
+
+Zahn, C., Leisner, D., Niederhauser, M., Roos, A., Iseli, T., & Soldati, M. (2022).Effects of Game Mode in Multiplayer Video Games on Intergenerational Social Interaction: Randomized Field Study. JMIR Form Res. 6(2): e29179. https://doi.org/10.2196/29179
+
+Zheng, W., Cao, S., Wang, Y., Yang, K., Chen, Y., & Song, G. (2021). The Impact of Social Value Orientation, Game Context and Trust on Cooperative Behavior After Cooperative Video Game Play. Psychological Reports, 124(3), 1353-1369.
+https://doi.org/10.1177/0033294120934705 
+
 
 ### Additional Marks
 

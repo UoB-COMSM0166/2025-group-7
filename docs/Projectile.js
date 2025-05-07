@@ -6,7 +6,7 @@
 
 class Projectile {
 
-    constructor(x, y, angle, duration){
+	constructor(x, y, angle, duration) {
 		this.x = x;
 		this.y = y;
 		this.angle = angle;
@@ -14,6 +14,6 @@ class Projectile {
 		this.despawnTime = millis() + (this.duration * 1000);
 		this.leftTurret = false;
 	}
-	draw(){}
-	update(){}
+	draw() { }
+	update() { }
 }

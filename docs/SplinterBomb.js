@@ -1,16 +1,17 @@
-class SplinterBomb extends Projectile{
-    static BOMB_SIZE = 8;
+class SplinterBomb extends Projectile {
+    static BOMB_SIZE = 5;
     static NUM_SPLINTERS = 40;
 
-    constructor(x, y, angle){
+    constructor(x, y, angle) {
         // Call the parent constructor
         super(x, y, angle, Weapon.BOMB_TIME);
         // Initialize the sprite
         this.sprite = new Sprite(x, y, SplinterBomb.BOMB_SIZE, 'hexagon');
         this.sprite.duration = Weapon.BOMB_TIME;
-        this.sprite.color = color(255, 255, 255);
+        this.sprite.color = color(200, 200, 200);
+        this.sprite.stroke = color(200, 0, 0);
         this.sprite.direction = angle;
-        this.sprite.speed = 4;
+        this.sprite.speed = 10;
         this.sprite.rotationSpeed = 25;
         this.sprite.bounciness = 1;
         this.sprite.friction = 0;
@@ -22,24 +23,30 @@ class SplinterBomb extends Projectile{
         this.damage = 0;
     }
     //Draw the bomb
-    draw(){
+    draw() {
+        drawingContext.shadowBlur = 10;
+        drawingContext.shadowColor = color(255, 0, 0);
+
         this.sprite.draw();
+        drawingContext.shadowBlur = 0;
+        drawingContext.shadowColor = 'transparent';
+        
     }
     //Update the bomb
-    update(){
+    update() {
         this.sprite.update();
     }
     //Remove the bomb when it explodes
-    remove(){
+    remove() {
         this.splinter();
         this.sprite.remove();
     }
     //Create splinters when the bomb explodes
-    splinter(){
+    splinter() {
         let x = this.sprite.x;
         let y = this.sprite.y;
-        
-        for(let i = 0; i < SplinterBomb.NUM_SPLINTERS; i++){
+
+        for (let i = 0; i < SplinterBomb.NUM_SPLINTERS; i++) {
             GameState.projectileList.push(new Splinter(x, y, 0));
         }
 
