@@ -61,7 +61,7 @@ class Pickup {
         this.y = selectedCell.y;
 
         // Randomly select pickup type
-        let randomiser = Math.floor(Math.random() * 7);
+        let randomiser = 6;//Math.floor(Math.random() * 7);
 
         if (randomiser == 0) {
             this.setHealth();

@@ -7,8 +7,8 @@ class Splinter extends Projectile {
         this.sprite = new Sprite();
         this.sprite.x = x;
         this.sprite.y = y;
-        this.sprite.color = color(0, 0, 0);
-        this.sprite.stroke = color(100, 0, 0);
+        this.sprite.color = color(150, 150, 150);
+        this.sprite.stroke = color(150, 0, 0);
         this.sprite.direction = Math.random() * 360;
         this.sprite.speed = Splinter.SPEED;
         let splinterSize = Splinter.SIZE;
@@ -25,7 +25,13 @@ class Splinter extends Projectile {
     }
 
     draw() {
+        
+        drawingContext.shadowBlur = 10;
+        drawingContext.shadowColor = color(255, 0, 0);
+
         this.sprite.draw();
+        drawingContext.shadowBlur = 0;
+        drawingContext.shadowColor = 'transparent';
     }
 
     update() {

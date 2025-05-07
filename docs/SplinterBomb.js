@@ -8,8 +8,8 @@ class SplinterBomb extends Projectile {
         // Initialize the sprite
         this.sprite = new Sprite(x, y, SplinterBomb.BOMB_SIZE, 'hexagon');
         this.sprite.duration = Weapon.BOMB_TIME;
-        this.sprite.color = color(0, 0, 0);
-        this.sprite.stroke = color(100, 0, 0);
+        this.sprite.color = color(200, 200, 200);
+        this.sprite.stroke = color(200, 0, 0);
         this.sprite.direction = angle;
         this.sprite.speed = 10;
         this.sprite.rotationSpeed = 25;
@@ -24,7 +24,13 @@ class SplinterBomb extends Projectile {
     }
     //Draw the bomb
     draw() {
+        drawingContext.shadowBlur = 10;
+        drawingContext.shadowColor = color(255, 0, 0);
+
         this.sprite.draw();
+        drawingContext.shadowBlur = 0;
+        drawingContext.shadowColor = 'transparent';
+        
     }
     //Update the bomb
     update() {
