@@ -291,6 +291,7 @@ class GameState {
                     projectile.leftTurret = true;
                     if (projectile.sprite.overlapped(projectile.tank.tankSprite)) {
                         projectile.sprite.visible = true;
+                        projectile.sprite.speed = 5;
                     }
                 }
             }
