@@ -3,34 +3,35 @@
 # 2025-group-7
 2025 COMSM0166 group 7
 
-## Hex Wars
+[<img src="https://img.shields.io/badge/Play-Now-brightgreen" width="100" height="25">](https://uob-comsm0166.github.io/2025-group-7/)
+[<img src="https://img.shields.io/badge/Game-Ideas-blue" width="100" height="25">](https://github.com/UoB-COMSM0166/2025-group-7/blob/f06ff86a68514414d8ebfe9873cceb3a018d9c7c/Game-Ideas.txt)
+<!-- [<img src="https://img.shields.io/badge/License-MIT-yellow" width="100" height="25">](LICENSE) -->
 
-Link to your game [PLAY HERE](https://uob-comsm0166.github.io/2025-group-7/)
 
-Link to game ideas: [HERE](https://github.com/UoB-COMSM0166/2025-group-7/blob/f06ff86a68514414d8ebfe9873cceb3a018d9c7c/Game-Ideas.txt)
 
-Your game lives in the [/docs](/docs) folder, and is published using Github pages to the link above.
-
-Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
+Include a demo video of your game here (you don't have to 
+wait until the end, you can insert a work in progress video)
+## 🎥 Prototype & Demo Video
 
 [![Watch the video](https://img.youtube.com/vi/U0QKMWBccW0/0.jpg)](https://www.youtube.com/watch?v=U0QKMWBccW0)
 
-
-
-## Your Group
+## 👥 Development Team
+### Team Photo
 
 ![Grp-7](group-photo.jpg)
 
-| Group Member | Name            | Email                          | Role  |
-|--------------|-----------------|--------------------------------|-------|
-| 1            | Yaseer Alluwaim | ct24605@bristol.ac.uk          | role  |
-| 2            | Ajinkya Bhalerao| xi24194@bristol.ac.uk          | role  |
-| 3            | Guo Xuanpu      | uw24974@bristol.ac.uk          | role  |
-| 4            | Nagat Guled     | dp23022@bristol.ac.uk          | role  |
-| 5            | Harry Jackson   | gc24290@bristol.ac.uk          | role  |
-| 6            | Haorui Cai      | um24581@bristol.ac.uk          | role  |
+### Group Members
+##
+| Role | Name | Email |
+|------|------|-------|
+| Developer | Yaseer Alluwaim | ct24605@bristol.ac.uk |
+| Developer | Ajinkya Bhalerao | xi24194@bristol.ac.uk |
+| Developer | Guo Xuanpu | uw24974@bristol.ac.uk |
+| Developer | Nagat Guled | dp23022@bristol.ac.uk |
+| Developer | Harry Jackson | gc24290@bristol.ac.uk |
+| Developer | Haorui Cai | um24581@bristol.ac.uk |
 
-## Project Report
+## 📚 Project Report
 
 ### Introduction
 
@@ -296,7 +297,7 @@ This has been a rewarding opportunity to gain practical experience in Software E
 - Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent.
 
 
-### Bibliography
+## 📚 Bibliography
 
 Adachi, P. J. C., & Willoughby, T. (2011). The effect of video game competition and violence on aggressive behavior: Which characteristic has the greatest influence? Psychology of Violence, 1(4), 259–274. https://doi.org/10.1037/a0024908
 
@@ -321,3 +322,7 @@ You can delete this section in your own repo, it's just here for information. in
 
   - Is your repo clearly organised? 
   - Is code well commented throughout?
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
