@@ -278,7 +278,22 @@ In future, we can develop a cooperative multiplayer mode in order to encourage s
 
 ### Contribution Statement
 
-- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent. 
+- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent.
+
+
+### Bibliography
+
+Adachi, P. J. C., & Willoughby, T. (2011). The effect of video game competition and violence on aggressive behavior: Which characteristic has the greatest influence? Psychology of Violence, 1(4), 259–274. https://doi.org/10.1037/a0024908
+
+Danushi, O., Forti, S., & Soldani, J. (2025). Environmentally Sustainable Software Design and Development: A Systematic Literature Review. https://doi.org/10.48550/arXiv.2407.19901
+
+Glass, B. D., Maddox, W. T., & Love, B., C. (2013). Real-Time Strategy Game Training: Emergence of a Cognitive Flexibility Trait. PLOS One. https://doi.org/10.1371/journal.pone.0070350
+
+Zahn, C., Leisner, D., Niederhauser, M., Roos, A., Iseli, T., & Soldati, M. (2022).Effects of Game Mode in Multiplayer Video Games on Intergenerational Social Interaction: Randomized Field Study. JMIR Form Res. 6(2): e29179. https://doi.org/10.2196/29179
+
+Zheng, W., Cao, S., Wang, Y., Yang, K., Chen, Y., & Song, G. (2021). The Impact of Social Value Orientation, Game Context and Trust on Cooperative Behavior After Cooperative Video Game Play. Psychological Reports, 124(3), 1353-1369.
+https://doi.org/10.1177/0033294120934705 
+
 
 ### Additional Marks
 
