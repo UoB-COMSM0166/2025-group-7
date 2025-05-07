@@ -136,8 +136,13 @@ The sequence diagram below illustrates our map generation process. `GameState` i
 
 - 15% ~750 words
 
-- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game. 
+- Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game.
 
+(current word count: 225)
+
+As we were nearing the implementation stage of the process we were unsure of how to translate our design into a working game. We decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our unique implementations, identifying commonalities and differences and using this to further inform our design. 
+
+There are multiple aspects of our game that we prioritised more as our implementation progressed. For example, our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at this stage. This was not ideal as we had identified it as a challenge from the beginning of the process and it is a complex part of the game. However, implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour later on. We also began to consider the game menu and instructions later on in our implementation. This was effective for our process as when we felt the game was at a playable state we could focus on features that would make the game more intuitive and usable.
 
 
 ### Evaluation
