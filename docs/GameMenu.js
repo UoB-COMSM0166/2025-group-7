@@ -14,6 +14,7 @@ class GameMenu {
         // Create menu buttons
         this.menuButton = createButton("Menu", 1250, 10, 100, 30);
         this.menuButton.setStyle({
+            font: 'batForAlt',
             fillBg: color(0, 0, 0, 0),
             fillBgHover: color(0, 0, 0, 0),
             fillBgActive: color(0, 0, 0, 0),
@@ -24,8 +25,7 @@ class GameMenu {
             strokeBgHover: color(219, 51, 105),
             strokeBgActive: color(219, 51, 105),
             strokeWeight: 2,
-            rounding: 10,
-            font: 'batForAlt',
+            rounding: 10
         });
         this.resumeButton = createButton('Resume', this.menuX - this.menuWidth / 2 + 100, this.menuY - this.menuHeight / 2 + 100, 400, 50);
         this.resumeButton.setStyle({
