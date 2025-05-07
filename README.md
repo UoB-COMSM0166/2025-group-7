@@ -7,10 +7,20 @@
 [<img src="https://img.shields.io/badge/Game-Ideas-blue" width="100" height="25">](https://github.com/UoB-COMSM0166/2025-group-7/blob/f06ff86a68514414d8ebfe9873cceb3a018d9c7c/Game-Ideas.txt)
 [<img src="https://img.shields.io/badge/License-MIT-yellow" width="100" height="25">](LICENSE)
 
+## 📚 Libraries and Programming Language Used
 
+- **Programming Language**: [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+- **Libraries**:
+  - [![p5.js](https://img.shields.io/badge/p5.js-EA4E5F?style=flat&logo=processing&logoColor=white)](https://p5js.org/) - A JavaScript library for creative coding.
+  - [![p5.play](https://img.shields.io/badge/p5.play-6C71C4?style=flat&logo=github&logoColor=white)](https://molleindustria.github.io/p5.play/) - A library for creating 2D games in p5.js.
+  - [![p5.touchgui](https://img.shields.io/badge/p5.touchgui-4CAF50?style=flat&logo=appveyor&logoColor=white)](https://github.com/bitcraftlab/p5.touchgui) - A library for creating touch-friendly GUI elements in p5.js.
+
+
+
+## 🎥 Prototype & Demo Video
 Include a demo video of your game here (you don't have to 
 wait until the end, you can insert a work in progress video)
-## 🎥 Prototype & Demo Video
 
 [![Watch the video](https://img.youtube.com/vi/U0QKMWBccW0/0.jpg)](https://www.youtube.com/watch?v=U0QKMWBccW0)
 
