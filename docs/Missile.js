@@ -42,6 +42,7 @@ class Missile extends Projectile {
     this.leftTurret = true;       // skip GameState turret‑exit check
     this.sprite.addAni('move', ...missileAnim);
     this.sprite.anis.scale = 0.2;
+    this.sprite.ani.frameDelay = 1;
   }
 
   /* Main loop ------------------------------------------------------------- */
