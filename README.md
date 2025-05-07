@@ -274,7 +274,22 @@ In future, we can develop a cooperative multiplayer mode in order to encourage s
 
 - 10% ~500 words
 
-- Reflect on project as a whole. Lessons learned. Reflect on challenges. Future work. 
+- Reflect on project as a whole. Lessons learned. Reflect on challenges. Future work.
+
+(current word count: 471)
+
+This project has been a challenging but gratifying process. Hex Wars has evolved tremendously through the course of its development. It is a testament to our determination to explore new concepts and fine-tune our collaboration.
+
+Throughout the project we prioritised regular, in person meetings, maximising the efficiency of sprints. Over the course of the agile development process, we incorporated many new ideas including the hexagonal grid, shield pickup and the futuristic theme. We learned that through the frequent integration of code that fit our Object Oriented approach, such additions were much more feasible. We found that we referred to the kanban more frequently towards the end of the project, when tasks became smaller and more numerous. The importance of drawing a robust and clear class diagram cannot be understated. When we had come to an agreement on how our code would be structured we were able to focus on our allocated tasks, and group discussions became smoother. Revisiting evaluations later on in the process proved very useful for identifying remaining issues and prioritising them effectively. 
+
+Writing the algorithm for map generation was our biggest challenge, especially attacking it so early on in the project. However, it provided us with the expertise to design a comprehensive path finding algorithm that could be repurposed to be used for the AI bot. The challenge of programming AI bot behaviour stretched our software development skills. We approached this task near the end of the project, when our skills and understanding of the language were sufficient to successfully tackle it. Overall, our challenges were appropriate for the timeline of the project, but AI bot behaviour in particular could be further optimised given the chance.
+
+If offered the opportunity to approach this project differently, we would focus on accessibility from the beginning of the UI design implementation. We did not look into accessibility and sustainability in detail until we already had a working version of our game. This means that allowing for colour customisation, and serving images in modern formats were later additions to our implementation. We were able to introduce these ideas later but we have learned the importance of centring accessibility and sustainability from the beginning of the software development process. 
+
+In future, we aim to offer online multiplayer. Given the time limitations we were not able to focus on how we could collect user data, allowing them to login and save their progress, while being careful of data protection implications. With the current scope of our game, this is not currently necessary. Therefore, with the implementation of more game playing modes and a more extensive single-player campaign we can consider this further. 
+
+This has been a rewarding opportunity to gain practical experience in Software Engineering. The team work, communication and Software Development skills we have refined will benefit us for many years to come. 
+
 
 ### Contribution Statement
 
