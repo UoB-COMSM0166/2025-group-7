@@ -400,7 +400,7 @@ class GameState {
             this.player1.incScore();
             audioP1Wins.play();
             audioTankMovement.stop();
-            this.endRound(this.tankList[0]);
+            this.endRound(this.tankList[1]);
         }
     }
 
