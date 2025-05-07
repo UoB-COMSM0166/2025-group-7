@@ -1,8 +1,8 @@
 const CORNER_CELLS = [
-    { col: 0, row: 0 },  // 左上
-    { col: 9, row: 0 },  // 右上
-    { col: 0, row: 3 },  // 左下
-    { col: 9, row: 3 }   // 右下
+    { col: 0, row: 0 },  // Top left
+    { col: 9, row: 0 },  // Top right
+    { col: 0, row: 3 },  // Bottom left
+    { col: 9, row: 3 }   // Bottom right
 ];
 
 let gui
@@ -34,19 +34,10 @@ class GameState {
     RAND1Y = (GameState.twoPlayerMode) ? floor(random(0, 3)) : 1;
     RAND2X = floor(random(0, 4));
     RAND2Y = floor(random(0, 3));
-    //TANK1X = this.RAND1X * 90.5 + 272;
-    //TANK1Y = this.RAND1Y * 105 + 54 + (this.RAND1X % 2 == 0 ? 0 : 52.5);
-    //TANK2X = this.RAND2X * 90.5 + 272;
-    //TANK2Y = this.RAND2Y * 105 + 54 + (this.RAND2X % 2 == 0 ? 0 : 52.5);
-    //ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
-    //ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
-    //TANK1ROT = this.ANGLE1;
-    //TANK2ROT = this.ANGLE2;
     static HARD = 0;
     static EASY = 1;
 
-
-    //initial values for the game settings
+    // Game settings and state
     static difficulty = GameState.EASY;
     static twoPlayerMode = true;
     static currentWinner;
@@ -55,7 +46,7 @@ class GameState {
 
     static showMapGeneration = false;
     static doneMapGeneration = false;
-    static themeColor = /*red, blue, green, white*/[[255, 0, 0], [0, 0, 255], [0, 255, 0], [255, 255, 255]];
+    static themeColor = [[255, 0, 0], [0, 0, 255], [0, 255, 0], [255, 255, 255]]; // red, blue, green, white
     static themeColorIndex = 0;
     static menuMode = false;
 
@@ -80,10 +71,10 @@ class GameState {
         //create two tanks
         this.tankList = [];
         this.initializeTankPositions();
-        
+
         let tank1 = new Tank(this.TANK1X, this.TANK1Y, this.TANK1ROT, GameState.difficulty, 1, this);
         this.tankList.push(tank1);
-        
+
         let tank2 = new Tank(this.TANK2X, this.TANK2Y, this.TANK2ROT, GameState.difficulty, 2, this);
         this.tankList.push(tank2);
 
@@ -107,7 +98,6 @@ class GameState {
         this.player2 = new Player(GameState.difficulty, GameState.twoPlayerMode, keyListener2);
 
         //establishes initial time for first Pickup to spawn
-
         this.nextPickupSpawn = millis() + this.pickupSpawnInterval();
 
         //Create Gui insstance 
@@ -416,17 +406,16 @@ class GameState {
     endRound(deadTankSprite) {
         this.isGameOver = true;
 
-        // 清理所有拾取
+        // Clear all pickups
         while (this.pickupList.length) {
             this.pickupList[0].sprite.remove();
             this.pickupList.splice(0, 1);
         }
         this.nextPickupSpawn = millis() + this.pickupSpawnInterval();
 
-        // 2 秒后重启，并在其中重新生成 AI
+        // Restart game after 2 seconds and respawn AI
         this.restartGame(deadTankSprite);
     }
-
 
     addProjectile(newProjectile, tank) {
         newProjectile.tank = tank;
@@ -654,7 +643,6 @@ class GameState {
     }
 
     drawHUD() {
-
         strokeWeight(5);
         textFont(BatmanForeverAlt);
         textAlign(CENTER);
@@ -676,7 +664,6 @@ class GameState {
         drawingContext.shadowBlur = 0;
 
         //P1 weapon hex
-        //stroke(this.tankList[1].tankSprite.color);
         stroke(tank2Color);
         beginShape();
         vertex((offsetX - 280) + separator, offsetY + 0);
@@ -689,7 +676,6 @@ class GameState {
         image(this.tankList[1].tankWeapon.icon, offsetX - 357 + separator, offsetY - 28.3, 55, 55);
 
         //P2 weapon hex
-        //stroke(this.tankList[0].tankSprite.color);
         stroke(tank1Color);
         beginShape();
         vertex((offsetX + 280) - separator, offsetY + 0);
@@ -704,7 +690,6 @@ class GameState {
         offsetY -= 30;
 
         //P1 score hex
-        //stroke(this.tankList[1].tankSprite.color);
         stroke(tank2Color);
         beginShape();
         vertex((offsetX - 375) + separator, offsetY + 0);
@@ -716,14 +701,12 @@ class GameState {
         endShape(CLOSE);
         //print score
         strokeWeight(0);
-        //fill(this.tankList[1].tankSprite.color);
         fill(tank2Color);
         text(this.player2.getScore(), (offsetX - 400) + separator, offsetY - 12);
         strokeWeight(1);
         noFill();
 
         //P2 score hex
-        //stroke(this.tankList[0].tankSprite.color);
         stroke(tank1Color);
         beginShape();
         vertex((offsetX + 375) - separator, offsetY + 0);
@@ -735,7 +718,6 @@ class GameState {
         endShape(CLOSE);
         //print score
         strokeWeight(0);
-        //fill(this.tankList[0].tankSprite.color);
         fill(tank1Color);
         text(this.player1.getScore(), (offsetX + 400) - separator, offsetY - 12);
         strokeWeight(5);
@@ -747,7 +729,6 @@ class GameState {
         //P1 life bar
 
         //bar outline
-        //stroke(this.tankList[1].tankSprite.color);
         stroke(tank2Color);
         beginShape();
         vertex((offsetX - 270) + separator, offsetY + 0);
@@ -759,7 +740,6 @@ class GameState {
         //bar fill
         let fillLevel = (this.tankList[1].getLife() / this.tankList[1].initialLife) * 200;
 
-        //fill(this.tankList[1].tankSprite.color);
         fill(tank2Color);
         beginShape();
         vertex((offsetX - 270) + separator, offsetY + 0);
@@ -771,7 +751,6 @@ class GameState {
 
         //describe health and ammo
         strokeWeight(0);
-        //fill(this.tankList[1].tankSprite.color);
         fill(tank2Color);
         text("Health", (offsetX - 230) + separator, offsetY - 48);
         text("Ammo", (offsetX - 235) + separator, offsetY + 35);
@@ -780,7 +759,6 @@ class GameState {
 
         //P2 life bar
         //bar outline
-        //stroke(this.tankList[0].tankSprite.color);
         stroke(tank1Color);
         beginShape();
         vertex((offsetX + 270) - separator, offsetY + 0);
@@ -792,7 +770,6 @@ class GameState {
         //bar fill
         fillLevel = (this.tankList[0].getLife() / this.tankList[0].initialLife) * 200;
 
-        //fill(this.tankList[0].tankSprite.color);
         fill(tank1Color);
         beginShape();
         vertex((offsetX + 270) - separator, offsetY + 0);
@@ -804,7 +781,6 @@ class GameState {
 
         //describe health and ammo
         strokeWeight(0);
-        //fill(this.tankList[0].tankSprite.color);
         fill(tank1Color);
         text("Health", (offsetX + 230) - separator, offsetY - 48);
         text("Ammo", (offsetX + 235) - separator, offsetY + 35);
@@ -815,7 +791,6 @@ class GameState {
         strokeWeight(0);
 
         //P1 ammo
-        //fill(this.tankList[1].tankSprite.color);
         fill(tank2Color);
         for (let i = 0; i < this.tankList[1].getAmmo(); i++) {
             beginShape();
@@ -828,7 +803,6 @@ class GameState {
         }
 
         //P2 ammo
-        //fill(this.tankList[0].tankSprite.color);
         fill(tank1Color);
         for (let i = 0; i < this.tankList[0].getAmmo(); i++) {
             beginShape();
@@ -892,20 +866,20 @@ class GameState {
 
         //reset global drawing parameters
         fill('black');
-
-
     }
 
     initializeTankPositions() {
-        this.TANK1X = this.gameMap.grid[this.RAND1X][this.RAND1Y].centerX;  
+        // Set initial positions for both tanks based on grid coordinates
+        this.TANK1X = this.gameMap.grid[this.RAND1X][this.RAND1Y].centerX;
         this.TANK1Y = this.gameMap.grid[this.RAND1X][this.RAND1Y].centerY;
-        
+
         this.TANK2X = this.gameMap.grid[this.RAND2X][this.RAND2Y].centerX;
         this.TANK2Y = this.gameMap.grid[this.RAND2X][this.RAND2Y].centerY;
-        
+
+        // Calculate initial angles for tanks to face each other
         this.ANGLE1 = atan2(this.TANK2Y - this.TANK1Y, this.TANK2X - this.TANK1X);
         this.ANGLE2 = atan2(this.TANK1Y - this.TANK2Y, this.TANK1X - this.TANK2X);
-        
+
         this.TANK1ROT = this.ANGLE1;
         this.TANK2ROT = this.ANGLE2;
     }
@@ -944,6 +918,7 @@ class GameState {
         }
     }
 
+    // Update tank position and rotation
     updateTankPosition(tank, x, y, rot) {
         tank.tankSprite.x = x;
         tank.tankSprite.y = y;
@@ -952,13 +927,13 @@ class GameState {
         tank.tankSprite.wheels.y = y;
         tank.tankSprite.wheels.rotation = rot;
     }
+
+    // Find path to target tank using grid-based pathfinding
     pathFinder(tank, opponentTank) {
-        // find next cell to target
         let targetCell = this.gameMap.getCell(opponentTank.tankSprite.x, opponentTank.tankSprite.y);
         let currentCell = this.gameMap.getCell(tank.tankSprite.x, tank.tankSprite.y);
         let path = currentCell.findClosestPath(targetCell);
         if (path.length > 1) {
-            // move tank to next cell
             let nextCell = path[1];
             let nextX = nextCell.centerX;
             let nextY = nextCell.centerY;

@@ -1,4 +1,4 @@
-class Bullet extends Projectile{
+class Bullet extends Projectile {
     static BULLET_SIZE = 10;
 
     constructor(x, y, angle) {
@@ -20,21 +20,21 @@ class Bullet extends Projectile{
         //how much to decrement tank life by
         this.damage = 1;
     }
-    
-    draw(){
+
+    draw() {
         this.sprite.draw();
     }
-  
-    update(){
+
+    update() {
         this.sprite.update();
 
         //after half the life of bullet, shrink the bullet
-        if(this.despawnTime - millis() < 0.5*1000*Weapon.BULLET_TIME){
+        if (this.despawnTime - millis() < 0.5 * 1000 * Weapon.BULLET_TIME) {
             this.sprite.diameter -= 0.025;
         }
     }
 
-    remove(){
+    remove() {
         this.sprite.remove();
     }
 }

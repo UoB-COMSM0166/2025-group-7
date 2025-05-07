@@ -1,8 +1,8 @@
-class SplinterBomb extends Projectile{
+class SplinterBomb extends Projectile {
     static BOMB_SIZE = 8;
     static NUM_SPLINTERS = 40;
 
-    constructor(x, y, angle){
+    constructor(x, y, angle) {
         // Call the parent constructor
         super(x, y, angle, Weapon.BOMB_TIME);
         // Initialize the sprite
@@ -22,24 +22,24 @@ class SplinterBomb extends Projectile{
         this.damage = 0;
     }
     //Draw the bomb
-    draw(){
+    draw() {
         this.sprite.draw();
     }
     //Update the bomb
-    update(){
+    update() {
         this.sprite.update();
     }
     //Remove the bomb when it explodes
-    remove(){
+    remove() {
         this.splinter();
         this.sprite.remove();
     }
     //Create splinters when the bomb explodes
-    splinter(){
+    splinter() {
         let x = this.sprite.x;
         let y = this.sprite.y;
-        
-        for(let i = 0; i < SplinterBomb.NUM_SPLINTERS; i++){
+
+        for (let i = 0; i < SplinterBomb.NUM_SPLINTERS; i++) {
             GameState.projectileList.push(new Splinter(x, y, 0));
         }
 

@@ -2,12 +2,12 @@ class GameMenu {
     constructor() {
         this.menuWidth = 600;
         this.menuHeight = 480;
-        this.menuX = (GameState.CANVAS_WIDTH - this.menuWidth) / 2 + this.menuWidth/2;
-        this.menuY = (GameState.CANVAS_HEIGHT - this.menuHeight) / 2 + this.menuHeight/2;
-        
+        this.menuX = (GameState.CANVAS_WIDTH - this.menuWidth) / 2 + this.menuWidth / 2;
+        this.menuY = (GameState.CANVAS_HEIGHT - this.menuHeight) / 2 + this.menuHeight / 2;
+
         //Need to load font from path into system to style the buttons
         const batForAlt = new FontFace('batForAlt', 'url(fonts/batmfa__.ttf)');
-        batForAlt.load().then(function(loadedFont){
+        batForAlt.load().then(function (loadedFont) {
             document.fonts.add(loadedFont);
         });
 
@@ -27,7 +27,7 @@ class GameMenu {
             rounding: 10,
             font: 'batForAlt',
         });
-        this.resumeButton = createButton('Resume', this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 100, 400, 50);
+        this.resumeButton = createButton('Resume', this.menuX - this.menuWidth / 2 + 100, this.menuY - this.menuHeight / 2 + 100, 400, 50);
         this.resumeButton.setStyle({
             font: 'batForAlt',
             textSize: 30,
@@ -43,7 +43,7 @@ class GameMenu {
             strokeWeight: 2,
             rounding: 10
         });
-        this.restartButton = createButton('Restart',this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 180, 400, 50);
+        this.restartButton = createButton('Restart', this.menuX - this.menuWidth / 2 + 100, this.menuY - this.menuHeight / 2 + 180, 400, 50);
         this.restartButton.setStyle({
             font: 'batForAlt',
             textSize: 30,
@@ -59,7 +59,7 @@ class GameMenu {
             strokeWeight: 2,
             rounding: 10
         });
-        this.quitButton = createButton('Quit to Main Menu', this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 260, 400, 50);
+        this.quitButton = createButton('Quit to Main Menu', this.menuX - this.menuWidth / 2 + 100, this.menuY - this.menuHeight / 2 + 260, 400, 50);
         this.quitButton.setStyle({
             font: 'batForAlt',
             textSize: 30,
@@ -75,7 +75,7 @@ class GameMenu {
             strokeWeight: 2,
             rounding: 10
         });
-        this.instrButton = createButton('Instructions', this.menuX - this.menuWidth/2 + 100, this.menuY - this.menuHeight/2 + 340, 400, 50);
+        this.instrButton = createButton('Instructions', this.menuX - this.menuWidth / 2 + 100, this.menuY - this.menuHeight / 2 + 340, 400, 50);
         this.instrButton.setStyle({
             font: 'batForAlt',
             textSize: 30,
@@ -93,7 +93,7 @@ class GameMenu {
         });
 
         //from the instructions screen - enables you to go back
-        this.backButton = createButton('Back', this.menuX - this.menuWidth/2 + 200, this.menuY - this.menuHeight/2 + 400, 200, 50);
+        this.backButton = createButton('Back', this.menuX - this.menuWidth / 2 + 200, this.menuY - this.menuHeight / 2 + 400, 200, 50);
         this.backButton.setStyle({
             font: 'batForAlt',
             textSize: 30,
@@ -109,7 +109,7 @@ class GameMenu {
             strokeWeight: 2,
             rounding: 10
         });
-        
+
         //hide back button for now
         this.backButton.visible = false;
 
@@ -125,59 +125,59 @@ class GameMenu {
             // Draw semi-transparent background
             fill(0, 0, 0, 180);
             rect(this.menuX, this.menuY, GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
-            
+
             // Draw menu background with glow effect
             drawingContext.shadowBlur = 20;
             drawingContext.shadowColor = color(219, 51, 105);
-            stroke(0,0,0);
+            stroke(0, 0, 0);
             fill(0);
             rect(this.menuX, this.menuY, this.menuWidth, this.menuHeight, 20);
             drawingContext.shadowBlur = 0;
-            
+
             // Draw menu title
             textAlign(CENTER);
             textSize(36);
             fill(219, 51, 105);
             text('GAME MENU', this.menuX, this.menuY - 200);
-            
+
             // Show buttons after drawing the background
             this.showMenu();
-        } else if(GameState.menuMode && this.onInstructions){
+        } else if (GameState.menuMode && this.onInstructions) {
             this.drawInstructions();
         } else {
             this.hideMenu();
         }
     }
 
-    drawInstructions(){
+    drawInstructions() {
         if (GameState.menuMode && this.onInstructions) {
             // Draw semi-transparent background
             fill(0, 0, 0, 180);
             rect(this.menuX, this.menuY, GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
-            
+
             // Draw instructions background with glow effect
             drawingContext.shadowBlur = 20;
             drawingContext.shadowColor = color(219, 51, 105);
-            stroke(0,0,0);
+            stroke(0, 0, 0);
             fill(0);
             rect(this.menuX, this.menuY, this.menuWidth, this.menuHeight, 20);
             drawingContext.shadowBlur = 0;
-            
+
             // Draw instructions title
             textAlign(CENTER);
             textSize(36);
             fill(219, 51, 105);
-            text('INSTRUCTIONS', this.menuX, this.menuY - 200);            
+            text('INSTRUCTIONS', this.menuX, this.menuY - 200);
         }
     }
 
-    switchToInstructions(){
+    switchToInstructions() {
         this.hideMenu();
         this.onInstructions = true;
         this.backButton.visible = true;
     }
 
-    switchToMenu(){
+    switchToMenu() {
         this.showMenu();
         this.onInstructions = false;
         this.backButton.visible = false;

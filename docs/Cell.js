@@ -31,7 +31,7 @@ class Cell {
         // List all cell walls with their angles and outer conditions
         const cellWalls = [
             { name: "top", angle: 0, outer: this.j === 0 },
-            { name: "topRight", angle: 60, outer: this.i === this.rows - 1 || (this.j === 0 && this.i % 2 === 0)},
+            { name: "topRight", angle: 60, outer: this.i === this.rows - 1 || (this.j === 0 && this.i % 2 === 0) },
             { name: "bottomRight", angle: 120, outer: this.i === this.rows - 1 || this.j === this.cols - 1 && this.i % 2 !== 0 },
             { name: "bottom", angle: 180, outer: this.j === this.cols - 1 },
             { name: "bottomLeft", angle: 240, outer: this.i === 0 || this.j === this.cols - 1 && this.i % 2 !== 0 },
