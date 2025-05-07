@@ -256,6 +256,7 @@ class GameState {
         this.updatePlayerInput();
         this.updateCollisions();
         this.checkGameOver();
+        this.checkTankWallCollisions()
     }
 
     updateMap() {
@@ -279,6 +280,16 @@ class GameState {
             }
         }
         this.checkProjectileCollisions();
+    }
+
+    checkTankWallCollisions() {
+        for (let tank of this.tankList) {
+            for (let wall of walls) {
+                if (tank.tankSprite.collides(wall)) {
+                    tank.tankSprite.moveAway(wall);
+                }
+            }
+        }
     }
 
     checkProjectileCollisions() {
