@@ -53,6 +53,8 @@ In addition to the mechanical novelty, we’ve also styled the game in a more co
 - 15% ~750 words
 - Use case diagrams, user stories. Early stages design. Ideation process. How did you decide as a team what to develop?
 
+(current word count: 858)
+
 - Ideation
 
 Initial ideation was conducted through individual submission of game inspirations through Github. We narrowed the choices down to two core ideas – a tank combat game inspired by Tank Trouble, and a generic Tower Defence game – by simple group voting, which we then confirmed by an in-person meeting.
@@ -143,12 +145,16 @@ The sequence diagram below illustrates our map generation process. `GameState` i
 - 15% ~750 words
 
 - One qualitative evaluation (your choice)
+
+(current word count: 827)
   
 We conducted a Heuristic evaluation for the (25th February version) prototype of our game. Due to the game lacking in much of the UI elements we plan to implement, much of the feedback was concerning the tasks we have not yet completed. However, the evaluation was useful in gaining insight on what users value most, and therefore, helped us understand which of our remaining tasks we should prioritise.
 System status was the Heuristic that was most frequently mentioned during our evaluation. The issues include, remaining lives, remaining bullets and the effect of damage taken, all not being visible to users. These were also the issues rated with the highest severity by users.
 A user experienced initial difficulty in moving the tanks because they rotate left and right rather than move laterally. This is not an uncommon feature in games in which players play as vehicles, and it is a feature we have not changed from the original Tank Trouble game. We have discovered that we may receive feedback that highlights issues that are anticipated in a game similar to ours, and we must carefully consider how much weight we give such feedback.
 This evaluation also affirmed that we need to include some form of tutorial that explains the controls of the game, especially as it is developed and more elements are introduced.
 Users appreciated the minimalist aesthetic of our game and expressed that it was enjoyable to play. 
+
+On the 30th of April we revisited Heuristic evaluation amongst ourselves. The aim was to highlight any remaining issues with our game and ensure it was still adhering to the Heuristic principles. For example, noticed a lack of instructions and confirmation message asking the user if they are sure they want to leave when exiting the game. These violate the principles, recognition rather than recall and error prevention. The evaluation allowed us to record and allocate all of the remaining tasks needed to complete development via the kanban. 
 
 - One quantitative evaluation (of your choice)
 
@@ -184,6 +190,14 @@ However, this was not the case for most participants as our results show that th
 
 
 - Description of how code was tested. 
+
+Testing code visually is core to the user-centred nature of our process. When running code we made sure the visual experience adhered to our expectations and user-stories. There were many bugs we encountered and struggled with, but eventually resolved with this approach. Bullets shot near the edge of the map would progress over outer walls. We remedied this by having the bullets spawn from the centre of the tank and only appearing at the end of the turret. We also noticed issues with the missile weapon. After observing its behaviour, inspecting the code, and group discussion, we understood it was identifying an initial location and proceeding to that static location instead of chasing its opponent.   
+
+We utilised the debug property of sprites in order to test our code. Setting this property to true makes the sprite's collider visible, allowing us to resolve collision issues with a range of sprites, particularly weapons. Console.log() is another feature of the language that was useful in observing if variables changed as expected throughout gameplay.
+
+In addition, we observed the game's ability to respond to edge cases such as many bullets being fired in close succession and players appearing to defeat each other simultaneously. On these occasions, it was important to consider current standards so that the game behaves as users are familiar with. We repeated these tests later on in development, ensuring that issues had not returned.
+
+
 
 ### Process 
 
