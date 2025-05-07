@@ -17,7 +17,7 @@ class GameFinish{
     
     constructor(endImage, VT323Font){
         createCanvas(GameState.CANVAS_WIDTH, GameState.CANVAS_HEIGHT);
-        displayMode('centered');
+        displayMode('maxed');
 
         this.button = {x: this.newGameRectX, y: this.newGameRectY,
             width: this.newGameRectWidth, height: this.newGameRectHeight
