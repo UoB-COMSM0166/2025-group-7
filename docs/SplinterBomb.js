@@ -1,5 +1,5 @@
 class SplinterBomb extends Projectile {
-    static BOMB_SIZE = 8;
+    static BOMB_SIZE = 5;
     static NUM_SPLINTERS = 40;
 
     constructor(x, y, angle) {
@@ -8,7 +8,8 @@ class SplinterBomb extends Projectile {
         // Initialize the sprite
         this.sprite = new Sprite(x, y, SplinterBomb.BOMB_SIZE, 'hexagon');
         this.sprite.duration = Weapon.BOMB_TIME;
-        this.sprite.color = color(255, 255, 255);
+        this.sprite.color = color(0, 0, 0);
+        this.sprite.stroke = color(100, 0, 0);
         this.sprite.direction = angle;
         this.sprite.speed = 10;
         this.sprite.rotationSpeed = 25;
