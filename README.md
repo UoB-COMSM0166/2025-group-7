@@ -5,8 +5,7 @@
 
 [<img src="https://img.shields.io/badge/Play-Now-brightgreen" width="100" height="25">](https://uob-comsm0166.github.io/2025-group-7/)
 [<img src="https://img.shields.io/badge/Game-Ideas-blue" width="100" height="25">](https://github.com/UoB-COMSM0166/2025-group-7/blob/f06ff86a68514414d8ebfe9873cceb3a018d9c7c/Game-Ideas.txt)
-<!-- [<img src="https://img.shields.io/badge/License-MIT-yellow" width="100" height="25">](LICENSE) -->
-
+[<img src="https://img.shields.io/badge/License-MIT-yellow" width="100" height="25">](LICENSE)
 
 
 Include a demo video of your game here (you don't have to 
