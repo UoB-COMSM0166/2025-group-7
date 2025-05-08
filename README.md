@@ -156,7 +156,7 @@ There are multiple aspects of our game that we prioritised more as our implement
 
 Over the course of implementation several pickups were developed which enrich the game and allow for different playing styles and tactics:
 
-|Name | Image | Description |
+| Name | Image | Description |
 | :----------------------: | :--------------------------: | ------------------- |
 | **Ammo** |<img src="docs/images/ammo-icon.webp" width="50">| Restores ammunition to 10 bullets. <br> |
 | **Health**  |<img src="docs/images/health-icon.webp" width="50">| Increases health by one unit. <br> |
@@ -266,10 +266,10 @@ The choice for Agile was also supported by the circumstances of the project, whi
 
 Resulting from our sprint process, our game underwent several iterations in keeping with the agile principle "*deliver working code frequently*". The table below ilustrates these:
 
-| | | |
+|Early Stage| Mid Stage | Late Stage |
 | :----------------------: | :--------------------------: | :-------------------: |
-|<img src="development-docs/dev-screenshots/early-stage-gameplay.PNG" width="33%">|<img src="development-docs/dev-screenshots/mid-stage-gameplay.PNG" width="33%">|<img src="development-docs/dev-screenshots/late-stage-gameplay.PNG" width="33%">|
-|<img src="development-docs/dev-screenshots/early-stage-intro.PNG" width="33%">|<img src="development-docs/dev-screenshots/mid-stage-intro.PNG" width="33%">|<img src="development-docs/dev-screenshots/late-stage-intro.PNG" width="33%">|
+|<img src="development-docs/dev-screenshots/early-stage-gameplay.PNG" width="90%">|<img src="development-docs/dev-screenshots/mid-stage-gameplay.PNG" width="90%">|<img src="development-docs/dev-screenshots/late-stage-gameplay.PNG" width="90%">|
+|<img src="development-docs/dev-screenshots/early-stage-intro.PNG" width="90%">|<img src="development-docs/dev-screenshots/mid-stage-intro.PNG" width="90%">|<img src="development-docs/dev-screenshots/late-stage-intro.PNG" width="90%">|
 
 
 ### Sustainability, ethics and accessability 
