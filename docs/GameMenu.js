@@ -176,6 +176,7 @@ class GameMenu {
 
     switchToInstructions() {
         this.hideMenu();
+        this.menuButton.visible = false;
         this.onInstructions = true;
         this.backButton.visible = true;
     }
