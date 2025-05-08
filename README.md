@@ -154,6 +154,17 @@ As we were nearing the implementation stage of the process we were unsure of how
 
 There are multiple aspects of our game that we prioritised more as our implementation progressed. For example, our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at this stage. This was not ideal as we had identified it as a challenge from the beginning of the process and it is a complex part of the game. However, implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour later on. We also began to consider the game menu and instructions later on in our implementation. This was effective for our process as when we felt the game was at a playable state we could focus on features that would make the game more intuitive and usable.
 
+Over the course of implementation several pickups were developed which enrich the game and allow for different playing styles and tactics:
+
+|Name | Image | Description |
+| ---------------------- | -------------------------- | ------------------- |
+| **Ammo** |<img src="docs/images/ammo-icon.webp" width="100">| Restores ammunition to 10 bullets. <br> |
+| **Health**  |<img src="docs/images/health-icon.webp" width="100">| Increases health by one unit. <br> |
+| **Shield** |<img src="docs/images/shield-icon.webp" width="100">| Protects tank from one hit of any weapon. <br> |
+| **Missile** |<img src="docs/images/missile-icon.webp" width="100">| Locates and seeks enemy tank. Instant death when impacting enemy tank. <br> |
+| **Bomb** |<img src="docs/images/bomb-icon.webp" width="100">| Explodes into many splinters of 0.5 damage each. <br> |
+| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Instant death of enemy when the spiked ram penetrates the enemy tank. <br> |
+| **Laser** |<img src="docs/images/laser-icon.webp" width="100">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
 
 ### Evaluation
 
