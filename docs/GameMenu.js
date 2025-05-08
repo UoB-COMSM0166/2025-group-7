@@ -5,12 +5,6 @@ class GameMenu {
         this.menuX = (GameState.CANVAS_WIDTH - this.menuWidth) / 2 + this.menuWidth / 2;
         this.menuY = (GameState.CANVAS_HEIGHT - this.menuHeight) / 2 + this.menuHeight / 2;
 
-        //Need to load font from path into system to style the buttons
-        const batForAlt = new FontFace('batForAlt', 'url(fonts/batmfa__.ttf)');
-        batForAlt.load().then(function (loadedFont) {
-            document.fonts.add(loadedFont);
-        });
-
         // Create menu buttons
         this.menuButton = createButton("Menu", 1250, 10, 100, 30);
         this.menuButton.setStyle({
@@ -220,4 +214,3 @@ class GameMenu {
         GameState.menuMode = false;
     }
 }
-

@@ -29,6 +29,12 @@ let tank2Color = '#E9AB17';
 let isTouchScreen = hasTouchscreen();
 
 function preload() {
+    //Need to load font from path into system to style the buttons
+    const batForAlt = new FontFace('batForAlt', 'url(fonts/batmfa__.ttf)');
+    batForAlt.load().then(function (loadedFont) {
+        document.fonts.add(loadedFont);
+    });
+
     // Load all audio files
     audioBackground = loadSound('audio/background.wav');
     audioBombExplode = loadSound('audio/bombExplode.mp3');
