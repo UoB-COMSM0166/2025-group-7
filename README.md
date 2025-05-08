@@ -5,6 +5,7 @@
 
 [<img src="https://img.shields.io/badge/Play-Now-brightgreen" width="100" height="25">](https://uob-comsm0166.github.io/2025-group-7/)
 [<img src="https://img.shields.io/badge/Game-Ideas-blue" width="100" height="25">](https://github.com/UoB-COMSM0166/2025-group-7/blob/f06ff86a68514414d8ebfe9873cceb3a018d9c7c/Game-Ideas.txt)
+[<img src="https://img.shields.io/badge/Watch-Demo-red" width="100" height="25">](https://www.youtube.com/watch?v=U0QKMWBccW0)
 [<img src="https://img.shields.io/badge/License-MIT-yellow" width="100" height="25">](LICENSE)
 
 ## 📚 Libraries and Programming Language Used
@@ -17,8 +18,28 @@
   - [![p5.touchgui](https://img.shields.io/badge/p5.touchgui-4CAF50?style=flat&logo=appveyor&logoColor=white)](https://github.com/bitcraftlab/p5.touchgui) - A library for creating touch-friendly GUI elements in p5.js.
 
 
+## Table of Contents
+- [📚 Libraries and Programming Language Used](#-libraries-and-programming-language-used)
+- [🎥 Prototype & Demo Video](#-prototype--demo-video)
+- [👥 Development Team](#-development-team)
+  - [Team Photo](#team-photo)
+  - [Group Members](#group-members)
+- [📚 Project Report](#-project-report)
+  - [Introduction](#introduction)
+  - [Requirements](#requirements)
+  - [Design](#design)
+  - [Implementation](#implementation)
+  - [Evaluation](#evaluation)
+  - [Process](#process)
+  - [Sustainability, ethics and accessability](#sustainability-ethics-and-accessability)
+  - [Conclusion](#conclusion)
+- [Contribution Statement](#-contribution-statement)
+- [📚 Bibliography](#-bibliography)
+- [Additional Marks](#-additional-marks)
+- [📝 License](#-license)
 
-## 🎥 Prototype & Demo Video
+
+## 🎥 Demo Video
 Include a demo video of your game here (you don't have to 
 wait until the end, you can insert a work in progress video)
 
