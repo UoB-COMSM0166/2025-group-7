@@ -157,7 +157,7 @@ There are multiple aspects of our game that we prioritised more as our implement
 Over the course of implementation several pickups were developed which enrich the game and allow for different playing styles and tactics:
 
 |Name | Image | Description |
-| :----------------------: | -------------------------- | ------------------- |
+| :----------------------: | :--------------------------: | ------------------- |
 | **Ammo** |<img src="docs/images/ammo-icon.webp" width="50">| Restores ammunition to 10 bullets. <br> |
 | **Health**  |<img src="docs/images/health-icon.webp" width="50">| Increases health by one unit. <br> |
 | **Shield** |<img src="docs/images/shield-icon.webp" width="50">| Protects tank from one hit of any weapon. <br> |
