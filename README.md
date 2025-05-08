@@ -268,8 +268,8 @@ Resulting from our sprint process, our game underwent several iterations in keep
 
 | | | |
 | :----------------------: | :--------------------------: | :-------------------: |
-|<img src="development-docs/dev-screenshots/early-stage-gameplay.PNG" width="200">|<img src="development-docs/dev-screenshots/mid-stage-gameplay.PNG" width="200">|<img src="development-docs/dev-screenshots/late-stage-gameplay.PNG" width="200">|
-|<img src="development-docs/dev-screenshots/early-stage-intro.PNG" width="200">|<img src="development-docs/dev-screenshots/mid-stage-intro.PNG" width="200">|<img src="development-docs/dev-screenshots/late-stage-intro.PNG" width="200">|
+|<img src="development-docs/dev-screenshots/early-stage-gameplay.PNG" width="33%">|<img src="development-docs/dev-screenshots/mid-stage-gameplay.PNG" width="33%">|<img src="development-docs/dev-screenshots/late-stage-gameplay.PNG" width="33%">|
+|<img src="development-docs/dev-screenshots/early-stage-intro.PNG" width="33%">|<img src="development-docs/dev-screenshots/mid-stage-intro.PNG" width="33%">|<img src="development-docs/dev-screenshots/late-stage-intro.PNG" width="33%">|
 
 
 ### Sustainability, ethics and accessability 
