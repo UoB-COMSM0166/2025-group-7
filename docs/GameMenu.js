@@ -93,7 +93,7 @@ class GameMenu {
         });
 
         //from the instructions screen - enables you to go back
-        this.backButton = createButton('Back', this.menuX - this.menuWidth / 2 + 200, this.menuY - this.menuHeight / 2 + 400, 200, 50);
+        this.backButton = createButton('Back', this.menuX - this.menuWidth / 2 + 200, this.menuY - this.menuHeight / 2 + 450, 200, 50);
         this.backButton.setStyle({
             font: 'batForAlt',
             textSize: 30,
@@ -160,17 +160,17 @@ class GameMenu {
             drawingContext.shadowColor = color(219, 51, 105);
             stroke(0, 0, 0);
             fill(0);
-            rect(this.menuX, this.menuY, this.menuWidth, this.menuHeight, 20);
+            rect(this.menuX, this.menuY, 1.4*this.menuWidth, 1.2*this.menuHeight, 20);
             drawingContext.shadowBlur = 0;
 
             // Draw instructions title
             textAlign(CENTER);
             textSize(36);
             fill(219, 51, 105);
-            text('INSTRUCTIONS', this.menuX, this.menuY - 200);   
+            text('INSTRUCTIONS', this.menuX, this.menuY - 250);   
 
             // Add the instructions image
-            image(instructionsImg, 0.5*this.menuX + 50, 0.5*this.menuY + 25, 575, 300);         
+            image(instructionsImg, 0.5*this.menuX, 0.5*this.menuY - 10, 675, 375);         
         }
     }
 
@@ -219,47 +219,4 @@ class GameMenu {
         GameState.menuMode = false;
     }
 }
-/*Game Modes:
-
-Single-Player Mode: Battle against AI, up to 4 levels, with increasing number of AI in each level.
-
-Two-Player Mode: Players battle against each other, the first to get 3 points wins.
-
-Game Rules:
-
-Maps are randomly generated and different for each game.
-
-Score points by defeating the opponent's tank.
-
-Two Difficulties:
-
-Simple Mode: The tank has 3 health and moves fast.
-
-Hard Mode: The tank has only 1 health, moves slowly, and is more challenging.
-
-Battle Mechanics:
-
-Firing bullets and hitting the tank can cause 1 point of damage.
-
-Walls can bounce bullets, be careful not to be hit by yourself!
-
-Walls can be destroyed to change the terrain.
-
-Item System (Random Drop):
-
-Health: Restore 1 point of health, up to the upper limit.
-
-Ammo: Restore all bullets.
-
-Saw: Melee weapon, destroys the enemy on contact, and bullets cannot be fired.
-
-Laser: Fires a laser that penetrates up to two walls and can destroy tanks (only one shot).
-
-Shield: Gain an invincible shield that can block any damage.
-
-Missile: Automatically tracks missiles, destroys on hit, disappears when time runs out (only one shot).
-
-Bomb: Throws a bomb that releases a large number of small bullets after the explosion (each deals 0.5 damage).
-
-*/
 
