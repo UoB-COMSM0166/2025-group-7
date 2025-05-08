@@ -224,7 +224,6 @@ We utilised the debug property of sprites in order to test our code. Setting thi
 In addition, we observed the game's ability to respond to edge cases such as many bullets being fired in close succession and players appearing to defeat each other simultaneously. On these occasions, it was important to consider current standards so that the game behaves as users are familiar with. We repeated these tests later on in development, ensuring that issues had not returned.
 
 
-
 ### Process 
 
 - 15% ~750 words
@@ -264,6 +263,13 @@ The team followed Agile processes, as an Agile software development lifecycle wa
 Waterfall was rejected because of the opaque requirements of the project, which would be refined along the process rather than set in stone at the outset. Because of the scope of the project a V-shaped SDLC was considered inappropriate, since a sharp delineation between programming and testing was seen to be counterproductive. And a Spiral methodology was also rejected due to the timescale involved in the project – with Agile-style continuous software integration considered more appropriate than repeated discrete iteration.
 
 The choice for Agile was also supported by the circumstances of the project, which allowed us to avoid many of the traditional dangers associated with the approach: it is a greenfield rather than brownfield project, the team is necessarily co-located due to the university context, and term-time availability of the entire team was very predictable. There was also no firm contractual relationship required by the project, with the requirements set by the unit remaining fairly loose – supporting an Agile approach to development and an ongoing discovery process.
+
+Resulting from our sprint process, our game underwent several iterations in keeping with the agile principle "*deliver working code frequently*". The table below ilustrates these:
+
+| | | |
+| :----------------------: | :--------------------------: | :-------------------: |
+|<img src="development-docs/dev-screenshots/early-stage-gameplay.PNG" width="200">|<img src="development-docs/dev-screenshots/mid-stage-gameplay.PNG" width="200">|<img src="development-docs/dev-screenshots/late-stage-gameplay.PNG" width="200">|
+|<img src="development-docs/dev-screenshots/early-stage-intro.PNG" width="200">|<img src="development-docs/dev-screenshots/mid-stage-intro.PNG" width="200">|<img src="development-docs/dev-screenshots/late-stage-intro.PNG" width="200">|
 
 
 ### Sustainability, ethics and accessability 
