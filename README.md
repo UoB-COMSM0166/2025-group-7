@@ -65,12 +65,12 @@ In addition to the mechanical novelty, we’ve also styled the game in a more co
 
 (current word count: 858)
 
-- **Ideation**
+- Ideation
 
 Initial ideation was conducted through individual submission of game inspirations through Github. We narrowed the choices down to two core ideas – a tank combat game inspired by Tank Trouble, and a generic Tower Defence game – by simple group voting, which we then confirmed by an in-person meeting.
 One common point in support of both options was the scope they offered for innovation on the existing formula, and a feeling that the engineering challenges they offered were correctly pitched for the length of the project.
 
-- **Prototyping**
+- Prototyping
   
 Both ideas were prototyped during the January 28 workshop, with Tank Trouble prototyped on paper and Tower Defence prototyped via Powerpoint. The team agreed to focus on the Tank Trouble prototype at the outset, indicating an existing common preference for that idea.
 
@@ -81,13 +81,13 @@ Both ideas were prototyped during the January 28 workshop, with Tank Trouble pro
 
 After prototyping, the decision was taken to focus on the Tank Trouble idea because of the team’s greater familiarity with the core game mechanics – and because we had already identified some interesting twists on the existing game design that would help differentiate our game from its inspiration.
 
-- **Testing Feedback**
+- Testing Feedback
   
 Testing of the paper prototype at the February 6 workshop elicited useful feedback on the design of the game, and some of the engineering challenges we might face.
 On game design, some people were confused about the “one hit to kill” philosophy present in the original game – thinking it would make the game too chaotic and might undermine the value of power-ups that enhance the tank’s weapons. Others were unsure of certain ideas about environmental destructibility, highlighting the importance of communicating this information to the player visually.
 On engineering, we were warned that a two player game operated from a single keyboard might risk input conflicts, allowing one player to prevent another player from moving by spamming keys and confusing the game. 
 
-- **User Stories**
+- User Stories
 
 When conceptualising requirements, we knew that identifying stakeholders would be an important first step so that we could tailor our requirements to what is necessary and desirable for them in a game.
 
@@ -232,7 +232,7 @@ In addition, we observed the game's ability to respond to edge cases such as man
 
 (current word count: 724)
 
--	**Our process**
+-	Our process
 -	
 Work was primarily driven by decision making at a weekly touchpoint, conducted in-person between scheduled on-campus lectures.
 
@@ -244,7 +244,7 @@ The team did not implement daily stand-ups since the work was balanced with othe
 
 Work accelerated during the April vacation period, with all members of the team making themselves broadly available throughout. This led to more regular meetings – including daily sessions during one week of the holiday.
 
--	**Division of work**
+-	Division of work
 -	
 The team took inspiration from the Extreme Programming principles of collective responsibility for code and a whole team approach to decision-making, and as such strict ownership of parts of the programme was not initiated or enforced – although individual team members did spearhead development of different parts of the programme according to their own interests and strengths.
 
@@ -256,7 +256,7 @@ In some instances, pair programming sessions were agreed at weekly meetings to f
 
 This formal process was supplemented by ongoing discussion on a group Whatsapp chat so that individuals could update the group on recently committed work, highlight any problems that had arisen in the course of completing tickets, and seek feedback on ideas and decision-making that hadn’t been scoped or settled during the last weekly touchpoint.
 
--	**Rationale**
+-	Rationale
 
 The team followed Agile processes, as an Agile software development lifecycle was considered the correct choice for the project.
 
