@@ -157,14 +157,14 @@ There are multiple aspects of our game that we prioritised more as our implement
 Over the course of implementation several pickups were developed which enrich the game and allow for different playing styles and tactics:
 
 |Name | Image | Description |
-| ---------------------- | -------------------------- | ------------------- |
-| **Ammo** |<img src="docs/images/ammo-icon.webp" width="100">| Restores ammunition to 10 bullets. <br> |
-| **Health**  |<img src="docs/images/health-icon.webp" width="100">| Increases health by one unit. <br> |
-| **Shield** |<img src="docs/images/shield-icon.webp" width="100">| Protects tank from one hit of any weapon. <br> |
-| **Missile** |<img src="docs/images/missile-icon.webp" width="100">| Locates and seeks enemy tank. Instant death when impacting enemy tank. <br> |
-| **Bomb** |<img src="docs/images/bomb-icon.webp" width="100">| Explodes into many splinters of 0.5 damage each. <br> |
+| :----------------------: | -------------------------- | ------------------- |
+| **Ammo** |<img src="docs/images/ammo-icon.webp" width="75">| Restores ammunition to 10 bullets. <br> |
+| **Health**  |<img src="docs/images/health-icon.webp" width="75">| Increases health by one unit. <br> |
+| **Shield** |<img src="docs/images/shield-icon.webp" width="75">| Protects tank from one hit of any weapon. <br> |
+| **Missile** |<img src="docs/images/missile-icon.webp" width="75">| Locates and seeks enemy tank. Instant death when impacting enemy tank. <br> |
+| **Bomb** |<img src="docs/images/bomb-icon.webp" width="75">| Explodes into many splinters of 0.5 damage each. <br> |
 | **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Instant death of enemy when the spiked ram penetrates the enemy tank. <br> |
-| **Laser** |<img src="docs/images/laser-icon.webp" width="100">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
+| **Laser** |<img src="docs/images/laser-icon.webp" width="75">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
 
 ### Evaluation
 
