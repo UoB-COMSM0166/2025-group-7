@@ -169,7 +169,7 @@ The sequence diagram below illustrates our map generation process. `GameState` i
 
 - Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game.
 
-(current word count: 225)
+(current word count: 895)
 
 As we were nearing the implementation stage of the process we were unsure of how to translate our design into a working game. We decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our unique implementations, identifying commonalities and differences and using this to further inform our design. 
 
