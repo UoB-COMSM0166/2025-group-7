@@ -355,45 +355,42 @@ In addition, we observed the game's ability to respond to edge cases such as man
 
 ### Process 
 
-- 15% ~750 words
+(current word count: 747/750)
 
-- Teamwork. How did you work together, what tools did you use. Did you have team roles? Reflection on how you worked together.
-
-(current word count: 724)
-
--	Our process
--	
-Work was primarily driven by decision making at a weekly touchpoint, conducted in-person between scheduled on-campus lectures.
+### Our process
+ 
+Work was primarily driven by decisions made at in-person weekly meetings between scheduled on-campus lectures.
 
 These sessions functioned as Agile reviews, retrospectives, and sprint planning sessions – at which the team as a whole interacted with the game together, explained their recent work (often with code walkthroughs), and discussed on-going issues with development and potential issues on the horizon.
 
-Agile reviews were conducted, sub-optimally, without the presence of authoritative clients or end-users, and required members of the development team to wear two hats – participating in these meetings as parties responsible for their own recent work, and acting as surrogates for game players in holistic evaluation of the current build. Even though this was not ideal, it did produce beneficial insights for the development of the game – most notably in the mid-development decision to switch the game from a square to a hexagonal grid, in order to increase differentiation from Tank Trouble and make projectile behaviour more interesting.
+Agile reviews were conducted, sub-optimally, without the presence of authoritative clients or end-users, and required members of the development team to wear two hats – participating in these meetings as parties responsible for their own recent work, and acting as surrogates for game players in holistic evaluation of the current build. This was not ideal, but it did produce beneficial insights for the development of the game – most notably in the mid-development decision to switch the game from a square to a hexagonal grid, in order to increase differentiation from Tank Trouble and make projectile behaviour more interesting.
 
-The team did not implement daily stand-ups since the work was balanced with other commitments on the MSc course, and we chose not to enforce the expectation of daily work on the project that a daily stand-up might imply – instead monitoring progress at our weekly sessions, where issues with overall progress could be addressed if necessary.
+The team did not implement daily stand-ups since the work was balanced with other commitments on the MSc course, and we chose not to enforce the expectation of daily work on the project that a daily stand-up might imply. Instead we monitored progress at our weekly sessions, where issues with overall progress could be addressed if necessary.
 
 Work accelerated during the April vacation period, with all members of the team making themselves broadly available throughout. This led to more regular meetings – including daily sessions during one week of the holiday.
 
--	Division of work
--	
-The team took inspiration from the Extreme Programming principles of collective responsibility for code and a whole team approach to decision-making, and as such strict ownership of parts of the programme was not initiated or enforced – although individual team members did spearhead development of different parts of the programme according to their own interests and strengths.
+### Division of work
 
-Development tasks were added to the group Kanban board at our weekly Agile sessions, utilising the in-built project management functionality on Github. The most important tickets for the next week were assigned, and additional tickets in surplus of the most essential work remained in the Kanban backlog for individual team members to pick up as and when capacity permitted – or else were left to be assigned, by agreed order of priority, at the start of a future sprint.
+The team took inspiration from the Extreme Programming principles of collective responsibility for code and a whole team approach to decision-making. Therefore, strict ownership of parts of the programme was not initiated or enforced – although individual team members did spearhead development of different parts of the programme according to their own interests and strengths.
 
-In early sessions, a formal planning poker approach was taken to sizing and prioritising work – but as the project progressed, it was agreed that consensus was easily found within the group on priorities, and that a more informal process could be used to free up extra time for interactive demo and retrospective as a team.
+Development tasks were added to the group Kanban board at our weekly Agile sessions, utilising the in-built project management functionality on Github. The most important tickets for the next week were assigned, and lower priority tickets remained in the Kanban backlog for individual team members to pick up as and when capacity permitted. Otherwise, they were left to be assigned by agreed order of priority, at the start of a future sprint.
+
+In early sessions, a formal planning poker approach was taken to sizing and prioritising work – but as the project progressed, the team noticed that consensus was easily found within the group on priorities. For that reason, we agreed a more informal process could be used to free up extra time for interactive demo and retrospective as a team.
 
 In some instances, pair programming sessions were agreed at weekly meetings to facilitate collaboration across the team – assisting members who had encountered issues in development, or allowing individuals to better understand existing areas of the code that they had not recently worked on.
 
-This formal process was supplemented by ongoing discussion on a group Whatsapp chat so that individuals could update the group on recently committed work, highlight any problems that had arisen in the course of completing tickets, and seek feedback on ideas and decision-making that hadn’t been scoped or settled during the last weekly touchpoint.
+This formal process was supplemented by ongoing discussion on a group Whatsapp chat so that individuals could update the group on recently committed work and highlight any problems that had arisen in the course of completing tickets. This was also used to seek feedback on ideas, and for decision-making that hadn’t been scoped or settled during the last weekly touchpoint.
 
--	Rationale
+### Rationale
 
 The team followed Agile processes, as an Agile software development lifecycle was considered the correct choice for the project.
 
-Waterfall was rejected because of the opaque requirements of the project, which would be refined along the process rather than set in stone at the outset. Because of the scope of the project a V-shaped SDLC was considered inappropriate, since a sharp delineation between programming and testing was seen to be counterproductive. And a Spiral methodology was also rejected due to the timescale involved in the project – with Agile-style continuous software integration considered more appropriate than repeated discrete iteration.
+Waterfall was rejected because of the opaque requirements of the project, which would be refined along the process rather than set in stone at the outset. Due to the scope of the project, a V-shaped SDLC was considered inappropriate since a sharp delineation between programming and testing was seen to be counterproductive. A Spiral methodology was also rejected due to the timescale involved in the project – with Agile-style continuous software integration considered more appropriate than repeated discrete iteration.
 
 The choice for Agile was also supported by the circumstances of the project, which allowed us to avoid many of the traditional dangers associated with the approach: it is a greenfield rather than brownfield project, the team is necessarily co-located due to the university context, and term-time availability of the entire team was very predictable. There was also no firm contractual relationship required by the project, with the requirements set by the unit remaining fairly loose – supporting an Agile approach to development and an ongoing discovery process.
 
-Resulting from our sprint process, our game underwent several iterations in keeping with the agile principle "*deliver working code frequently*". The table below ilustrates these:
+Resulting from our sprint process, our game underwent several iterations in keeping with the agile principle "*deliver working code frequently*". The table below illustrates these:
+
 
 |Early Stage| Mid Stage | Late Stage |
 | :----------------------: | :--------------------------: | :-------------------: |
