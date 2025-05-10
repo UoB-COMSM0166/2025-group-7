@@ -14,13 +14,13 @@
 
 - **Libraries**:
   - [![p5.js](https://img.shields.io/badge/p5*js-EA4E5F?style=plastic)](https://p5js.org/) - A JavaScript library for creative coding.
-  - [![p5.play](https://img.shields.io/badge/p5play-6C71C4?style=flat&logo=github&logoColor=white)](https://molleindustria.github.io/p5.play/) - A library for creating 2D games in p5.js.
-  - [![p5.touchgui](https://img.shields.io/badge/p5.touchgui-4CAF50?style=flat&logo=appveyor&logoColor=white)](https://github.com/bitcraftlab/p5.touchgui) - A library for creating touch-friendly GUI elements in p5.js.
+  - [![p5.play](https://img.shields.io/badge/p5play-6C71C4?style=flat&logo=github&logoColor=white)](https://p5play.org/) - A library for creating 2D games in p5.js.
+  - [![p5.touchgui](https://img.shields.io/badge/p5.touchgui-4CAF50?style=flat&logo=appveyor&logoColor=white)](https://github.com/L05/p5.touchgui) - A library for creating touch-friendly GUI elements in p5.js.
 
 
 ## Table of Contents
 - [📚 Libraries and Programming Language Used](#-libraries-and-programming-language-used)
-- [🎥 Prototype & Demo Video](#-prototype--demo-video)
+- [🎥 Demo Video](#-demo-video)
 - [👥 Development Team](#-development-team)
   - [Team Photo](#team-photo)
   - [Group Members](#group-members)
@@ -29,13 +29,14 @@
   - [Requirements](#requirements)
   - [Design](#design)
   - [Implementation](#implementation)
+    - [Map System](#map-system-implementation)
+    - [AI System](#ai-system-implementation)
   - [Evaluation](#evaluation)
   - [Process](#process)
-  - [Sustainability, ethics and accessability](#sustainability-ethics-and-accessability)
+  - [Sustainability, Ethics and Accessibility](#sustainability-ethics-and-accessability)
   - [Conclusion](#conclusion)
 - [Contribution Statement](#-contribution-statement)
 - [📚 Bibliography](#-bibliography)
-- [Additional Marks](#-additional-marks)
 - [📝 License](#-license)
 
 
@@ -231,6 +232,8 @@ The map is procedurally generated using a modified depth-first search (DFS) appr
       * Walls being removed (animated)
       * Backtracking steps (visualized)
     - Helps players understand the maze generation process
+    
+    [![Map Generation Visualization](development-docs\Implementation\MapGenerationVis.gif)](https://youtu.be/tEoLHI7DnEs?si=6obunh9-PZNj38-X)
 
 
 #### Key Classes and Methods
