@@ -200,7 +200,9 @@ class Cell {
 
             // If we've reached the goal, reconstruct the path and return it
             if (current === end) {
-                return this.reconstructPath(current);
+                const path = this.reconstructPath(current);
+                if (GameState.showPath) this.visualizePath(path); // Visualize the final path only if map generation is shown
+                return path;
             }
 
             // Move current from openSet to closedSet
@@ -233,10 +235,28 @@ class Cell {
                     }
                 }
             }
+
+            // Visualize the current path being explored only if map generation is shown
+            if (GameState.showPath) {
+                const currentPath = this.reconstructPath(current);
+                this.visualizePath(currentPath);
+            }
         }
 
         // If no path found, return an empty array
         return [];
+    }
+
+    // Visualizes the path with a line connecting the centers of the cells
+    visualizePath(path) {
+        if (path.length < 2) return; // No path to visualize
+
+        // Draw a line between each pair of consecutive cells in the path
+        for (let i = 0; i < path.length - 1; i++) {
+            const currentCell = path[i];
+            const nextCell = path[i + 1];
+            line(currentCell.centerX, currentCell.centerY, nextCell.centerX, nextCell.centerY);
+        }
     }
 
     // Heuristic function (estimated cost from cell 'a' to cell 'b')

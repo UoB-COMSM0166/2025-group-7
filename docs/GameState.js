@@ -46,6 +46,7 @@ class GameState {
 
     static showMapGeneration = false;
     static doneMapGeneration = false;
+    static showPath = false;
     static themeColor = [[255, 0, 0], [0, 0, 255], [0, 255, 0], [255, 255, 255]]; // red, blue, green, white
     static themeColorIndex = 0;
     static menuMode = false;
@@ -941,8 +942,8 @@ class GameState {
     }
 
     // Find path to target tank using grid-based pathfinding
-    pathFinder(tank, opponentTank) {
-        let targetCell = this.gameMap.getCell(opponentTank.tankSprite.x, opponentTank.tankSprite.y);
+    pathFinder(tank, targetLocation) {
+        let targetCell = this.gameMap.getCell(targetLocation.x, targetLocation.y);
         let currentCell = this.gameMap.getCell(tank.tankSprite.x, tank.tankSprite.y);
         let path = currentCell.findClosestPath(targetCell);
         if (path.length > 1) {

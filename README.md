@@ -233,7 +233,7 @@ The map is procedurally generated using a modified depth-first search (DFS) appr
       * Backtracking steps (visualized)
     - Helps players understand the maze generation process
     
-    [![Map Generation Visualization](development-docs\Implementation\MapGenerationVis.gif)](https://youtu.be/tEoLHI7DnEs?si=6obunh9-PZNj38-X)
+[![Map Generation Visualization](development-docs\Implementation\MapGenerationVis.gif)](https://youtu.be/tEoLHI7DnEs?si=6obunh9-PZNj38-X)
 
 
 #### Key Classes and Methods

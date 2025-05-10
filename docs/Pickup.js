@@ -61,7 +61,7 @@ class Pickup {
         this.y = selectedCell.y;
 
         // Randomly select pickup type
-        let randomiser = Math.floor(Math.random() * 7);
+        let randomiser = 5;//Math.floor(Math.random() * 7);
 
         if (randomiser == 0) {
             this.setHealth();
@@ -80,10 +80,10 @@ class Pickup {
         }
         else if (randomiser == 5) {
             this.setMissile();
-        }
+        }/*
         else if (randomiser == 6) {
             
-        }
+        }*/
         else {
             this.setBomb();
         }

@@ -27,6 +27,7 @@ class Tank {
         this.destroyed = false;
         this.INITIALX = locX;
         this.INITIALY = locY;
+        this.lastFireTime = 0; // Initialize last fire time
         this.tankSprite = new Sprite(locX, locY, Tank.TANK_WIDTH, "hexagon");
         this.tankSprite.addCollider((Tank.GUN_HEIGHT + Tank.TANK_HEIGHT) / 2, 0, Tank.GUN_HEIGHT, Tank.GUN_WIDTH);
         this.tankSprite.wheels = new Group();
@@ -125,11 +126,13 @@ class Tank {
         }
     }
 
-    canFire() {
-        return (this.tankWeapon.numberOfRounds < this.tankWeapon.capacity);
+    canFire(fireCD = 1000) {
+        const currentTime = millis();
+        return (this.tankWeapon.numberOfRounds < this.tankWeapon.capacity) && (currentTime - this.lastFireTime >= fireCD);
     }
 
     fire() {
+        this.lastFireTime = millis(); // Update last fire time
         //Create new projectile according to appropriate weapon type
         this.tankWeapon.fireSound.play();
         let projDist = Tank.TANK_HEIGHT / 2 + Tank.GUN_HEIGHT + Tank.PROJECTILE_SPAWN_DIST;

@@ -127,8 +127,8 @@ class GameSetup {
 
         //put in game mode text
         drawingContext.shadowBlur = 5;
-        drawingContext.shadowColor = color(136, 128, 128);
-        fill(color(136, 128, 128));
+        drawingContext.shadowColor = color(0, 200, 255);
+        fill(color(0, 200, 255));
         text('GAME MODE', GameState.CANVAS_WIDTH / 2, this.BELOW_TITLE - 60);
 
         //put in difficulty selection
@@ -136,7 +136,7 @@ class GameSetup {
         text('DIFFICULTY', GameState.CANVAS_WIDTH / 2, this.BELOW_TITLE - 60 + this.VERT_SP);
 
         //put in Map Generation selection
-        text('MAP GENERATION', GameState.CANVAS_WIDTH / 2, this.BELOW_TITLE - 60 + this.ON_MAPGEN * this.VERT_SP);
+        text('MAP GENERATION & PATH VISUALIZATION', GameState.CANVAS_WIDTH / 2, this.BELOW_TITLE - 60 + this.ON_MAPGEN * this.VERT_SP);
 
         //put in user selection box with glowing effect
         this.drawGlowingButton(GameState.CANVAS_WIDTH / 2, this.BELOW_TITLE + this.selector * this.VERT_SP + this.REG_TEXT / 2, 500, 80, '#CCCCCC', '#FFFFFF');
@@ -275,6 +275,7 @@ class GameSetup {
                 GameState.difficulty = 1 - GameState.difficulty;
             } else if (this.selector === this.ON_MAPGEN) {
                 GameState.showMapGeneration = !GameState.showMapGeneration;
+                GameState.showPath = !GameState.showPath;
             }
         }
     }
@@ -312,11 +313,13 @@ class GameSetup {
         // Check map generation
         if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.mapGen.on)) {
             GameState.showMapGeneration = true;
+            GameState.showPath = true;
             this.selector = this.ON_MAPGEN;
             return;
         }
         if (this.isMouseInButton(mouseXVal, mouseYVal, this.buttons.mapGen.off)) {
             GameState.showMapGeneration = false;
+            GameState.showPath = false;
             this.selector = this.ON_MAPGEN;
             return;
         }

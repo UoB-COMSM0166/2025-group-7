@@ -10,17 +10,25 @@ class AIController {
     this.gameState = gameState;
     this.targetTank = targetTank;
     this.level = level;
-    this.lastFireMS = 0;
     this.fireCD = level === GameState.HARD ? 1000 : 2000;   // Difficulty affects firing rate
     this.turnStep = level === GameState.HARD ? 3 : 1.5;     // Difficulty affects turning speed
     this.safeDistSq = 150 * 150;
     this.currentPath = null;
     this.oldPath = null;
     this.pathReached = true;
+    this.lastDecisionTime = 0;
+    this.shouldSeekHealth = false;
   }
 
   async update() {
     if (this.gameState.getIsGameOver()) return;
+
+    // Randomize health pickup decision every 10 seconds
+    const currentTime = millis();
+    if (currentTime - this.lastDecisionTime > 10000) {
+      this.shouldSeekHealth = random() < 0.10; // 10% chance to seek health
+      this.lastDecisionTime = currentTime;
+    }
 
     // Add properties to track position and detect if stuck
     if (!this.lastPosition) {
@@ -32,7 +40,6 @@ class AIController {
 
     // Check if tank is stuck by comparing current position with last position
     // Only check if the tank is actively trying to move
-    const currentTime = millis();
     if (currentTime - this.lastMoveTime > 1000 && this.isMoving) { // Only check if tank is trying to move
       const currentPosition = { x: this.tank.tankSprite.x, y: this.tank.tankSprite.y };
       const distance = Math.sqrt(
@@ -59,11 +66,20 @@ class AIController {
       }
     }
 
+    // Check if tank's life is less than 2 and there are health pickups
+    if (this.tank.getLife() < 2 && this.gameState.pickupList.some(pickup => pickup.type === "HEALTH") && this.shouldSeekHealth) {
+      const healthPickup = this.gameState.pickupList.find(pickup => pickup.type === "HEALTH");
+      if (healthPickup) {
+        this.currentPath = this.gameState.pathFinder(this.tank, healthPickup.sprite);
+        this.pathReached = false;
+      }
+    }
+
     // Check if we need a new path
     if (this.pathReached || this.currentPath === null) {
       // Only calculate a new path when we've reached the current destination
       // or when we don't have a path yet
-      this.currentPath = this.gameState.pathFinder(this.tank, this.targetTank);
+      this.currentPath = this.gameState.pathFinder(this.tank, this.targetTank.tankSprite);
       this.pathReached = false;
     }
 
@@ -73,7 +89,15 @@ class AIController {
     }
 
     // Move toward player using pathfinding
-    if (this.tank.tankSprite.distanceTo(this.targetTank.tankSprite) > 100) {
+    let targetDistance = 100; // Default distance
+    if (this.tank.tankWeapon.weaponType === Weapon.SAW_TYPE) {
+      targetDistance = 50; // Saw weapons get closer
+    } else if (this.tank.tankWeapon.weaponType === Weapon.LASER_TYPE) {
+      targetDistance = 500; // Laser weapons maintain distance
+    }
+
+    if (this.tank.tankSprite.distanceTo(this.targetTank.tankSprite) > targetDistance || 
+        (this.tank.tankWeapon.weaponType === Weapon.MISSILE_TYPE && this.tank.canFire(this.fireCD))) {
       await this.tank.tankSprite.rotateTowards(this.currentPath);
       await delay(300);
       this.tank.move(Tank.UP_DIRECTION);
@@ -85,10 +109,11 @@ class AIController {
     }
 
     // === 3. Fire ===
-    if (this.tank.canFire() && millis() - this.lastFireMS > this.fireCD &&
-      this.tank.tankSprite.distanceTo(this.targetTank.tankSprite) <= 100) {
-      this.gameState.addProjectile(this.tank.fire(), this.tank);
-      this.lastFireMS = millis();
+    if (this.tank.canFire(this.fireCD)) {
+      if (this.tank.tankWeapon.weaponType === Weapon.MISSILE_TYPE || 
+          this.tank.tankSprite.distanceTo(this.targetTank.tankSprite) <= targetDistance) {
+        this.gameState.addProjectile(this.tank.fire(), this.tank);
+      }
     }
   }
 }
