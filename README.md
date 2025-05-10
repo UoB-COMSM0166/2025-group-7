@@ -187,6 +187,111 @@ Over the course of implementation several pickups were developed which enrich th
 | **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Instant death of enemy when the spiked ram penetrates the enemy tank. <br> |
 | **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
 
+### Map System Implementation
+
+The hexagonal grid-based map system is a core innovation in Hex Wars, differentiating it from traditional rectangular grid games, such as Tank Trouble. Key components include:
+
+#### Hexagonal Grid Structure
+- Grid composed of `Cell` objects arranged in offset coordinates
+- Each hexagonal cell tracks:
+  - Position (i,j grid coordinates)
+  - Visual coordinates (centerX, centerY)
+  - Wall states (6 possible walls per cell)
+  - Visit status (for generation algorithm)
+
+#### Map Generation Algorithm
+The map is procedurally generated using a modified depth-first search (DFS) approach:
+
+1. **Initialization**:
+   - Create grid with all walls intact
+   - Start at cell (0,0) with empty stack
+
+2. **Maze Generation**:
+   The algorithm works as follows:
+   - Mark the current cell as visited
+   - Look for a random unvisited neighboring cell
+   - If an unvisited neighbor exists:
+     * Remember the current cell by adding it to a stack
+     * Remove the wall between current and neighbor cells
+     * Move to the neighbor cell (making it the new current cell)
+   - If no unvisited neighbors exist:
+     * Check if there are cells in the stack
+     * If so, backtrack by taking the last cell from the stack as the new current
+   This process repeats until all cells in the grid have been visited at random amount to make sure there are different paths between cells.
+
+3. **Post-processing**:
+   - Remove overlapping walls between cells
+   - Generate wall sprites for rendering (This was done for optimization)
+
+4. **Visualization Mode**:
+    - Controlled by `GameState.showMapGeneration` flag
+    - When enabled in the setup panel, players can watch the maze generation process in real-time before the game starts.
+    - Shows:
+      * Current cell being processed (highlighted)
+      * Walls being removed (animated)
+      * Backtracking steps (visualized)
+    - Helps players understand the maze generation process
+
+
+#### Key Classes and Methods
+
+| Class | Key Methods | Purpose |
+|-------|------------|---------|
+| `Grid` | `initGrid()`, `generateMap()` | Creates and manages cell grid. DFS based algorithm |
+| `Cell` | `removeWall()`, `checkNeighbours()` | Handles cell connections |
+| `Cell` | `findClosestPath()` | AI tanks pathfinding implementation based on A* algorithm|
+
+
+Key features of our maze generation system:
+- Guarantees full connectivity (all cells reachable from any starting point)
+- Optimized rendering performance
+- Destructible walls allows increasing intensive gameplay
+
+### AI System Implementation
+
+The AI system powers single-player mode with intelligent enemy tank behavior. Key components include:
+
+#### Core Architecture
+- `AIController` class manages each AI tank
+- Uses `GameState` and `Grid` for pathfinding and player tank position
+- Controls `Tank` movement and firing behaviors
+
+#### Key Behaviors
+1. **Pathfinding**:
+   - Uses A* algorithm through hexagonal grid
+   - Finds shortest path to player tank
+   - Handles wall destruction for calculating path
+
+2. **Movement**:
+   - Long-range: Navigates toward player
+   - Close-range: Positions for optimal firing
+   - Stuck detection: Recalculates path if stuck
+
+3. **Combat**:
+   - Fires when:
+     * Has ammunition
+     * Cooldown expired 
+     * Player in range (≤100px)
+   - Uses currently equipped weapon
+
+#### Difficulty System
+| Parameter         | EASY          | HARD         |
+|-------------------|---------------|--------------|
+| Firing Cooldown   | 2000ms        | 1000ms       |  
+| Turn Speed        | 1.5           | 3            |
+| Initial Player Health    | 3             | 1            |
+
+#### Game Progression
+- AI tanks spawn in corners (1-4 per round)
+- Player starts center map
+- Round ends when all AI or player destroyed
+
+#### Technical Challenges
+- Basic weapon selection (no strategic choices)
+- Independent AI tanks (no coordinated tactics)
+
+Future improvements could include smarter weapon usage and cooperative AI behaviors.
+
 ### Evaluation
 
 - 15% ~750 words
