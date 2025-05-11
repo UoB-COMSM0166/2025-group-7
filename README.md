@@ -430,14 +430,13 @@ Resulting from our sprint process, our game underwent several iterations in keep
 
 ### Sustainability, ethics and accessability 
 
-- 10%, 750 words
-- Evidence of the impact of your game across the environment and two of the other areas (Social, Economic, Technical and Individual)
-
-(current word count: 747)
+(current word count: 730/750)
 
 It is vital to consider sustainability throughout the software development process. The information and Communication Technologies (ICT) sector is responsible for approximately 2% of global carbon emissions (Danushi, Forti, & Soldani, 2024).
 
-Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. The game consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the WEEE waste produced by the PC gaming industry. On the other hand the game has lower energy consumption compared to typical PC games (owing to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient. Finally the game does not include in-game purchases or upgrades which can be considered exploitative (and which many online games possess).
+Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. The game consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the Waste from Electronical and Electronic Equipment (WEEE) produced by the PC gaming industry.
+
+On the other hand, the game has lower energy consumption compared to typical PC games (owed to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient.
 
 ![SusAD](./diagrams/SusAD.jpg)
 
@@ -450,16 +449,13 @@ Our game impacts individual sustainability by encouraging strategic thinking and
 Furthermore, in the initial stages of implementation, our game had a red and green theme. The colours of our two tanks in both modes were a bright red and green. At this time, we felt that these colours were easy to locate, and fit our minimalist theme. However, during a guest talk by Doug Clark on designing for accessibility we found that these colours were the most problematic for colour blind people. This would make the tanks difficult to distinguish, and greatly impact the usability and enjoyability of playing the game for such users. Due to this, we chose to not only change the colours of the tanks, but allow the user to be able to choose and customise colours. This makes our game more individually sustainable as it allows our game to be accessible to a more diverse demographic of users. It also enhances the playability of our game to non-color blind players as they are able to choose the colours that bring the most comfort to their playing experience.
 
 In our discussion, concerns were raised regarding sedentary lifestyles and gaming addictions causing lesser connections with nature. The glorification of conflict and warfare may normalise such concepts within impressionable minds such as children. The general aggression model suggests that exposure to violent video games can cause people to behave impulsively and aggressively (Adachi & Willoughby, 2011). However, we have purposefully designed our game to be of a futuristic and virtual style. The game is not intended to simulate reality, rather the warfare theme serves as a foundation to introduce many different components (e.g. weapons). 
+
 In future, we can develop a cooperative multiplayer mode in order to encourage social sustainability. Research suggests that the cooperative game mode could weaken the effect of violent video games (Zheng et al., 2021). Our game may positively impact social sustainability in its current form as competitive game modes have been found to stimulate more shared laughter (Zhan et al., 2022). 
 
 
 ### Conclusion
 
-- 10% ~500 words
-
-- Reflect on project as a whole. Lessons learned. Reflect on challenges. Future work.
-
-(current word count: 471)
+(current word count: 468/500)
 
 This project has been a challenging but gratifying process. Hex Wars has evolved tremendously through the course of its development. It is a testament to our determination to explore new concepts and fine-tune our collaboration.
 
@@ -469,7 +465,7 @@ Writing the algorithm for map generation was our biggest challenge, especially a
 
 If offered the opportunity to approach this project differently, we would focus on accessibility from the beginning of the UI design implementation. We did not look into accessibility and sustainability in detail until we already had a working version of our game. This means that allowing for colour customisation, and serving images in modern formats were later additions to our implementation. We were able to introduce these ideas later but we have learned the importance of centring accessibility and sustainability from the beginning of the software development process. 
 
-In future, we aim to offer online multiplayer. Given the time limitations we were not able to focus on how we could collect user data, allowing them to login and save their progress, while being careful of data protection implications. With the current scope of our game, this is not currently necessary. Therefore, with the implementation of more game playing modes and a more extensive single-player campaign we can consider this further. 
+In future, we aim to offer online multiplayer. Given the time limitations we were not able to focus the collection of user data, allowing them to login and save their progress, while being careful of data protection implications. With the current scope of our game, this is not necessary but with the implementation of more game playing modes and a more extensive single-player campaign we can consider this further. 
 
 This has been a rewarding opportunity to gain practical experience in Software Engineering. The team work, communication and Software Development skills we have refined will benefit us for many years to come. 
 
