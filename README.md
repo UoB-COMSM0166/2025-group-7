@@ -67,8 +67,6 @@ wait until the end, you can insert a work in progress video)
 
 ### Introduction
 
-(current word count: 245/250)
-
 Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots. It can be played on both PCs and touch screen devices.
 
 It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a more challenging hexagonal grid with destructible walls.
@@ -79,8 +77,6 @@ We have also styled the game in a more consistent futuristic theme with clear ap
 
 
 ### Requirements 
-
-(current word count: 747/750)
 
 #### Ideation
 
@@ -141,8 +137,6 @@ Given I have never played the game before, when I start playing the game for the
 
 ### Design
 
-(current word count: 707/750)
-
 Shown below are our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking, attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. 
 
 Methods are often called by other classes and hence, are mostly public. A key abstraction is that classes often possess `draw()`, `update()` and `remove()` methods. Therefore a bullet or tank is drawn simply by running its `draw()` method. Through providing this standard interface a higher level class does not need to know the details regarding how to draw the lower level object. 
@@ -189,8 +183,6 @@ This design aims for an engaging game play, with AI tanks being able to react to
  
 
 ### Implementation
-
-(current word count: 750/750)
 
 Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identifying commonalities and differences, using this to further inform our design.
 
@@ -330,8 +322,6 @@ Future improvements could include cooperative AI behaviors.
 
 ### Evaluation
 
-(current word count: 749/750)
-
 #### Qualitative evaluation
   
 We conducted a Heuristic evaluation for the (February 25 version) prototype of our game. The evaluation was useful in gaining insight on what users value most, and therefore, helped us understand which of our remaining tasks we should prioritise.
@@ -389,8 +379,6 @@ In addition, we observed the game's ability to respond to edge cases such as man
 
 ### Process 
 
-(current word count: 747/750)
-
 #### Our process
  
 Work was primarily driven by decisions made at in-person weekly meetings between scheduled on-campus lectures.
@@ -438,8 +426,6 @@ Resulting from our sprint process, our game underwent several iterations in keep
 
 ### Sustainability, ethics and accessability 
 
-(current word count: 730/750)
-
 It is vital to consider sustainability throughout the software development process. The information and Communication Technologies (ICT) sector is responsible for approximately 2% of global carbon emissions (Danushi, Forti, & Soldani, 2024).
 
 Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. The game consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the Waste from Electronical and Electronic Equipment (WEEE) produced by the PC gaming industry.
@@ -463,8 +449,6 @@ In future, we can develop a cooperative multiplayer mode in order to encourage s
 
 ### Conclusion
 
-(current word count: 468/500)
-
 This project has been a challenging but gratifying process. Hex Wars has evolved tremendously through the course of its development. It is a testament to our determination to explore new concepts and fine-tune our collaboration.
 
 Throughout the project we prioritised regular, in person meetings, maximising the efficiency of sprints. Over the course of the agile development process, we incorporated many new ideas including the hexagonal grid, shield pickup and the futuristic theme. We learned that through the frequent integration of code that fit our Object Oriented approach, such additions were much more feasible. We found that we referred to the kanban more frequently towards the end of the project, when tasks became smaller and more numerous. The importance of drawing a robust and clear class diagram cannot be understated. When we had come to an agreement on how our code would be structured we were able to focus on our allocated tasks, and group discussions became smoother. Revisiting evaluations later on in the process proved very useful for identifying remaining issues and prioritising them effectively. 
@@ -478,9 +462,16 @@ In future, we aim to offer online multiplayer. Given the time limitations we wer
 This has been a rewarding opportunity to gain practical experience in Software Engineering. The team work, communication and Software Development skills we have refined will benefit us for many years to come. 
 
 
-### Contribution Statement
+## Contribution Statement
 
-- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent.
+| Name             | Contribution |
+|------------------|--------------|
+| Yaseer Alluwaim  | 1.0          |
+| Ajinkya Bhalerao | 1.0          |
+| Guo Xuanpu       | 1.0          |
+| Nagat Guled      | 1.0          |
+| Harry Jackson    | 1.0          |
+| Haorui Cai       | 1.0          |
 
 
 ## 📚 Bibliography
@@ -496,18 +487,6 @@ Zahn, C., Leisner, D., Niederhauser, M., Roos, A., Iseli, T., & Soldati, M. (202
 Zheng, W., Cao, S., Wang, Y., Yang, K., Chen, Y., & Song, G. (2021). The Impact of Social Value Orientation, Game Context and Trust on Cooperative Behavior After Cooperative Video Game Play. Psychological Reports, 124(3), 1353-1369.
 https://doi.org/10.1177/0033294120934705 
 
-
-### Additional Marks
-
-You can delete this section in your own repo, it's just here for information. in addition to the marks above, we will be marking you on the following two points:
-
-- **Quality** of report writing, presentation, use of figures and visual material (5%) 
-  - Please write in a clear concise manner suitable for an interested layperson. Write as if this repo was publicly available.
-
-- **Documentation** of code (5%)
-
-  - Is your repo clearly organised? 
-  - Is code well commented throughout?
 
 ## 📝 License
 
