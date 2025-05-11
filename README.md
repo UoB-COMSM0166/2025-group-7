@@ -194,6 +194,12 @@ This design aims for an engaging game play, with AI tanks being able to react to
 
 Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identifying commonalities and differences, using this to further inform our design.
 
+
+| ![AJ protoype gif](development-docs/ideation-stage/prototype-gifs/AJ-prototype-gif.gif) | ![Yaseer prototype gif](development-docs/ideation-stage/prototype-gifs/Yaseer-prototype-gif.gif) | ![Nagat prototype gif](development-docs/ideation-stage/prototype-gifs/Nagat-prototype-gif.gif) |
+|:-------------:|:-------------:|:-------------:|
+| ![Harry prototype gif](development-docs/ideation-stage/prototype-gifs/Harry-prototype-gif.gif) | ![Guo prototype gif](development-docs/ideation-stage/prototype-gifs/Guo-prototype-gif.gif) |               |
+
+
 There are multiple aspects of our game that we prioritised more as our implementation progressed. Our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at that stage. This was not ideal due to its complexity, but implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour. We also focused on the game menu, instructions and touch screen compatability later on in our implementation. 
 
 Over the course of implementation several pickups were developed which allow for different playing styles and tactics:
