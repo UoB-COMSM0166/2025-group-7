@@ -115,7 +115,7 @@ function setup() {
 
 function draw() {
     // Main game loop - handles different game states
-    if(touches.length > 0) {
+    if (touches.length > 0) {
         isTouchScreen = true;
     }
     if (setupStage) {
@@ -250,7 +250,7 @@ function mousePressed() {
             gameMenu.resetQuitButton();
         }
         if (gameMenu.restartButton.isPressed) {
-            gameMenu.restartGame();
+            gameMenu.restartGame(true);
             confirmQuit = false;
             gameMenu.resetQuitButton();
         }
@@ -297,7 +297,7 @@ function mouseClicked() {
             gameMenu.resetQuitButton();
         }
         if (gameMenu.restartButton.isReleased) {
-            gameMenu.restartGame();
+            gameMenu.restartGame(true);
             confirmQuit = false;
             gameMenu.resetQuitButton();
         }
@@ -327,10 +327,12 @@ function mouseClicked() {
 }
 
 
-function resetGame() {
+function resetGame(restart = false) {
     // Reset all game state and audio
     // Stop all active sounds
-    audioBackground.stop();
+    if (restart) {
+        audioBackground.stop();
+    }
     audioBombExplode.stop();
     audioBombShot.stop();
     audioBulletShot.stop();
