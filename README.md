@@ -407,6 +407,10 @@ In some instances, pair programming sessions were agreed at weekly meetings to f
 
 This formal process was supplemented by ongoing discussion on a group Whatsapp chat so that individuals could update the group on recently committed work and highlight any problems that had arisen in the course of completing tickets. This was also used to seek feedback on ideas, and for decision-making that hadn’t been scoped or settled during the last weekly touchpoint.
 
+
+![screenshot of groupchat](./Groupchat-screenshot.jpg)
+
+
 #### Rationale
 
 The team followed Agile processes, as an Agile software development lifecycle was considered the correct choice for the project.
