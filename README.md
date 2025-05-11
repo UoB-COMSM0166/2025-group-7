@@ -141,9 +141,6 @@ Given I have never played the game before, when I start playing the game for the
 
 ### Design
 
-- 15% ~750 words 
-- System architecture. Class diagrams, behavioural diagrams.
-
 (current word count: 711)
 
 Shown below are our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking, attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. 
@@ -176,15 +173,15 @@ Finally we call `removeOverlappingWalls` for each `Cell` (which removes any comm
 The AI tanks controller is implemented in the `AIController` class, but uses the same `tank` class as human-player tanks in initiating the tank, weapons, and firing. `AIController` manages the AI behaviour for movement and combat. Each AI tank uses a dedicated `AIController` instance.
 
   **Architectural Design**:
-	- The `AIController` is initiated in `GameState`, and receives the player tank's location, pickup status, and pathfinding.
-  - The `Tank` class controls the state of the tank.
+      - The `AIController` is initiated in `GameState`, and receives the player tank's location, pickup status, and pathfinding.
+      - The `Tank` class controls the state of the tank.
 
   **Gameplay Design**:
- 	- `AIController` decides the firing rate, and turn speed depending on the difficulty level set in `GameState`.
-	- `AIController` passes the object it wants to find (player or pickups) to `Gamestate`'s `pathFinder()` method.
-	- `AIController` recalculates the path when stuck.
-	- `AIController` changes its target depending on the situation. If health is low, it may decide to find a healthbox to pick up instead of following the player.
-	- Depending on the tank's weapon type, the AI decides the distance to engage with or attack the player tank.
+      - `AIController` decides the firing rate, and turn speed depending on the difficulty level set in `GameState`.
+      - `AIController` passes the object it wants to find (player or pickups) to `Gamestate`'s `pathFinder()` method.
+      - `AIController` recalculates the path when stuck.
+      - `AIController` changes its target depending on the situation. If health is low, it may decide to find a healthbox to pick up instead of following the player.
+      - Depending on the tank's weapon type, the AI decides the distance to engage with or attack the player tank.
  
 This design aims for an engaging game play, with AI tanks being able to react to different situations until the player tank is defeated.
  
