@@ -49,7 +49,7 @@ wait until the end, you can insert a work in progress video)
 ## 👥 Development Team
 ### Team Photo
 
-![Grp-7](group-photo.jpg)
+![Grp-7](report-images/group-photo.jpg)
 
 ### Group Members
 ##
@@ -408,7 +408,7 @@ In some instances, pair programming sessions were agreed at weekly meetings to f
 This formal process was supplemented by ongoing discussion on a group Whatsapp chat so that individuals could update the group on recently committed work and highlight any problems that had arisen in the course of completing tickets. This was also used to seek feedback on ideas, and for decision-making that hadn’t been scoped or settled during the last weekly touchpoint.
 
 
-![screenshot of groupchat](./Groupchat-screenshot.jpg)
+![screenshot of groupchat](report-images/Groupchat-screenshot.jpg)
 
 
 #### Rationale
