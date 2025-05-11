@@ -141,7 +141,7 @@ Given I have never played the game before, when I start playing the game for the
 
 ### Design
 
-(current word count: 711)
+(current word count: 707)
 
 Shown below are our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking, attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. 
 
@@ -173,10 +173,12 @@ Finally we call `removeOverlappingWalls` for each `Cell` (which removes any comm
 The AI tanks controller is implemented in the `AIController` class, but uses the same `tank` class as human-player tanks in initiating the tank, weapons, and firing. `AIController` manages the AI behaviour for movement and combat. Each AI tank uses a dedicated `AIController` instance.
 
   **Architectural Design**:
-      - The `AIController` is initiated in `GameState`, and receives the player tank's location, pickup status, and pathfinding.
-      - The `Tank` class controls the state of the tank.
+  
+      - `AIController` is initiated in `GameState`, and receives the player tank's location, pickup status, and pathfinding.
+      - `Tank` controls the state of the tank.
 
   **Gameplay Design**:
+  
       - `AIController` decides the firing rate, and turn speed depending on the difficulty level set in `GameState`.
       - `AIController` passes the object it wants to find (player or pickups) to `Gamestate`'s `pathFinder()` method.
       - `AIController` recalculates the path when stuck.
