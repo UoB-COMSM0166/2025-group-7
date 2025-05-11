@@ -246,8 +246,6 @@ function mousePressed() {
         if (gameMenu.resumeButton.isPressed) {
             GameState.menuMode = false;
             allSprites.sleeping = false;
-            tankGame.tankMoving = true;
-            audioTankMovement.play();
             confirmQuit = false;
             gameMenu.resetQuitButton();
         }
