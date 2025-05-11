@@ -164,6 +164,21 @@ The sequence diagram below illustrates our map generation process. `GameState` i
 ![UML Sequence Diagram Map Generation](./diagrams/sequence-diagram.png)
 
 
+Single Player Mode has four different levels, and depending on the level, the amount of AI controlled tanks are generated. They are initiated in `GameState` and initialized in the corners of the map. In `AIController` constructor, the tank the controller controls, the player tank, and game difficulty is passed in in order to determine the tank's behaviour. Then, in `GameSatate` the `update()` method is called to update the state of the tank and their target. Depending on that, the AI tank will move towards the player, pick up health boxes, or shoot at the player tank.
+#### AI Tank Behaviour
+    - Healthbox pickup
+      * Decides to follow player tank or pick up healthbox
+      * If it decides on picking up healthbox
+        * It checks its health if low, then finds a path to the healthbox
+    - Movement
+      * It finds the shortest path to the player tank
+      * It navegates the hexagonal map until it reaches the player tank
+    - Combat
+      * It it carries bullets, or a bomb, it shoots at player tank at 100px distance
+      * If it carries a lazer, it's at 500px distance
+      * If it carries a saw, it's as close as possible
+      * If it carries a missile, it's immediate attack
+
 ### Implementation
 
 - 15% ~750 words
