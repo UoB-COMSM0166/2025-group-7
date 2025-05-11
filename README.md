@@ -67,7 +67,7 @@ wait until the end, you can insert a work in progress video)
 
 ### Introduction
 
-(current word count: 247)
+(current word count: 247/250)
 
 Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots.
 
@@ -80,7 +80,7 @@ In addition to this mechanical novelty, we have also styled the game in a more c
 
 ### Requirements 
 
-(current word count: 747)
+(current word count: 747/750)
 
 #### Ideation
 
@@ -141,7 +141,7 @@ Given I have never played the game before, when I start playing the game for the
 
 ### Design
 
-(current word count: 707)
+(current word count: 707/750)
 
 Shown below are our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking, attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. 
 
@@ -190,7 +190,7 @@ This design aims for an engaging game play, with AI tanks being able to react to
 
 ### Implementation
 
-(current word count: 750)
+(current word count: 750/750)
 
 Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identifying commonalities and differences, using this to further inform our design.
 
@@ -322,25 +322,26 @@ Future improvements could include cooperative AI behaviors.
 
 ### Evaluation
 
-- 15% ~750 words
+(current word count: 749/750)
 
-- One qualitative evaluation (your choice)
-
-(current word count: 827)
+#### Qualitative evaluation
   
-We conducted a Heuristic evaluation for the (25th February version) prototype of our game. Due to the game lacking in much of the UI elements we plan to implement, much of the feedback was concerning the tasks we have not yet completed. However, the evaluation was useful in gaining insight on what users value most, and therefore, helped us understand which of our remaining tasks we should prioritise.
-System status was the Heuristic that was most frequently mentioned during our evaluation. The issues include, remaining lives, remaining bullets and the effect of damage taken, all not being visible to users. These were also the issues rated with the highest severity by users.
-A user experienced initial difficulty in moving the tanks because they rotate left and right rather than move laterally. This is not an uncommon feature in games in which players play as vehicles, and it is a feature we have not changed from the original Tank Trouble game. We have discovered that we may receive feedback that highlights issues that are anticipated in a game similar to ours, and we must carefully consider how much weight we give such feedback.
-This evaluation also affirmed that we need to include some form of tutorial that explains the controls of the game, especially as it is developed and more elements are introduced.
-Users appreciated the minimalist aesthetic of our game and expressed that it was enjoyable to play. 
+We conducted a Heuristic evaluation for the (February 25 version) prototype of our game. The evaluation was useful in gaining insight on what users value most, and therefore, helped us understand which of our remaining tasks we should prioritise.
+System status was the Heuristic that was most frequently mentioned during our evaluation. The highest severity issues included, remaining lives, remaining bullets and the effect of damage taken all not being visible to users. 
 
-On the 30th of April we revisited Heuristic evaluation amongst ourselves. The aim was to highlight any remaining issues with our game and ensure it was still adhering to the Heuristic principles. For example, noticed a lack of instructions and confirmation message asking the user if they are sure they want to leave when exiting the game. These violate the principles, recognition rather than recall and error prevention. The evaluation allowed us to record and allocate all of the remaining tasks needed to complete development via the kanban. 
+A user experienced initial difficulty in moving the tanks because they rotate left and right rather than move laterally. This is not an uncommon feature in games in which players play as vehicles, and it is a feature we have not changed from the original Tank Trouble game. 
+This evaluation affirmed that we need to include some form of explanation of the controls of the game. Users appreciated the minimalist aesthetic of our game and expressed that it was enjoyable to play.
 
-- One quantitative evaluation (of your choice)
+In an April 30 meeting, we revisited Heuristic evaluation amongst ourselves. The aim was to highlight any remaining issues with our game and ensure it was still adhering to the Heuristic principles. For example, we noticed a lack of instructions, and the need for a confirmation message asking the user if they are sure they want to leave when exiting the game. These violate the principles, recognition rather than recall and error prevention. The evaluation allowed us to record and allocate all of the remaining tasks needed to complete development via the kanban.
 
-On the 4th of March we asked 11 participants to complete the NASA TLX for an easy and hard version of our game. In the hard version the player’s tank was slower, they had less ammunition and their health was lower.
-Through the NASA TLX, we found that some users actually found it easier to navigate the tank in the hard mode. We realised that beginners will have a much different experience to us, as developers who play the game regularly. This evaluation exposed the obstacle of striking a balance between a challenging, enjoyable game for experienced gamers, and a playable one for inexperienced gamers. 
-However, this was not the case for most participants as our results show that there was a statistically significant increased workload when playing the hard mode. Two participants experienced a higher workload, while two participants experienced no observable difference. Therefore, our difficulty modes were generally suitable but they needed fine tuning to ensure this is the case for a wider range of users.
+#### Quantitative evaluation
+
+In the March 4 lab, we asked 11 participants to complete the NASA TLX for an easy and hard version of our game. In the hard version the player’s tank was slower, they had less ammunition and their health was lower.
+
+Through the NASA TLX, we found that some users actually found it easier to navigate the tank in the hard mode. We found that beginners have a much different experience to us, as developers who play the game regularly. This evaluation exposed the obstacle of striking a balance between a challenging, engaging game for experienced gamers, and a playable one for inexperienced gamers.
+
+However, this was not the case for most participants as our results show that there was a statistically significant increased workload when playing the hard mode. Two participants experienced a higher workload for the easy mode, while two participants experienced no observable difference. Therefore, our difficulty modes were generally suitable but they needed fine tuning to ensure this is the case for a wider range of users.
+
 
 **NASA TLX aggregate scores:**
 
@@ -369,9 +370,9 @@ However, this was not the case for most participants as our results show that th
 | Result             | **Significant**|
 
 
-- Description of how code was tested. 
+#### How code was tested. 
 
-Testing code visually is core to the user-centred nature of our process. When running code we made sure the visual experience adhered to our expectations and user-stories. There were many bugs we encountered and struggled with, but eventually resolved with this approach. Bullets shot near the edge of the map would progress over outer walls. We remedied this by having the bullets spawn from the centre of the tank and only appearing at the end of the turret. We also noticed issues with the missile weapon. After observing its behaviour, inspecting the code, and group discussion, we understood it was identifying an initial location and proceeding to that static location instead of chasing its opponent.   
+Testing code visually is core to the user-centred nature of our process. When running code we made sure the visual experience adhered to our expectations and user-stories. There were many bugs we encountered and struggled with, but eventually resolved with this approach. Bullets shot near the edge of the map would progress over outer walls. We remedied this by having the bullets spawn from the centre of the tank and only appearing at the end of the turret. We also noticed issues with the missile weapon. After observing its behaviour and inspecting the code, we understood it was identifying an initial location and proceeding to that static location instead of chasing its opponent.   
 
 We utilised the debug property of sprites in order to test our code. Setting this property to true makes the sprite's collider visible, allowing us to resolve collision issues with a range of sprites, particularly weapons. Console.log() is another feature of the language that was useful in observing if variables changed as expected throughout gameplay.
 
