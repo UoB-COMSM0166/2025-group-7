@@ -370,7 +370,7 @@ However, this was not the case for most participants as our results show that th
 | Result             | **Significant**|
 
 
-#### How code was tested. 
+#### How code was tested
 
 Testing code visually is core to the user-centred nature of our process. When running code we made sure the visual experience adhered to our expectations and user-stories. There were many bugs we encountered and struggled with, but eventually resolved with this approach. Bullets shot near the edge of the map would progress over outer walls. We remedied this by having the bullets spawn from the centre of the tank and only appearing at the end of the turret. We also noticed issues with the missile weapon. After observing its behaviour and inspecting the code, we understood it was identifying an initial location and proceeding to that static location instead of chasing its opponent.   
 
