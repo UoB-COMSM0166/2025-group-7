@@ -64,85 +64,78 @@ wait until the end, you can insert a work in progress video)
 
 ## 📚 Project Report
 
+
 ### Introduction
 
-- 5% ~250 words 
-- Describe your game, what is based on, what makes it novel?
+(current word count: 246)
 
-(current word count: 250)
+Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots.
 
-Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank – using forward movement, backward movement, and left/right pivoting instead of lateral movement – around a dynamically generated hex map with the aim of destroying opposing tanks. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots.
-
-It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat, but differs in a key mechanical aspect: whereas Tank Trouble is largely predicated on geometric reasoning about predictable projectile bounce off of fixed surfaces, Hex Wars creates a more chaotic style of combat by situating the game in a hexagonal grid (about which it is harder to intuitively reason) with destructible walls.
+It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a hexagonal grid (about which it is harder to intuitively reason) with destructible walls.
 
 Environmental destructibility means that the arena of combat becomes more and more sparse as gameplay unfolds, pushing players into more proactive and less defensive strategies. It also creates interesting decisions about preserving ammunition and switching to new weapons – with opportunities to reshape the map now balanced against existing concerns about directly damaging the opposing tank.
 
-In addition to the mechanical novelty, we’ve also styled the game in a more consistent futuristic theme with clear applications to graphical assets, sound, and UI design – creating a more coherent aesthetic experience than that offered by Tank Trouble, which simply situates cartoon tanks in an otherwise un-themed game world.
+In addition to this mechanical novelty, we’ve also styled the game in a more consistent futuristic theme with clear applications to graphical assets, sound, and UI design – creating a more coherent aesthetic experience than that offered by Tank Trouble, which simply situates cartoon tanks in an otherwise un-themed game world.
 
 
 ### Requirements 
 
-- 15% ~750 words
-- Use case diagrams, user stories. Early stages design. Ideation process. How did you decide as a team what to develop?
-
-(current word count: 858)
+(current word count: 747)
 
 #### Ideation
 
-Initial ideation was conducted through individual submission of game inspirations through Github. We narrowed the choices down to two core ideas – a tank combat game inspired by Tank Trouble, and a generic Tower Defence game – by simple group voting, which we then confirmed by an in-person meeting.
+Initial ideation was conducted through individual submission of game inspirations on Github. We narrowed the choices down to two ideas – a tank combat game inspired by Tank Trouble, and a generic Tower Defence game – by simple group voting, which we then confirmed by an in-person meeting.
 One common point in support of both options was the scope they offered for innovation on the existing formula, and a feeling that the engineering challenges they offered were correctly pitched for the length of the project.
 
 #### Prototyping
   
 Both ideas were prototyped during the January 28 workshop, with Tank Trouble prototyped on paper and Tower Defence prototyped via Powerpoint. The team agreed to focus on the Tank Trouble prototype at the outset, indicating an existing common preference for that idea.
 
+
 ![Tank Trouble paper prototype](development-docs/paper-prototypes/TTpaperprototype.gif)
 
 
 ![Tower Defence paper prototype](development-docs/paper-prototypes/tower_defense_prototype.gif)
 
-After prototyping, the decision was taken to focus on the Tank Trouble idea because of the team’s greater familiarity with the core game mechanics – and because we had already identified some interesting twists on the existing game design that would help differentiate our game from its inspiration.
+
+After prototyping, the decision was taken to focus on the Tank Trouble idea because of the team’s greater familiarity with the core game mechanics – and because we had already identified some interesting twists on the existing game design that would help differentiate our game from its inspiration
 
 #### Testing Feedback
   
 Testing of the paper prototype at the February 6 workshop elicited useful feedback on the design of the game, and some of the engineering challenges we might face.
-On game design, some people were confused about the “one hit to kill” philosophy present in the original game – thinking it would make the game too chaotic and might undermine the value of power-ups that enhance the tank’s weapons. Others were unsure of certain ideas about environmental destructibility, highlighting the importance of communicating this information to the player visually.
-On engineering, we were warned that a two player game operated from a single keyboard might risk input conflicts, allowing one player to prevent another player from moving by spamming keys and confusing the game. 
+On game design, some people were unsure about the “one hit to kill” philosophy present in the original game – thinking it would make the game too chaotic and might undermine the value of power-ups that enhance the tank’s weapons. Others were confused about the environmental destructibility aspects, highlighting the importance of communicating this information to the player visually.
+On engineering, we were warned that a two player game operated from a single keyboard might risk input conflicts, allowing one player to prevent another player from moving by spamming keys.
 
-#### User Stories
+#### Stakeholders
 
-When conceptualising requirements, we knew that identifying stakeholders would be an important first step so that we could tailor our requirements to what is necessary and desirable for them in a game.
+As we conceptualised requirements, identifying stakeholders was an important first step so that we could tailor our requirements to what is necessary and desirable for them in a game.
 
-Fig. X shows our onion model. Directly outside the core video game lie direct stakeholders. These are people responsible for core aspects of game development including developers, UI/UX developers, project managers and the product owner. Developers expect the game to be written according to best practices and accepted standards for improved collaborative efficiency. While project managers expect timely and cost-effective delivery of the game, the product owner (as voice of the customer) expects the game to satisfy end users and will therefore interface closely with user testers. These direct stakeholders rely upon indirect stakeholders (testers, maintainers, future developers) for feedback guiding the sprint process and long-term success of the game. All those involved in development rely upon external stakeholders (including target users, the hosting platform and our lecturers) to validate the game and drive developments post-launch. Finally, the wider environment (ethical bodies, data privacy bodies, library providers, bad agents) is concerned with other aspects which might influence external stakeholders to play (or not play) the game, as well as issues which the product owner must bear in mind at all times.
+Shown below is our onion model. Directly outside the core video game lie direct stakeholders. These are people responsible for core aspects of game development including developers, UI/UX developers, project managers and the product owner. Developers expect the game to be written according to best practices and accepted standards for improved collaborative efficiency. While project managers expect timely and cost-effective delivery of the game, the product owner (as the voice of the customer) expects the game to satisfy end users, and will therefore interface closely with user testers. 
+These direct stakeholders rely upon indirect stakeholders (testers, maintainers, future developers) for feedback guiding the sprint process and long-term success of the game. All parties involved in development rely upon external stakeholders (including target users, the hosting platform and our lecturers) to validate the game and drive developments post-launch. Finally, the wider environment (ethical bodies, data privacy bodies, library providers, bad agents) is concerned with issues that might influence external stakeholders’ decision to play the game, which the product owner must bear in mind at all times.
+
 
 ![Onion Model](./diagrams/onion-diagram.jpg)
 
-We took time to consider epics, user stories and acceptance criteria to ensure we kept users at the core of our process. 
 
-#### Epics:
+We took time to carefully consider epics, user stories and acceptance criteria to ensure we kept users at the core of our process. Some of our initial ideas are stated below:
+
+#### Epics
 
 (1) Game that is comfortable to play for the visually impaired  
 (2) Coherent overall design theme to the game  
 (3) Intuitive game with guidance for controls  
 (4) Game with no bugs or errors and maintainable code  
-(5) Taking input from gamers e.g. gamer name and keeping track of state data related to the players e.g. tank health, bullets left  
-(6) Management of size and complexity of game to enable running on third party platforms  
 
-We considered the perspectives of a range of stakeholders. 
+#### User Stories and Acceptance Criteria
 
-#### User Stories and Acceptance Criteria:
+-As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand  
+Given external users play the game for the first time, when they start playing the game it behaves in a reasonable way, then the game progresses in a way that is intuitive to them
 
--->As a child/inexperienced gamer, I want the game to be playable for me by not being too challenging, so that I enjoy my experience and continue to play in future  
--->Given this is one of my first gaming experiences, when I start playing the game, I want to be able to get through the easiest rounds
+-As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience  
+Given I uploaded the game on my server, when users try to access the game they enjoy it even with slow internet, then they continue to use my server
 
--->As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand  
--->Given external users play the game for the first time, when they start playing the game it behaves in a reasonable way, then the game progresses in a way that is intuitive to them
-
--->As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience  
--->Given I uploaded the game on my server, when users try to access them game, I want them to enjoy it even with slow internet
-
-–->As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others  
--->Given I have never played the game before, when I start playing the game for the first time, I want it to be different enough from the original version that I have reason to continue to play
+–As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others  
+Given I have never played the game before, when I start playing the game for the first time it should be different enough from the original version, then I have reason to continue to play
 
 
 ### Design
