@@ -67,7 +67,7 @@ wait until the end, you can insert a work in progress video)
 
 ### Introduction
 
-(current word count: 246)
+(current word count: 247)
 
 Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots.
 
@@ -75,7 +75,7 @@ It is based on the browser-based tank combat game Tank Trouble. It shares many o
 
 Environmental destructibility means that the arena of combat becomes more and more sparse as gameplay unfolds, pushing players into more proactive and less defensive strategies. It also creates interesting decisions about preserving ammunition and switching to new weapons – with opportunities to reshape the map now balanced against existing concerns about directly damaging the opposing tank.
 
-In addition to this mechanical novelty, we’ve also styled the game in a more consistent futuristic theme with clear applications to graphical assets, sound, and UI design – creating a more coherent aesthetic experience than that offered by Tank Trouble, which simply situates cartoon tanks in an otherwise un-themed game world.
+In addition to this mechanical novelty, we have also styled the game in a more consistent futuristic theme with clear applications to graphical assets, sound, and UI design – creating a more coherent aesthetic experience than that offered by Tank Trouble, which simply situates cartoon tanks in an otherwise un-themed game world.
 
 
 ### Requirements 
@@ -111,6 +111,7 @@ On engineering, we were warned that a two player game operated from a single key
 As we conceptualised requirements, identifying stakeholders was an important first step so that we could tailor our requirements to what is necessary and desirable for them in a game.
 
 Shown below is our onion model. Directly outside the core video game lie direct stakeholders. These are people responsible for core aspects of game development including developers, UI/UX developers, project managers and the product owner. Developers expect the game to be written according to best practices and accepted standards for improved collaborative efficiency. While project managers expect timely and cost-effective delivery of the game, the product owner (as the voice of the customer) expects the game to satisfy end users, and will therefore interface closely with user testers. 
+
 These direct stakeholders rely upon indirect stakeholders (testers, maintainers, future developers) for feedback guiding the sprint process and long-term success of the game. All parties involved in development rely upon external stakeholders (including target users, the hosting platform and our lecturers) to validate the game and drive developments post-launch. Finally, the wider environment (ethical bodies, data privacy bodies, library providers, bad agents) is concerned with issues that might influence external stakeholders’ decision to play the game, which the product owner must bear in mind at all times.
 
 
@@ -128,14 +129,14 @@ We took time to carefully consider epics, user stories and acceptance criteria t
 
 #### User Stories and Acceptance Criteria
 
--As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand  
-Given external users play the game for the first time, when they start playing the game it behaves in a reasonable way, then the game progresses in a way that is intuitive to them
+-As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand.  
+Given external users play the game for the first time, when they start playing the game it behaves in a reasonable way, then the game progresses in a way that is intuitive to them.
 
--As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience  
-Given I uploaded the game on my server, when users try to access the game they enjoy it even with slow internet, then they continue to use my server
+-As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience.  
+Given I uploaded the game on my server, when users try to access the game they enjoy it even with slow internet, then they continue to use my server.
 
-–As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others  
-Given I have never played the game before, when I start playing the game for the first time it should be different enough from the original version, then I have reason to continue to play
+–As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others.
+Given I have never played the game before, when I start playing the game for the first time it should be different enough from the original version, then I have reason to continue to play.
 
 
 ### Design
@@ -143,34 +144,50 @@ Given I have never played the game before, when I start playing the game for the
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams.
 
-(current word count: 700)
+(current word count: 711)
 
-The figures below show our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. Methods are often called by other classes hence are mostly public. A key abstraction is that classes often possess `draw()`, `update()` and `remove()` methods. Therefore a bullet or tank is drawn simply by running its `draw()` method. Through providing this standard interface a higher level class does not need to know the details regarding how to draw the lower level object. Shown in yellow are the weapons we initially proposed. All weapon classes inherit from the abstract class Projectile providing concrete implementations of the `draw()`, `update()` and `remove()` methods. Shown in pink are the Tank and Weapon classes. A composition relationship is shown between them since a Tank **has** a Weapon. Further, the Weapon cannot exist without the Tank. The Weapon class also contains static variables such as `bulletCapacity` and `bulletDuration` describing how many bullets the tank can fire and how long bullets last for once fired. In orange is the GameState class which has all game related objects such as the tanks, grid and projectiles. As an example of polymorphism the `projectileList` attribute contains all projectiles currently in play – these can be bombs, bullets, splinters etc. GameState calls their `draw()` and `update()` methods irrespective of what the underlying object type actually is – which also demonstrates clear delegation.
+Shown below are our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking, attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. 
+
+Methods are often called by other classes and hence, are mostly public. A key abstraction is that classes often possess `draw()`, `update()` and `remove()` methods. Therefore a bullet or tank is drawn simply by running its `draw()` method. Through providing this standard interface a higher level class does not need to know the details regarding how to draw the lower level object. 
+
+Shown in yellow are the weapons we initially proposed. All weapon classes inherit from the abstract class Projectile providing concrete implementations of the `draw()`, `update()` and `remove()` methods. Shown in pink are the Tank and Weapon classes. A composition relationship is shown between them since a Tank **has** a Weapon. Furthermore, the Weapon cannot exist without the Tank. The Weapon class also contains static variables such as `bulletCapacity` and `bulletDuration` describing how many bullets the tank can fire and how long bullets last for once fired.
+
+In orange is the GameState class which has all game related objects such as the tanks, grid and projectiles. As an example of polymorphism the `projectileList` attribute contains all projectiles currently in play – these can be bombs, bullets, splinters etc. GameState calls their `draw()` and `update()` methods irrespective of what the underlying object type actually is– which also demonstrates clear delegation.
+
 
 ![UML Diagram](./diagrams/uml-diagram.png)
+
 
 ![UML Diagram Projectiles](./diagrams/weapons-uml.PNG)
 
 
-The sequence diagram below illustrates our map generation process. `GameState` initially creates a `Grid` object using the `Grid(GRID_HEIGHT)` constructor. `GameState` then calls the `initGrid` method of `Grid` which creates a hexagonal `Cell` object for every location on the grid. Each `Cell` object stores information such as its location and which walls exist (initially all six walls of each hexagonal cell exist). `GameState` then calls the `initMap` method of `Grid` which generates the map by deleting walls from cells. This algorithm involves assuming a starting location at the top-left of the grid called `current`. There is also a stack of cells called `cellstack` which represents the path the algorithm has followed on the grid. The algorithm starts by calling the `getNeighbours` method of the `current` cell which randomly returns a neighbouring cell from `current` called `next`. If `next` is a valid cell we first push `current` to `cellstack` then we proceed to remove the wall between `current` and `next` by calling `current.removeWall(next)` and increment by setting `current = next`. Otherwise `next` is invalid meaning the path has reached a dead-end and we take a step back in our path by setting `current = cellstack.pop()`. We keep repeating this process until all grid cells have been visited, ensuring no location is inaccessible from another. Finally we call `removeOverlappingWalls` for each `Cell` (which removes any common walls between cells) and `show` (which generates the wall sprite objects). We then return to GameState finishing map generation. This algorithm can generate infinitely many different maps making the game feel different every time.
+The sequence diagram below illustrates our map generation process. `GameState` initially creates a `Grid` object using the `Grid(GRID_HEIGHT)` constructor. `GameState` then calls the `initGrid` method of `Grid` which creates a hexagonal `Cell` object for every location on the grid. Each `Cell` object stores information such as its location and which walls exist (initially all six walls of each hexagonal cell exist). `GameState` then calls the `initMap` method of `Grid` which generates the map by deleting walls from cells.
+
+This algorithm involves assuming a starting location at the top-left of the grid called `current`. There is also a stack of cells called `cellstack` which represents the path the algorithm has followed on the grid. The algorithm starts by calling the `getNeighbours` method of the `current` cell which randomly returns a neighbouring cell from `current` called `next`. If `next` is a valid cell we first push `current` to `cellstack` then we proceed to remove the wall between `current` and `next` by calling `current.removeWall(next)` and increment by setting `current = next`. Otherwise `next` is invalid, meaning the path has reached a dead-end and we take a step back in our path by setting `current = cellstack.pop()`. We keep repeating this process until all grid cells have been visited, ensuring no location is inaccessible from another.
+
+Finally we call `removeOverlappingWalls` for each `Cell` (which removes any common walls between cells) and `show` (which generates the wall sprite objects). We then return to GameState finishing map generation. This algorithm can generate infinitely many different maps making the game feel and appear different every time.
+
 
 ![UML Sequence Diagram Map Generation](./diagrams/sequence-diagram.png)
 
+
 #### AI System Design
-  The AI tanks controller are implemented in `AIController` class, but uses the same `tank` class initiating tank, weapons, and firing. `AIController` manages the AI behaviour for movement and combat. Each AI tank uses a dedicated `AIController` instance. 
+
+The AI tanks controller is implemented in the `AIController` class, but uses the same `tank` class as human-player tanks in initiating the tank, weapons, and firing. `AIController` manages the AI behaviour for movement and combat. Each AI tank uses a dedicated `AIController` instance.
+
   **Architectural Design**:
-    The `AIController` is initiated in `GameState`, and recieves the player tank's location, pickup status, and pathfinding. 
-    The `Tank`class controls the state of the tank. 
+	- The `AIController` is initiated in `GameState`, and receives the player tank's location, pickup status, and pathfinding.
+  - The `Tank` class controls the state of the tank.
 
   **Gameplay Design**:
-     `AIController` decides the firing rate, and turn speed depending on the dificulty level set in `GameState`. 
-    - `AIController` passes the objest it want to find, player or pickups, to `Gamestate`'s `pathFinder()` method. 
-    - `AIController` recalculates path when stuck.
-    - `AIController` changes target depending on situation. If health is low, it may decide to find a healthbox to pickup instead of following the player.
-    - Depending on the tank's weapon type, the AI decides the distance to engage with or attack player tank.
-  
-  This design aims for an engaging game play, with the AI tanks being able to react to different situations until the player tank is defeated. 
-
+ 	- `AIController` decides the firing rate, and turn speed depending on the difficulty level set in `GameState`.
+	- `AIController` passes the object it wants to find (player or pickups) to `Gamestate`'s `pathFinder()` method.
+	- `AIController` recalculates the path when stuck.
+	- `AIController` changes its target depending on the situation. If health is low, it may decide to find a healthbox to pick up instead of following the player.
+	- Depending on the tank's weapon type, the AI decides the distance to engage with or attack the player tank.
+ 
+This design aims for an engaging game play, with AI tanks being able to react to different situations until the player tank is defeated.
+ 
 
 ### Implementation
 
