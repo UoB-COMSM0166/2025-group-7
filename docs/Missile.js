@@ -83,6 +83,7 @@ class Missile extends Projectile {
     let best = null, bestD = Infinity;
     for (const t of this.gs.tankList) {
       if (t === this.owner || t.getLife() <= 0) continue;
+      if (this.gs.extraAIControllers.includes(this.owner) && this.gs.extraAIControllers.includes(t)) continue;
       const d = dist(t.tankSprite.x, t.tankSprite.y, this.x, this.y);
       if (d < bestD) { best = t; bestD = d; }
     }
