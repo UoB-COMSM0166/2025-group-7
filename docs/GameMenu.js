@@ -173,9 +173,11 @@ class GameMenu {
         this.menuButton.visible = false;
         this.onInstructions = true;
         this.backButton.visible = true;
+
     }
 
     switchToMenu() {
+        this.resetQuitButton();
         this.showMenu();
         this.onInstructions = false;
         this.backButton.visible = false;
@@ -212,5 +214,25 @@ class GameMenu {
         setup();
         gameEndScreen = null;
         GameState.menuMode = false;
+    }
+
+    resetQuitButton() {
+        
+        this.quitButton.label = 'Quit to Main Menu';
+        this.quitButton.setStyle({
+            font: 'batForAlt',
+            textSize: 30,
+            fillBg: color(0, 0, 0, 0),
+            fillBgHover: color(0, 0, 0, 0),
+            fillBgActive: color(0, 0, 0, 0),
+            fillLabel: color(136, 128, 128),
+            fillLabelHover: color(219, 51, 105),
+            fillLabelActive: color(219, 51, 105),
+            strokeBg: color(136, 128, 128),
+            strokeBgHover: color(219, 51, 105),
+            strokeBgActive: color(219, 51, 105),
+            strokeWeight: 2,
+            rounding: 10
+        });
     }
 }

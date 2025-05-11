@@ -26,7 +26,7 @@ let tank1Color = '#00FFFF';
 let tank2Color = '#E9AB17';
 
 // Check if device has touchscreen
-let isTouchScreen = hasTouchscreen();
+let isTouchScreen = false;
 
 function preload() {
     //Need to load font from path into system to style the buttons
@@ -115,6 +115,9 @@ function setup() {
 
 function draw() {
     // Main game loop - handles different game states
+    if(touches.length > 0) {
+        isTouchScreen = true;
+    }
     if (setupStage) {
         startingScreen.draw();
     }
@@ -194,6 +197,8 @@ function keyPressed() {
             GameState.menuMode = true;
             audioTankMovement.stop();
             tankGame.tankMoving = false;
+            gameMenu.resetQuitButton();
+            confirmQuit = false;
         }
     } else if (GameState.menuMode) {
         if (keyCode === ESCAPE) {
@@ -234,29 +239,33 @@ function mousePressed() {
     }
     if (isTouchScreen && gameMenu) {
         if (gameMenu.menuButton.isPressed) {
-            GameState.menuMode = !GameState.menuMode;
-            tankGame.tankMoving ? audioTankMovement.stop() : audioTankMovement.play();
-            allSprites.sleeping = !allSprites.sleeping;
-            tankGame.tankMoving = !tankGame.tankMoving;
+            tankGame.tankMoving = false;
+            audioTankMovement.stop();
+            GameState.menuMode = true;
         }
         if (gameMenu.resumeButton.isPressed) {
             GameState.menuMode = false;
             allSprites.sleeping = false;
             tankGame.tankMoving = true;
             audioTankMovement.play();
+            confirmQuit = false;
+            gameMenu.resetQuitButton();
         }
         if (gameMenu.restartButton.isPressed) {
             gameMenu.restartGame();
+            confirmQuit = false;
+            gameMenu.resetQuitButton();
         }
         if (gameMenu.quitButton.isPressed && !confirmQuit) {
             gameMenu.quitButton.label = "Are you sure?";
             gameMenu.quitButton.setStyle({
+                fillBg: color(255, 0, 0, 50),
+                fillLabel: color(255, 255, 255),
                 fillBgHover: color(255, 0, 0, 50),
                 fillBgActive: color(255, 0, 0, 50),
                 fillLabelHover: color(255, 255, 255),
                 fillLabelActive: color(255, 255, 255),
             });
-            confirmQuit = true;
         }
         if (gameMenu.quitButton.isPressed && confirmQuit) {
             gameMenu.quitToMenu();
@@ -264,6 +273,8 @@ function mousePressed() {
         }
         if (gameMenu.instrButton.isPressed) {
             gameMenu.switchToInstructions();
+            confirmQuit = false;
+            gameMenu.resetQuitButton();
         }
         if (gameMenu.backButton.isPressed) {
             gameMenu.switchToMenu();
@@ -284,9 +295,13 @@ function mouseClicked() {
         if (gameMenu.resumeButton.isReleased) {
             GameState.menuMode = false;
             allSprites.sleeping = false;
+            confirmQuit = false;
+            gameMenu.resetQuitButton();
         }
         if (gameMenu.restartButton.isReleased) {
             gameMenu.restartGame();
+            confirmQuit = false;
+            gameMenu.resetQuitButton();
         }
         if (gameMenu.quitButton.isReleased && !confirmQuit) {
             gameMenu.quitButton.label = "Are you sure?";
@@ -304,6 +319,8 @@ function mouseClicked() {
         }
         if (gameMenu.instrButton.isReleased) {
             gameMenu.switchToInstructions();
+            confirmQuit = false;
+            gameMenu.resetQuitButton();
         }
         if (gameMenu.backButton.isReleased) {
             gameMenu.switchToMenu();
@@ -311,13 +328,6 @@ function mouseClicked() {
     }
 }
 
-function hasTouchscreen() {
-    // Detect if device has touchscreen capabilities
-    return 'TouchEvent' in window ||
-        (window.DocumentTouch && document instanceof window.DocumentTouch) ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0;
-}
 
 function resetGame() {
     // Reset all game state and audio
@@ -388,5 +398,12 @@ function resetGame() {
     while (tankGame.pickupList.length > 0) {
         tankGame.pickupList[0].sprite.remove();
         tankGame.pickupList.splice(0);
+    }
+}
+function mouseReleased() {
+    if (isTouchScreen && gameMenu) {
+        if (gameMenu.quitButton.isReleased && !confirmQuit) {
+            confirmQuit = true;
+        }
     }
 }
