@@ -67,15 +67,15 @@ wait until the end, you can insert a work in progress video)
 
 ### Introduction
 
-(current word count: 247/250)
+(current word count: 245/250)
 
-Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots.
+Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots. It can be played on both PCs and touch screen devices.
 
-It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a hexagonal grid (about which it is harder to intuitively reason) with destructible walls.
+It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a more challenging hexagonal grid with destructible walls.
 
-Environmental destructibility means that the arena of combat becomes more and more sparse as gameplay unfolds, pushing players into more proactive and less defensive strategies. It also creates interesting decisions about preserving ammunition and switching to new weapons – with opportunities to reshape the map now balanced against existing concerns about directly damaging the opposing tank.
+Environmental destructibility means that the arena of combat becomes more and more sparse as gameplay unfolds, pushing players into more proactive and less defensive strategies. It also creates interesting decisions about preserving ammunition and switching to new weapons – with opportunities to reshape the map paired with the existing challenge of damaging the opposing tank.
 
-In addition to this mechanical novelty, we have also styled the game in a more consistent futuristic theme with clear applications to graphical assets, sound, and UI design – creating a more coherent aesthetic experience than that offered by Tank Trouble, which simply situates cartoon tanks in an otherwise un-themed game world.
+We have also styled the game in a more consistent futuristic theme with clear applications to graphical assets, sound, and UI design – creating a more coherent aesthetic experience than that offered by Tank Trouble, which simply situates cartoon tanks in an otherwise un-themed game world.
 
 
 ### Requirements 
@@ -194,7 +194,7 @@ This design aims for an engaging game play, with AI tanks being able to react to
 
 Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identifying commonalities and differences, using this to further inform our design.
 
-There are multiple aspects of our game that we prioritised more as our implementation progressed. For example, our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at that stage. This was not ideal due to its complexity, but implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour. We also began to consider the game menu and instructions later on in our implementation. 
+There are multiple aspects of our game that we prioritised more as our implementation progressed. Our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at that stage. This was not ideal due to its complexity, but implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour. We also focused on the game menu, instructions and touch screen compatability later on in our implementation. 
 
 Over the course of implementation several pickups were developed which allow for different playing styles and tactics:
 
