@@ -172,79 +172,123 @@ class Cell {
         return neighbors;
     }
 
-    findClosestPath(targetCell) {
-        // Reset A* properties for all cells in the grid
-        for (let i = 0; i < this.grid.length; i++) {
-            for (let j = 0; j < this.grid[i].length; j++) {
-                this.grid[i][j].f = 0;
-                this.grid[i][j].g = 0;
-                this.grid[i][j].h = 0;
-                this.grid[i][j].previous = null;
-            }
-        }
+    // Modify the findClosestPath method to accept gameState and requestingTank
+    findClosestPath(targetCell, gameState, requestingTank) {
+        this.resetGridProperties();
 
         const start = this;
         const end = targetCell;
 
         const openSet = [start];
         const closedSet = [];
+        const allyPositions = this.getAllyPositions(gameState, requestingTank);
+
+        // Get intended next cells of other AIs
+        const otherAITanks = gameState.extraAIControllers.filter(ai => ai.tank !== requestingTank);
+        const allyIntendedNextCells = otherAITanks
+            .map(ai => ai.getIntendedNextCell ? ai.getIntendedNextCell() : null)
+            .filter(cell => cell !== null);
 
         while (openSet.length > 0) {
-            // Find the cell in openSet with the lowest f value
-            let current = openSet[0];
-            for (let i = 1; i < openSet.length; i++) {
-                if (openSet[i].f < current.f) {
-                    current = openSet[i];
-                }
-            }
+            const current = this.getLowestFCell(openSet);
 
-            // If we've reached the goal, reconstruct the path and return it
             if (current === end) {
                 const path = this.reconstructPath(current);
-                if (GameState.showPath) this.visualizePath(path); // Visualize the final path only if map generation is shown
+                if (GameState.showPath) this.visualizePath(path);
                 return path;
             }
 
-            // Move current from openSet to closedSet
-            openSet.splice(openSet.indexOf(current), 1);
-            closedSet.push(current);
+            this.moveToClosedSet(current, openSet, closedSet);
 
-            // Check all neighbors of current
             const neighbors = current.neighboringCellsWithNoWalls();
+            this.processNeighbors(neighbors, current, end, openSet, closedSet, allyPositions, allyIntendedNextCells);
+        }
 
-            for (let neighbor of neighbors) {
-                // Ignore the neighbor which is already evaluated
-                if (closedSet.includes(neighbor)) {
-                    continue;
-                }
+        return [];
+    }
 
-                // The distance from start to neighbor
-                const tentativeG = current.g + 1; // Assuming each step costs 1
+    resetGridProperties() {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[i].length; j++) {
+                const cell = this.grid[i][j];
+                cell.f = 0;
+                cell.g = 0;
+                cell.h = 0;
+                cell.previous = null;
+            }
+        }
+    }
 
-                // If new path to neighbor is better OR neighbor is not in openSet
-                if (!openSet.includes(neighbor) || tentativeG < neighbor.g) {
-                    // This path is the best until now. Record it!
-                    neighbor.g = tentativeG;
-                    neighbor.h = this.heuristic(neighbor, end);
-                    neighbor.f = neighbor.g + neighbor.h;
-                    neighbor.previous = current;
+    getAllyPositions(gameState, requestingTank) {
+        const otherAITanks = gameState.extraAIControllers.filter(ai => ai.tank !== requestingTank);
+        const allyPositions = [];
 
-                    // Add neighbor to openSet if not already there
-                    if (!openSet.includes(neighbor)) {
-                        openSet.push(neighbor);
+        for (let ai of otherAITanks) {
+            if (ai.tank && ai.tank.tankSprite) {
+                for (let row of this.grid) {
+                    for (let cell of row) {
+                        if (cell.centerX === ai.tank.tankSprite.x && cell.centerY === ai.tank.tankSprite.y) {
+                            allyPositions.push(cell);
+                        }
                     }
                 }
             }
+        }
 
-            // Visualize the current path being explored only if map generation is shown
-            if (GameState.showPath) {
-                const currentPath = this.reconstructPath(current);
-                this.visualizePath(currentPath);
+        return allyPositions;
+    }
+
+    getAllyIntendedNextCells(gameState, requestingTank) {
+        const otherAITanks = gameState.extraAIControllers.filter(ai => ai.tank !== requestingTank);
+        const allyIntendedNextCells = [];
+
+        for (let ai of otherAITanks) {
+            if (ai.intendedNextCell) {
+                allyIntendedNextCells.push(ai.intendedNextCell);
             }
         }
 
-        // If no path found, return an empty array
-        return [];
+        return allyIntendedNextCells;
+    }
+
+    getLowestFCell(openSet) {
+        return openSet.reduce((lowest, cell) => (cell.f < lowest.f ? cell : lowest), openSet[0]);
+    }
+
+    moveToClosedSet(current, openSet, closedSet) {
+        openSet.splice(openSet.indexOf(current), 1);
+        closedSet.push(current);
+    }
+
+    processNeighbors(neighbors, current, end, openSet, closedSet, allyPositions, allyIntendedNextCells) {
+        for (let neighbor of neighbors) {
+            if (closedSet.includes(neighbor)) continue;
+
+            let additionalCost = 0;
+
+            // Penalize cells currently occupied by allies
+            if (allyPositions.some(occupiedCell => occupiedCell.centerX === neighbor.centerX && occupiedCell.centerY === neighbor.centerY)) {
+                additionalCost += 15; // Increased cost for current occupation
+            }
+
+            // Strongly penalize cells that are the intended next step of another ally
+            if (allyIntendedNextCells.some(intendedCell => intendedCell.centerX === neighbor.centerX && intendedCell.centerY === neighbor.centerY)) {
+                additionalCost += 50; // Very high cost to discourage going to an ally's immediate target cell
+            }
+
+            const tentativeG = current.g + 1 + additionalCost;
+
+            if (!openSet.includes(neighbor) || tentativeG < neighbor.g) {
+                neighbor.g = tentativeG;
+                neighbor.h = this.heuristic(neighbor, end);
+                neighbor.f = neighbor.g + neighbor.h;
+                neighbor.previous = current;
+
+                if (!openSet.includes(neighbor)) {
+                    openSet.push(neighbor);
+                }
+            }
+        }
     }
 
     // Visualizes the path with a line connecting the centers of the cells

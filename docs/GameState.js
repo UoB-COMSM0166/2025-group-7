@@ -117,7 +117,6 @@ class GameState {
         // Calculate number of AI tanks based on round number (gameOverCnt)
         // Start with 1 tank, increase by 1 every round up to 4
         const numAITanks = min(4, max(1, this.gameOverCnt + 1));
-        console.log(numAITanks);
 
         // Only spawn the calculated number of AI tanks
         for (let idx = 0; idx < numAITanks; idx++) {
@@ -945,7 +944,7 @@ class GameState {
     pathFinder(tank, targetLocation) {
         let targetCell = this.gameMap.getCell(targetLocation.x, targetLocation.y);
         let currentCell = this.gameMap.getCell(tank.tankSprite.x, tank.tankSprite.y);
-        let path = currentCell.findClosestPath(targetCell);
+        let path = currentCell.findClosestPath(targetCell, this, tank); // Pass gameState and tank
         if (path.length > 1) {
             let nextCell = path[1];
             let nextX = nextCell.centerX;

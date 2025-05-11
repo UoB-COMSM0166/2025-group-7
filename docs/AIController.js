@@ -18,6 +18,7 @@ class AIController {
     this.pathReached = true;
     this.lastDecisionTime = 0;
     this.shouldSeekHealth = false;
+    this.isSeekingHealth = false;
   }
 
   async update() {
@@ -68,11 +69,40 @@ class AIController {
 
     // Check if tank's life is less than 2 and there are health pickups
     if (this.tank.getLife() < 2 && this.gameState.pickupList.some(pickup => pickup.type === "HEALTH") && this.shouldSeekHealth) {
-      const healthPickup = this.gameState.pickupList.find(pickup => pickup.type === "HEALTH");
-      if (healthPickup) {
-        this.currentPath = this.gameState.pathFinder(this.tank, healthPickup.sprite);
-        this.pathReached = false;
+      let bestHealthPickup = null;
+      let minDistance = Infinity;
+
+      for (const pickup of this.gameState.pickupList) {
+        if (pickup.type === "HEALTH" && (!pickup.targetedByAI || pickup.targetedByAI === this.tank.id)) {
+          const distance = dist(this.tank.tankSprite.x, this.tank.tankSprite.y, pickup.sprite.x, pickup.sprite.y);
+          if (distance < minDistance) {
+            minDistance = distance;
+            bestHealthPickup = pickup;
+          }
+        }
       }
+
+      if (bestHealthPickup) {
+        // Claim this pickup
+        if (!bestHealthPickup.targetedByAI) {
+          this.gameState.pickupList.forEach(p => {
+            if (p.targetedByAI === this.tank.id) p.targetedByAI = null;
+          });
+          bestHealthPickup.targetedByAI = this.tank.id;
+        }
+        this.currentPath = this.gameState.pathFinder(this.tank, bestHealthPickup.sprite);
+        this.pathReached = false;
+        this.isSeekingHealth = true;
+      } else {
+        this.isSeekingHealth = false;
+      }
+    } else if (this.isSeekingHealth) {
+      // Unclaim the health pack if it was targeted
+      this.gameState.pickupList.forEach(p => {
+        if (p.targetedByAI === this.tank.id) p.targetedByAI = null;
+      });
+      this.isSeekingHealth = false;
+      this.pathReached = true;
     }
 
     // Check if we need a new path

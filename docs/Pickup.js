@@ -132,6 +132,7 @@ class Pickup {
         } else {
             this.type = "HEALTH";
             this.sprite.image = imgHealthPickup;
+            this.targetedByAI = null; 
         }
     }
 
