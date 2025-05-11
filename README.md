@@ -150,7 +150,7 @@ User Stories and Acceptance Criteria:
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams.
 
-(current word count: 525)
+(current word count: 700)
 
 The figures below show our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. Methods are often called by other classes hence are mostly public. A key abstraction is that classes often possess `draw()`, `update()` and `remove()` methods. Therefore a bullet or tank is drawn simply by running its `draw()` method. Through providing this standard interface a higher level class does not need to know the details regarding how to draw the lower level object. Shown in yellow are the weapons we initially proposed. All weapon classes inherit from the abstract class Projectile providing concrete implementations of the `draw()`, `update()` and `remove()` methods. Shown in pink are the Tank and Weapon classes. A composition relationship is shown between them since a Tank **has** a Weapon. Further, the Weapon cannot exist without the Tank. The Weapon class also contains static variables such as `bulletCapacity` and `bulletDuration` describing how many bullets the tank can fire and how long bullets last for once fired. In orange is the GameState class which has all game related objects such as the tanks, grid and projectiles. As an example of polymorphism the `projectileList` attribute contains all projectiles currently in play – these can be bombs, bullets, splinters etc. GameState calls their `draw()` and `update()` methods irrespective of what the underlying object type actually is – which also demonstrates clear delegation.
 
@@ -163,21 +163,21 @@ The sequence diagram below illustrates our map generation process. `GameState` i
 
 ![UML Sequence Diagram Map Generation](./diagrams/sequence-diagram.png)
 
+#### AI System Design
+  The AI tanks controller are implemented in `AIController` class, but uses the same `tank` class initiating tank, weapons, and firing. `AIController` manages the AI behaviour for movement and combat. Each AI tank uses a dedicated `AIController` instance. 
+  **Architectural Design**:
+    The `AIController` is initiated in `GameState`, and recieves the player tank's location, pickup status, and pathfinding. 
+    The `Tank`class controls the state of the tank. 
 
-Single Player Mode has four different levels, and depending on the level, the amount of AI controlled tanks are generated. They are initiated in `GameState` and initialized in the corners of the map. In `AIController` constructor, the tank the controller controls, the player tank, and game difficulty is passed in in order to determine the tank's behaviour. Then, in `GameSatate` the `update()` method is called to update the state of the tank and their target. Depending on that, the AI tank will move towards the player, pick up health boxes, or shoot at the player tank.
-#### AI Tank Behaviour
-    - Healthbox pickup
-      * Decides to follow player tank or pick up healthbox
-      * If it decides on picking up healthbox
-        * It checks its health if low, then finds a path to the healthbox
-    - Movement
-      * It finds the shortest path to the player tank
-      * It navegates the hexagonal map until it reaches the player tank
-    - Combat
-      * It it carries bullets, or a bomb, it shoots at player tank at 100px distance
-      * If it carries a lazer, it's at 500px distance
-      * If it carries a saw, it's as close as possible
-      * If it carries a missile, it's immediate attack
+  **Gameplay Design**:
+     `AIController` decides the firing rate, and turn speed depending on the dificulty level set in `GameState`. 
+    - `AIController` passes the objest it want to find, player or pickups, to `Gamestate`'s `pathFinder()` method. 
+    - `AIController` recalculates path when stuck.
+    - `AIController` changes target depending on situation. If health is low, it may decide to find a healthbox to pickup instead of following the player.
+    - Depending on the tank's weapon type, the AI decides the distance to engage with or attack player tank.
+  
+  This design aims for an engaging game play, with the AI tanks being able to react to different situations until the player tank is defeated. 
+
 
 ### Implementation
 
@@ -278,6 +278,7 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 1. **Pathfinding**:
    - Uses A* algorithm through hexagonal grid
    - Finds shortest path to player tank
+   - Finds shortest path topickup boxes
    - Handles wall destruction for calculating path
 
 2. **Movement**:
@@ -289,8 +290,12 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
    - Fires when:
      * Has ammunition
      * Cooldown expired 
-     * Player in range (≤100px)
+     * Player in range depending on weapon
    - Uses currently equipped weapon
+
+4. **Health Management**:
+   - Tracks health
+   - Finds healthbox pickup when exists
 
 #### Difficulty System
 | Parameter         | EASY          | HARD         |
@@ -305,10 +310,9 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 - Round ends when all AI or player destroyed
 
 #### Technical Challenges
-- Basic weapon selection (no strategic choices)
 - Independent AI tanks (no coordinated tactics)
 
-Future improvements could include smarter weapon usage and cooperative AI behaviors.
+Future improvements could include cooperative AI behaviors.
 
 ### Evaluation
 
