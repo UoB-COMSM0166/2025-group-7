@@ -181,7 +181,7 @@ This design aims for an engaging game play, with AI tanks being able to react to
 
 ### Implementation
 
-Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identifying commonalities and differences, using this to further inform our design.
+Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identified commonalities and differences and used this to further inform our design.
 
 
 | ![AJ protoype gif](development-docs/ideation-stage/prototype-gifs/AJ-prototype-gif.gif) | ![Yaseer prototype gif](development-docs/ideation-stage/prototype-gifs/Yaseer-prototype-gif.gif) | ![Nagat prototype gif](development-docs/ideation-stage/prototype-gifs/Nagat-prototype-gif.gif) |
@@ -200,10 +200,10 @@ Over the course of implementation several pickups were developed which allow for
 | **Ammo** |<img src="docs/images/ammo-icon.webp" width="50">| Restores ammunition to 10 bullets. <br> |
 | **Health**  |<img src="docs/images/health-icon.webp" width="50">| Increases health by one unit. <br> |
 | **Shield** |<img src="docs/images/shield-icon.webp" width="50">| Protects tank from one hit of any weapon. <br> |
-| **Missile** |<img src="docs/images/missile-icon.webp" width="50">| Locates and seeks enemy tank. Instant death when impacting enemy tank. <br> |
+| **Missile** |<img src="docs/images/missile-icon.webp" width="50">| Locates and seeks enemy tank. Deals instant death on impacting an enemy tank. <br> |
 | **Bomb** |<img src="docs/images/bomb-icon.webp" width="50">| Explodes into many splinters of 0.5 damage each. <br> |
-| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Constant damage when the spiked ram penetrates the enemy tank. <br> |
-| **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
+| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Deals instant death on penetratation of an enemy tank. <br> |
+| **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Deals instant death on impacting an enemy tank. <br> |
 
 ### Challenge 1: Hexagonal Map System Implementation
 
@@ -235,7 +235,7 @@ The map is procedurally generated using a modified depth-first search (DFS) appr
    - If no unvisited neighbors exist:
      * Check if there are cells in the stack
      * Backtrack by taking the last cell from the stack as the new current
-   This process repeats until all cells in the grid have been visited at random amount to make sure there are different paths between cells.
+   This process repeats until all cells in the grid have been visited at random amounts to make sure there are different paths between cells.
 
 3. **Post-processing**:
    - Remove overlapping walls between cells
@@ -274,7 +274,7 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 #### Core Architecture
 - `AIController` class manages each AI tank
 - Uses `GameState` and `Grid` for pathfinding and player tank position
-- Controls `Tank` movement and firing behaviors
+- `Tank` controls movement and firing behaviors
 
 #### Key Behaviors
 1. **Pathfinding**:
@@ -295,12 +295,12 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
    - Fires when:
      * Has ammunition
      * Cooldown expired 
-     * Player in range depending on weapon
+     * Player is in range depending on weapon
    - Uses currently equipped weapon
 
 4. **Health Management**:
    - Tracks health
-   - Finds healthbox pickup when exists
+   - Finds healthbox pickup if available
 
 #### Difficulty System
 | Parameter         | EASY          | HARD         |
@@ -311,7 +311,7 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 
 #### Game Progression
 - AI tanks spawn in corners (1-4 per round)
-- Player start in the centre of the map
+- Player starts in the centre of the map
 - Round ends when all AI tanks or the player is destroyed
 
 #### Technical Challenges
