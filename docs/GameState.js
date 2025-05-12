@@ -150,6 +150,7 @@ class GameState {
             };
 
             const buttonStyle = {
+                font: 'batForAlt',
                 rounding: 100,
                 fillBgActive: color(200, 200, 200, 50),
                 fillLabelActive: color(200, 200, 200, 0),
@@ -161,19 +162,19 @@ class GameState {
                 joyStick = createJoystick("Player1_JoyStick", 10, 250, 180, 180);
                 joyStick.setStyle(joystickStyle);
 
-                shootButton = createButton("Player1_Shoot", 1185, 265, 150, 150);
+                shootButton = createButton("Shoot", 1185, 265, 150, 150);
                 shootButton.setStyle(buttonStyle);
             } else {
-                joyStick = createJoystick("Player1_JoyStick", 1170, 425, 180, 180);
+                joyStick = createJoystick("Player1_JoyStick", 1180, 425, 160, 160);
                 joyStick.setStyle(joystickStyle);
 
-                shootButton = createButton("Player1_Shoot", 1185, 100, 150, 150);
+                shootButton = createButton("Shoot", 1185, 100, 150, 150);
                 shootButton.setStyle(buttonStyle);
 
-                joyStick2 = createJoystick("Player2_JoyStick", 10, 100, 180, 180);
+                joyStick2 = createJoystick("Player2_JoyStick", 20, 100, 160, 160);
                 joyStick2.setStyle(joystickStyle);
 
-                shootButton2 = createButton("Player2_Shoot", 25, 425, 150, 150);
+                shootButton2 = createButton("Shoot", 25, 425, 150, 150);
                 shootButton2.setStyle(buttonStyle);
             }
         }
