@@ -13,6 +13,10 @@ class Pickup {
 
         this.numPickups = pickups.length;
 
+        for (let i = 0; i < pickups.length; i++) {
+            this.countCurrentPickups(pickups[i]);
+        }
+
         // Find empty cells on the grid
         let availableCells = [];
         for (let i = 0; i < 10; i++) {
