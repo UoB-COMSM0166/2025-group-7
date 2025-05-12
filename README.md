@@ -202,7 +202,7 @@ Over the course of implementation several pickups were developed which allow for
 | **Shield** |<img src="docs/images/shield-icon.webp" width="50">| Protects tank from one hit of any weapon. <br> |
 | **Missile** |<img src="docs/images/missile-icon.webp" width="50">| Locates and seeks enemy tank. Deals instant death on impacting an enemy tank. <br> |
 | **Bomb** |<img src="docs/images/bomb-icon.webp" width="50">| Explodes into many splinters of 0.5 damage each. <br> |
-| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Deals instant death on penetratation of an enemy tank. <br> |
+| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Deals constant damage on penetratation of an enemy tank. <br> |
 | **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Deals instant death on impacting an enemy tank. <br> |
 
 ### Challenge 1: Hexagonal Map System Implementation
