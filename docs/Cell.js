@@ -172,7 +172,7 @@ class Cell {
         return neighbors;
     }
 
-    // Modify the findClosestPath method to accept gameState and requestingTank
+    // Finds the closest path to a target cell using A* algorithm
     findClosestPath(targetCell, gameState, requestingTank) {
         this.resetGridProperties();
 
@@ -273,7 +273,7 @@ class Cell {
 
             // Strongly penalize cells that are the intended next step of another ally
             if (allyIntendedNextCells.some(intendedCell => intendedCell.centerX === neighbor.centerX && intendedCell.centerY === neighbor.centerY)) {
-                additionalCost += 50; // Very high cost to discourage going to an ally's immediate target cell
+                additionalCost += 50;
             }
 
             const tentativeG = current.g + 1 + additionalCost;
