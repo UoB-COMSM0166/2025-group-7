@@ -296,9 +296,11 @@ class Tank {
         }
         destroyAnim.frameDelay = 1;
         destroyAnim.rotation = this.tankSprite.rotation;
+        if (!this.isDestroyed) {
+            audioTankDestroy.play();
+        }
         this.isDestroyed = true;
         this.inMotion = false;
-        audioTankDestroy.play();
         setTimeout(() => {
             this.isDestroyed = false;
         }, 2000);
