@@ -285,6 +285,7 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
    - Finds shortest path to player tank
    - Finds shortest path to pickup boxes
    - Handles wall destruction for calculating path
+   - Can be Visualized from the setup panel
 
     ![Pathfinding Visualization](development-docs/Implementation/PathFinding.webp)
 
@@ -317,9 +318,9 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 - Round ends when all AI tanks or the player is destroyed
 
 #### Technical Challenges
-- Independent AI tanks (no coordinated tactics)
+- Independent AI tanks (partial coordinated tactics)
 
-Future improvements could include cooperative AI behaviors.
+Future improvements could include more cooperative AI behaviors.
 
 
 ### Evaluation
