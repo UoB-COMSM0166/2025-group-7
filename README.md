@@ -67,7 +67,7 @@ wait until the end, you can insert a work in progress video)
 
 ### Introduction
 
-Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots. It can be played on both PCs and touch screen devices.
+Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots. It is playable on both PCs and touch screen devices.
 
 It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a more challenging hexagonal grid with destructible walls.
 
