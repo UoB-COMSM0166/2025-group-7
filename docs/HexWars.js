@@ -55,6 +55,7 @@ function preload() {
     audioShieldPickup = loadSound('audio/shieldPickup.mp3');
     audioTankDestroy = loadSound('audio/tankDestroy.mp3');
     audioTankMovement = loadSound('audio/tankMovement.wav');
+    audioTargetLocked = loadSound('audio/targetLocked.mp3');
 
     // Load all image assets
     imgAmmoIcon = loadImage('images/ammo-icon.webp');

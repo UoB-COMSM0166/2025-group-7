@@ -369,6 +369,7 @@ class GameState {
                     i == 0 ? audioP2Wins.play() : audioP1Wins.play();
                 }
                 audioTankMovement.stop();
+                audioMissileMovement.stop();
                 this.endRound(this.tankList[i]);
                 break;
             }
@@ -408,12 +409,14 @@ class GameState {
             this.player2.incScore();
             audioGameOver.play();
             audioTankMovement.stop();
+            audioMissileMovement.stop();
             this.endRound(this.tankList[0]);
         } else if (aiAlive === 0) {
             // Player won - increment score
             this.player1.incScore();
             audioRoundComplete.play();
             audioTankMovement.stop();
+            audioMissileMovement.stop();
             this.endRound(this.tankList[1]);
         }
     }
@@ -604,6 +607,7 @@ class GameState {
                         this.tankList[i].tankWeapon = new Weapon(Weapon.LASER_TYPE);
                         audioGenericPickup.play();
                     } else if (this.pickupList[j].type == "MISSILE") {
+                        audioGenericPickup.play();
                         this.removeSawIfNeeded(this.tankList[i]);
                         this.tankList[i].tankWeapon = new Weapon(Weapon.MISSILE_TYPE);
                     }

@@ -43,6 +43,9 @@ class Missile extends Projectile {
     this.sprite.addAni('move', ...missileAnim);
     this.sprite.anis.scale = 0.2;
     this.sprite.ani.frameDelay = 1;
+
+    audioTargetLocked.play();
+    audioMissileMovement.loop();
   }
 
   /* Main loop ------------------------------------------------------------- */
@@ -99,6 +102,7 @@ class Missile extends Projectile {
         t.receiveDamage(Missile.DAMAGE);
       }
     }
+    audioMissileMovement.stop();
     audioBombExplode.play();
     this._particles();
     this.remove();
