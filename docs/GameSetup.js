@@ -212,6 +212,16 @@ class GameSetup {
             this.tank2ColorPicker.show();
         }
 
+        textAlign(LEFT, CENTER);
+        textSize(this.REG_TEXT);
+        fill(255);
+        text('Player 1 Color', GameState.CANVAS_WIDTH / 2 + this.HORZ3 + 240, this.BELOW_TITLE - this.REG_TEXT);
+        if(GameState.twoPlayerMode) {
+            text('Player 2 Color', GameState.CANVAS_WIDTH / 2 + this.HORZ3 + 240, this.BELOW_TITLE + this.REG_TEXT * 2);
+        }
+        textAlign(CENTER, TOP);
+
+
         //leave this back to default since it's used in drawing the tank sprites
         strokeWeight(1);
     }
