@@ -33,7 +33,11 @@ class GameFinish {
         fill('white');
         textFont(BatmanForeverAlt);
         textSize(70);
-        text("GAME COMPLETE", this.gameCompleteX, this.gameCompleteY);
+        if (!GameState.twoPlayerMode && (GameState.currentWinner === "Player 2" || GameState.currentWinnerScore !== "4")) {
+            text("GAME OVER", this.gameCompleteX  + 120, this.gameCompleteY);
+        } else {
+            text("GAME COMPLETE", this.gameCompleteX, this.gameCompleteY);
+        }
 
         // display the winner
         if (GameState.twoPlayerMode) {
@@ -58,10 +62,13 @@ class GameFinish {
                 text("You Win!", this.gameWinnerX + 100, this.gameWinnerY);
             }
         }
-
         fill('white');
         textSize(60);
-        text(GameState.currentWinnerScore + " : " + GameState.currentLoserScore, this.scoreX, this.scoreY);
+        if (GameState.twoPlayerMode) {
+            text(GameState.currentWinnerScore + " : " + GameState.currentLoserScore, this.scoreX, this.scoreY);
+        } else {
+            text(GameState.currentWinnerScore + " / 4", this.scoreX, this.scoreY);
+        }
 
         // Check if mouse is hovering over the button
         const isHovering = mouseX > this.newGameRectX - this.newGameRectWidth / 2 &&
