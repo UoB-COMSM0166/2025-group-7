@@ -330,7 +330,7 @@ function mouseClicked() {
 function resetGame(restart = false) {
     // Reset all game state and audio
     // Stop all active sounds
-    if (restart) {
+    if (!restart) {
         audioBackground.stop();
     }
     audioBombExplode.stop();
