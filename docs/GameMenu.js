@@ -211,9 +211,10 @@ class GameMenu {
         // Return to starting screen
         resetGame();
         allSprites.removeAll();
-        setup();
-        gameEndScreen = null;
         GameState.menuMode = false;
+        setup();
+        tankGame = null;
+        gameEndScreen = null;
     }
 
     resetQuitButton() {
