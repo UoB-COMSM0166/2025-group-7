@@ -29,8 +29,8 @@
   - [Requirements](#requirements)
   - [Design](#design)
   - [Implementation](#implementation)
-    - [Map System](#map-system-implementation)
-    - [AI System](#ai-system-implementation)
+    - [Challenge 1: Hexagonal Map System Implementation](#challenge-1-hexagonal-map-system-implementation)
+    - [Challenge 2: AI System Implementation](#challenge-2-ai-system-implementation)
   - [Evaluation](#evaluation)
   - [Process](#process)
   - [Sustainability, Ethics and Accessibility](#sustainability-ethics-and-accessability)
@@ -208,7 +208,7 @@ Over the course of implementation several pickups were developed which allow for
 | **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Instant death of enemy when the spiked ram penetrates the enemy tank. <br> |
 | **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
 
-### Map System Implementation
+### Challenge 1: Hexagonal Map System Implementation
 
 The hexagonal grid-based map system is a core innovation in Hex Wars. Key components include:
 
@@ -270,7 +270,7 @@ Key features of our maze generation system:
 - Optimized rendering performance
 - Destructible walls allow for increasingly intensive gameplay
 
-### AI System Implementation
+### Challenge 2: AI System Implementation
 
 The AI system powers single-player mode with intelligent enemy tank behavior. Key components include:
 
