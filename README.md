@@ -88,10 +88,8 @@ One common point in support of both options was the scope they offered for innov
 Both ideas were prototyped during the January 28 workshop, with Tank Trouble prototyped on paper and Tower Defence prototyped via Powerpoint. The team agreed to focus on the Tank Trouble prototype at the outset, indicating an existing common preference for that idea.
 
 
-![Tank Trouble paper prototype](development-docs/paper-prototypes/TTpaperprototype.gif)
-
-
-![Tower Defence paper prototype](development-docs/paper-prototypes/tower_defense_prototype.gif)
+| ![Tank Trouble paper prototype](development-docs/paper-prototypes/TTpaperprototype.gif) | ![Tower Defence paper prototype](development-docs/paper-prototypes/tower-defense-prototype.gif) |
+|:-------------:|:-------------:|
 
 
 After prototyping, the decision was taken to focus on the Tank Trouble idea because of the team’s greater familiarity with the core game mechanics – and because we had already identified some interesting twists on the existing game design that would help differentiate our game from its inspiration
@@ -205,7 +203,7 @@ Over the course of implementation several pickups were developed which allow for
 | **Shield** |<img src="docs/images/shield-icon.webp" width="50">| Protects tank from one hit of any weapon. <br> |
 | **Missile** |<img src="docs/images/missile-icon.webp" width="50">| Locates and seeks enemy tank. Instant death when impacting enemy tank. <br> |
 | **Bomb** |<img src="docs/images/bomb-icon.webp" width="50">| Explodes into many splinters of 0.5 damage each. <br> |
-| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Instant death of enemy when the spiked ram penetrates the enemy tank. <br> |
+| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Constant damage when the spiked ram penetrates the enemy tank. <br> |
 | **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
 
 ### Challenge 1: Hexagonal Map System Implementation
@@ -285,6 +283,7 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
    - Finds shortest path to player tank
    - Finds shortest path to pickup boxes
    - Handles wall destruction for calculating path
+   - Can be Visualized from the setup panel
 
     ![Pathfinding Visualization](development-docs/Implementation/PathFinding.webp)
 
@@ -317,9 +316,9 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 - Round ends when all AI tanks or the player is destroyed
 
 #### Technical Challenges
-- Independent AI tanks (no coordinated tactics)
+- Independent AI tanks (partial coordinated tactics)
 
-Future improvements could include cooperative AI behaviors.
+Future improvements could include more cooperative AI behaviors.
 
 
 ### Evaluation

@@ -84,10 +84,7 @@ class Pickup {
         }
         else if (randomiser == 5) {
             this.setMissile();
-        }/*
-        else if (randomiser == 6) {
-            
-        }*/
+        }
         else {
             this.setBomb();
         }

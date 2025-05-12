@@ -6,7 +6,7 @@ let sawHeight = 50;
 class Saw {
 
     constructor(tankSprite, tankIndex) {
-        this.damage = Infinity;
+        this.damage = 0.1;
         this.tankIndex = tankIndex;
         this.tankSprite = tankSprite;
         this.sawOffset = 33;
