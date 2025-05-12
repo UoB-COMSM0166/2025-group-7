@@ -5,7 +5,7 @@
 
 [<img src="https://img.shields.io/badge/Play-Now-brightgreen" width="100" height="25">](https://uob-comsm0166.github.io/2025-group-7/)
 [<img src="https://img.shields.io/badge/Game-Ideas-blue" width="100" height="25">](https://github.com/UoB-COMSM0166/2025-group-7/blob/f06ff86a68514414d8ebfe9873cceb3a018d9c7c/Game-Ideas.txt)
-[<img src="https://img.shields.io/badge/Watch-Demo-red" width="100" height="25">](https://www.youtube.com/watch?v=U0QKMWBccW0)
+[<img src="https://img.shields.io/badge/Watch-Demo-red" width="100" height="25">](https://youtu.be/d9IMgLUG0fs)
 [<img src="https://img.shields.io/badge/License-MIT-yellow" width="100" height="25">](LICENSE)
 
 ## 📚 Libraries and Programming Language Used
@@ -41,10 +41,9 @@
 
 
 ## 🎥 Demo Video
-Include a demo video of your game here (you don't have to 
-wait until the end, you can insert a work in progress video)
+Watch the video below to see the game in action.
 
-[![Watch the video](https://img.youtube.com/vi/U0QKMWBccW0/0.jpg)](https://www.youtube.com/watch?v=U0QKMWBccW0)
+[![Watch the video](https://img.youtube.com/vi/d9IMgLUG0fs/0.jpg)](https://youtu.be/d9IMgLUG0fs)
 
 ## 👥 Development Team
 ### Team Photo
@@ -67,7 +66,7 @@ wait until the end, you can insert a work in progress video)
 
 ### Introduction
 
-Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots. It can be played on both PCs and touch screen devices.
+Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots. It is playable on both PCs and touch screen devices.
 
 It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a more challenging hexagonal grid with destructible walls.
 
