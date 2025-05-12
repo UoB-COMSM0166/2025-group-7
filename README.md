@@ -54,12 +54,12 @@ Watch the video below to see the game in action.
 ##
 | Role | Name | Email | Github Username |
 |------|------|-------| --------------- |
-| Developer | Yaseer Alluwaim | ct24605@bristol.ac.uk | xDyasser |
-| Developer | Ajinkya Bhalerao | xi24194@bristol.ac.uk | ab2163 |
-| Developer | Guo Xuanpu | uw24974@bristol.ac.uk | XuanpuGuo |
-| Developer | Nagat Guled | dp23022@bristol.ac.uk | noeg18 |
-| Developer | Harry Jackson | gc24290@bristol.ac.uk | hjx92 |
-| Developer | Haorui Cai | um24581@bristol.ac.uk | KeithCai1995 |
+| Developer | Yaseer Alluwaim | ct24605@bristol.ac.uk | @xDyasser |
+| Developer | Ajinkya Bhalerao | xi24194@bristol.ac.uk | @ab2163 |
+| Developer | Guo Xuanpu | uw24974@bristol.ac.uk | @XuanpuGuo |
+| Developer | Nagat Guled | dp23022@bristol.ac.uk | @noeg18 |
+| Developer | Harry Jackson | gc24290@bristol.ac.uk | @hjx92 |
+| Developer | Haorui Cai | um24581@bristol.ac.uk | @KeithCai1995 |
 
 ## 📚 Project Report
 
