@@ -35,7 +35,7 @@
   - [Process](#process)
   - [Sustainability, Ethics and Accessibility](#sustainability-ethics-and-accessability)
   - [Conclusion](#conclusion)
-- [Contribution Statement](#-contribution-statement)
+- [Contribution Statement](#contribution-statement)
 - [📚 Bibliography](#-bibliography)
 - [📝 License](#-license)
 
