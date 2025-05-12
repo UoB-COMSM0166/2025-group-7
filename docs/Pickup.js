@@ -3,6 +3,7 @@ class Pickup {
     // Initialize pickup counters and properties
     constructor(gridWidth, gridHeight, pickups, tanks) {
 
+        // Count existing pickups to protect against duplication
         this.numHealth = 0;
         this.numAmmo = 0;
         this.numSaw = 0;
@@ -12,7 +13,6 @@ class Pickup {
         this.numBomb = 0;
 
         this.numPickups = pickups.length;
-
         for (let i = 0; i < pickups.length; i++) {
             this.countCurrentPickups(pickups[i]);
         }

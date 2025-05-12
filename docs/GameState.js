@@ -643,16 +643,34 @@ class GameState {
     }
 
     controlTankSound() {
-        if ((this.tankList[0].inMotion || this.tankList[1].inMotion)) {
-            if (!this.tankMoving) {
-                this.tankMoving = true;
-                audioTankMovement.loop();
+        
+        if (GameState.twoPlayerMode) {
+            if ((this.tankList[0].inMotion || this.tankList[1].inMotion)) {
+                if (!this.tankMoving) {
+                    this.tankMoving = true;
+                    audioTankMovement.loop();
+                }
+            }
+            else {
+                if (this.tankMoving) {
+                    this.tankMoving = false;
+                    audioTankMovement.stop();
+                }
             }
         }
+
         else {
-            if (this.tankMoving) {
-                this.tankMoving = false;
-                audioTankMovement.stop();
+            if (this.tankList[0].inMotion) {
+                if (!this.tankMoving) {
+                    this.tankMoving = true;
+                    audioTankMovement.loop();
+                }
+            }
+            else {
+                if (this.tankMoving) {
+                    this.tankMoving = false;
+                    audioTankMovement.stop();
+                }
             }
         }
     }
