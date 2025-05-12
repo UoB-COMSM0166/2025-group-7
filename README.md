@@ -118,20 +118,20 @@ We took time to carefully consider epics, user stories and acceptance criteria t
 
 #### Epics
 
-(1) Game that is comfortable to play for the visually impaired  
-(2) Coherent overall design theme to the game  
-(3) Intuitive game with guidance for controls  
-(4) Game with no bugs or errors and maintainable code  
+1. Game that is comfortable to play for the visually impaired  
+2. Coherent overall design theme to the game  
+3. Intuitive game with guidance for controls  
+4. Game with no bugs or errors and maintainable code  
 
 #### User Stories and Acceptance Criteria
 
--As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand.  
+- As a project manager, I want to have a functional game that executes the basic mechanics of this genre, so that players have an experience they can easily understand.  
 Given external users play the game for the first time, when they start playing the game it behaves in a reasonable way, then the game progresses in a way that is intuitive to them.
 
--As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience.  
+- As a third party service provider, I want the program uploaded on our server to be compact and render fast, so that users do not have a frustrating experience.  
 Given I uploaded the game on my server, when users try to access the game they enjoy it even with slow internet, then they continue to use my server.
 
-–As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others.
+- As an experienced gamer, I want to have a unique experience, so that the game is distinguished from others.
 Given I have never played the game before, when I start playing the game for the first time it should be different enough from the original version, then I have reason to continue to play.
 
 
