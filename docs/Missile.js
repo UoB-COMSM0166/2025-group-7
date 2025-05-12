@@ -72,7 +72,7 @@ class Missile extends Projectile {
     }
 
     // 2) explode after flight time
-    if (this.despawnTime <= 0) {
+    if (this.despawnTime <= millis()) {
       this._explode();
       return;
     }

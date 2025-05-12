@@ -272,12 +272,12 @@ class GameState {
     }
 
     updateProjectiles() {
+        let currentTime = millis();
         for (let i = 0; i < GameState.projectileList.length; i++) {
-            if (GameState.projectileList[i].despawnTime < millis()) {
+            GameState.projectileList[i].update();
+            if (GameState.projectileList[i].despawnTime < currentTime) {
                 GameState.projectileList[i].remove();
                 GameState.projectileList.splice(i, 1);
-            } else {
-                GameState.projectileList[i].update();
             }
         }
         this.checkProjectileCollisions();
