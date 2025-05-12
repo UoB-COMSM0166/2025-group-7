@@ -254,7 +254,7 @@ The map is procedurally generated using a modified depth-first search (DFS) appr
     - Helps players understand the maze generation process.
 
     
-[![Map Generation Visualization](development-docs\Implementation\MapGenerationVis.gif)](https://youtu.be/tEoLHI7DnEs?si=6obunh9-PZNj38-X)
+    [![Map Generation Visualization](development-docs/Implementation/MapGenerationVis.webp)](https://youtu.be/slypS4pDsEA)
 
 
 #### Key Classes and Methods
@@ -285,6 +285,8 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
    - Finds shortest path to player tank
    - Finds shortest path to pickup boxes
    - Handles wall destruction for calculating path
+
+    ![Pathfinding Visualization](development-docs/Implementation/PathFinding.webp)
 
 2. **Movement**:
    - Long-range: Navigates toward player
