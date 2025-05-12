@@ -52,14 +52,14 @@ Watch the video below to see the game in action.
 
 ### Group Members
 ##
-| Role | Name | Email |
-|------|------|-------|
-| Developer | Yaseer Alluwaim | ct24605@bristol.ac.uk |
-| Developer | Ajinkya Bhalerao | xi24194@bristol.ac.uk |
-| Developer | Guo Xuanpu | uw24974@bristol.ac.uk |
-| Developer | Nagat Guled | dp23022@bristol.ac.uk |
-| Developer | Harry Jackson | gc24290@bristol.ac.uk |
-| Developer | Haorui Cai | um24581@bristol.ac.uk |
+| Role | Name | Email | Github Username |
+|------|------|-------| --------------- |
+| Developer | Yaseer Alluwaim | ct24605@bristol.ac.uk | xDyasser |
+| Developer | Ajinkya Bhalerao | xi24194@bristol.ac.uk | ab2163 |
+| Developer | Guo Xuanpu | uw24974@bristol.ac.uk | XuanpuGuo |
+| Developer | Nagat Guled | dp23022@bristol.ac.uk | noeg18 |
+| Developer | Harry Jackson | gc24290@bristol.ac.uk | hjx92 |
+| Developer | Haorui Cai | um24581@bristol.ac.uk | KeithCai1995 |
 
 ## 📚 Project Report
 
@@ -68,7 +68,7 @@ Watch the video below to see the game in action.
 
 Our game, Hex Wars, is a 2D tank combat game in which players manoeuvre a tank around a dynamically generated hex map with the aim of destroying opposing tanks. Players use forward movement, backward movement, and left/right pivoting instead of lateral movement. It can be played in a local two-player “versus” mode, or in a single-player mode against AI bots. It is playable on both PCs and touch screen devices.
 
-It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a more challenging hexagonal grid with destructible walls.
+It is based on the browser-based tank combat game Tank Trouble. It shares many of the design principles of the original game, including tank-style movement from a top down perspective and projectile based combat. However, while Tank Trouble is largely predicated on geometric reasoning about projectiles bouncing predictably off of fixed surfaces, Hex Wars creates a more chaotic style of combat, by situating the game in a hexagonal grid (rather than a square grid) with destructible walls.
 
 Environmental destructibility means that the arena of combat becomes more and more sparse as gameplay unfolds, pushing players into more proactive and less defensive strategies. It also creates interesting decisions about preserving ammunition and switching to new weapons – with opportunities to reshape the map paired with the existing challenge of damaging the opposing tank.
 
@@ -181,7 +181,7 @@ This design aims for an engaging game play, with AI tanks being able to react to
 
 ### Implementation
 
-Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identified commonalities and differences and used this to further inform our design.
+Initially we implemented our ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. We discussed our implementations, identified commonalities and differences and used this to further inform our design.
 
 
 | ![AJ protoype gif](development-docs/ideation-stage/prototype-gifs/AJ-prototype-gif.gif) | ![Yaseer prototype gif](development-docs/ideation-stage/prototype-gifs/Yaseer-prototype-gif.gif) | ![Nagat prototype gif](development-docs/ideation-stage/prototype-gifs/Nagat-prototype-gif.gif) |
@@ -191,7 +191,7 @@ Initially we decided to implement our own ideas separately to become more famili
 |:-------------:|:-------------:|
 
 
-There are multiple aspects of our game that we prioritised more as our implementation progressed. Our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at that stage. This was not ideal due to its complexity, but implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour. We also focused on the game menu, instructions and touch screen compatability later on in our implementation. 
+There are multiple aspects of our game that we prioritised more as our implementation progressed. Our initial UML diagram does not include single-player mode, as we focused on the design and implementation of multiplayer mode at that stage. This was not ideal due to its complexity, but implementing multiple tanks/players from the beginning made it less cumbersome to integrate the code for AI enemy tank behaviour. We also focused on the game menu and touch screen compatability later in our implementation. 
 
 Over the course of implementation several pickups were developed which allow for different playing styles and tactics:
 
@@ -202,7 +202,7 @@ Over the course of implementation several pickups were developed which allow for
 | **Shield** |<img src="docs/images/shield-icon.webp" width="50">| Protects tank from one hit of any weapon. <br> |
 | **Missile** |<img src="docs/images/missile-icon.webp" width="50">| Locates and seeks enemy tank. Deals instant death on impacting an enemy tank. <br> |
 | **Bomb** |<img src="docs/images/bomb-icon.webp" width="50">| Explodes into many splinters of 0.5 damage each. <br> |
-| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Deals instant death on penetratation of an enemy tank. <br> |
+| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Deals constant damage on penetratation of an enemy tank. <br> |
 | **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Deals instant death on impacting an enemy tank. <br> |
 
 ### Challenge 1: Hexagonal Map System Implementation
@@ -328,9 +328,10 @@ We conducted a Heuristic evaluation for the (February 25 version) prototype of o
 System status was the Heuristic that was most frequently mentioned during our evaluation. The highest severity issues included, remaining lives, remaining bullets and the effect of damage taken all not being visible to users. 
 
 A user experienced initial difficulty in moving the tanks because they rotate left and right rather than move laterally. This is not an uncommon feature in games in which players play as vehicles, and it is a feature we have not changed from the original Tank Trouble game. 
+
 This evaluation affirmed that we need to include some form of explanation of the controls of the game. Users appreciated the minimalist aesthetic of our game and expressed that it was enjoyable to play.
 
-In an April 30 meeting, we revisited Heuristic evaluation amongst ourselves. The aim was to highlight any remaining issues with our game and ensure it was still adhering to the Heuristic principles. For example, we noticed a lack of instructions, and the need for a confirmation message asking the user if they are sure they want to leave when exiting the game. These violate the principles, recognition rather than recall and error prevention. The evaluation allowed us to record and allocate all of the remaining tasks needed to complete development via the kanban.
+In an April 30 meeting, we revisited Heuristic evaluation amongst ourselves. The aim was to highlight any remaining issues with our game and ensure it was still adhering to the Heuristic principles. For example, we noticed a lack of instructions, and the need for a confirmation message asking the user if they are sure they want to leave when exiting the game. These violate the principles recognition rather than recall and error prevention. The evaluation allowed us to record and allocate all of the remaining tasks needed to complete development via the kanban.
 
 #### Quantitative evaluation
 
@@ -385,7 +386,7 @@ Work was primarily driven by decisions made at in-person weekly meetings between
 
 These sessions functioned as Agile reviews, retrospectives, and sprint planning sessions – at which the team as a whole interacted with the game together, explained their recent work (often with code walkthroughs), and discussed on-going issues with development and potential issues on the horizon.
 
-Agile reviews were conducted, sub-optimally, without the presence of authoritative clients or end-users, and required members of the development team to wear two hats – participating in these meetings as parties responsible for their own recent work, and acting as surrogates for game players in holistic evaluation of the current build. This was not ideal, but it did produce beneficial insights for the development of the game – most notably in the mid-development decision to switch the game from a square to a hexagonal grid, in order to increase differentiation from Tank Trouble and make projectile behaviour more interesting.
+Agile reviews were conducted without the presence of authoritative clients or end-users, and required members of the development team to wear two hats – participating in these meetings as parties responsible for their own recent work, and acting as surrogates for game players in holistic evaluation of the current build. This was not ideal, but it did produce beneficial insights for the development of the game – most notably in the mid-development decision to switch the game to a hexagonal grid, in order to increase differentiation from Tank Trouble and make projectile behaviour more interesting.
 
 The team did not implement daily stand-ups since the work was balanced with other commitments on the MSc course, and we chose not to enforce the expectation of daily work on the project that a daily stand-up might imply. Instead we monitored progress at our weekly sessions, where issues with overall progress could be addressed if necessary.
 
@@ -428,17 +429,16 @@ Resulting from our sprint process, our game underwent several iterations in keep
 
 It is vital to consider sustainability throughout the software development process. The information and Communication Technologies (ICT) sector is responsible for approximately 2% of global carbon emissions (Danushi, Forti, & Soldani, 2024).
 
-Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics and represents the issues considered most important in terms of likelihood and impact. The game consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the Waste from Electronical and Electronic Equipment (WEEE) produced by the PC gaming industry.
+Our sustainability awareness diagram is shown below. The diagram was created following a team-based discussion of the Sustainability Awareness Framework topics, and represents the issues considered most important in terms of likelihood and impact. The game consumes server lifetime and (because a keyboard is needed to play) promotes PC usage which may be less energy efficient than tablet or phone usage. Furthermore the game promotes a culture of PC gaming (which is associated with high-volume consumption of components such as GPUs and RAM) and therefore shares some of the collective responsibility of the Waste from Electronical and Electronic Equipment (WEEE) produced by the PC gaming industry.
 
-On the other hand, the game has lower energy consumption compared to typical PC games (owed to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities thereby making our code more efficient.
+On the other hand, the game has lower energy consumption compared to typical PC games (owed to its simplistic design) and runs locally on the client machine – reducing energy consumption caused by network data usage in many other online PC games. The game also uses the P5 Play physics library which provides optimised implementations of numerous common game entities, thereby making our code more efficient.
 
 ![SusAD](./diagrams/SusAD.jpg)
 
 
 Green software patterns were a central part of our discussion of the sustainability of the game. We made an effort to serve images in modern formats such as webp. P5play complies with minifying web assets to reduce page size and network bandwidth. As a team, we decided to implement stateless design, reducing the on-disk data required to run the game. We aim to implement this after carefully considering the impact on the environmental footprint of the game and any privacy implications. In future, we can optimise average CPU utilisation and use a compiled language to further adhere to green software patterns.
 
-
-Our game impacts individual sustainability by encouraging strategic thinking and improved coordination skills. Research shows that a sufficient level of simultaneous information and action coordination in a video game can lead to improved cognitive flexibility (Glass, Maddox, & Love, 2013). Our game requires the player to learn how to navigate the tank, pick up collectables and avoid and attack their opponent, among other tasks. As well as this, the added twist of breakable walls provides another complex element to the game. Therefore, our game rewards more strategic players as they can choose which features of our game to use to their advantage. 
+Our game impacts individual sustainability by encouraging strategic thinking and improved coordination skills. Research shows that a sufficient level of simultaneous information and action coordination in a video game can lead to improved cognitive flexibility (Glass, Maddox, & Love, 2013). Our game requires the player, among other tasks, to learn how to navigate the tank, pick up collectables and avoid and attack their opponent. As well as this, the added twist of breakable walls provides another complex element to the game. Therefore, our game rewards more strategic players as they can choose which features of our game to use to their advantage. 
 
 Furthermore, in the initial stages of implementation, our game had a red and green theme. The colours of our two tanks in both modes were a bright red and green. At this time, we felt that these colours were easy to locate, and fit our minimalist theme. However, during a guest talk by Doug Clark on designing for accessibility we found that these colours were the most problematic for colour blind people. This would make the tanks difficult to distinguish, and greatly impact the usability and enjoyability of playing the game for such users. Due to this, we chose to not only change the colours of the tanks, but allow the user to be able to choose and customise colours. This makes our game more individually sustainable as it allows our game to be accessible to a more diverse demographic of users. It also enhances the playability of our game to non-color blind players as they are able to choose the colours that bring the most comfort to their playing experience.
 
@@ -457,7 +457,7 @@ Writing the algorithm for map generation was our biggest challenge, especially a
 
 If offered the opportunity to approach this project differently, we would focus on accessibility from the beginning of the UI design implementation. We did not look into accessibility and sustainability in detail until we already had a working version of our game. This means that allowing for colour customisation, and serving images in modern formats were later additions to our implementation. We were able to introduce these ideas later but we have learned the importance of centring accessibility and sustainability from the beginning of the software development process. 
 
-In future, we aim to offer online multiplayer. Given the time limitations we were not able to focus the collection of user data, allowing them to login and save their progress, while being careful of data protection implications. With the current scope of our game, this is not necessary but with the implementation of more game playing modes and a more extensive single-player campaign we can consider this further. 
+In future, we aim to offer online multiplayer. Given the time limitations we were not able to focus on the collection of user data, allowing them to login and save their progress, while being careful of data protection implications. With the current scope of our game this is not necessary, but with the implementation of more game playing modes and a more extensive single-player campaign we can consider this further. 
 
 This has been a rewarding opportunity to gain practical experience in Software Engineering. The team work, communication and Software Development skills we have refined will benefit us for many years to come. 
 
