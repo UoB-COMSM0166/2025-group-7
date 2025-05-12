@@ -1,10 +1,4 @@
 class AIController {
-  /**
-   * @param {Tank}      tank        Controlled tank
-   * @param {GameState} gameState   Used to get global information & call addProjectile
-   * @param {Tank}      targetTank  Main tracking target (in this case, player 1)
-   * @param {Number}    level       0 = HARD, 1 = EASY, corresponding to GameState.HARD/EASY
-   */
   constructor(tank, gameState, targetTank, level = GameState.EASY) {
     this.tank = tank;
     this.gameState = gameState;
@@ -40,7 +34,6 @@ class AIController {
     }
 
     // Check if tank is stuck by comparing current position with last position
-    // Only check if the tank is actively trying to move
     if (currentTime - this.lastMoveTime > 1000 && this.isMoving) { // Only check if tank is trying to move
       const currentPosition = { x: this.tank.tankSprite.x, y: this.tank.tankSprite.y };
       const distance = Math.sqrt(
@@ -61,8 +54,6 @@ class AIController {
       if (this.stuckCounter >= 3) {
         this.pathReached = true;
         this.stuckCounter = 0;
-
-        // Optional: Add some randomness to help find a different path
         this.currentPath = null;
       }
     }
@@ -138,7 +129,7 @@ class AIController {
       this.isMoving = false; // Tank is intentionally stationary
     }
 
-    // === 3. Fire ===
+    // === Fire ===
     if (this.tank.canFire(this.fireCD)) {
       if (this.tank.tankWeapon.weaponType === Weapon.MISSILE_TYPE || 
           this.tank.tankSprite.distanceTo(this.targetTank.tankSprite) <= targetDistance) {

@@ -134,13 +134,13 @@ Given I have never played the game before, when I start playing the game for the
 
 ### Design
 
-Shown below are our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable only the high level attributes and methods are shown. Generally speaking, attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. 
+Shown below is our UML diagram developed through group discussion in the early project stages. To make the diagram readable and understandable, only the high level attributes and methods are shown. Generally speaking, attributes have private access and (when needed) are managed through accessor and mutator methods (not shown) providing improved encapsulation and reduced coupling of classes. 
 
-Methods are often called by other classes and hence, are mostly public. A key abstraction is that classes often possess `draw()`, `update()` and `remove()` methods. Therefore a bullet or tank is drawn simply by running its `draw()` method. Through providing this standard interface a higher level class does not need to know the details regarding how to draw the lower level object. 
+Methods are often called by other classes and hence, are mostly public. A key abstraction is that classes often possess `draw()`, `update()` and `remove()` methods. Therefore a bullet or tank is drawn simply by running its `draw()` method. Through providing this standard interface, a higher level class does not need to know the details regarding how to draw the lower level object. 
 
-Shown in yellow are the weapons we initially proposed. All weapon classes inherit from the abstract class Projectile providing concrete implementations of the `draw()`, `update()` and `remove()` methods. Shown in pink are the Tank and Weapon classes. A composition relationship is shown between them since a Tank **has** a Weapon. Furthermore, the Weapon cannot exist without the Tank. The Weapon class also contains static variables such as `bulletCapacity` and `bulletDuration` describing how many bullets the tank can fire and how long bullets last for once fired.
+Shown in yellow are the weapons we initially proposed. All weapon classes inherit from the abstract class, Projectile, providing concrete implementations of the `draw()`, `update()` and `remove()` methods. Shown in pink are the Tank and Weapon classes. A composition relationship is shown between them as a Tank **has** a Weapon. Furthermore, the Weapon cannot exist without the Tank. The Weapon class also contains static variables such as `bulletCapacity` and `bulletDuration` describing how many bullets the tank can fire and how long bullets last for once fired.
 
-In orange is the GameState class which has all game related objects such as the tanks, grid and projectiles. As an example of polymorphism the `projectileList` attribute contains all projectiles currently in play – these can be bombs, bullets, splinters etc. GameState calls their `draw()` and `update()` methods irrespective of what the underlying object type actually is– which also demonstrates clear delegation.
+In orange is the GameState class which has all game related objects such as the tanks, grid and projectiles. As an example of polymorphism, the `projectileList` attribute contains all projectiles currently in play – these can be bombs, bullets, splinters etc. GameState calls their `draw()` and `update()` methods irrespective of what the underlying object type actually is– which also demonstrates clear delegation.
 
 
 ![UML Diagram](./diagrams/uml-diagram.png)
@@ -151,9 +151,9 @@ In orange is the GameState class which has all game related objects such as the 
 
 The sequence diagram below illustrates our map generation process. `GameState` initially creates a `Grid` object using the `Grid(GRID_HEIGHT)` constructor. `GameState` then calls the `initGrid` method of `Grid` which creates a hexagonal `Cell` object for every location on the grid. Each `Cell` object stores information such as its location and which walls exist (initially all six walls of each hexagonal cell exist). `GameState` then calls the `initMap` method of `Grid` which generates the map by deleting walls from cells.
 
-This algorithm involves assuming a starting location at the top-left of the grid called `current`. There is also a stack of cells called `cellstack` which represents the path the algorithm has followed on the grid. The algorithm starts by calling the `getNeighbours` method of the `current` cell which randomly returns a neighbouring cell from `current` called `next`. If `next` is a valid cell we first push `current` to `cellstack` then we proceed to remove the wall between `current` and `next` by calling `current.removeWall(next)` and increment by setting `current = next`. Otherwise `next` is invalid, meaning the path has reached a dead-end and we take a step back in our path by setting `current = cellstack.pop()`. We keep repeating this process until all grid cells have been visited, ensuring no location is inaccessible from another.
+This algorithm involves assuming a starting location at the top-left of the grid called `current`. There is also a stack of cells called `cellstack` which represents the path the algorithm has followed on the grid. The algorithm starts by calling the `getNeighbours` method of the `current` cell which randomly returns a neighbouring cell from `current` called `next`. If `next` is a valid cell we first push `current` to `cellstack`, then we proceed to remove the wall between `current` and `next` by calling `current.removeWall(next)` and increment by setting `current = next`. Otherwise `next` is invalid, meaning the path has reached a dead-end and we take a step back in our path by setting `current = cellstack.pop()`. We keep repeating this process until all grid cells have been visited, ensuring no location is inaccessible from another.
 
-Finally we call `removeOverlappingWalls` for each `Cell` (which removes any common walls between cells) and `show` (which generates the wall sprite objects). We then return to GameState finishing map generation. This algorithm can generate infinitely many different maps making the game feel and appear different every time.
+Finally, we call `removeOverlappingWalls` for each `Cell` (which removes any common walls between cells) and `show` (which generates the wall sprite objects). After finishing map generation, we return to GameState. This algorithm can generate infinitely many different maps making the game feel and appear different every time.
 
 
 ![UML Sequence Diagram Map Generation](./diagrams/sequence-diagram.png)
@@ -181,7 +181,7 @@ This design aims for an engaging game play, with AI tanks being able to react to
 
 ### Implementation
 
-Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identifying commonalities and differences, using this to further inform our design.
+Initially we decided to implement our own ideas separately to become more familiar with JavaScript and the tools that are available to us. We each had different approaches, with some members being interested in learning more about the p5play library, and others opting for a lower-level approach. After this exercise, we discussed our implementations, identified commonalities and differences and used this to further inform our design.
 
 
 | ![AJ protoype gif](development-docs/ideation-stage/prototype-gifs/AJ-prototype-gif.gif) | ![Yaseer prototype gif](development-docs/ideation-stage/prototype-gifs/Yaseer-prototype-gif.gif) | ![Nagat prototype gif](development-docs/ideation-stage/prototype-gifs/Nagat-prototype-gif.gif) |
@@ -200,10 +200,10 @@ Over the course of implementation several pickups were developed which allow for
 | **Ammo** |<img src="docs/images/ammo-icon.webp" width="50">| Restores ammunition to 10 bullets. <br> |
 | **Health**  |<img src="docs/images/health-icon.webp" width="50">| Increases health by one unit. <br> |
 | **Shield** |<img src="docs/images/shield-icon.webp" width="50">| Protects tank from one hit of any weapon. <br> |
-| **Missile** |<img src="docs/images/missile-icon.webp" width="50">| Locates and seeks enemy tank. Instant death when impacting enemy tank. <br> |
+| **Missile** |<img src="docs/images/missile-icon.webp" width="50">| Locates and seeks enemy tank. Deals instant death on impacting an enemy tank. <br> |
 | **Bomb** |<img src="docs/images/bomb-icon.webp" width="50">| Explodes into many splinters of 0.5 damage each. <br> |
-| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Constant damage when the spiked ram penetrates the enemy tank. <br> |
-| **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Instant death when impacting enemy tank. <br> |
+| **Spiked Ram** |<img src="docs/spikedram.png" width="100">| A spiked melee-style weapon placed at the front of the tank. Deals instant death on penetratation of an enemy tank. <br> |
+| **Laser** |<img src="docs/images/laser-icon.webp" width="50">| Fires a straight-line laser, even through walls. Deals instant death on impacting an enemy tank. <br> |
 
 ### Challenge 1: Hexagonal Map System Implementation
 
@@ -235,7 +235,7 @@ The map is procedurally generated using a modified depth-first search (DFS) appr
    - If no unvisited neighbors exist:
      * Check if there are cells in the stack
      * Backtrack by taking the last cell from the stack as the new current
-   This process repeats until all cells in the grid have been visited at random amount to make sure there are different paths between cells.
+   This process repeats until all cells in the grid have been visited at random amounts to make sure there are different paths between cells.
 
 3. **Post-processing**:
    - Remove overlapping walls between cells
@@ -274,7 +274,7 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 #### Core Architecture
 - `AIController` class manages each AI tank
 - Uses `GameState` and `Grid` for pathfinding and player tank position
-- Controls `Tank` movement and firing behaviors
+- `Tank` controls movement and firing behaviors
 
 #### Key Behaviors
 1. **Pathfinding**:
@@ -295,12 +295,12 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
    - Fires when:
      * Has ammunition
      * Cooldown expired 
-     * Player in range depending on weapon
+     * Player is in range depending on weapon
    - Uses currently equipped weapon
 
 4. **Health Management**:
    - Tracks health
-   - Finds healthbox pickup when exists
+   - Finds healthbox pickup if available
 
 #### Difficulty System
 | Parameter         | EASY          | HARD         |
@@ -311,7 +311,7 @@ The AI system powers single-player mode with intelligent enemy tank behavior. Ke
 
 #### Game Progression
 - AI tanks spawn in corners (1-4 per round)
-- Player start in the centre of the map
+- Player starts in the centre of the map
 - Round ends when all AI tanks or the player is destroyed
 
 #### Technical Challenges
