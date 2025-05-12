@@ -365,7 +365,9 @@ class GameState {
         for (let i = 0; i < this.tankList.length; i++) {
             if (this.tankList[i].getLife() <= 0) {
                 (i === 0 ? this.player2 : this.player1).incScore();
-                i == 0 ? audioP2Wins.play() : audioP1Wins.play();
+                if (GameState.twoPlayerMode) {
+                    i == 0 ? audioP2Wins.play() : audioP1Wins.play();
+                }
                 audioTankMovement.stop();
                 this.endRound(this.tankList[i]);
                 break;
@@ -404,13 +406,13 @@ class GameState {
 
         if (playerDead) {
             this.player2.incScore();
-            audioP2Wins.play();
+            audioGameOver.play();
             audioTankMovement.stop();
             this.endRound(this.tankList[0]);
         } else if (aiAlive === 0) {
             // Player won - increment score
             this.player1.incScore();
-            audioP1Wins.play();
+            audioRoundComplete.play();
             audioTankMovement.stop();
             this.endRound(this.tankList[1]);
         }
