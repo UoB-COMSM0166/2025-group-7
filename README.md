@@ -88,10 +88,8 @@ One common point in support of both options was the scope they offered for innov
 Both ideas were prototyped during the January 28 workshop, with Tank Trouble prototyped on paper and Tower Defence prototyped via Powerpoint. The team agreed to focus on the Tank Trouble prototype at the outset, indicating an existing common preference for that idea.
 
 
-![Tank Trouble paper prototype](development-docs/paper-prototypes/TTpaperprototype.gif)
-
-
-![Tower Defence paper prototype](development-docs/paper-prototypes/tower-defense-prototype.gif)
+| ![Tank Trouble paper prototype](development-docs/paper-prototypes/TTpaperprototype.gif) | ![Tower Defence paper prototype](development-docs/paper-prototypes/tower-defense-prototype.gif) |
+|:-------------:|:-------------:|
 
 
 After prototyping, the decision was taken to focus on the Tank Trouble idea because of the team’s greater familiarity with the core game mechanics – and because we had already identified some interesting twists on the existing game design that would help differentiate our game from its inspiration
