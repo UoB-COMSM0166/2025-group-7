@@ -17,6 +17,7 @@
   - [![p5.play](https://img.shields.io/badge/p5play-6C71C4?style=flat&logo=github&logoColor=white)](https://p5play.org/) - A library for creating 2D games in p5.js.
   - [![p5.touchgui](https://img.shields.io/badge/p5.touchgui-4CAF50?style=flat&logo=appveyor&logoColor=white)](https://github.com/L05/p5.touchgui) - A library for creating touch-friendly GUI elements in p5.js.
 
+link to prototype made by Haorui Cai: [HERE](https://keithcai1227.github.io/Tank-trouble/)
 
 ## Table of Contents
 - [📚 Libraries and Programming Language Used](#-libraries-and-programming-language-used)
