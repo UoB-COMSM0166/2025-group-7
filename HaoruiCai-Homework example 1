@@ -1,0 +1,80 @@
+let shapes = [];
+
+function setup() {
+  createCanvas(710, 400);
+  noStroke();
+
+  // Create MRect objects and push them into the array
+  shapes.push(new MRect(1, 134.0, 0.532, 0.1 * height, 10.0, 60.0));
+  shapes.push(new MRect(2, 44.0, 0.166, 0.3 * height, 5.0, 50.0));
+  shapes.push(new MRect(2, 58.0, 0.332, 0.4 * height, 10.0, 35.0));
+  shapes.push(new MRect(1, 120.0, 0.0498, 0.9 * height, 15.0, 60.0));
+}
+
+function draw() {
+  background(0);
+
+  // For each shape, display and move it
+  for (let i = 0; i < shapes.length; i++) {
+    shapes[i].display();
+  }
+
+  // Example movements (matching original logic)
+  shapes[0].move(mouseX - width / 2, mouseY + height * 0.1, 30);
+  shapes[1].move((mouseX + width * 0.05) % width, mouseY + height * 0.025, 20);
+  shapes[2].move(mouseX / 4, mouseY - height * 0.025, 40);
+  shapes[3].move(mouseX - width / 2, height - mouseY, 50);
+}
+
+// Decrease the bar (circle) count on every mouse press
+function mousePressed() {
+  for (let i = 0; i < shapes.length; i++) {
+    shapes[i].update();
+  }
+}
+
+class MRect {
+  constructor(iw, ixp, ih, iyp, id, it) {
+    this.w = iw;         // single bar width (used as circle diameter's "width")
+    this.xpos = ixp;     // rect xposition
+    this.h = ih;         // rect height (used as circle's "height" scale)
+    this.ypos = iyp;     // rect yposition
+    this.d = id;         // single bar distance
+    this.t = it;         // number of bars
+    // Random color for each set of circles
+    this.c = color(random(255), random(255), random(255));
+  }
+
+  // Move method (same as before)
+  move(posX, posY, damping) {
+    let dif = this.ypos - posY;
+    if (abs(dif) > 1) {
+      this.ypos -= dif / damping;
+    }
+    dif = this.xpos - posX;
+    if (abs(dif) > 1) {
+      this.xpos -= dif / damping;
+    }
+  }
+
+  // Display circles instead of rectangles
+  display() {
+    fill(this.c);
+    for (let i = 0; i < this.t; i++) {
+      // Using ellipse instead of rect
+      ellipse(
+        this.xpos + i * (this.d + this.w),
+        this.ypos,
+        this.w,           // Circle's width
+        height * this.h   // Circle's height
+      );
+    }
+  }
+
+  // New update method: reduce number of bars (circles) by 1
+  update() {
+    if (this.t > 0) {
+      this.t--;
+    }
+  }
+}
